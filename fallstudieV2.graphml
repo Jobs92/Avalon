@@ -176,7 +176,8 @@ produziere(int anzahl)</y:MethodLabel>
           <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
             <y:AttributeLabel>int: level
 int: preis
-int: anzahl</y:AttributeLabel>
+int: anzahl
+int: qualität</y:AttributeLabel>
             <y:MethodLabel/>
           </y:UML>
         </y:UMLClassNode>
