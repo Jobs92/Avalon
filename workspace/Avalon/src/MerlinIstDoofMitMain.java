@@ -6,3 +6,7 @@ public class MerlinIstDoofMitMain {
 	}
 
 }
+
+public class test {
+	
+}
