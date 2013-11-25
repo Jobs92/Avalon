@@ -1,3 +1,5 @@
+package campaigns;
+
 
 public class ExplicitResearch {
 	int startRound;

@@ -1,3 +1,4 @@
+package departments;
 
 public class Marketing {
 

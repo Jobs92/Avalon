@@ -1,3 +1,5 @@
+package campaigns;
+
 
 public abstract class Campaign {
 	String description;
