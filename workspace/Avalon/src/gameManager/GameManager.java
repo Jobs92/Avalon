@@ -1,12 +1,13 @@
-package GameManager;
+package gameManager;
 
 import company.Company;
+import market.Market;
 
 public class GameManager {
 	private int round = 0;
 	private boolean active = false;
 	private Company winner;
-//	private Market market = new Market()
+	private Market market = new Market();
 //	private EventManager eventManager = new EventManager()
 	
 	public void startGame(){
@@ -22,7 +23,8 @@ public class GameManager {
 	private void nextRound() {
 		round++;
 		waitForPlayer();
-//		market.simBuyingBehaviour();
+		market.simActivities();
+		market.simBuyingBehaviour();
 //		eventManager.simEvents();
 		if (!checkWinner()){
 			round++;
