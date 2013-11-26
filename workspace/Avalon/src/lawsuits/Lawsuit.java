@@ -1,0 +1,26 @@
+package lawsuits;
+import departments.LegalDepartment;
+
+
+public class Lawsuit {
+	private LegalDepartment claimant;
+	private LegalDepartment defendant;
+	private int amount = 0;
+	private int duration = 0;
+	private boolean active;
+	
+	public Lawsuit(LegalDepartment c, LegalDepartment d){
+		claimant = c;
+		defendant = d;
+		defendant.beSued(this);
+		active = true;
+	}
+	
+	public int getAmount() {
+		return amount;
+	}
+	
+	public void endLawsuit(){
+		active = false;
+	}
+}
