@@ -1,9 +1,19 @@
 package company;
 
+import departments.LegalDepartment;
+import departments.Marketing;
+import departments.Research;
+
 public class Company {
 	private String playername;
 	private int popularity;
 	private int money;
+	private Marketing marketing;
+	private Research research;
+	private Storage storage;
+	private LegalDepartment legaldepartment;
+	private Purchase purchase;
+
 
 // money functions	
 public int getMoney() {
@@ -34,13 +44,12 @@ public void reducePopularity(int value){
  
  
 public void initialize(){
-	private Marketing  marketing;
-	private Research research;
-	private Storage storage;
-	private LegalDepartment legaldepartment;
-	private Purchase purchase;
-	
-	
+	marketing = new Marketing();
+	research = new Research();
+	storage = new Storage();
+	legaldepartment = new LegalDepartment();
+	purchase = new Purchase();
+
 	}
 
 }
