@@ -119,10 +119,10 @@ produziere(int anzahl)</y:MethodLabel>
       <data key="d4"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="64.84042897297297" width="123.0" x="51.427127135134924" y="927.5797855135136"/>
+          <y:Geometry height="78.70986667906618" width="143.80415655913976" x="51.427127135134924" y="927.5797855135136"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="39.40087890625" x="41.799560546875" y="3.0">Lager<y:LabelModel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="39.40087890625" x="52.20163882644488" y="3.0">Lager<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -131,8 +131,8 @@ produziere(int anzahl)</y:MethodLabel>
           </y:NodeLabel>
           <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
             <y:AttributeLabel/>
-            <y:MethodLabel>addProdukt(int: level)
-</y:MethodLabel>
+            <y:MethodLabel>addProduct(int: level)
+removeProduct(int: level)</y:MethodLabel>
           </y:UML>
         </y:UMLClassNode>
       </data>
@@ -519,7 +519,6 @@ int: rundeEnde</y:AttributeLabel>
     </node>
     <node id="n22">
       <data key="d4"/>
-      <data key="d5"/>
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="103.0" width="131.25" x="673.4175824175825" y="-180.133234335135"/>
@@ -909,7 +908,6 @@ int: auswirkung</y:AttributeLabel>
     </edge>
     <edge id="e23" source="n20" target="n11">
       <data key="d8"/>
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -921,7 +919,6 @@ int: auswirkung</y:AttributeLabel>
     </edge>
     <edge id="e24" source="n22" target="n9">
       <data key="d8"/>
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -933,7 +930,6 @@ int: auswirkung</y:AttributeLabel>
     </edge>
     <edge id="e25" source="n22" target="n10">
       <data key="d8"/>
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
