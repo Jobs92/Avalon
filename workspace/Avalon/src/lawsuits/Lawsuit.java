@@ -1,7 +1,6 @@
 package lawsuits;
 import departments.LegalDepartment;
 
-
 public class Lawsuit {
 	private LegalDepartment claimant;
 	private LegalDepartment defendant;

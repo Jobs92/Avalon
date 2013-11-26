@@ -1,9 +1,7 @@
 package departments;
 
 import java.util.Arrays;
-
 import company.Company;
-
 import lawsuits.Lawsuit;
 
 public class LegalDepartment {
