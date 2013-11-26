@@ -7,6 +7,9 @@ public class Product {
 	private int price;
 	private int amount;
 	private int quality;
+	
+	
+	
 	public int getLevel() {
 		return level;
 	}
