@@ -44,7 +44,7 @@ public void reducePopularity(int value){
 	 legaldepartment.simulate();
 	 marketing.simulate();
 	 research.simulate();
-	 sales.simulate();
+	 purchase.simulate();
  }
  
  
@@ -53,7 +53,7 @@ public void initialize(){
 	research = new Research(1);
 	warehouse = new Warehouse();
 	legaldepartment = new LegalDepartment(this);
-	purchase = new Purchase();
+	purchase = new Purchase(this);
 
 	}
 

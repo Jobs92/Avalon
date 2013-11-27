@@ -3,13 +3,16 @@ import otherclasses.Supplier;
 import company.*;
 
 public class Purchase {
+	private Company company = null;
 	
-	
-	private void newPurchase(int amount, Supplier supplier){
-		company.reduceMoney =  amount * Supplier.getPrice();
+	public Purchase (Company c){
+		this.company = c;
 	}
 	
-	public Purchase (Company company) {
-		
+	private void simulate(int amount, Supplier supplier){
+		 company.reduceMoney(amount * supplier.getPrice());
 	}
+	
+	
+	
 }
