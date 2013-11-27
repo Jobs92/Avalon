@@ -1,6 +1,7 @@
 package gameManager;
 
 import company.Company;
+import eventHandling.EventManager;
 import market.Market;
 
 public class GameManager {
@@ -8,7 +9,7 @@ public class GameManager {
 	private boolean active = false;
 	private Company winner;
 	private Market market = new Market();
-//	private EventManager eventManager = new EventManager()
+	private EventManager eventManager = new EventManager();
 	
 	public void startGame(){
 		initializeGame();
@@ -25,7 +26,7 @@ public class GameManager {
 		waitForPlayer();
 		market.simActivities();
 		market.simBuyingBehaviour();
-//		eventManager.simEvents();
+		eventManager.simEvents();
 		if (!checkWinner()){
 			round++;
 		}else{
@@ -40,18 +41,28 @@ public class GameManager {
 
 	private boolean checkWinner() {
 		int neededAmount = 0; //TODO: get correct value from configuration
-//		Company[] cs = market.getCompanies();
-//		for (Company c : cs) {
-//			if (c.getBalance >= neededAmount){
-//				winner = c;
-//				return true;
-//			}
-//		}
+		Company[] cs = market.getCompanies();
+		for (Company c : cs) {
+			if (c.getMoney() >= neededAmount){
+		}
+				winner = c;
+				return true;
+			}
 		return false;
 	}
 
 	private void waitForPlayer() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void addPlayer(Company c){
+		market.addCompany(c);
+	}
+	
+	public Company[] getPlayer(){
+		System.out.println(market);
+		System.out.println(market.getCompanies());
+		return market.getCompanies();
 	}
 }

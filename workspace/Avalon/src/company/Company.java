@@ -2,9 +2,8 @@ package company;
 
 import departments.LegalDepartment;
 import departments.Marketing;
-import departments.Research;
 import departments.Purchase;
-import departments.Sales;
+import departments.Research;
 import departments.Warehouse;
 
 public class Company {
@@ -48,9 +47,9 @@ public void reducePopularity(int value){
  
 public void initialize(){
 	marketing = new Marketing();
-	research = new Research();
+	research = new Research(1);
 	warehouse = new Warehouse();
-	legaldepartment = new LegalDepartment();
+	legaldepartment = new LegalDepartment(this);
 	purchase = new Purchase();
 
 	}

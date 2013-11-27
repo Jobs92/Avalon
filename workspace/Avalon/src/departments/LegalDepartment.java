@@ -30,10 +30,9 @@ public class LegalDepartment {
 	}
 	
 	public void payAmount(){
-		
-//		int amount = lawsuitsAsDefendant[lawsuitsAsDefendant.length-1].getAmount();
-//		company.reduceBalance(amount);
-//		lawsuitsAsDefendant[lawsuitsAsDefendant.length-1].endLawsuit();
+		int amount = lawsuitsAsDefendant[lawsuitsAsDefendant.length-1].getAmount();
+		company.reduceMoney(amount);
+		lawsuitsAsDefendant[lawsuitsAsDefendant.length-1].endLawsuit();
 	}
 	
 	public void abandonLawsuit(){
