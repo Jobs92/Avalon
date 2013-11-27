@@ -8,8 +8,8 @@ import departments.Warehouse;
 
 public class Company {
 	private String playername;
-	private int popularity;
-	private int money;
+	private double popularity;
+	private double money;
 	private Marketing marketing;
 	private Research research;
 	private Warehouse warehouse;
@@ -18,21 +18,21 @@ public class Company {
 
 
 // money functions	
-public int getMoney() {
+public double getMoney() {
 	return this.money;
 }
-public void addMoney(int value){
+public void addMoney(double value){
 	this.money = this.money + value;
 }
-public void reduceMoney(int value){
+public void reduceMoney(double value){
 	this.money = this.money - value;
 }
 
 // popularity functions
-public int getPopularity() {
+public double getPopularity() {
 	return this.popularity;
 }
-public void addPopularity(int value){
+public void addPopularity(double value){
 	this.popularity = this.popularity + value;
 }
 public void reducePopularity(int value){
@@ -41,7 +41,10 @@ public void reducePopularity(int value){
 
 // simulation functions
  public void simActivities(){
-	 
+	 legaldepartment.simulate();
+	 marketing.simulate();
+	 research.simulate();
+	 sales.simulate();
  }
  
  
