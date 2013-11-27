@@ -1,14 +1,10 @@
 package campaigns;
 
-import departments.Research;
-
+import departments.Department;
 
 public class ResearchCampaign extends Campaign {
-	Research research;
-
-	public ResearchCampaign(Research research) {
-		super();
-		this.research = research;
+	public ResearchCampaign(Department department, String title, int cost,
+			int duration, int successProbability, int level, String description) {
+		super(department, title, cost, duration, successProbability, level, description);
 	}
-	
 }

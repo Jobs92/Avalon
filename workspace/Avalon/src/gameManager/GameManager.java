@@ -10,8 +10,16 @@ public class GameManager {
 	private Company winner;
 	private Market market = new Market();
 	private EventManager eventManager = new EventManager();
-	
-	public void startGame(){
+	private static GameManager sharedInstance;
+
+	public static GameManager sharedInstance() {
+		if (GameManager.sharedInstance == null) {
+			GameManager.sharedInstance = new GameManager();
+		}
+		return GameManager.sharedInstance;
+	}
+
+	public void startGame() {
 		initializeGame();
 		nextRound();
 	}
@@ -27,9 +35,9 @@ public class GameManager {
 		market.simActivities();
 		market.simBuyingBehaviour();
 		eventManager.simEvents();
-		if (!checkWinner()){
+		if (!checkWinner()) {
 			round++;
-		}else{
+		} else {
 			endGame();
 		}
 	}
@@ -40,29 +48,33 @@ public class GameManager {
 	}
 
 	private boolean checkWinner() {
-		int neededAmount = 0; //TODO: get correct value from configuration
+		int neededAmount = 0; // TODO: get correct value from configuration
 		Company[] cs = market.getCompanies();
 		for (Company c : cs) {
-			if (c.getMoney() >= neededAmount){
-		}
-				winner = c;
-				return true;
+			if (c.getMoney() >= neededAmount) {
 			}
+			winner = c;
+			return true;
+		}
 		return false;
 	}
 
 	private void waitForPlayer() {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
-	public void addPlayer(Company c){
+
+	public void addPlayer(Company c) {
 		market.addCompany(c);
 	}
-	
-	public Company[] getPlayer(){
+
+	public Company[] getPlayer() {
 		System.out.println(market);
 		System.out.println(market.getCompanies());
 		return market.getCompanies();
+	}
+
+	public int getRound() {
+		return this.round;
 	}
 }

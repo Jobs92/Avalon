@@ -2,11 +2,12 @@ package campaigns;
 
 import departments.Department;
 
-public class MarketingCampaign extends Campaign {
+public class SpyingCampaign extends ResearchCampaign {
 
-	public MarketingCampaign(Department department, String title, int cost,
+	public SpyingCampaign(Department department, String title, int cost,
 			int duration, int successProbability, int level, String description) {
 		super(department, title, cost, duration, successProbability, level,
 				description);
 	}
+
 }

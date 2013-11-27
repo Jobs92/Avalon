@@ -1,20 +1,35 @@
 package campaigns;
 
+import gameManager.GameManager;
 
-public class ExplicitCampaign {
-	int startRound;
-	int endRound;
-	public int getStartRound() {
-		return startRound;
+public abstract class ExplicitCampaign {
+
+	private int endRound;
+	protected Campaign campaign;
+
+	public ExplicitCampaign(Campaign campaign) {
+		this.campaign = campaign;
+		this.endRound = GameManager.sharedInstance().getRound()
+				+ campaign.getDuration();
 	}
-	public void setStartRound(int startRound) {
-		this.startRound = startRound;
+
+	public void simulate() {
+		if (GameManager.sharedInstance().getRound() == endRound) {
+			if (isSuccessfull()) {
+				campaignFinishedSuccessfully();
+			} else {
+				campaignFailed();
+			}
+		}
 	}
-	public int getEndRound() {
-		return endRound;
+
+	private boolean isSuccessfull() {
+		int random = (int) Math.random() * 100;
+		return random < campaign.getSuccessProbability();
 	}
-	public void setEndRound(int endRound) {
-		this.endRound = endRound;
-	}
-	
+
+	protected abstract void campaignFinishedSuccessfully();
+
+	protected abstract void campaignFailed();
+
 }

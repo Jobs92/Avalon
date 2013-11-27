@@ -1,4 +1,4 @@
-package Product;
+package product;
 
 
 public class Product {
@@ -8,7 +8,9 @@ public class Product {
 	private int amount;
 	private int quality;
 	
-	
+	public void addLevel(int level){
+		this.level+=level;
+	}
 	
 	public int getLevel() {
 		return level;

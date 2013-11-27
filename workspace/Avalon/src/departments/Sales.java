@@ -1,6 +1,6 @@
 package departments;
 
-import Product.Product;
+import product.Product;
 
 public class Sales {
 	

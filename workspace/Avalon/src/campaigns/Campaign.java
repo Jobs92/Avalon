@@ -1,36 +1,59 @@
 package campaigns;
 
+import departments.Department;
 
 public abstract class Campaign {
-	String description;
-	int cost;
-	int duration;
-	int level;
-	
+	private String description;
+	private String title;
+	private int successProbability;
+	private int cost;
+	private int duration;
+	private int level;
+	private boolean active;
+	private Department department;
+
 	public String getDescription() {
 		return description;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+
+	public String getTitle() {
+		return title;
 	}
+
 	public int getCost() {
 		return cost;
 	}
-	public void setCost(int cost) {
-		this.cost = cost;
-	}
+
 	public int getDuration() {
 		return duration;
 	}
-	public void setDuration(int duration) {
-		this.duration = duration;
-	}
+
 	public int getLevel() {
 		return level;
 	}
-	public void setLevel(int level) {
-		this.level = level;
+
+	public boolean isActive() {
+		return active;
 	}
-	
-	
+
+	public Department getDepartment() {
+		return department;
+	}
+
+	public int getSuccessProbability() {
+		return successProbability;
+	}
+
+	public Campaign(Department department, String title, int cost,
+			int duration, int successProbability, int level, String description) {
+		super();
+		this.department = department;
+		this.successProbability = successProbability;
+		this.title = title;
+		this.description = description;
+		this.cost = cost;
+		this.duration = duration;
+		this.level = level;
+		this.active = true;
+	}
 }
