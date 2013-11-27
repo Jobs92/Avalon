@@ -3,6 +3,9 @@ package company;
 import departments.LegalDepartment;
 import departments.Marketing;
 import departments.Research;
+import departments.Purchase;
+import departments.Sales;
+import departments.Warehouse;
 
 public class Company {
 	private String playername;
@@ -10,7 +13,7 @@ public class Company {
 	private int money;
 	private Marketing marketing;
 	private Research research;
-	private Storage storage;
+	private Warehouse warehouse;
 	private LegalDepartment legaldepartment;
 	private Purchase purchase;
 
@@ -46,7 +49,7 @@ public void reducePopularity(int value){
 public void initialize(){
 	marketing = new Marketing();
 	research = new Research();
-	storage = new Storage();
+	warehouse = new Warehouse();
 	legaldepartment = new LegalDepartment();
 	purchase = new Purchase();
 
