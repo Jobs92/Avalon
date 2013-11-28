@@ -2,6 +2,7 @@ package company;
 
 import java.util.ArrayList;
 
+import product.Product;
 import departments.Department;
 import departments.LegalDepartment;
 import departments.Marketing;
@@ -12,8 +13,10 @@ import departments.Warehouse;
 
 public class Company {
 	private String playername;
-	private double popularity;
+	private int popularity;
 	private double money;
+	private Product product;
+
 	private ArrayList<Department> departments;
 
 	// private Marketing marketing;
@@ -25,6 +28,8 @@ public class Company {
 
 	public Company() {
 		super();
+		money = 0;
+		popularity = 0;
 		departments = new ArrayList<Department>();
 		departments.add(new Sales());
 		departments.add(new Marketing());
@@ -32,6 +37,10 @@ public class Company {
 		departments.add(new Warehouse());
 		departments.add(new LegalDepartment(this));
 		departments.add(new Purchase(this));
+	}
+
+	public Product getProduct() {
+		return product;
 	}
 
 	public String getPlayername() {
@@ -76,11 +85,11 @@ public class Company {
 	}
 
 	// popularity functions
-	public double getPopularity() {
+	public int getPopularity() {
 		return this.popularity;
 	}
 
-	public void addPopularity(double value) {
+	public void addPopularity(int value) {
 		this.popularity = this.popularity + value;
 	}
 

@@ -9,4 +9,10 @@ public class MarketingCampaign extends Campaign {
 		super(department, title, cost, duration, successProbability, level,
 				description);
 	}
+
+	@Override
+	public ExplicitCampaign startCampaign() {
+		ExplicitMarketingCampaign c = new ExplicitMarketingCampaign(this);
+		return c;
+	}
 }

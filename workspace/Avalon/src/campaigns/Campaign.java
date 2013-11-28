@@ -3,6 +3,10 @@ package campaigns;
 import departments.Department;
 
 public abstract class Campaign {
+	public static final int MARKETING = 0;
+	public static final int REASEARCH = 1;
+	public static final int SPYING = 2;
+	
 	private String description;
 	private String title;
 	private int successProbability;
@@ -56,4 +60,11 @@ public abstract class Campaign {
 		this.level = level;
 		this.active = true;
 	}
+	
+	public abstract ExplicitCampaign startCampaign();
 }
+
+
+
+
+

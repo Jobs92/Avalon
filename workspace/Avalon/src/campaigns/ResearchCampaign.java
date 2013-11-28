@@ -7,4 +7,10 @@ public class ResearchCampaign extends Campaign {
 			int duration, int successProbability, int level, String description) {
 		super(department, title, cost, duration, successProbability, level, description);
 	}
+
+	@Override
+	public ExplicitCampaign startCampaign() {
+		ExplicitResearchCampaign c = new ExplicitResearchCampaign(this);
+		return c;
+	}
 }

@@ -1,27 +1,14 @@
 package campaigns;
 
-import product.Product;
-
-
 public class ExplicitResearchCampaign extends ExplicitCampaign {
-	Product product;
 	
-	public ExplicitResearchCampaign(ResearchCampaign campaign, Product product) {
+	public ExplicitResearchCampaign(ResearchCampaign campaign) {
 		super(campaign);
-		this.product = product;
-	}
-
-	public Product getProduct() {
-		return product;
-	}
-
-	protected void campaignFinished() {
-		product.addLevel(campaign.getLevel());
 	}
 
 	@Override
 	protected void campaignFinishedSuccessfully() {
-		product.addLevel(campaign.getLevel());
+		campaign.getDepartment().getCompany().getProduct().addLevel(campaign.getLevel());
 	}
 
 	@Override

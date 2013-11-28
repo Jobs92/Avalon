@@ -10,4 +10,8 @@ public class SpyingCampaign extends ResearchCampaign {
 				description);
 	}
 
+	public ExplicitSpyingCampaign startSpyingCampaign(int target) {
+		return new ExplicitSpyingCampaign(target, this);
+	}
+
 }
