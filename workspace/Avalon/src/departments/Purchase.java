@@ -2,7 +2,7 @@ package departments;
 import otherclasses.Supplier;
 import company.*;
 
-public class Purchase {
+public class Purchase extends Department {
 	private Company company = null;
 	
 	public Purchase (Company c){

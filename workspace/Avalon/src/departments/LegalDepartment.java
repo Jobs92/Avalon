@@ -4,7 +4,7 @@ import java.util.Arrays;
 import company.Company;
 import lawsuits.Lawsuit;
 
-public class LegalDepartment {
+public class LegalDepartment extends Department{
 	private int level = 1;
 	private Company company = null;
 	private Lawsuit[] lawsuitsAsClaimant;

@@ -1,6 +1,6 @@
 package departments;
 
-public class Warehouse {
+public class Warehouse  extends Department{
 	
 	public void addProduct( int level){
 		

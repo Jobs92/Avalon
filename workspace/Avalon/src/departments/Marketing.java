@@ -1,6 +1,6 @@
 package departments;
 
-public class Marketing {
+public class Marketing extends Department{
 
 	private void startCampaign(int level){
 		

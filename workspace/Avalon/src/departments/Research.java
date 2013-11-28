@@ -1,6 +1,6 @@
 package departments;
 
-public class Research {
+public class Research  extends Department{
 	int level;
 
 	public Research(int level) {

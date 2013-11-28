@@ -2,7 +2,7 @@ package departments;
 
 import product.Product;
 
-public class Sales {
+public class Sales  extends Department{
 	
 	
 	public void setPrice(Product p, int price){
