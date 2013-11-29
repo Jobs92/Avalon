@@ -59,4 +59,9 @@ public abstract class CampaignDepartment extends Department {
 	public int getLevel() {
 		return level;
 	}
+
+	public ArrayList<ExplicitCampaign> getExplicitCampaigns() {
+		return explicitCampaigns;
+	}
+
 }
