@@ -3,8 +3,8 @@ package departments;
 import company.Company;
 
 public abstract class Department {
-	double fixcost;
-	Company company;
+	protected double fixcost;
+	protected Company company;
 	public void simulate(){
 		
 	}

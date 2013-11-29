@@ -11,6 +11,7 @@ public class Market {
 	
 	public void simBuyingBehaviour(){
 		//TODO: machen wir zusammen
+		//auch zurückschicken kommt hier irgendwo rein
 	}
 	
 	public void simActivities(){

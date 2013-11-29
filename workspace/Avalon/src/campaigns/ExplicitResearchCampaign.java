@@ -20,8 +20,10 @@ public class ExplicitResearchCampaign extends ExplicitCampaign {
 
 	@Override
 	protected void campaignFailed() {
-		// TODO Auto-generated method stub
-
+		String message = "Forschungskampagne \""
+				+ campaign.getTitle()
+				+ "\" hatte keine Ergebnisse.";
+		campaign.getDepartment().getCompany().addMessageToInbox(message);
 	}
 
 }

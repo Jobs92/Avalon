@@ -3,7 +3,6 @@ package departments;
 import java.util.ArrayList;
 
 import product.Product;
-import campaigns.Campaign;
 import campaigns.ExplicitCampaign;
 import campaigns.ExplicitMarketingCampaign;
 import campaigns.ResearchCampaign;
@@ -12,23 +11,23 @@ import campaigns.SpyingCampaign;
 public class Research extends Department {
 	private int level;
 	private int reasearchedLevels;
-	private ArrayList<Campaign> campaigns;
+	private ArrayList<ResearchCampaign> campaigns;
 	private ArrayList<ExplicitCampaign> explicitCampaigns;
 
-	public Research(int level) {
+	public Research() {
 		super();
-		this.level = level;
+		this.level = 1;
 		init();
 	}
 
 	private void init() {
 		reasearchedLevels = 0;
 		explicitCampaigns = new ArrayList<ExplicitCampaign>();
-		campaigns = new ArrayList<Campaign>();
+		campaigns = new ArrayList<ResearchCampaign>();
 		// load campaigns from file (?)
 	}
-	
-	public void addCampaign(Campaign campaign){
+
+	public void addCampaign(ResearchCampaign campaign) {
 		campaigns.add(campaign);
 	}
 
@@ -40,19 +39,28 @@ public class Research extends Department {
 	public void startCampaign(SpyingCampaign spyingCampaign, int target) {
 		explicitCampaigns.add(spyingCampaign.startSpyingCampaign(target));
 	}
-	
-	public void applyResearchResults(){
-		Product newProduct = new Product(company.getHighestProduct().getLevel()+this.reasearchedLevels);
+
+	public void applyResearchResults() {
+		Product newProduct = new Product(company.getHighestProduct().getLevel()
+				+ this.reasearchedLevels);
 		company.addProduct(newProduct);
-		reasearchedLevels=0;
+		reasearchedLevels = 0;
 	}
-	
-	public void addResearchedLevels(int level){
-		reasearchedLevels+=level;
+
+	public void addResearchedLevels(int level) {
+		reasearchedLevels += level;
 	}
-	
-	public void improveResearch(int level){
-		this.level+=level;
+
+	public void improveResearch() {
+		for (ResearchCampaign campaign : campaigns) {
+			campaign.updateProbability(1);
+		}
+		this.level += 1;
+	}
+
+	public int getCostForNextLevel() {
+		int cost = level * level * 20000;
+		return cost;
 	}
 
 	public int getLevel() {

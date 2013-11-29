@@ -34,7 +34,7 @@ public class Company {
 		departments = new ArrayList<Department>();
 		departments.add(new Sales());
 		departments.add(new Marketing());
-		departments.add(new Research(1));
+		departments.add(new Research());
 		departments.add(new Warehouse());
 		departments.add(new LegalDepartment(this));
 		departments.add(new Purchase(this));

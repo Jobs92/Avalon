@@ -43,6 +43,11 @@ public abstract class Campaign {
 		return successProbability;
 	}
 
+	public void updateProbability(int level){
+		successProbability = successProbability + level;
+		//TODO: also update levels???
+	}
+
 	public Campaign(Department department, String title, int cost,
 			int duration, int successProbability, int level, String description) {
 		super();
