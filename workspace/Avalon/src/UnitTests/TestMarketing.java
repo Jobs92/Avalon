@@ -22,29 +22,29 @@ public class TestMarketing {
 		company = new Company();
 		gameManager = new GameManager();
 		marketing = new Marketing();
-		campaign = new MarketingCampaign(marketing, "TestTitle",
-				10000, 1, 95, 3, "Description");
+		campaign = new MarketingCampaign(marketing, "TestTitle", 10000, 1, 95,
+				3, "Description");
 		marketing.addCampaign(campaign);
 	}
 
 	@After
 	public void tearDown() throws Exception {
 	}
-	
+
 	@Test
 	public void testImproveMarketing() {
-		marketing.improveMarketing();
+		marketing.improveDepartment();
 		// does not work due to GameManager faults
 		assertEquals(96, campaign.getSuccessProbability());
 	}
 
-//	@Test
-//	public void testStartCampaign() {
-//		marketing.startCampaign(new MarketingCampaign(marketing, "TestTitle",
-//				10000, 1, 95, 3, "Description"));
-//		marketing.simulate();
-//		// does not work due to GameManager faults
-//		assertEquals(3, company.getPopularity());
-//	}
+	// @Test
+	// public void testStartCampaign() {
+	// marketing.startCampaign(new MarketingCampaign(marketing, "TestTitle",
+	// 10000, 1, 95, 3, "Description"));
+	// marketing.simulate();
+	// // does not work due to GameManager faults
+	// assertEquals(3, company.getPopularity());
+	// }
 
 }
