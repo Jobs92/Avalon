@@ -10,7 +10,7 @@ public class Purchase extends Department {
 	}
 	
 	private void simulate(int amount, Supplier supplier){
-		 company.reduceMoney(amount * supplier.getPrice());
+		 company.changeMoney((-1 )*amount * supplier.getPrice());
 	}
 	
 	

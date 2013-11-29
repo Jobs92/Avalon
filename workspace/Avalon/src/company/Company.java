@@ -75,12 +75,8 @@ public class Company {
 		return this.money;
 	}
 
-	public void addMoney(double value) {
+	public void changeMoney(double value) {
 		this.money = this.money + value;
-	}
-
-	public void reduceMoney(double value) {
-		this.money = this.money - value;
 	}
 
 	// popularity functions
