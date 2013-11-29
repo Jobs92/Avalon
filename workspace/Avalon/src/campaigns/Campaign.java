@@ -7,14 +7,13 @@ public abstract class Campaign {
 	public static final int REASEARCH = 1;
 	public static final int SPYING = 2;
 	
-	private String description;
-	private String title;
-	private int successProbability;
-	private int cost;
-	private int duration;
-	private int level;
-	private boolean active;
-	private Department department;
+	protected String description;
+	protected String title;
+	protected int successProbability;
+	protected int cost;
+	protected int duration;
+	protected int level;
+	protected Department department;
 
 	public String getDescription() {
 		return description;
@@ -36,10 +35,6 @@ public abstract class Campaign {
 		return level;
 	}
 
-	public boolean isActive() {
-		return active;
-	}
-
 	public Department getDepartment() {
 		return department;
 	}
@@ -58,7 +53,6 @@ public abstract class Campaign {
 		this.cost = cost;
 		this.duration = duration;
 		this.level = level;
-		this.active = true;
 	}
 	
 	public abstract ExplicitCampaign startCampaign();

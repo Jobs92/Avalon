@@ -6,6 +6,7 @@ public abstract class ExplicitCampaign {
 
 	private int endRound;
 	protected Campaign campaign;
+	protected boolean active;
 
 	public ExplicitCampaign(Campaign campaign) {
 		this.campaign = campaign;

@@ -1,5 +1,7 @@
 package campaigns;
 
+import company.Company;
+
 public class ExplicitMarketingCampaign extends ExplicitCampaign {
 
 	public ExplicitMarketingCampaign(MarketingCampaign campaign) {
@@ -8,14 +10,20 @@ public class ExplicitMarketingCampaign extends ExplicitCampaign {
 
 	@Override
 	protected void campaignFinishedSuccessfully() {
-		campaign.getDepartment().getCompany()
-				.addPopularity(campaign.getLevel());
+		Company c = new Company();
+		c.addPopularity(campaign.getLevel());
+		String message = "Marketingkampagne \"" + campaign.getTitle()
+				+ "\" erfolgreich durchgeführt. Popularität um "
+				+ campaign.getLevel() + " Level gestiegen.";
+		c.addMessageToInbox(message);
 	}
 
 	@Override
 	protected void campaignFailed() {
-		// TODO Auto-generated method stub
-
+		Company c = new Company();
+		String message = "Marketingkampagne \"" + campaign.getTitle()
+				+ "\" wurde nicht erfolgreich abgeschlossen.";
+		c.addMessageToInbox(message);
 	}
 
 }

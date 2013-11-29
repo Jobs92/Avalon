@@ -15,7 +15,8 @@ public class Company {
 	private String playername;
 	private int popularity;
 	private double money;
-	private Product product;
+	private ArrayList<String> inbox;
+	private ArrayList<Product> products;
 
 	private ArrayList<Department> departments;
 
@@ -37,10 +38,8 @@ public class Company {
 		departments.add(new Warehouse());
 		departments.add(new LegalDepartment(this));
 		departments.add(new Purchase(this));
-	}
-
-	public Product getProduct() {
-		return product;
+		inbox = new ArrayList<String>();
+		products = new ArrayList<Product>();
 	}
 
 	public String getPlayername() {
@@ -102,5 +101,25 @@ public class Company {
 		for (Department d : departments) {
 			d.simulate();
 		}
+	}
+
+	public void addMessageToInbox(String message) {
+		inbox.add(message);
+	}
+
+	public String[] getMessagesFromInox() {
+		String[] result = new String[inbox.size()];
+		for (int i = 0; i < result.length; i++) {
+			result[i] = inbox.get(i);
+		}
+		return result;
+	}
+	
+	public void addProduct(Product product){
+		products.add(product);
+	}
+	
+	public Product getHighestProduct(){
+		return products.get(products.size()-1);
 	}
 }

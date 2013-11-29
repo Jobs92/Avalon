@@ -13,4 +13,6 @@ public class ResearchCampaign extends Campaign {
 		ExplicitResearchCampaign c = new ExplicitResearchCampaign(this);
 		return c;
 	}
+	
+	
 }
