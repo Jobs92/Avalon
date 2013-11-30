@@ -32,5 +32,10 @@ public class Lawsuit {
 	public void simulate(){
 		int dif = claimant.getLevel() - defendant.getLevel();
 		//TODO: lawsuit simulieren
+		
+		double weightLevel = 1; //TODO: load from config
+		double weightRound = 1; //TODO: load from config
+		
+		double param = (weightLevel*dif + weightRound*duration)/2.0;
 	}
 }
