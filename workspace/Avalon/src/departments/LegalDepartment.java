@@ -22,13 +22,12 @@ public class LegalDepartment extends Department{
 	}
 	
 	public void checkComponent(Company c){
-		//TODO: checkComponent for Spying
 		ArrayList<ExplicitCampaign> allCampaigns= c.getResearch().getExplicitCampaigns();
 		for (int i = 0; i < allCampaigns.size(); i++) {
 			ExplicitResearchCampaign campaign = (ExplicitResearchCampaign) allCampaigns.get(i);
-//			if (campaign.??){
-//				foundSpyingCampaigns.add((ExplicitSpyingCampaign) campaign);
-//			}
+			if (campaign.getClass() == ExplicitSpyingCampaign.class){
+				foundSpyingCampaigns.add((ExplicitSpyingCampaign) campaign);
+			}
 				
 		}
 	}
