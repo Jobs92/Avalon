@@ -11,7 +11,7 @@ public class test {
     	try {
                //load a properties file
     		prop.load(new FileInputStream("config.properties"));
-    		System.out.println(prop.get("weightRound"));
+    		System.out.println(prop.getProperty("weightRound"));
 
 	} catch (IOException ex) {
 		ex.printStackTrace();
