@@ -31,13 +31,24 @@ public class GameManager {
 
 	private void nextRound() {
 		round++;
+		//Player decide further actions
 		waitForPlayer();
-		market.simActivities();
+		
+		//Active Actions are simulated
+		market.simulate();
+		
+		//Buying Behaviour at the market is simulated
 		market.simBuyingBehaviour();
+		
+		//Events are simulated
 		eventManager.simEvents();
+		
+		//Check for winner
 		if (!checkWinner()) {
-			round++;
+			//no winner --> next round is started
+			nextRound();
 		} else {
+			//winner --> games is finished
 			endGame();
 		}
 	}

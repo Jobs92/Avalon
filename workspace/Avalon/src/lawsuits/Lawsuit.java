@@ -1,9 +1,11 @@
 package lawsuits;
+import campaigns.ExplicitSpyingCampaign;
 import departments.LegalDepartment;
 
 public class Lawsuit {
 	private LegalDepartment claimant;
 	private LegalDepartment defendant;
+	private ExplicitSpyingCampaign spying;
 	private int amount = 0;
 	private int duration = 0;
 	private boolean active;
@@ -21,5 +23,14 @@ public class Lawsuit {
 	
 	public void endLawsuit(){
 		active = false;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+	
+	public void simulate(){
+		int dif = claimant.getLevel() - defendant.getLevel();
+		//TODO: lawsuit simulieren
 	}
 }

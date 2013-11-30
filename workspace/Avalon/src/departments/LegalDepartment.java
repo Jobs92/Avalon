@@ -1,43 +1,103 @@
 package departments;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+
+import campaigns.Campaign;
+import campaigns.ExplicitCampaign;
+import campaigns.ExplicitResearchCampaign;
+import campaigns.ExplicitSpyingCampaign;
 import company.Company;
 import lawsuits.Lawsuit;
 
 public class LegalDepartment extends Department{
 	private int level = 1;
 	private Company company = null;
-	private Lawsuit[] lawsuitsAsClaimant;
-	private Lawsuit[] lawsuitsAsDefendant;
+	private ArrayList<Lawsuit> lawsuitsAsClaimant = new ArrayList<Lawsuit>();
+	private ArrayList<Lawsuit> lawsuitsAsDefendant = new ArrayList<Lawsuit>();
+	private ArrayList<ExplicitSpyingCampaign> foundSpyingCampaigns = new ArrayList<ExplicitSpyingCampaign>();
 	
 	public LegalDepartment(Company c){
 		this.company = c;
 	}
 	
 	public void checkComponent(Company c){
-		//TODO: checkComponent
+		//TODO: checkComponent for Spying
+		ArrayList<ExplicitResearchCampaign> allCampaigns= c.getResearch().getExplicitCampaigns();
+		for (int i = 0; i < allCampaigns.size(); i++) {
+			ExplicitResearchCampaign campaign = allCampaigns.get(i);
+//			if (campaign.??){
+//				foundSpyingCampaigns.add((ExplicitSpyingCampaign) campaign);
+//			}
+				
+		}
 	}
 	
+	public int getLevel() {
+		return level;
+	}
+	
+	public void upgrade(){
+		int amount = 0; //TODO aus Config Datei holen
+		company.changeMoney(amount*-1);
+		level++;
+	}
+
 	public void beSued(Lawsuit l){
-		lawsuitsAsDefendant = Arrays.copyOf(lawsuitsAsDefendant, lawsuitsAsDefendant.length+1);
-		lawsuitsAsDefendant[lawsuitsAsDefendant.length-1] = l;
+		lawsuitsAsDefendant.add(l);
 	}
 	
 	public void sueComponent(Company c){
-//		Lawsuit l = new Lawsuit(this, c.getLegalDepartment());
-//		lawsuitsAsClaimant = Arrays.copyOf(lawsuitsAsClaimant, lawsuitsAsClaimant.length+1);
-//		lawsuitsAsClaimant[lawsuitsAsClaimant.length-1] = l;
+		LegalDepartment opponent = c.getLegalDepartment();
+		if (this.isAvailable() && opponent.isAvailable()){
+			Lawsuit l = new Lawsuit(this, opponent);
+			lawsuitsAsClaimant.add(l);
+		}
 	}
 	
+	private boolean isAvailable() {
+		// A legal Departmant has the capacity for only one lawsuit at the same time
+		
+		// Check lawsuits as Claimant
+		for (int i = 0; i < lawsuitsAsClaimant.size(); i++) {
+			if (lawsuitsAsClaimant.get(i).isActive()){
+				return false;
+			}
+		}
+		
+		// Check lawsuits as Defendant
+		for (int i = 0; i < lawsuitsAsDefendant.size(); i++) {
+			if (lawsuitsAsDefendant.get(i).isActive()){
+				return false;
+			}
+		}
+		return true;
+	}
+
 	public void payAmount(){
-		int amount = lawsuitsAsDefendant[lawsuitsAsDefendant.length-1].getAmount();
-		company.reduceMoney(amount);
-		lawsuitsAsDefendant[lawsuitsAsDefendant.length-1].endLawsuit();
+		Lawsuit l = lawsuitsAsDefendant.get(lawsuitsAsDefendant.size()-1);
+		if (l.isActive()){
+			int amount = l.getAmount();
+			company.changeMoney(amount);
+			l.endLawsuit();
+		}
 	}
 	
 	public void abandonLawsuit(){
-		lawsuitsAsDefendant[lawsuitsAsDefendant.length-1].endLawsuit();
+		Lawsuit l = lawsuitsAsClaimant.get(lawsuitsAsClaimant.size()-1);
+		if (l.isActive()){
+			l.endLawsuit();
+		}
 	}
-	
-	
+
+	@Override
+	public void simulate() {
+		Lawsuit l;
+		for (int i = 0; i < lawsuitsAsClaimant.size(); i++) {
+			l = lawsuitsAsClaimant.get(i);
+			if (l.isActive()){
+				l.simulate();
+			}
+		}
+	}	
 }
