@@ -23,9 +23,9 @@ public class LegalDepartment extends Department{
 	
 	public void checkComponent(Company c){
 		//TODO: checkComponent for Spying
-		ArrayList<ExplicitResearchCampaign> allCampaigns= c.getResearch().getExplicitCampaigns();
+		ArrayList<ExplicitCampaign> allCampaigns= c.getResearch().getExplicitCampaigns();
 		for (int i = 0; i < allCampaigns.size(); i++) {
-			ExplicitResearchCampaign campaign = allCampaigns.get(i);
+			ExplicitResearchCampaign campaign = (ExplicitResearchCampaign) allCampaigns.get(i);
 //			if (campaign.??){
 //				foundSpyingCampaigns.add((ExplicitSpyingCampaign) campaign);
 //			}
@@ -48,7 +48,7 @@ public class LegalDepartment extends Department{
 	}
 	
 	public void sueComponent(Company c){
-		LegalDepartment opponent = c.getLegalDepartment();
+		LegalDepartment opponent = c.getLegaldepartment();
 		if (this.isAvailable() && opponent.isAvailable()){
 			Lawsuit l = new Lawsuit(this, opponent);
 			lawsuitsAsClaimant.add(l);
