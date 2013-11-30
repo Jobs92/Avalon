@@ -14,7 +14,7 @@ public class Market {
 		//auch zurückschicken kommt hier irgendwo rein
 	}
 	
-	public void simActivities(){
+	public void simulate(){
 		for (Company c : companies) {
 			c.simActivities();
 		}
