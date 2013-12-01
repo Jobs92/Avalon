@@ -8,14 +8,17 @@ public class Product {
 	private int amount;
 	private int quality;
 	
+	
 	public Product(int level) {
 		super();
 		this.level = level;
+		this.amount=0;
 	}
 
 	public void addLevel(int level){
 		this.level+=level;
 	}
+	
 	
 	public int getLevel() {
 		return level;
@@ -41,6 +44,8 @@ public class Product {
 	public void setQuality(int quality) {
 		this.quality = quality;
 	}
-	
+    public void addQuality(int quality) {
+    	this.quality += quality;
+    }
 
 }

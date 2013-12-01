@@ -118,4 +118,8 @@ public class Company {
 	public product.Product getHighestProduct(){
 		return products.get(products.size()-1);
 	}
+	public void saleProduct(){
+		
+	}
+	
 }
