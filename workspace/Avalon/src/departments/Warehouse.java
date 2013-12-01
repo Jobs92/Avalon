@@ -1,13 +1,53 @@
 package departments;
 
+import java.util.ArrayList;
+
 public class Warehouse  extends Department{
 	
-	public void addProduct( int level){
+	
+	private ArrayList<product.Product> products;
+	private int ressources;
+	
+	public Warehouse() {
+		super();
+		products = new ArrayList<product.Product>();
+		ressources=0;
+	}
+	
+	public int getRessources() {
+		return ressources;
+	}
+
+	public void setRessources(int ressources) {
+		this.ressources = ressources;
+	}
+
+	
+
+	public ArrayList<product.Product> getProducts() {
+		return products;
+	}
+	
+	public product.Product getSingleProduct(int level){
+		for (int i = 0; i < products.size(); i++) {
+			
+			if (products.get(i).getLevel()==level) {
+				return products.get(i);
+			}
+			
+		}
+		return null;
+		
+	}
+
+
+	public void addProduct(product.Product product){
+		products.add(product);
 		
 	}
 	
-	public void removeProduct (int level){
-		
+	public product.Product getHighestProduct(){
+		return products.get(products.size()-1);
 	}
 
 }

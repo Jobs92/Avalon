@@ -16,9 +16,9 @@ public class Research extends CampaignDepartment {
 	}
 
 	public void applyResearchResults() {
-		Product newProduct = new Product(company.getHighestProduct().getLevel()
+		Product newProduct = new Product(company.getWarehouse().getHighestProduct().getLevel()
 				+ this.reasearchedLevels);
-		company.addProduct(newProduct);
+		company.getWarehouse().addProduct(newProduct);
 		reasearchedLevels = 0;
 	}
 
