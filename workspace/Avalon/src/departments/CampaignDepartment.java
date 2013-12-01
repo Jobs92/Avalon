@@ -21,7 +21,6 @@ public abstract class CampaignDepartment extends Department {
 		explicitCampaigns = new ArrayList<ExplicitCampaign>();
 		campaigns = new ArrayList<Campaign>();
 		loadCampaigns();
-		// load campaigns from file (?)
 	}
 
 	protected abstract void loadCampaigns();

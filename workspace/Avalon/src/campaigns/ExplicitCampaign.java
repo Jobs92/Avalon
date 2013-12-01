@@ -1,5 +1,6 @@
 package campaigns;
 
+import otherclasses.Probability;
 import gameManager.GameManager;
 
 public abstract class ExplicitCampaign {
@@ -16,17 +17,12 @@ public abstract class ExplicitCampaign {
 
 	public void simulate() {
 		if (GameManager.sharedInstance().getRound() == endRound) {
-			if (isSuccessfull()) {
+			if (Probability.propability(campaign.getSuccessProbability())) {
 				campaignFinishedSuccessfully();
 			} else {
 				campaignFailed();
 			}
 		}
-	}
-
-	private boolean isSuccessfull() {
-		int random = (int) Math.random() * 100;
-		return random < campaign.getSuccessProbability();
 	}
 
 	protected abstract void campaignFinishedSuccessfully();
