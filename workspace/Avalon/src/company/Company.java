@@ -16,7 +16,7 @@ public class Company {
 	private int popularity;
 	private double money;
 	private ArrayList<String> inbox;
-	private ArrayList<Product> products;
+	private ArrayList<product.Product> products;
 
 	private ArrayList<Department> departments;
 
@@ -39,7 +39,7 @@ public class Company {
 		departments.add(new LegalDepartment(this));
 		departments.add(new Purchase(this));
 		inbox = new ArrayList<String>();
-		products = new ArrayList<Product>();
+		products = new ArrayList<product.Product>();
 	}
 
 	public String getPlayername() {
@@ -111,11 +111,11 @@ public class Company {
 		return result;
 	}
 	
-	public void addProduct(Product product){
+	public void addProduct(product.Product product){
 		products.add(product);
 	}
 	
-	public Product getHighestProduct(){
+	public product.Product getHighestProduct(){
 		return products.get(products.size()-1);
 	}
 }
