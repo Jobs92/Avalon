@@ -16,7 +16,7 @@ public class Market {
 	
 	public void simulate(){
 		for (Company c : companies) {
-			c.simActivities();
+			c.simulate();
 		}
 	}
 

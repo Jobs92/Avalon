@@ -1,9 +1,6 @@
 package departments;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import campaigns.Campaign;
 import campaigns.ExplicitCampaign;
 import campaigns.ExplicitResearchCampaign;
 import campaigns.ExplicitSpyingCampaign;

@@ -92,7 +92,7 @@ public class Company {
 	}
 
 	// simulation functions
-	public void simActivities() {
+	public void simulate() {
 		for (Department d : departments) {
 			d.simulate();
 		}
