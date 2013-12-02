@@ -38,6 +38,10 @@ public class Market {
 	public void addCompany(Company company) {
 		companies.add(company);
 	}
+	
+	public void addSupplier(Supplier s){
+		supplier.add(s);
+	}
 
 	public void sendMessage(String title, String message, int target,
 			int source, int type) {
