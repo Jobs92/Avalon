@@ -20,12 +20,7 @@ public class Company {
 	private double money;
 	private ArrayList<Message> inbox;
 	private boolean ready;
-	private Market market;
 	// private ArrayList<product.Product> products;
-	
-	public void setMarket(Market m){
-		market = m;
-	}
 
 	public boolean isReady() {
 		return ready;
@@ -34,7 +29,7 @@ public class Company {
 	public void setReady(boolean ready) {
 		this.ready = ready;
 		if (ready){
-			market.informReady();
+			GameManager.sharedInstance().informReady();
 		}
 	}
 

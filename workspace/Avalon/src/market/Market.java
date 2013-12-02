@@ -56,9 +56,6 @@ public class Market {
 			companies.get(target).addMessageToInbox(m);
 		}
 	}
-	
-	public void informReady(){
-		GameManager.sharedInstance().checkNextRound();
-	}
+
 
 }
