@@ -16,11 +16,82 @@ import departments.Warehouse;
 
 public class Company {
 	private String playername;
+	private int id;
 	private int popularity;
 	private double money;
 	private ArrayList<Message> inbox;
 	private boolean ready;
 	// private ArrayList<product.Product> products;
+	
+	public void setMarket(Market m){
+		market = m;
+	}
+
+	public boolean isReady() {
+		return ready;
+	}
+
+	public void setReady(boolean ready) {
+		this.ready = ready;
+		if (ready){
+			market.informReady();
+		}
+	}
+
+	public boolean isReady() {
+		return ready;
+	}
+
+	public void setReady(boolean ready) {
+		this.ready = ready;
+		if (ready){
+			GameManager.sharedInstance().informReady();
+		}
+	}
+
+	public boolean isReady() {
+		return ready;
+	}
+
+	public void setReady(boolean ready) {
+		this.ready = ready;
+		if (ready){
+			GameManager.sharedInstance().informReady();
+		}
+	}
+
+	public boolean isReady() {
+		return ready;
+	}
+
+	public void setReady(boolean ready) {
+		this.ready = ready;
+		if (ready){
+			GameManager.sharedInstance().informReady();
+		}
+	}
+
+	public boolean isReady() {
+		return ready;
+	}
+
+	public void setReady(boolean ready) {
+		this.ready = ready;
+		if (ready){
+			GameManager.sharedInstance().informReady();
+		}
+	}
+
+	public boolean isReady() {
+		return ready;
+	}
+
+	public void setReady(boolean ready) {
+		this.ready = ready;
+		if (ready){
+			GameManager.sharedInstance().informReady();
+		}
+	}
 
 	public boolean isReady() {
 		return ready;
@@ -83,6 +154,10 @@ public class Company {
 
 	public Purchase getPurchase() {
 		return (Purchase) departments.get(5);
+	}
+	
+	public int getId() {
+		return this.id;
 	}
 
 	// money functions

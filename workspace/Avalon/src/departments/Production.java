@@ -9,14 +9,21 @@ public class Production extends Department {
 		//toDo:Fixkosten
 	private int level;
 	private int capacity;
+<<<<<<< HEAD
+=======
 	private int capacity_upgrade; //ToDo
+>>>>>>> dfbf42e809bc470cf3d2bd66cd45d2bf0d89eaa9
 	private ArrayList<otherclasses.Jobs> history;
 	
 	public Production(){
 		history = new ArrayList<otherclasses.Jobs>();
 		level = 1;
+<<<<<<< HEAD
+		capacity=1;
+=======
 		capacity=config.Config.getProductionCapacity();
 		
+>>>>>>> dfbf42e809bc470cf3d2bd66cd45d2bf0d89eaa9
 	}
 	
 	

@@ -14,7 +14,10 @@ public class Market {
 	private ArrayList<Company> companies = new ArrayList<Company>();
 	private static Market sharedInstance;
 	private ArrayList<Supplier> supplier = new ArrayList<Supplier>();
+<<<<<<< HEAD
+=======
 	
+>>>>>>> dfbf42e809bc470cf3d2bd66cd45d2bf0d89eaa9
 	public static Market sharedInstance() {
 		if (Market.sharedInstance == null) {
 			Market.sharedInstance = new Market();
@@ -44,9 +47,19 @@ public class Market {
 	public void addSupplier(Supplier s){
 		supplier.add(s);
 	}
+<<<<<<< HEAD
+
+	public void addSupplier(Supplier s) {
+		supplier.add(s);
+	}
+
+	public void addSupplier(Supplier s) {
+		supplier.add(s);
+=======
 	
 	public ArrayList<Supplier> getSupplier(){
 		return supplier;
+>>>>>>> dfbf42e809bc470cf3d2bd66cd45d2bf0d89eaa9
 	}
 
 	public void sendMessage(String title, String message, int target,
@@ -61,4 +74,13 @@ public class Market {
 		}
 	}
 
+	public void sendMessage(Message message) {
+		if (message.getType() == Message.BROADCAST) {
+			for (Company c : companies) {
+				c.addMessageToInbox(message);
+			}
+		} else {
+			companies.get(message.getTargetPlayer()).addMessageToInbox(message);
+		}
+	}
 }

@@ -1,6 +1,6 @@
 package departments;
 
-import gameManager.GameManager;
+import config.Config;
 
 public class Marketing extends CampaignDepartment {
 
@@ -16,7 +16,7 @@ public class Marketing extends CampaignDepartment {
 
 	@Override
 	public int getCostForNextLevel() {
-		int cost = level * level * GameManager.sharedInstance().getConfig().getCostsUpgradeMarketing();
+		int cost = level * level * Config.getCostsUpgradeMarketing();
 		return cost;
 	}
 

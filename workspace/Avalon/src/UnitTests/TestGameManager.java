@@ -32,6 +32,8 @@ public class TestGameManager {
 		assertEquals(gameManager.getPlayer().size(), 1);
 	}
 	
+<<<<<<< HEAD
+=======
 //	@Test
 //	public void testNextRound() {
 //		gameManager.addPlayer(company1);
@@ -41,5 +43,6 @@ public class TestGameManager {
 //		assertEquals(gameManager.getRound(), 0);
 //	}
 	
+>>>>>>> dfbf42e809bc470cf3d2bd66cd45d2bf0d89eaa9
 
 }

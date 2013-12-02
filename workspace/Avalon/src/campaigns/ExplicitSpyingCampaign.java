@@ -1,5 +1,8 @@
 package campaigns;
 
+import market.Market;
+import utils.Message;
+import company.Company;
 import departments.Research;
 
 public class ExplicitSpyingCampaign extends ExplicitResearchCampaign {
@@ -27,21 +30,35 @@ public class ExplicitSpyingCampaign extends ExplicitResearchCampaign {
 	@Override
 	protected void campaignFinishedSuccessfully() {
 		Research r = (Research) campaign.getDepartment();
-		r.addResearchedLevels(campaign.getLevel());
-		String message = "Spionagekampagne \""
+		r.addSpiedLevels(campaign.getLevel());
+
+		Company c = campaign.getDepartment().getCompany();
+		Message message = new Message();
+		message.setTitle("Spionagekampagne erfolgreich durchgeführt!");
+		message.setMessage("Spionagekampagne \""
 				+ campaign.getTitle()
-				+ "\" erfolgreich durchgeführt. Gewonnene Erkenntnisse werden verarbeitet.";
-		campaign.getDepartment().getCompany().addMessageToInbox(message);
+				+ "\" erfolgreich durchgeführt.  Gewonnene Erkenntnisse werden verarbeitet.");
+		message.setType(Message.GAME);
+		message.setTargetPlayer(c.getId());
+		c.addMessageToInbox(message);
 	}
 
 	@Override
 	protected void campaignFailed() {
-		String message = "Spionagekampagne \""
-				+ campaign.getTitle()
-				+ "\" ist aufgeflogen.";
-		campaign.getDepartment().getCompany().addMessageToInbox(message);
-		
-		//more to do
+		Company c = campaign.getDepartment().getCompany();
+		Message message = new Message();
+		message.setTitle("Spionagekampagne fehlgeschlagen!");
+		message.setMessage("Spionagekampagne \"" + campaign.getTitle()
+				+ "\" ist aufgeflogen. Sie könnten verklagt werden!");
+		message.setType(Message.GAME);
+		message.setTargetPlayer(c.getId());
+		c.addMessageToInbox(message);
+		// send message to opponent
+		message.setTitle("Sie wurden ausspioniert!");
+		message.setMessage("Sie wurden ausspioniert. Sie sollten den Gegner verklagen.");
+		message.setSourcePlayer(c.getId());
+		message.setTargetPlayer(this.spiedPlayer);
+		Market.sharedInstance().sendMessage(message);
 	}
 
 }

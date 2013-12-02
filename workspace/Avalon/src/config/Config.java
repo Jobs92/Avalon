@@ -11,7 +11,10 @@ public class Config {
 
 	private static int costsUpgradeResearch;
 	private static int costsUpgradeMarketing;
+<<<<<<< HEAD
+=======
 	
+>>>>>>> dfbf42e809bc470cf3d2bd66cd45d2bf0d89eaa9
 	private static int productionCapacity;
 
 	public static double[] getSupplierPrice() {
@@ -41,7 +44,11 @@ public class Config {
 	public static int getCostsUpgradeResearch() {
 		return costsUpgradeResearch;
 	}
+<<<<<<< HEAD
+	
+=======
 
+>>>>>>> dfbf42e809bc470cf3d2bd66cd45d2bf0d89eaa9
 	public static int getCostsUpgradeMarketing() {
 		return costsUpgradeMarketing;
 	}

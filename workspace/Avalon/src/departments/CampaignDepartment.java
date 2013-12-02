@@ -2,6 +2,7 @@ package departments;
 
 import java.util.ArrayList;
 
+import config.Config;
 import campaigns.Campaign;
 import campaigns.ExplicitCampaign;
 
@@ -48,6 +49,7 @@ public abstract class CampaignDepartment extends Department {
 			campaign.updateProbability(1);
 		}
 		this.level += 1;
+		this.fixcost = (int) (this.fixcost * ((100 + Config.getCampaignDepartmentUpgradeCost()) / 100.0));
 	}
 
 	public abstract int getCostForNextLevel();
