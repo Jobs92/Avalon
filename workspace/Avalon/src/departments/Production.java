@@ -1,9 +1,20 @@
 package departments;
 
+import java.util.ArrayList;
+
+import product.Product;
+
 public class Production extends Department {
 		
 	private int level;
 	private int capacity;
+	private ArrayList<Integer>jobs;
+	
+	public Production(){
+		jobs = new ArrayList<Integer>();
+	}
+	
+	
 	
 	
 	public int getLevel() {
@@ -29,20 +40,26 @@ public class Production extends Department {
 		// TODO Auto-generated method stub
 		
 	}
-	public void produve (int level, int amount){ 
-		int targat_amount=company.getWarehouse().getSingleProduct(level).getAmount();    //Helper
-		int target_price=company.getWarehouse().getSingleProduct(level).getPrice();
+	public void produce (int level, int amount){ 
+
 		
-		
-		
-		if (capacity>amount) {
+		if (capacity<amount) {
 			 // ToDo: Error Massaage oder so?
 		}
 		else {
 			
-			company.getWarehouse().getSingleProduct(level).setAmount(targat_amount-amount);
-			this.revenue+=amount*target_price;
+			if (company.getWarehouse().getSingleProduct(level)==null) {
+				company.getWarehouse().addProduct(new Product(level));
+				company.getWarehouse().getSingleProduct(level).setAmount(amount);
+			} else {
+				company.getWarehouse().getSingleProduct(level).setAmount(company.getWarehouse().getSingleProduct(level).getAmount()+amount);
+			}
+			
+			
+		
 		}
+		
+	}
 		
 	
 }
