@@ -5,15 +5,18 @@ import java.util.ArrayList;
 import product.Product;
 
 public class Production extends Department {
-		
+	
+		//toDo:Fixkosten
 	private int level;
 	private int capacity;
+	private int capacity_upgrade; //ToDo
 	private ArrayList<otherclasses.Jobs> history;
 	
 	public Production(){
 		history = new ArrayList<otherclasses.Jobs>();
 		level = 1;
-		capacity=1;
+		capacity=config.Config.getProductionCapacity();
+		
 	}
 	
 	
@@ -27,6 +30,7 @@ public class Production extends Department {
 	}
 	public void addLevel(int level) {
 		this.level += level;
+		this.upgrade();
 	}
 	public int getCapacity() {
 		return capacity;
@@ -62,6 +66,19 @@ public class Production extends Department {
 		}
 		
 	}
+
+
+
+
+	public int getCapacity_upgrade() {
+		return capacity_upgrade;
+	}
+	public void upgrade(){
+		this.capacity=this.capacity*capacity_upgrade;
+	}
+
+
+
 		
 	
 }
