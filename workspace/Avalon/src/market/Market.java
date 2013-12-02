@@ -14,7 +14,6 @@ public class Market {
 	private ArrayList<Company> companies = new ArrayList<Company>();
 	private static Market sharedInstance;
 	private ArrayList<Supplier> supplier = new ArrayList<Supplier>();
-
 	public static Market sharedInstance() {
 		if (Market.sharedInstance == null) {
 			Market.sharedInstance = new Market();
@@ -39,6 +38,10 @@ public class Market {
 
 	public void addCompany(Company company) {
 		companies.add(company);
+	}
+	
+	public void addSupplier(Supplier s){
+		supplier.add(s);
 	}
 
 	public void addSupplier(Supplier s) {
