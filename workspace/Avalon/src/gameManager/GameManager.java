@@ -12,10 +12,13 @@ public class GameManager {
 	private int round = 0;
 	private boolean active;
 	private Company winner;
-	private Market market;
-	private EventManager eventManager;
+	private Market market = new Market();
+	private EventManager eventManager = new EventManager();
 	private static GameManager sharedInstance;
 	private Config config;
+	
+	private GameManager(){
+	}
 
 	public static GameManager sharedInstance() {
 		if (GameManager.sharedInstance == null) {
@@ -32,8 +35,6 @@ public class GameManager {
 	private void initializeGame() {
 		// TODO Auto-generated method stub
 		config = new Config();
-		market = new Market();
-		eventManager = new EventManager();
 		active = true;
 		
 		//Generate Supplier
@@ -74,8 +75,9 @@ public class GameManager {
 	public void informReady(){
 		ArrayList<Company> player = market.getCompanies();
 		for (int i = 0; i < player.size(); i++) {
-			if (!player.get(i).isReady());
-			return;
+			if (!player.get(i).isReady()){
+				return;
+			}
 		}
 		simulate();
 	}
@@ -91,15 +93,17 @@ public class GameManager {
 	}
 
 	private boolean checkWinner() {
-		int neededAmount = 0; // TODO: get correct value from configuration
-		ArrayList<Company> cs = market.getCompanies();
-		for (Company c : cs) {
-			if (c.getMoney() >= neededAmount) {
-			}
-			winner = c;
-			return true;
-		}
+		//zum testen
 		return false;
+//		int neededAmount = 0; // TODO: get correct value from configuration
+//		ArrayList<Company> cs = market.getCompanies();
+//		for (Company c : cs) {
+//			if (c.getMoney() >= neededAmount) {
+//			}
+//			winner = c;
+//			return true;
+//		}
+//		return false;
 	}
 
 	private void waitForPlayer() {
@@ -114,8 +118,6 @@ public class GameManager {
 	}
 
 	public ArrayList<Company> getPlayer() {
-		System.out.println(market);
-		System.out.println(market.getCompanies());
 		return market.getCompanies();
 	}
 	
