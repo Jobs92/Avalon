@@ -50,4 +50,10 @@ public class Warehouse  extends Department{
 		return products.get(products.size()-1);
 	}
 
+	@Override
+	public void simulate() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

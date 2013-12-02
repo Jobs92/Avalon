@@ -14,4 +14,10 @@ public class Purchase extends Department {
 		company.changeMoney((-1) * amount * supplier.getPrice());
 	}
 
+	@Override
+	public void simulate() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

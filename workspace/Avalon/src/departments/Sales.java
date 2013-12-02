@@ -34,4 +34,12 @@ public class Sales  extends Department{
 		
 	}
 
+
+
+	@Override
+	public void simulate() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
