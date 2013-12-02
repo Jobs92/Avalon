@@ -18,11 +18,9 @@ public class Warehouse  extends Department{
 		return ressources;
 	}
 
-	public void setRessources(int ressources) {
-		this.ressources = ressources;
+	public void changeRessources(int ressources) {
+		this.ressources += ressources;
 	}
-
-	
 
 	public ArrayList<product.Product> getProducts() {
 		return products;
@@ -40,10 +38,8 @@ public class Warehouse  extends Department{
 		
 	}
 
-
 	public void addProduct(product.Product product){
 		products.add(product);
-		
 	}
 	
 	public product.Product getHighestProduct(){
@@ -52,8 +48,6 @@ public class Warehouse  extends Department{
 
 	@Override
 	public void simulate() {
-		// TODO Auto-generated method stub
-		
 	}
 
 }
