@@ -20,7 +20,6 @@ public class Company {
 	private double money;
 	private ArrayList<Message> inbox;
 	private boolean ready;
-	private Market market;
 	// private ArrayList<product.Product> products;
 
 	public boolean isReady() {
@@ -44,7 +43,7 @@ public class Company {
 	// private Purchase purchase;
 	// private Sales sales;
 
-	public Company(Market market) {
+	public Company() {
 		super();
 		money = 0;
 		popularity = 0;
@@ -56,7 +55,6 @@ public class Company {
 		departments.add(new LegalDepartment(this));
 		departments.add(new Purchase(this));
 		inbox = new ArrayList<Message>();
-		this.market = market;
 		// products = new ArrayList<product.Product>();
 	}
 
@@ -131,10 +129,6 @@ public class Company {
 
 	public int getId() {
 		return this.id;
-	}
-	
-	public Market getMarket(){
-		return this.market;
 	}
 
 	// public void addProduct(product.Product product){

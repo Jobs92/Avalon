@@ -1,9 +1,8 @@
 package campaigns;
 
+import market.Market;
 import utils.Message;
-
 import company.Company;
-
 import departments.Research;
 
 public class ExplicitSpyingCampaign extends ExplicitResearchCampaign {
@@ -64,7 +63,7 @@ public class ExplicitSpyingCampaign extends ExplicitResearchCampaign {
 		message.setTitle("Sie wurden ausspioniert!");
 		message.setMessage("Sie wurden ausspioniert! Sie sollten "
 				+ c.getPlayername() + " verklagen!");
-		c.getMarket().sendMessage(message);
+		Market.sharedInstance().sendMessage(message);
 	}
 
 }
