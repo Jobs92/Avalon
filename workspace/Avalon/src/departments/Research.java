@@ -1,5 +1,6 @@
 package departments;
 
+import gameManager.GameManager;
 import product.Product;
 import campaigns.SpyingCampaign;
 
@@ -30,5 +31,11 @@ public class Research extends CampaignDepartment {
 	@Override
 	protected void loadCampaigns() {
 		// TODO
+	}
+
+	@Override
+	public int getCostForNextLevel() {
+		int cost = level * level * GameManager.sharedInstance().getConfig().getCostsUpgradeResearch();
+		return cost;
 	}
 }

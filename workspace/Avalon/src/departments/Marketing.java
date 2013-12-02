@@ -1,5 +1,7 @@
 package departments;
 
+import gameManager.GameManager;
+
 public class Marketing extends CampaignDepartment {
 
 	public Marketing() {
@@ -10,6 +12,12 @@ public class Marketing extends CampaignDepartment {
 	@Override
 	protected void loadCampaigns() {
 		// TODO
+	}
+
+	@Override
+	public int getCostForNextLevel() {
+		int cost = level * level * GameManager.sharedInstance().getConfig().getCostsUpgradeMarketing();
+		return cost;
 	}
 
 }

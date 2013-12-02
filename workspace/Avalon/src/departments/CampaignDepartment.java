@@ -50,10 +50,7 @@ public abstract class CampaignDepartment extends Department {
 		this.level += 1;
 	}
 
-	public int getCostForNextLevel() {
-		int cost = level * level * 20000;
-		return cost;
-	}
+	public abstract int getCostForNextLevel();
 
 	public int getLevel() {
 		return level;
