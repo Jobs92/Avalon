@@ -2,6 +2,7 @@ package market;
 
 import java.util.ArrayList;
 
+import utils.Message;
 import company.Company;
 
 public class Market {
@@ -26,6 +27,12 @@ public class Market {
 
 	public void addCompany(Company company) {
 		companies.add(company);
+	}
+
+	public void sendMessage(String title, String message, int target,
+			int source, int type) {
+		companies.get(target).addMessageToInbox(
+				new Message(title, message, target, source, type));
 	}
 
 }

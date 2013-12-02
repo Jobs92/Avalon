@@ -2,6 +2,7 @@ package company;
 
 import java.util.ArrayList;
 
+import utils.Message;
 import departments.Department;
 import departments.LegalDepartment;
 import departments.Marketing;
@@ -14,8 +15,8 @@ public class Company {
 	private String playername;
 	private int popularity;
 	private double money;
-	private ArrayList<String> inbox;
-//	private ArrayList<product.Product> products;
+	private ArrayList<Message> inbox;
+	// private ArrayList<product.Product> products;
 
 	private ArrayList<Department> departments;
 
@@ -37,8 +38,8 @@ public class Company {
 		departments.add(new Warehouse());
 		departments.add(new LegalDepartment(this));
 		departments.add(new Purchase(this));
-		inbox = new ArrayList<String>();
-		//products = new ArrayList<product.Product>();
+		inbox = new ArrayList<Message>();
+		// products = new ArrayList<product.Product>();
 	}
 
 	public String getPlayername() {
@@ -98,29 +99,28 @@ public class Company {
 		}
 	}
 
-	public void addMessageToInbox(String message) {
+	public void addMessageToInbox(Message message) {
 		inbox.add(message);
 	}
 
-	public String[] getMessagesFromInox() {
-		String[] result = new String[inbox.size()];
+	public Message[] getMessagesFromInox() {
+		Message[] result = new Message[inbox.size()];
 		for (int i = 0; i < result.length; i++) {
 			result[i] = inbox.get(i);
 		}
 		return result;
 	}
-	
-//public void addProduct(product.Product product){
-//	products.add(product); //ToDo!!!
-//	}
-//	
-//public product.Product getHighestProduct(){
-//	return products.get(products.size()-1);  //Todo!!!
-// }
-//	public void saleProduct(){
-//		
-//		
-//	}
-	
-	
+
+	// public void addProduct(product.Product product){
+	// products.add(product); //ToDo!!!
+	// }
+	//
+	// public product.Product getHighestProduct(){
+	// return products.get(products.size()-1); //Todo!!!
+	// }
+	// public void saleProduct(){
+	//
+	//
+	// }
+
 }

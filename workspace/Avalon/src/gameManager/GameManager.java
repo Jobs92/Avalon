@@ -103,6 +103,8 @@ public class GameManager {
 		return market.getCompanies();
 	}
 
+	
+	
 	public int getRound() {
 		return this.round;
 	}
