@@ -31,8 +31,14 @@ public class Market {
 
 	public void sendMessage(String title, String message, int target,
 			int source, int type) {
-		companies.get(target).addMessageToInbox(
-				new Message(title, message, target, source, type));
+		Message m = new Message(title, message, target, source, type);
+		if (type == Message.BROADCAST) {
+			for (Company c : companies) {
+				c.addMessageToInbox(m);
+			}
+		} else {
+			companies.get(target).addMessageToInbox(m);
+		}
 	}
 
 }

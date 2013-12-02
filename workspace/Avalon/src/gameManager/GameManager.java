@@ -72,7 +72,7 @@ public class GameManager {
 		active = false;
 	}
 	
-	private Config getConfig(){
+	public Config getConfig(){
 		return config;
 	}
 

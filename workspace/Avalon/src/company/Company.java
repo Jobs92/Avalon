@@ -103,7 +103,7 @@ public class Company {
 		inbox.add(message);
 	}
 
-	public Message[] getMessagesFromInox() {
+	public Message[] getMessagesFromInbox() {
 		Message[] result = new Message[inbox.size()];
 		for (int i = 0; i < result.length; i++) {
 			result[i] = inbox.get(i);
