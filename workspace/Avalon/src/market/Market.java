@@ -1,5 +1,7 @@
 package market;
 
+import gameManager.GameManager;
+
 import java.util.ArrayList;
 
 import otherclasses.Supplier;
@@ -53,6 +55,10 @@ public class Market {
 		} else {
 			companies.get(target).addMessageToInbox(m);
 		}
+	}
+	
+	public void informReady(){
+		GameManager.sharedInstance().checkNextRound();
 	}
 
 }
