@@ -2,6 +2,7 @@ package market;
 
 import java.util.ArrayList;
 
+import otherclasses.Supplier;
 import utils.Message;
 import company.Company;
 
@@ -9,6 +10,15 @@ public class Market {
 	private int marketSaturation;
 	private int buyingPower;
 	private ArrayList<Company> companies;
+	private static Market sharedInstance;
+	private ArrayList<Supplier> supplier;
+	
+	public static Market sharedInstance() {
+		if (Market.sharedInstance == null) {
+			Market.sharedInstance = new Market();
+		}
+		return Market.sharedInstance;
+	}
 
 	public void simBuyingBehaviour() {
 		// TODO: machen wir zusammen
