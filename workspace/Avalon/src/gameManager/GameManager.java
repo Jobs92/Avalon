@@ -3,6 +3,7 @@ package gameManager;
 import java.util.ArrayList;
 
 import company.Company;
+import config.Config;
 import eventHandling.EventManager;
 import market.Market;
 
@@ -13,6 +14,7 @@ public class GameManager {
 	private Market market = new Market();
 	private EventManager eventManager = new EventManager();
 	private static GameManager sharedInstance;
+	private Config config;
 
 	public static GameManager sharedInstance() {
 		if (GameManager.sharedInstance == null) {
@@ -28,6 +30,7 @@ public class GameManager {
 
 	private void initializeGame() {
 		// TODO Auto-generated method stub
+		config = new Config();
 		active = true;
 	}
 
@@ -58,6 +61,10 @@ public class GameManager {
 	private void endGame() {
 		// TODO Auto-generated method stub
 		active = false;
+	}
+	
+	private Config getConfig(){
+		return config;
 	}
 
 	private boolean checkWinner() {
