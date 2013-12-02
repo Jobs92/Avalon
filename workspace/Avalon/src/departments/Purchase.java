@@ -11,7 +11,7 @@ public class Purchase extends Department {
 
 	public Purchase(Company c) {
 		this.company = c;
-		ArrayList<Supplier> supplier = Market.sharedInstance().getSupplier;
+		ArrayList<Supplier> supplier = Market.sharedInstance().getSupplier();
 	}
 
 	public void simulate(int amount, Supplier supplier) {

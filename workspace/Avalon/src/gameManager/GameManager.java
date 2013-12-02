@@ -107,7 +107,10 @@ public class GameManager {
 		for (int i = 0; i < player.size(); i++) {
 			player.get(i).setReady(false);
 		}
+<<<<<<< HEAD
 
+=======
+>>>>>>> dfbf42e809bc470cf3d2bd66cd45d2bf0d89eaa9
 	}
 
 	public void addPlayer(Company c) {
