@@ -13,16 +13,8 @@ public class Market {
 	private int buyingPower;
 	private ArrayList<Company> companies = new ArrayList<Company>();
 	private static Market sharedInstance;
-<<<<<<< HEAD
-<<<<<<< HEAD
-	private ArrayList<Supplier> supplier;
-
-=======
-=======
->>>>>>> 8ca160347dc7c7da0de2f24ee95d9df66b758852
 	private ArrayList<Supplier> supplier = new ArrayList<Supplier>();
-	
->>>>>>> a1ddb2ed7e031b4df232eaf3bb0a3eb10e0660dc
+
 	public static Market sharedInstance() {
 		if (Market.sharedInstance == null) {
 			Market.sharedInstance = new Market();
@@ -48,8 +40,8 @@ public class Market {
 	public void addCompany(Company company) {
 		companies.add(company);
 	}
-	
-	public void addSupplier(Supplier s){
+
+	public void addSupplier(Supplier s) {
 		supplier.add(s);
 	}
 
@@ -65,7 +57,6 @@ public class Market {
 		}
 	}
 
-<<<<<<< HEAD
 	public void sendMessage(Message message) {
 		if (message.getType() == Message.BROADCAST) {
 			for (Company c : companies) {
@@ -75,7 +66,4 @@ public class Market {
 			companies.get(message.getTargetPlayer()).addMessageToInbox(message);
 		}
 	}
-=======
-
->>>>>>> 8ca160347dc7c7da0de2f24ee95d9df66b758852
 }
