@@ -2,6 +2,7 @@ package gameManager;
 
 import java.util.ArrayList;
 
+import otherclasses.Supplier;
 import company.Company;
 import config.Config;
 import eventHandling.EventManager;
@@ -32,6 +33,14 @@ public class GameManager {
 		// TODO Auto-generated method stub
 		config = new Config();
 		active = true;
+		
+		//Generate Supplier
+		int amountSupplier = Math.min(config.getSupplierTrust(), Math.min(config.getSupplierQuality(), config.getSupplierPrice()));
+		for (int i = 0; i < amountSupplier; i++) {
+			Supplier s = new Supplier(config.getSupplierPrice()[i], config.getSupplierTrust()[i], config.getSupplierQuality()[i]);
+			market.addSupplier(s);
+		}
+		
 	}
 
 	private void nextRound() {
