@@ -5,24 +5,19 @@ public class Supplier {
 	private double trustiness;
 	private double qualitiy;
 	
+	public Supplier(double price, double trustiness, double qualitiy) {
+		super();
+		this.price = price;
+		this.trustiness = trustiness;
+		this.qualitiy = qualitiy;
+	}
 	public double getPrice() {
 		return price;
-	}
-	public void setPrice(double price) {
-		this.price = price;
 	}
 	public double getTrustiness() {
 		return trustiness;
 	}
-	public void setTrustiness(double trustiness) {
-		this.trustiness = trustiness;
-	}
 	public double getQualitiy() {
 		return qualitiy;
-	}
-	public void setQualitiy(double qualitiy) {
-		this.qualitiy = qualitiy;
-	}
-	
-	
+	}	
 }
