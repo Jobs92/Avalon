@@ -5,6 +5,19 @@ public class Config {
 	private int[] supplierTrust = new int[3];
 	private int[] supplierQuality = new int[3];
 	
+	
+	public double getCompanyStartMoney() {
+		return companyStartMoney;
+	}
+
+	public int getCompanyStartPopularity() {
+		return companyStartPopularity;
+	}
+
+	private double companyStartMoney;
+	private int companyStartPopularity;
+	
+	
 	public int[] getSupplierTrust() {
 		return supplierTrust;
 	}
