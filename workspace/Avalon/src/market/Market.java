@@ -9,9 +9,9 @@ import company.Company;
 public class Market {
 	private int marketSaturation;
 	private int buyingPower;
-	private ArrayList<Company> companies;
+	private ArrayList<Company> companies = new ArrayList<Company>();
 	private static Market sharedInstance;
-	private ArrayList<Supplier> supplier;
+	private ArrayList<Supplier> supplier = new ArrayList<Supplier>();
 	
 	public static Market sharedInstance() {
 		if (Market.sharedInstance == null) {

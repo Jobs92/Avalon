@@ -10,10 +10,10 @@ import market.Market;
 
 public class GameManager {
 	private int round = 0;
-	private boolean active = false;
+	private boolean active;
 	private Company winner;
-	private Market market = new Market();
-	private EventManager eventManager = new EventManager();
+	private Market market;
+	private EventManager eventManager;
 	private static GameManager sharedInstance;
 	private Config config;
 
@@ -32,6 +32,8 @@ public class GameManager {
 	private void initializeGame() {
 		// TODO Auto-generated method stub
 		config = new Config();
+		market = new Market();
+		eventManager = new EventManager();
 		active = true;
 		
 		//Generate Supplier
