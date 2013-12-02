@@ -6,6 +6,13 @@ public class Jobs {
 	private int amount;
 	private boolean completed;
 	
+	
+	public Jobs(int level, int amount){
+		this.level=level;
+		this.amount=amount;
+		this.completed=false;
+	}
+	
 	public int getLevel() {
 		return level;
 	}

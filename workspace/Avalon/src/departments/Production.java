@@ -2,6 +2,7 @@ package departments;
 
 import java.util.ArrayList;
 
+import otherclasses.Jobs;
 import product.Product;
 
 public class Production extends Department {
@@ -54,12 +55,14 @@ public class Production extends Department {
 		
 	}
 	public void produce (int level, int amount){ 
-
+//TODO
 		
 		if (capacity<amount) {
 			 // ToDo: Error Massaage oder so?
 		}
 		else {
+			otherclasses.Jobs planJob= new otherclasses.Jobs(level,amount);
+			history.add(planJob);
 			
 			if (company.getWarehouse().getSingleProduct(level)==null) {
 				company.getWarehouse().addProduct(new Product(level));
