@@ -1,34 +1,31 @@
 package market;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 import company.Company;
 
 public class Market {
 	private int marketSaturation;
 	private int buyingPower;
-	private Company[] companies = new Company[0];
-	
-	public void simBuyingBehaviour(){
-		//TODO: machen wir zusammen
-		//auch zurückschicken kommt hier irgendwo rein
+	private ArrayList<Company> companies;
+
+	public void simBuyingBehaviour() {
+		// TODO: machen wir zusammen
+		// auch zurückschicken kommt hier irgendwo rein
 	}
-	
-	public void simulate(){
+
+	public void simulate() {
 		for (Company c : companies) {
 			c.simulate();
 		}
 	}
 
-	public Company[] getCompanies() {
+	public ArrayList<Company> getCompanies() {
 		return companies;
 	}
-	
-	public void addCompany(Company c){
-		System.out.println(companies.length);
-		companies = Arrays.copyOf(companies, companies.length+1);
-		companies[companies.length-1] = c;
-		System.out.println(companies.length);
+
+	public void addCompany(Company company) {
+		companies.add(company);
 	}
-	
+
 }

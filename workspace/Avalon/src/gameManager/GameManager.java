@@ -1,5 +1,7 @@
 package gameManager;
 
+import java.util.ArrayList;
+
 import company.Company;
 import eventHandling.EventManager;
 import market.Market;
@@ -31,24 +33,24 @@ public class GameManager {
 
 	private void nextRound() {
 		round++;
-		//Player decide further actions
+		// Player decide further actions
 		waitForPlayer();
-		
-		//Active Actions are simulated
+
+		// Active Actions are simulated
 		market.simulate();
-		
-		//Buying Behaviour at the market is simulated
+
+		// Buying Behaviour at the market is simulated
 		market.simBuyingBehaviour();
-		
-		//Events are simulated
+
+		// Events are simulated
 		eventManager.simEvents();
-		
-		//Check for winner
+
+		// Check for winner
 		if (!checkWinner()) {
-			//no winner --> next round is started
+			// no winner --> next round is started
 			nextRound();
 		} else {
-			//winner --> games is finished
+			// winner --> games is finished
 			endGame();
 		}
 	}
@@ -60,7 +62,7 @@ public class GameManager {
 
 	private boolean checkWinner() {
 		int neededAmount = 0; // TODO: get correct value from configuration
-		Company[] cs = market.getCompanies();
+		ArrayList<Company> cs = market.getCompanies();
 		for (Company c : cs) {
 			if (c.getMoney() >= neededAmount) {
 			}
@@ -79,7 +81,7 @@ public class GameManager {
 		market.addCompany(c);
 	}
 
-	public Company[] getPlayer() {
+	public ArrayList<Company> getPlayer() {
 		System.out.println(market);
 		System.out.println(market.getCompanies());
 		return market.getCompanies();

@@ -18,7 +18,7 @@ public class LegalDepartment extends Department{
 		this.company = c;
 	}
 	
-	public void checkComponent(Company c){
+	public void checkOpponent(Company c){
 		ArrayList<ExplicitCampaign> allCampaigns= c.getResearch().getExplicitCampaigns();
 		for (int i = 0; i < allCampaigns.size(); i++) {
 			ExplicitResearchCampaign campaign = (ExplicitResearchCampaign) allCampaigns.get(i);
@@ -43,7 +43,7 @@ public class LegalDepartment extends Department{
 		lawsuitsAsDefendant.add(l);
 	}
 	
-	public void sueComponent(Company c){
+	public void sueOpponent(Company c){
 		LegalDepartment opponent = c.getLegaldepartment();
 		if (this.isAvailable() && opponent.isAvailable()){
 			Lawsuit l = new Lawsuit(this, opponent);
