@@ -2,6 +2,7 @@ package departments;
 
 import java.util.ArrayList;
 
+import market.Market;
 import otherclasses.Supplier;
 import company.*;
 
