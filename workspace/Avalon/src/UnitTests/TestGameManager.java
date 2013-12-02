@@ -26,9 +26,20 @@ public class TestGameManager {
 
 	@Test
 	public void testAddCompany() {
+		System.out.println("bla");
 		gameManager.addPlayer(company1);
+		System.out.println("fas");
 		assertEquals(gameManager.getPlayer().size(), 1);
 	}
+	
+//	@Test
+//	public void testNextRound() {
+//		gameManager.addPlayer(company1);
+//		gameManager.addPlayer(company2);
+//		gameManager.startGame();
+//		System.out.println(gameManager.getRound());
+//		assertEquals(gameManager.getRound(), 0);
+//	}
 	
 
 }

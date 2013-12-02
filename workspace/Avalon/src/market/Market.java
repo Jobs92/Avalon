@@ -44,6 +44,10 @@ public class Market {
 	public void addSupplier(Supplier s){
 		supplier.add(s);
 	}
+	
+	public ArrayList<Supplier> getSupplier(){
+		return supplier;
+	}
 
 	public void sendMessage(String title, String message, int target,
 			int source, int type) {
