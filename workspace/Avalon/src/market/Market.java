@@ -12,7 +12,7 @@ public class Market {
 	private ArrayList<Company> companies;
 	private static Market sharedInstance;
 	private ArrayList<Supplier> supplier;
-	
+
 	public static Market sharedInstance() {
 		if (Market.sharedInstance == null) {
 			Market.sharedInstance = new Market();
@@ -51,4 +51,13 @@ public class Market {
 		}
 	}
 
+	public void sendMessage(Message message) {
+		if (message.getType() == Message.BROADCAST) {
+			for (Company c : companies) {
+				c.addMessageToInbox(message);
+			}
+		} else {
+			companies.get(message.getTargetPlayer()).addMessageToInbox(message);
+		}
+	}
 }

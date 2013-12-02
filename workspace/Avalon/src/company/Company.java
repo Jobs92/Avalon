@@ -13,6 +13,7 @@ import departments.Warehouse;
 
 public class Company {
 	private String playername;
+	private int id;
 	private int popularity;
 	private double money;
 	private ArrayList<Message> inbox;
@@ -68,6 +69,10 @@ public class Company {
 
 	public Purchase getPurchase() {
 		return (Purchase) departments.get(5);
+	}
+	
+	public int getId() {
+		return this.id;
 	}
 
 	// money functions

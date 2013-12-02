@@ -9,8 +9,10 @@ public class Config {
 	private double companyStartMoney;
 	private int companyStartPopularity;
 
-	private int costsUpgradeResearch;
+	private static int costsUpgradeResearch;
 	private int costsUpgradeMarketing;
+	private static int campaignDepartmentUpgradeCost;
+	private static int researchFixcost;
 
 	public double[] getSupplierPrice() {
 		return supplierPrice;
@@ -36,8 +38,16 @@ public class Config {
 		return maxLevelResearch;
 	}
 
-	public int getCostsUpgradeResearch() {
+	public static int getCostsUpgradeResearch() {
 		return costsUpgradeResearch;
+	}
+
+	public static int getResearchFixcost() {
+		return researchFixcost;
+	}
+
+	public static int getCampaignDepartmentUpgradeCost() {
+		return campaignDepartmentUpgradeCost;
 	}
 
 	public int getCostsUpgradeMarketing() {

@@ -10,6 +10,10 @@ public class Message {
 	private int sourcePlayer;
 	private String message;
 	private int type;
+	
+	public Message(){
+		super();
+	}
 
 	public Message(String title, String message, int targetPlayer,
 			int sourcePlayer, int type) {
@@ -41,4 +45,25 @@ public class Message {
 		return type;
 	}
 
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public void setTargetPlayer(int targetPlayer) {
+		this.targetPlayer = targetPlayer;
+	}
+
+	public void setSourcePlayer(int sourcePlayer) {
+		this.sourcePlayer = sourcePlayer;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	
 }

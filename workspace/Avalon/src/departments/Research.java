@@ -1,15 +1,23 @@
 package departments;
 
+import config.Config;
 import gameManager.GameManager;
 import product.Product;
 import campaigns.SpyingCampaign;
 
 public class Research extends CampaignDepartment {
-	private int reasearchedLevels;
+	private int notAppliedLevels;
+	private int patentLevel;
+	private int researchLevel;
+	private int spiedLevels;
 
 	public Research() {
 		super();
-		this.reasearchedLevels = 0;
+		this.notAppliedLevels = 0;
+		this.patentLevel = 1;
+		this.researchLevel = 1;
+		this.spiedLevels = 0;
+		this.fixcost = Config.getResearchFixcost();
 	}
 
 	public void startCampaign(SpyingCampaign spyingCampaign, int target) {
@@ -17,15 +25,19 @@ public class Research extends CampaignDepartment {
 	}
 
 	public void applyResearchResults() {
-		Product newProduct = new Product(company.getWarehouse()
-				.getHighestProduct().getLevel()
-				+ this.reasearchedLevels);
+		this.researchLevel += notAppliedLevels;
+
+		Product newProduct = new Product(this.researchLevel + this.spiedLevels);
 		company.getWarehouse().addProduct(newProduct);
-		reasearchedLevels = 0;
+		notAppliedLevels = 0;
 	}
 
 	public void addResearchedLevels(int level) {
-		reasearchedLevels += level;
+		notAppliedLevels += level;
+	}
+
+	public void addSpiedLevels(int level) {
+		spiedLevels += level;
 	}
 
 	@Override
@@ -35,7 +47,20 @@ public class Research extends CampaignDepartment {
 
 	@Override
 	public int getCostForNextLevel() {
-		int cost = level * level * GameManager.sharedInstance().getConfig().getCostsUpgradeResearch();
+		int cost = level * level
+				* Config.getCostsUpgradeResearch();
 		return cost;
+	}
+
+	public void patentResearchLevel() {
+		patentLevel = researchLevel;
+	}
+
+	public int getPatentLevel() {
+		return this.patentLevel;
+	}
+
+	public int getSpiedLevels() {
+		return this.spiedLevels;
 	}
 }
