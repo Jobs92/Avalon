@@ -104,8 +104,6 @@ public class GameManager {
 		System.out.println(market.getCompanies());
 		return market.getCompanies();
 	}
-
-	
 	
 	public int getRound() {
 		return this.round;

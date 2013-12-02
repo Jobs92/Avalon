@@ -11,5 +11,5 @@ public class test {
 		
 		GameManager g = new GameManager();
 		g.startGame();
-}
+	}
 }

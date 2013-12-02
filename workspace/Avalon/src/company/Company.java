@@ -16,6 +16,7 @@ public class Company {
 	private int popularity;
 	private double money;
 	private ArrayList<Message> inbox;
+	private boolean ready;
 	// private ArrayList<product.Product> products;
 
 	private ArrayList<Department> departments;
