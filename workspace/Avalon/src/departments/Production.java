@@ -8,10 +8,12 @@ public class Production extends Department {
 		
 	private int level;
 	private int capacity;
-	private ArrayList<Integer>jobs;
+	private ArrayList<otherclasses.Jobs> history;
 	
 	public Production(){
-		jobs = new ArrayList<Integer>();
+		history = new ArrayList<otherclasses.Jobs>();
+		level = 1;
+		capacity=1;
 	}
 	
 	
