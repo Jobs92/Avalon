@@ -2,8 +2,8 @@ package config;
 
 public class Config {
 	private int maxLevelResearch;
-	private double[] supplierTrust = new double[3];
-	private double[] supplierQuality = new double[3];
+	private int[] supplierTrust = new int[3];
+	private int[] supplierQuality = new int[3];
 	private double[] supplierPrice = new double[3];
 
 	private double companyStartMoney;
@@ -22,11 +22,11 @@ public class Config {
 		return companyStartPopularity;
 	}
 
-	public double[] getSupplierTrust() {
+	public int[] getSupplierTrust() {
 		return supplierTrust;
 	}
 
-	public double[] getSupplierQuality() {
+	public int[] getSupplierQuality() {
 		return supplierQuality;
 	}
 

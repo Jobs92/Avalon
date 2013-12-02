@@ -2,10 +2,10 @@ package otherclasses;
 
 public class Supplier {
 	private double price;
-	private double trustiness;
-	private double qualitiy;
+	private int trustiness;
+	private int qualitiy;
 	
-	public Supplier(double price, double trustiness, double qualitiy) {
+	public Supplier(double price, int trustiness, int qualitiy) {
 		super();
 		this.price = price;
 		this.trustiness = trustiness;
@@ -14,10 +14,10 @@ public class Supplier {
 	public double getPrice() {
 		return price;
 	}
-	public double getTrustiness() {
+	public int getTrustiness() {
 		return trustiness;
 	}
-	public double getQualitiy() {
+	public int getQualitiy() {
 		return qualitiy;
 	}	
 }
