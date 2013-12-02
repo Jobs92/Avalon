@@ -11,9 +11,6 @@ public class Config {
 
 	private static int costsUpgradeResearch;
 	private static int costsUpgradeMarketing;
-	private static int campaignDepartmentUpgradeCost;
-	private static int researchFixcost;
-	
 	private static int productionCapacity;
 
 	public static double[] getSupplierPrice() {
@@ -42,14 +39,6 @@ public class Config {
 
 	public static int getCostsUpgradeResearch() {
 		return costsUpgradeResearch;
-	}
-
-	public static int getResearchFixcost() {
-		return researchFixcost;
-	}
-
-	public static int getCampaignDepartmentUpgradeCost() {
-		return campaignDepartmentUpgradeCost;
 	}
 	
 	public static int getCostsUpgradeMarketing() {

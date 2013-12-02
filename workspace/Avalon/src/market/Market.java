@@ -45,6 +45,10 @@ public class Market {
 		supplier.add(s);
 	}
 
+	public void addSupplier(Supplier s) {
+		supplier.add(s);
+	}
+
 	public void sendMessage(String title, String message, int target,
 			int source, int type) {
 		Message m = new Message(title, message, target, source, type);
