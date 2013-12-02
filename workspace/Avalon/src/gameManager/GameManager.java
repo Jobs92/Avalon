@@ -49,7 +49,9 @@ public class GameManager {
 		round++;
 		// Player decide further actions
 		waitForPlayer();
-
+	}
+	
+	private void simulate(){
 		// Active Actions are simulated
 		market.simulate();
 
@@ -74,6 +76,7 @@ public class GameManager {
 		active = false;
 	}
 	
+	
 	public Config getConfig(){
 		return config;
 	}
@@ -91,7 +94,10 @@ public class GameManager {
 	}
 
 	private void waitForPlayer() {
-		// TODO Auto-generated method stub
+		ArrayList<Company> player = market.getCompanies();
+		for (int i = 0; i < player.size(); i++) {
+			player.get(i).setReady(false);
+		}
 
 	}
 
