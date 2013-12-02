@@ -70,6 +70,15 @@ public class GameManager {
 			endGame();
 		}
 	}
+	
+	public void informReady(){
+		ArrayList<Company> player = market.getCompanies();
+		for (int i = 0; i < player.size(); i++) {
+			if (!player.get(i).isReady());
+			return;
+		}
+		simulate();
+	}
 
 	private void endGame() {
 		// TODO Auto-generated method stub
