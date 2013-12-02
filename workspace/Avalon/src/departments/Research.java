@@ -1,7 +1,6 @@
 package departments;
 
 import config.Config;
-import gameManager.GameManager;
 import product.Product;
 import campaigns.SpyingCampaign;
 

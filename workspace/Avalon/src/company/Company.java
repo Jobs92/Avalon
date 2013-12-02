@@ -39,6 +39,17 @@ public class Company {
 		}
 	}
 
+	public boolean isReady() {
+		return ready;
+	}
+
+	public void setReady(boolean ready) {
+		this.ready = ready;
+		if (ready){
+			GameManager.sharedInstance().informReady();
+		}
+	}
+
 	private ArrayList<Department> departments;
 
 	// private Marketing marketing;

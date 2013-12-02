@@ -103,6 +103,7 @@ public class GameManager {
 
 	public void addPlayer(Company c) {
 		market.addCompany(c);
+		c.setMarket(market);
 	}
 
 	public ArrayList<Company> getPlayer() {

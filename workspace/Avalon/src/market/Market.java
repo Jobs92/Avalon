@@ -1,5 +1,7 @@
 package market;
 
+import gameManager.GameManager;
+
 import java.util.ArrayList;
 
 import otherclasses.Supplier;
@@ -12,9 +14,12 @@ public class Market {
 	private ArrayList<Company> companies = new ArrayList<Company>();
 	private static Market sharedInstance;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	private ArrayList<Supplier> supplier;
 
 =======
+=======
+>>>>>>> 8ca160347dc7c7da0de2f24ee95d9df66b758852
 	private ArrayList<Supplier> supplier = new ArrayList<Supplier>();
 	
 >>>>>>> a1ddb2ed7e031b4df232eaf3bb0a3eb10e0660dc
@@ -60,6 +65,7 @@ public class Market {
 		}
 	}
 
+<<<<<<< HEAD
 	public void sendMessage(Message message) {
 		if (message.getType() == Message.BROADCAST) {
 			for (Company c : companies) {
@@ -69,4 +75,7 @@ public class Market {
 			companies.get(message.getTargetPlayer()).addMessageToInbox(message);
 		}
 	}
+=======
+
+>>>>>>> 8ca160347dc7c7da0de2f24ee95d9df66b758852
 }
