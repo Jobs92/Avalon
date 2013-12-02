@@ -10,10 +10,10 @@ import market.Market;
 
 public class GameManager {
 	private int round = 0;
-	private boolean active = false;
+	private boolean active;
 	private Company winner;
-	private Market market = new Market();
-	private EventManager eventManager = new EventManager();
+	private Market market;
+	private EventManager eventManager;
 	private static GameManager sharedInstance;
 	private Config config;
 
@@ -32,10 +32,12 @@ public class GameManager {
 	private void initializeGame() {
 		// TODO Auto-generated method stub
 		config = new Config();
+		market = new Market();
+		eventManager = new EventManager();
 		active = true;
 		
 		//Generate Supplier
-		int amountSupplier = Math.min(config.getSupplierTrust(), Math.min(config.getSupplierQuality(), config.getSupplierPrice()));
+		int amountSupplier = Math.min(config.getSupplierTrust().length, Math.min(config.getSupplierQuality().length, config.getSupplierPrice().length));
 		for (int i = 0; i < amountSupplier; i++) {
 			Supplier s = new Supplier(config.getSupplierPrice()[i], config.getSupplierTrust()[i], config.getSupplierQuality()[i]);
 			market.addSupplier(s);
@@ -47,7 +49,9 @@ public class GameManager {
 		round++;
 		// Player decide further actions
 		waitForPlayer();
-
+	}
+	
+	private void simulate(){
 		// Active Actions are simulated
 		market.simulate();
 
@@ -72,6 +76,7 @@ public class GameManager {
 		active = false;
 	}
 	
+	
 	public Config getConfig(){
 		return config;
 	}
@@ -89,7 +94,10 @@ public class GameManager {
 	}
 
 	private void waitForPlayer() {
-		// TODO Auto-generated method stub
+		ArrayList<Company> player = market.getCompanies();
+		for (int i = 0; i < player.size(); i++) {
+			player.get(i).setReady(false);
+		}
 
 	}
 
@@ -102,8 +110,6 @@ public class GameManager {
 		System.out.println(market.getCompanies());
 		return market.getCompanies();
 	}
-
-	
 	
 	public int getRound() {
 		return this.round;

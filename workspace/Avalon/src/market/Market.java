@@ -9,10 +9,15 @@ import company.Company;
 public class Market {
 	private int marketSaturation;
 	private int buyingPower;
-	private ArrayList<Company> companies;
+	private ArrayList<Company> companies = new ArrayList<Company>();
 	private static Market sharedInstance;
+<<<<<<< HEAD
 	private ArrayList<Supplier> supplier;
 
+=======
+	private ArrayList<Supplier> supplier = new ArrayList<Supplier>();
+	
+>>>>>>> a1ddb2ed7e031b4df232eaf3bb0a3eb10e0660dc
 	public static Market sharedInstance() {
 		if (Market.sharedInstance == null) {
 			Market.sharedInstance = new Market();
@@ -37,6 +42,10 @@ public class Market {
 
 	public void addCompany(Company company) {
 		companies.add(company);
+	}
+	
+	public void addSupplier(Supplier s){
+		supplier.add(s);
 	}
 
 	public void sendMessage(String title, String message, int target,

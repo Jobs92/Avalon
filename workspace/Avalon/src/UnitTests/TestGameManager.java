@@ -29,5 +29,6 @@ public class TestGameManager {
 		gameManager.addPlayer(company1);
 		assertEquals(gameManager.getPlayer().size(), 1);
 	}
+	
 
 }

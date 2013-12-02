@@ -1,7 +1,10 @@
 package company;
 
+import gameManager.GameManager;
+
 import java.util.ArrayList;
 
+import market.Market;
 import utils.Message;
 import departments.Department;
 import departments.LegalDepartment;
@@ -17,7 +20,24 @@ public class Company {
 	private int popularity;
 	private double money;
 	private ArrayList<Message> inbox;
+	private boolean ready;
+	private Market market;
 	// private ArrayList<product.Product> products;
+	
+	public void setMarket(Market m){
+		market = m;
+	}
+
+	public boolean isReady() {
+		return ready;
+	}
+
+	public void setReady(boolean ready) {
+		this.ready = ready;
+		if (ready){
+			market.informReady();
+		}
+	}
 
 	private ArrayList<Department> departments;
 

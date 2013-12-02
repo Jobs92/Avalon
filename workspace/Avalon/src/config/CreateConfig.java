@@ -19,6 +19,7 @@ public class CreateConfig {
     		prop.setProperty("supplierPrice", "50.0;75.0;100.0");
     		prop.setProperty("supplierTrust", "80;90;95");
     		prop.setProperty("supplierQuality", "70;80;90");
+    		prop.setProperty("productionCapacity", "1000");
 
     		//save properties to project root folder
     		prop.store(new FileOutputStream("config.properties"), null);
