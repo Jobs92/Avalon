@@ -13,6 +13,11 @@ public class Config {
 	private static int costsUpgradeMarketing;
 	
 	private static int productionCapacity;
+	private static int researchFixcost;
+	
+	public static int getResearchFixcost(){
+		return researchFixcost;
+	}
 
 	public static double[] getSupplierPrice() {
 		return supplierPrice;

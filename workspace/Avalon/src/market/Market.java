@@ -1,9 +1,6 @@
 package market;
 
-import gameManager.GameManager;
-
 import java.util.ArrayList;
-
 import otherclasses.Supplier;
 import utils.Message;
 import company.Company;
@@ -14,7 +11,7 @@ public class Market {
 	private ArrayList<Company> companies = new ArrayList<Company>();
 	private static Market sharedInstance;
 	private ArrayList<Supplier> supplier = new ArrayList<Supplier>();
-	
+
 	public static Market sharedInstance() {
 		if (Market.sharedInstance == null) {
 			Market.sharedInstance = new Market();
@@ -40,12 +37,12 @@ public class Market {
 	public void addCompany(Company company) {
 		companies.add(company);
 	}
-	
-	public void addSupplier(Supplier s){
+
+	public void addSupplier(Supplier s) {
 		supplier.add(s);
 	}
-	
-	public ArrayList<Supplier> getSupplier(){
+
+	public ArrayList<Supplier> getSupplier() {
 		return supplier;
 	}
 
@@ -58,6 +55,16 @@ public class Market {
 			}
 		} else {
 			companies.get(target).addMessageToInbox(m);
+		}
+	}
+
+	public void sendMessage(Message message) {
+		if (message.getType() == Message.BROADCAST) {
+			for (Company c : companies) {
+				c.addMessageToInbox(message);
+			}
+		} else {
+			companies.get(message.getTargetPlayer()).addMessageToInbox(message);
 		}
 	}
 

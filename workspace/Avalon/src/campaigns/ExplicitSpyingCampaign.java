@@ -1,5 +1,9 @@
 package campaigns;
 
+import utils.Message;
+
+import company.Company;
+
 import departments.Research;
 
 public class ExplicitSpyingCampaign extends ExplicitResearchCampaign {
@@ -26,22 +30,41 @@ public class ExplicitSpyingCampaign extends ExplicitResearchCampaign {
 
 	@Override
 	protected void campaignFinishedSuccessfully() {
+		Company c = campaign.getDepartment().getCompany();
 		Research r = (Research) campaign.getDepartment();
-		r.addResearchedLevels(campaign.getLevel());
-		String message = "Spionagekampagne \""
+		r.addSpiedLevels(campaign.getLevel());
+
+		// send message
+		Message message = new Message();
+		message.setTitle("Spionagekampagne erfolgreich durchgeführt.");
+		message.setMessage("Spionagekampagne \""
 				+ campaign.getTitle()
-				+ "\" erfolgreich durchgeführt. Gewonnene Erkenntnisse werden verarbeitet.";
-		campaign.getDepartment().getCompany().addMessageToInbox(message);
+				+ "\" erfolgreich durchgeführt. Gewonnene Erkenntnisse werden verarbeitet.");
+		message.setType(Message.GAME);
+		message.setSourcePlayer(c.getId());
+		message.setSourcePlayer(c.getId());
+		c.addMessageToInbox(message);
 	}
 
 	@Override
 	protected void campaignFailed() {
-		String message = "Spionagekampagne \""
-				+ campaign.getTitle()
-				+ "\" ist aufgeflogen.";
-		campaign.getDepartment().getCompany().addMessageToInbox(message);
-		
-		//more to do
+		Company c = campaign.getDepartment().getCompany();
+
+		// send message
+		Message message = new Message();
+		message.setTitle("Spionagekampagne nicht erfolgreich durchgeführt.");
+		message.setMessage("Spionagekampagne \"" + campaign.getTitle()
+				+ "\" ist aufgeflogen. Sie könnten verklagt werden");
+		message.setType(Message.GAME);
+		message.setSourcePlayer(c.getId());
+		message.setSourcePlayer(c.getId());
+		c.addMessageToInbox(message);
+
+		// send message to spied player
+		message.setTitle("Sie wurden ausspioniert!");
+		message.setMessage("Sie wurden ausspioniert! Sie sollten "
+				+ c.getPlayername() + " verklagen!");
+		c.getMarket().sendMessage(message);
 	}
 
 }
