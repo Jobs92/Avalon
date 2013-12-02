@@ -1,4 +1,4 @@
-package otherclasses;
+package config;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
