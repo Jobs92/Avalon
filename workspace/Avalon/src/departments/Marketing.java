@@ -1,11 +1,13 @@
 package departments;
 
+import company.Company;
+
 import config.Config;
 
 public class Marketing extends CampaignDepartment {
 
-	public Marketing() {
-		super();
+	public Marketing(Company company) {
+		super(company);
 		loadCampaigns();
 	}
 

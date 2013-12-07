@@ -20,8 +20,8 @@ public class TestMarketing {
 	@Before
 	public void setUp() throws Exception {
 		company = new Company();
-		gameManager = new GameManager();
-		marketing = new Marketing();
+		gameManager = GameManager.sharedInstance();
+		marketing = new Marketing(company);
 		campaign = new MarketingCampaign(marketing, "TestTitle", 10000, 1, 95,
 				3, "Description");
 		marketing.addCampaign(campaign);

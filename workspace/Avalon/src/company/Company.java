@@ -1,10 +1,7 @@
 package company;
 
 import gameManager.GameManager;
-
 import java.util.ArrayList;
-
-import market.Market;
 import utils.Message;
 import departments.Department;
 import departments.LegalDepartment;
@@ -20,6 +17,7 @@ public class Company {
 	private double money;
 	private ArrayList<Message> inbox;
 	private boolean ready;
+
 	// private ArrayList<product.Product> products;
 
 	public boolean isReady() {
@@ -28,7 +26,7 @@ public class Company {
 
 	public void setReady(boolean ready) {
 		this.ready = ready;
-		if (ready){
+		if (ready) {
 			GameManager.sharedInstance().informReady();
 		}
 	}
@@ -48,10 +46,10 @@ public class Company {
 		money = 0;
 		popularity = 0;
 		departments = new ArrayList<Department>();
-		departments.add(new Sales());
-		departments.add(new Marketing());
-		departments.add(new Research());
-		departments.add(new Warehouse());
+		departments.add(new Sales(this));
+		departments.add(new Marketing(this));
+		departments.add(new Research(this));
+		departments.add(new Warehouse(this));
 		departments.add(new LegalDepartment(this));
 		departments.add(new Purchase(this));
 		inbox = new ArrayList<Message>();

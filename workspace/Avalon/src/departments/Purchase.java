@@ -1,27 +1,36 @@
 package departments;
 
-import java.util.ArrayList;
-
-import market.Market;
 import otherclasses.Supplier;
-import company.*;
+
+import company.Company;
 
 public class Purchase extends Department {
 	private Company company = null;
+	int amount;
+	Supplier supplier; //only one supplier?
 
-	public Purchase(Company c) {
-		this.company = c;
-		ArrayList<Supplier> supplier = Market.sharedInstance().getSupplier();
+	// ArrayList<Supplier> supplier;
+
+	public Purchase(Company company) {
+		super(company);
+		// supplier = new ArrayList<Supplier>();
 	}
 
-	public void simulate(int amount, Supplier supplier) {
-		company.changeMoney((-1) * amount * supplier.getPrice());
+	// public void simulate(int amount, Supplier supplier) {
+	// company.changeMoney((-1) * amount * supplier.getPrice());
+	// }
+
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
 	}
 
 	@Override
 	public void simulate() {
-		// TODO Auto-generated method stub
-		
+		company.changeMoney((-1) * amount * supplier.getPrice());
 	}
 
 }

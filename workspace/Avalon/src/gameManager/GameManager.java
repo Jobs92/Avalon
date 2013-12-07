@@ -15,7 +15,6 @@ public class GameManager {
 	private Market market = new Market();
 	private EventManager eventManager = new EventManager();
 	private static GameManager sharedInstance;
-	private Config config;
 	
 	private GameManager(){
 	}
@@ -33,14 +32,12 @@ public class GameManager {
 	}
 
 	private void initializeGame() {
-		// TODO Auto-generated method stub
-		config = new Config();
 		active = true;
 		
 		//Generate Supplier
-		int amountSupplier = Math.min(config.getSupplierTrust().length, Math.min(config.getSupplierQuality().length, config.getSupplierPrice().length));
+		int amountSupplier = Math.min(Config.getSupplierTrust().length, Math.min(Config.getSupplierQuality().length, Config.getSupplierPrice().length));
 		for (int i = 0; i < amountSupplier; i++) {
-			Supplier s = new Supplier(config.getSupplierPrice()[i], config.getSupplierTrust()[i], config.getSupplierQuality()[i]);
+			Supplier s = new Supplier(Config.getSupplierPrice()[i], Config.getSupplierTrust()[i], Config.getSupplierQuality()[i]);
 			market.addSupplier(s);
 		}
 		
@@ -85,11 +82,6 @@ public class GameManager {
 	private void endGame() {
 		// TODO Auto-generated method stub
 		active = false;
-	}
-	
-	
-	public Config getConfig(){
-		return config;
 	}
 
 	private boolean checkWinner() {

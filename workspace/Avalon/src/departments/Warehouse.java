@@ -2,14 +2,16 @@ package departments;
 
 import java.util.ArrayList;
 
+import company.Company;
+
 public class Warehouse  extends Department{
 	
 	
 	private ArrayList<product.Product> products;
 	private int ressources;
 	
-	public Warehouse() {
-		super();
+	public Warehouse(Company company) {
+		super(company);
 		products = new ArrayList<product.Product>();
 		ressources=0;
 	}

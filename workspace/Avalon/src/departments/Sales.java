@@ -1,9 +1,17 @@
 package departments;
 
+import company.Company;
+
 import product.Product;
 
 public class Sales  extends Department{
 	
+	public Sales(Company company) {
+		super(company);
+	}
+
+
+
 	private int revenue;
 	
 	

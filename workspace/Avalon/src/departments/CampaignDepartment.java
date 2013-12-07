@@ -2,6 +2,8 @@ package departments;
 
 import java.util.ArrayList;
 
+import company.Company;
+
 import campaigns.Campaign;
 import campaigns.ExplicitCampaign;
 
@@ -11,8 +13,8 @@ public abstract class CampaignDepartment extends Department {
 	protected ArrayList<Campaign> campaigns;
 	protected ArrayList<ExplicitCampaign> explicitCampaigns;
 
-	public CampaignDepartment() {
-		super();
+	public CampaignDepartment(Company company) {
+		super(company);
 		init();
 	}
 

@@ -2,6 +2,8 @@ package departments;
 
 import java.util.ArrayList;
 
+import company.Company;
+
 import product.Product;
 
 public class Production extends Department {
@@ -12,7 +14,8 @@ public class Production extends Department {
 	private int capacity_upgrade; //ToDo
 	private ArrayList<otherclasses.Jobs> history;
 	
-	public Production(){
+	public Production(Company company){
+		super(company);
 		history = new ArrayList<otherclasses.Jobs>();
 		level = 1;
 		capacity=config.Config.getProductionCapacity();

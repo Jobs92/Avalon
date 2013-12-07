@@ -1,5 +1,7 @@
 package departments;
 
+import company.Company;
+
 import config.Config;
 import product.Product;
 import campaigns.SpyingCampaign;
@@ -10,8 +12,8 @@ public class Research extends CampaignDepartment {
 	private int researchLevel;
 	private int spiedLevels;
 
-	public Research() {
-		super();
+	public Research(Company company) {
+		super(company);
 		this.notAppliedLevels = 0;
 		this.patentLevel = 1;
 		this.researchLevel = 1;
@@ -46,8 +48,7 @@ public class Research extends CampaignDepartment {
 
 	@Override
 	public int getCostForNextLevel() {
-		int cost = level * level
-				* Config.getCostsUpgradeResearch();
+		int cost = level * level * Config.getCostsUpgradeResearch();
 		return cost;
 	}
 
