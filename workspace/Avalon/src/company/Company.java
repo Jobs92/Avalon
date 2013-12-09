@@ -128,6 +128,8 @@ public class Company {
 	public int getId() {
 		return this.id;
 	}
+	
+	
 
 	// public void addProduct(product.Product product){
 	// products.add(product); //ToDo!!!
