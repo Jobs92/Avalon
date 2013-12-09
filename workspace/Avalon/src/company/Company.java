@@ -17,6 +17,9 @@ public class Company {
 	private double money;
 	private ArrayList<Message> inbox;
 	private boolean ready;
+	
+	private ArrayList<Department> departments;
+	private int id;
 
 	// private ArrayList<product.Product> products;
 
@@ -30,9 +33,6 @@ public class Company {
 			GameManager.sharedInstance().informReady();
 		}
 	}
-
-	private ArrayList<Department> departments;
-	private int id;
 
 	// private Marketing marketing;
 	// private Research research;
@@ -128,8 +128,6 @@ public class Company {
 	public int getId() {
 		return this.id;
 	}
-	
-	
 
 	// public void addProduct(product.Product product){
 	// products.add(product); //ToDo!!!

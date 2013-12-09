@@ -1,4 +1,4 @@
-package otherclasses;
+package utils;
 
 public class Probability {
 	public static boolean propability(int p){
