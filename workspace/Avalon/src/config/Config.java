@@ -1,6 +1,10 @@
 package config;
 
+import gameManager.GameManager;
+
 public class Config {
+	private static Config sharedInstance;
+
 	private static  int maxLevelResearch;
 	private static int[] supplierTrust = new int[3];
 	private static  int[] supplierQuality = new int[3];
@@ -14,6 +18,13 @@ public class Config {
 	
 	private static int productionCapacity;
 	private static int researchFixcost;
+	
+	public static Config sharedInstance() {
+		if (Config.sharedInstance == null) {
+			Config.sharedInstance = new Config();
+		}
+		return Config.sharedInstance;
+	}
 	
 	public static int getResearchFixcost(){
 		return researchFixcost;
