@@ -58,7 +58,7 @@ public class Production extends Department {
 		else {
 			
 			if (company.getWarehouse().getSingleProduct(level)==null) {
-				company.getWarehouse().addProduct(new Product(level));
+				company.getWarehouse().addProduct(new Product(level, company));
 				company.getWarehouse().getSingleProduct(level).setAmount(amount);
 			} else {
 				company.getWarehouse().getSingleProduct(level).setAmount(company.getWarehouse().getSingleProduct(level).getAmount()+amount);

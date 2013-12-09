@@ -28,7 +28,7 @@ public class Research extends CampaignDepartment {
 	public void applyResearchResults() {
 		this.researchLevel += notAppliedLevels;
 
-		Product newProduct = new Product(this.researchLevel + this.spiedLevels);
+		Product newProduct = new Product(this.researchLevel + this.spiedLevels, company);
 		company.getWarehouse().addProduct(newProduct);
 		notAppliedLevels = 0;
 	}

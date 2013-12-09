@@ -5,18 +5,19 @@ import gameManager.GameManager;
 import java.util.ArrayList;
 
 import otherclasses.Supplier;
+import product.Product;
 import utils.Message;
 import company.Company;
 import config.Config;
 
 public class Market {
-	private int marketSaturation;
+	private ArrayList<Product> products;
 	private int buyingPower;
 	private ArrayList<Company> companies = new ArrayList<Company>();
 	private static Market sharedInstance;
 	private ArrayList<Supplier> supplier = new ArrayList<Supplier>();
 	private int demand;
-	private ArrayList<ConsumerGroups> consumerGroups;
+	private ArrayList<ConsumerGroup> consumerGroups;
 
 	public static Market sharedInstance() {
 		if (Market.sharedInstance == null) {
@@ -28,28 +29,36 @@ public class Market {
 	public Market() {
 		demand = Config.getDemand();
 		buyingPower = Config.getBuyingPower();
-		//load consumergroups
+		products = new ArrayList<Product>();
+		// load ConsumerGroup
 	}
 
 	public void simulateMarket() {
 		int demand = saisonalOscillate(calculateDemand());
 		demand = (int) (demand * buyingPower / 100.0);
-		oscillateConsumerGroups();
-		
-		
-		
+		oscillateConsumerGroup();
+		for (ConsumerGroup cg : consumerGroups) {
+			cg.simulate();
+		}
+
 		// auch zurückschicken kommt hier irgendwo rein
 	}
-	
-	private void oscillateConsumerGroups(){
-		int size = consumerGroups.size();
-		for (ConsumerGroups cg : consumerGroups) {
-			cg.setPercentage(oscillate(cg.getPercentage(), Config.getConsumerGroupOscillation()));
+
+	private void oscillateConsumerGroup() {
+		int sum = 100;
+		for (int i = 0; i < consumerGroups.size() - 1; i++) {
+			ConsumerGroup cg = consumerGroups.get(i);
+			int p = oscillate(cg.getPercentage(),
+					Config.getConsumerGroupOscillation());
+			sum -= p;
+			cg.setPercentage(p);
 		}
+		ConsumerGroup cg = consumerGroups.get(consumerGroups.size() - 1);
+		cg.setPercentage(sum);
 	}
-	
-	private int oscillate(int i, int range){		
-		return (int)((((Math.random()-0.5)*10*2) +100)/100* 40);
+
+	private int oscillate(int i, int range) {
+		return (int) ((((Math.random() - 0.5) * 10 * 2) + 100) / 100 * 40);
 	}
 
 	private int saisonalOscillate(int i) {
@@ -86,6 +95,14 @@ public class Market {
 		}
 	}
 
+	public void addProduct(Product product) {
+		products.add(product);
+	}
+
+	public int getDemand() {
+		return demand;
+	}
+
 	public ArrayList<Company> getCompanies() {
 		return companies;
 	}
@@ -96,6 +113,10 @@ public class Market {
 
 	public void addSupplier(Supplier s) {
 		supplier.add(s);
+	}
+
+	public ArrayList<Product> getProducts() {
+		return products;
 	}
 
 	public ArrayList<Supplier> getSupplier() {
