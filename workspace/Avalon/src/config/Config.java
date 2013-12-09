@@ -20,7 +20,12 @@ public class Config {
 	
 	private static int demand;
 	private static int buyingPower;
+	private static int consumerGroupOscillation;
 	
+	public static int getConsumerGroupOscillation() {
+		return consumerGroupOscillation;
+	}
+
 	public static int getResearchFixcost(){
 		return researchFixcost;
 	}
