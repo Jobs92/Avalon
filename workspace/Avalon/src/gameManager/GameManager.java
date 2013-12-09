@@ -54,7 +54,7 @@ public class GameManager {
 		market.simulate();
 
 		// Buying Behaviour at the market is simulated
-		market.simBuyingBehaviour();
+		market.simulateMarket();
 
 		// Events are simulated
 		eventManager.simEvents();

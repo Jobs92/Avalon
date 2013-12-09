@@ -28,20 +28,31 @@ public class Market {
 	public Market() {
 		demand = Config.getDemand();
 		buyingPower = Config.getBuyingPower();
+		//load consumergroups
 	}
 
 	public void simulateMarket() {
-		int demand = oscillate(calculateDemand());
+		int demand = saisonalOscillate(calculateDemand());
 		demand = (int) (demand * buyingPower / 100.0);
+		oscillateConsumerGroups();
 		
 		
 		
-		
-		// TODO: machen wir zusammen
 		// auch zurückschicken kommt hier irgendwo rein
 	}
+	
+	private void oscillateConsumerGroups(){
+		int size = consumerGroups.size();
+		for (ConsumerGroups cg : consumerGroups) {
+			cg.setPercentage(oscillate(cg.getPercentage(), Config.getConsumerGroupOscillation()));
+		}
+	}
+	
+	private int oscillate(int i, int range){		
+		return (int)((((Math.random()-0.5)*10*2) +100)/100* 40);
+	}
 
-	public int oscillate(int i) {
+	private int saisonalOscillate(int i) {
 		int round = GameManager.sharedInstance().getRound();
 		switch (round % 4) {
 		case 0:
