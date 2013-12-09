@@ -18,6 +18,9 @@ public class Config {
 	private static int productionCapacity;
 	private static int researchFixcost;
 	
+	private static int demand;
+	private static int buyingPower;
+	
 	public static int getResearchFixcost(){
 		return researchFixcost;
 	}
@@ -40,6 +43,14 @@ public class Config {
 
 	public static int[] getSupplierQuality() {
 		return supplierQuality;
+	}
+	
+	public static int getDemand(){
+		return demand;
+	}
+	
+	public static int getBuyingPower(){
+		return buyingPower;
 	}
 
 	public static int getMaxLevelResearch() {
