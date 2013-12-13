@@ -40,6 +40,9 @@ public class Config {
 
 	//Production
 	private static int productionCapacity;
+	private static int maxLevelProduction;
+	private static int productionFixcost;
+	private static int costsUpgradeProduction;
 	
 	private Properties prop;
 	
@@ -81,6 +84,12 @@ public class Config {
 				this.supplierPrice[i] = Double.parseDouble(price[i]);
 			}
     		
+    		//Production
+    		this.productionCapacity = Integer.parseInt(prop.getProperty("productionCapacity"));
+    		this.productionFixcost = Integer.parseInt(prop.getProperty("productionFixcost"));
+    		this.maxLevelProduction = Integer.parseInt(prop.getProperty("maxLevelFixcost"));
+    		this.costsUpgradeProduction = Integer.parseInt(prop.getProperty("costsUpgradeProduction"));
+    		
     		
 
     	} catch (IOException ex) {
@@ -88,6 +97,16 @@ public class Config {
     	}	
 	}
 	
+	
+	
+	public static int getMaxLevelProduction() {
+		return maxLevelProduction;
+	}
+
+	public static int getProductionFixcost() {
+		return productionFixcost;
+	}
+
 	public static int getAmountWin() {
 		return amountWin;
 	}
