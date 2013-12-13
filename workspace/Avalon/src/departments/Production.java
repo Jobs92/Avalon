@@ -3,15 +3,13 @@ package departments;
 import java.util.ArrayList;
 
 import company.Company;
-
+import config.Config;
 import product.Product;
 
 public class Production extends Department {
 	
-		//toDo:Fixkosten
 	private int level;
 	private int capacity;
-	private int capacity_upgrade; //ToDo
 	private ArrayList<otherclasses.Jobs> history;
 	
 	public Production(Company company){
@@ -70,18 +68,15 @@ public class Production extends Department {
 		
 	}
 
-
-
-
-	public int getCapacity_upgrade() {
-		return capacity_upgrade;
-	}
 	public void upgrade(){
-		this.capacity=this.capacity*capacity_upgrade;
+		if (this.level+1 <= Config.getMaxLevelProduction()){
+			level++;
+			super.company.changeMoney((-1)*Config.getCostsUpgradeProduction());
+			this.capacity=(int)(this.capacity*Config.getUpgradeProduction());
+		}
 	}
 
 
 
 		
-	
 }

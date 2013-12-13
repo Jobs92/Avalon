@@ -43,6 +43,7 @@ public class Config {
 	private static int maxLevelProduction;
 	private static int productionFixcost;
 	private static int costsUpgradeProduction;
+	private static double upgradeProduction;
 	
 	private Properties prop;
 	
@@ -89,6 +90,7 @@ public class Config {
     		this.productionFixcost = Integer.parseInt(prop.getProperty("productionFixcost"));
     		this.maxLevelProduction = Integer.parseInt(prop.getProperty("maxLevelFixcost"));
     		this.costsUpgradeProduction = Integer.parseInt(prop.getProperty("costsUpgradeProduction"));
+    		this.upgradeProduction = Double.parseDouble(prop.getProperty("upgradeProduction"));
     		
     		
 
@@ -98,7 +100,14 @@ public class Config {
 	}
 	
 	
-	
+	public static double getUpgradeProduction() {
+		return upgradeProduction;
+	}
+
+	public static int getCostsUpgradeProduction() {
+		return costsUpgradeProduction;
+	}
+
 	public static int getMaxLevelProduction() {
 		return maxLevelProduction;
 	}
