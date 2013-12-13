@@ -7,7 +7,7 @@ import config.Config;
 import product.Product;
 
 public class Production extends Department {
-	private int fixcosts = Config.getProductionFixcost();
+	private int fixcost = Config.getProductionFixcost();
 	private int level;
 	private int capacity;
 	private ArrayList<otherclasses.Jobs> history;

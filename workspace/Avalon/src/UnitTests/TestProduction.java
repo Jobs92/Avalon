@@ -47,6 +47,19 @@ public class TestProduction {
 		company2.setReady(true);
 		assertEquals(Config.getCompanyStartMoney() - Config.getProductionFixcost(), company1.getMoney(), 0);
 		assertEquals(Config.getCompanyStartMoney() - Config.getProductionFixcost(), company2.getMoney(), 0);
+		company1.getProduction().upgrade();
+		assertEquals(2, company1.getProduction().getLevel());
+		assertEquals(1, company2.getProduction().getLevel());
+		assertEquals(Config.getCompanyStartMoney() - Config.getProductionFixcost() - Config.getCostsUpgradeProduction(), company1.getMoney(), 0);
+		for (int i = 2; i < 20; i++) {
+			company2.getProduction().upgrade();
+			if (i<=10){
+				assertEquals(i, company2.getProduction().getLevel());
+			}else{
+				assertEquals(10, company2.getProduction().getLevel());
+			}
+		}
+		
 	}
 
 }

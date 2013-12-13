@@ -1,11 +1,15 @@
 package company;
 
 import gameManager.GameManager;
+
 import java.util.ArrayList;
+
+import config.Config;
 import utils.Message;
 import departments.Department;
 import departments.LegalDepartment;
 import departments.Marketing;
+import departments.Production;
 import departments.Purchase;
 import departments.Research;
 import departments.Sales;
@@ -43,7 +47,7 @@ public class Company {
 
 	public Company() {
 		super();
-		money = 0;
+		money = Config.getCompanyStartMoney();
 		popularity = 0;
 		departments = new ArrayList<Department>();
 		departments.add(new Sales(this));
@@ -52,6 +56,7 @@ public class Company {
 		departments.add(new Warehouse(this));
 		departments.add(new LegalDepartment(this));
 		departments.add(new Purchase(this));
+		departments.add(new Production(this));
 		inbox = new ArrayList<Message>();
 		// products = new ArrayList<product.Product>();
 	}
@@ -82,6 +87,10 @@ public class Company {
 
 	public Purchase getPurchase() {
 		return (Purchase) departments.get(5);
+	}
+	
+	public Production getProduction(){
+		return (Production) departments.get(6);
 	}
 
 	// money functions
