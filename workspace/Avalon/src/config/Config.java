@@ -49,13 +49,14 @@ public class Config {
 	
 	private void loadConfig() {
 		prop = new Properties();
-		 
     	try {
                //load a properties file
     		prop.load(new FileInputStream("config.properties"));
     		
     		//General
     		this.amountWin = Integer.parseInt(prop.getProperty("amountWin"));
+    		this.companyStartMoney = Integer.parseInt(prop.getProperty("companyStartMoney"));
+    		this.companyStartPopularity = Integer.parseInt(prop.getProperty("companyStartPopularity"));
     		
     		//Legal Department
     		this.weightLevel = Double.parseDouble(prop.getProperty("weightLevel"));
@@ -63,12 +64,52 @@ public class Config {
     		this.probWinLawsuit = Integer.parseInt(prop.getProperty("probWinLawsuit"));
     		this.legalDepartmentFixcost = Integer.parseInt(prop.getProperty("legalDepartmentFixcost"));
     		this.costsUpgradeLegalDeparment = Integer.parseInt(prop.getProperty("costsUpgradeLegalDepartment"));
+    		
+    		//Supplier
+    		String[] trust = prop.getProperty("supplierTrust").split(";");
+    		for (int i = 0; i < trust.length; i++) {
+				this.supplierTrust[i] = Integer.parseInt(trust[i]);
+			}
+    		
+    		String[] quality = prop.getProperty("supplierQuality").split(";");
+    		for (int i = 0; i < trust.length; i++) {
+				this.supplierQuality[i] = Integer.parseInt(quality[i]);
+			}
+    		
+    		String[] price = prop.getProperty("supplierPrice").split(";");
+    		for (int i = 0; i < trust.length; i++) {
+				this.supplierPrice[i] = Integer.parseInt(price[i]);
+			}
+    		
+    		
 
-	} catch (IOException ex) {
+    	} catch (IOException ex) {
 		System.err.println(ex);
-		//ex.printStackTrace();
-    }
-		
+    	}	
+	}
+	
+	public static int getAmountWin() {
+		return amountWin;
+	}
+
+	public static double getWeightRound() {
+		return weightRound;
+	}
+
+	public static double getWeightLevel() {
+		return weightLevel;
+	}
+
+	public static int getProbWinLawsuit() {
+		return probWinLawsuit;
+	}
+
+	public static int getCostsUpgradeLegalDeparment() {
+		return costsUpgradeLegalDeparment;
+	}
+
+	public static int getLegalDepartmentFixcost() {
+		return legalDepartmentFixcost;
 	}
 
 	public static int getConsumerGroupOscillation() {
