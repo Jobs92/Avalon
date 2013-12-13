@@ -1,5 +1,6 @@
 package market;
 
+
 import gameManager.GameManager;
 
 import java.util.ArrayList;
@@ -112,6 +113,7 @@ public class Market {
 	}
 
 	public void addSupplier(Supplier s) {
+		System.out.println("in addSuppler: "+ supplier);
 		supplier.add(s);
 	}
 

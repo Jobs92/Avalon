@@ -78,7 +78,7 @@ public class Config {
     		
     		String[] price = prop.getProperty("supplierPrice").split(";");
     		for (int i = 0; i < trust.length; i++) {
-				this.supplierPrice[i] = Integer.parseInt(price[i]);
+				this.supplierPrice[i] = Double.parseDouble(price[i]);
 			}
     		
     		

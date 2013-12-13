@@ -12,7 +12,7 @@ public class GameManager {
 	private int round = 0;
 	private boolean active;
 	private Company winner;
-	private Market market = new Market();
+	private Market market = Market.sharedInstance();
 	private EventManager eventManager = new EventManager();
 	private static GameManager sharedInstance;
 	private Config c = new Config();
