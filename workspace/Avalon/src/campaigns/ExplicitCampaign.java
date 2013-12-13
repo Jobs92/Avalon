@@ -1,6 +1,6 @@
 package campaigns;
 
-import otherclasses.Probability;
+import utils.Probability;
 import gameManager.GameManager;
 
 public abstract class ExplicitCampaign {
