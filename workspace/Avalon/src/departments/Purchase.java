@@ -7,7 +7,7 @@ import company.Company;
 public class Purchase extends Department {
 	private Company company = null;
 	int amount;
-	private ArrayList<Order> orders;
+	private ArrayList<Order> orders;	
 
 	public Purchase(Company company) {
 		super(company);
