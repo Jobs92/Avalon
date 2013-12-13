@@ -56,11 +56,20 @@ public class TestGameManager {
 //		assertEquals(gameManager.getRound(), 3);
 //	}
 	
+	@SuppressWarnings("deprecation")
 	@Test //supplier
 	public void testSupplier(){
 		ArrayList<Supplier> sup = Market.sharedInstance().getSupplier();
-		System.out.println(sup);
-		assertEquals(Config.getSupplierPrice()[0], sup.get(0).getPrice());
+		assertEquals(Config.getSupplierPrice()[0], sup.get(0).getPrice(), 0);
+		assertEquals(Config.getSupplierQuality()[0], sup.get(0).getQuality(), 0);
+		assertEquals(Config.getSupplierTrust()[0], sup.get(0).getTrustiness(), 0);
+		assertEquals(Config.getSupplierPrice()[1], sup.get(1).getPrice(), 0);
+		assertEquals(Config.getSupplierQuality()[1], sup.get(1).getQuality(), 0);
+		assertEquals(Config.getSupplierTrust()[1], sup.get(1).getTrustiness(), 0);
+		assertEquals(Config.getSupplierPrice()[2], sup.get(2).getPrice(), 0);
+		assertEquals(Config.getSupplierQuality()[2], sup.get(2).getQuality(), 0);
+		assertEquals(Config.getSupplierTrust()[2], sup.get(2).getTrustiness(), 0);
+	
 
 	}
 	

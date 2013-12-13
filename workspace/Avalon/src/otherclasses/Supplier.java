@@ -17,7 +17,7 @@ public class Supplier {
 	public int getTrustiness() {
 		return trustiness;
 	}
-	public int getQualitiy() {
+	public int getQuality() {
 		return qualitiy;
 	}	
 }
