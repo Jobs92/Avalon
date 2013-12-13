@@ -45,12 +45,14 @@ public class GameManager {
 	}
 
 	private void nextRound() {
+		
 		round++;
 		// Player decide further actions
 		waitForPlayer();
 	}
 	
 	private void simulate(){
+
 		// Active Actions are simulated
 		market.simulate();
 
@@ -74,6 +76,7 @@ public class GameManager {
 		ArrayList<Company> player = market.getCompanies();
 		for (int i = 0; i < player.size(); i++) {
 			if (!player.get(i).isReady()){
+				//Not all player ready
 				return;
 			}
 		}
@@ -105,6 +108,14 @@ public class GameManager {
 
 	public void addPlayer(Company c) {
 		market.addCompany(c);
+	}
+	
+	public boolean getActive(){
+		return this.active;
+	}
+	
+	public Company getWinner(){
+		return this.winner;
 	}
 
 	public ArrayList<Company> getPlayer() {
