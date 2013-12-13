@@ -88,7 +88,7 @@ public class Config {
     		//Production
     		this.productionCapacity = Integer.parseInt(prop.getProperty("productionCapacity"));
     		this.productionFixcost = Integer.parseInt(prop.getProperty("productionFixcost"));
-    		this.maxLevelProduction = Integer.parseInt(prop.getProperty("maxLevelFixcost"));
+    		this.maxLevelProduction = Integer.parseInt(prop.getProperty("maxLevelProduction"));
     		this.costsUpgradeProduction = Integer.parseInt(prop.getProperty("costsUpgradeProduction"));
     		this.upgradeProduction = Double.parseDouble(prop.getProperty("upgradeProduction"));
     		
