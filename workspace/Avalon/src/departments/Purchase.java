@@ -25,6 +25,6 @@ public class Purchase extends Department {
 			sum += order.getCost();
 		}
 		orders.clear();
-		company.changeMoney((-1) * sum);
+		super.company.changeMoney((-1) * sum);
 	}
 }

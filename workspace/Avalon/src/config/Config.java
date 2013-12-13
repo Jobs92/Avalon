@@ -1,27 +1,76 @@
 package config;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 import gameManager.GameManager;
 
 public class Config {
 
-	private static  int maxLevelResearch;
-	private static int[] supplierTrust = new int[3];
-	private static  int[] supplierQuality = new int[3];
-	private static double[] supplierPrice = new double[3];
-
+	//general
+	private static int amountWin;
 	private static double companyStartMoney;
 	private static int companyStartPopularity;
-
+	
+	//Legal Department
+	private static double weightRound;
+	private static double weightLevel;
+	private static int probWinLawsuit;
+	private static int costsUpgradeLegalDeparment;
+	private static int legalDepartmentFixcost;
+	
+	//Research
+	private static  int maxLevelResearch;
+	private static int researchFixcost;
 	private static int costsUpgradeResearch;
+	
+	//Marketing
 	private static int costsUpgradeMarketing;
 	
-	private static int productionCapacity;
-	private static int researchFixcost;
-	
+	//Market
 	private static int demand;
 	private static int buyingPower;
 	private static int consumerGroupOscillation;
 	
+	//Supplier
+	private static int[] supplierTrust = new int[3];
+	private static  int[] supplierQuality = new int[3];
+	private static double[] supplierPrice = new double[3];
+
+	//Production
+	private static int productionCapacity;
+	
+	private Properties prop;
+	
+	public Config(){
+		loadConfig();
+	}
+	
+	private void loadConfig() {
+		prop = new Properties();
+		 
+    	try {
+               //load a properties file
+    		prop.load(new FileInputStream("config.properties"));
+    		
+    		//General
+    		this.amountWin = Integer.parseInt(prop.getProperty("amountWin"));
+    		
+    		//Legal Department
+    		this.weightLevel = Double.parseDouble(prop.getProperty("weightLevel"));
+    		this.weightRound = Double.parseDouble(prop.getProperty("weightRound"));
+    		this.probWinLawsuit = Integer.parseInt(prop.getProperty("probWinLawsuit"));
+    		this.legalDepartmentFixcost = Integer.parseInt(prop.getProperty("legalDepartmentFixcost"));
+    		this.costsUpgradeLegalDeparment = Integer.parseInt(prop.getProperty("costsUpgradeLegalDepartment"));
+
+	} catch (IOException ex) {
+		System.err.println(ex);
+		//ex.printStackTrace();
+    }
+		
+	}
+
 	public static int getConsumerGroupOscillation() {
 		return consumerGroupOscillation;
 	}
