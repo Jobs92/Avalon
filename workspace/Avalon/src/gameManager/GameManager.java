@@ -125,4 +125,8 @@ public class GameManager {
 	public int getRound() {
 		return this.round;
 	}
+	
+	public void deleteInstance(){
+		GameManager.sharedInstance = null;
+	}
 }

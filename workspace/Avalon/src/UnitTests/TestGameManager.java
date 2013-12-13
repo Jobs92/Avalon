@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import gameManager.GameManager;
 import market.Market;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -61,6 +62,13 @@ public class TestGameManager {
 		assertEquals(false, GameManager.sharedInstance().getActive());
 		assertEquals(company1, GameManager.sharedInstance().getWinner());
 	}
+	
+	@After
+	public void removeInstances(){
+		GameManager.sharedInstance().deleteInstance();
+		Market.sharedInstance().deleteInstance();
+	}
+	
 	
 //	@SuppressWarnings("deprecation")
 //	@Test //supplier

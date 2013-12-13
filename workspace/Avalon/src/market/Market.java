@@ -145,5 +145,9 @@ public class Market {
 			companies.get(message.getTargetPlayer()).addMessageToInbox(message);
 		}
 	}
+	
+	public void deleteInstance(){
+		this.sharedInstance = null;
+	}
 
 }
