@@ -22,16 +22,26 @@ public class Purchase extends Department {
 	public void simulate() {
 		int sum = 0;
 		for (Order order : orders) {
-			if (company.getMoney() >= order.getCost()){ //Not enough money
+			if (super.company.getMoney() >= order.getCost()){ //Not enough money
 				if (utils.Probability.propability(order.getTrust())){
-					company.getWarehouse().addRessources(order.getAmount(), order.getQuality());
-					company.changeMoney((-1)*order.getCost());
-					orders.remove(order);
+					super.company.getWarehouse().addRessources(order.getAmount(), order.getQuality());
+					super.company.changeMoney((-1)*order.getCost());
+					order.setActive(false);
 				}else{
 					//TODO: Meldung: Supplier hats nicht geschafft
 				}
 
 			}
-		}	
+		}
+		clearOrders();
+	}
+
+	private void clearOrders() {
+		for (int i = 0; i < orders.size(); i++) {
+			if (!orders.get(i).isActive()){
+				orders.remove(orders.get(i));
+			}
+		}
+		
 	}
 }
