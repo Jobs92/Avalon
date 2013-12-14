@@ -3,6 +3,7 @@ package departments;
 import java.util.ArrayList;
 
 import otherclasses.ProductionJobs;
+import otherclasses.Ressources;
 import company.Company;
 import config.Config;
 import product.Product;
@@ -33,18 +34,22 @@ public class Production extends Department {
 		super.company.changeMoney((-1)*fixcost);
 		for (ProductionJobs job : allProductionJobs) {
 			if (!job.isCompleted()){
-				int amount = company.getWarehouse().getSingleProduct(job.getLevel()).getAmount()+job.getAmount();
-				company.getWarehouse().getSingleProduct(job.getLevel()).setAmount(amount);
-				company.getWarehouse().changeRessources((-1)*amount);
-				company.changeMoney((-1)*Config.getProductionVariableCosts()*amount);
+				for (int i = 0; i < job.getAmount(); i++) {
+					Ressources r = company.getWarehouse().getRessource();
+					if (utils.Probability.propability(r.getQuality())){
+						company.getWarehouse().getSingleProduct(job.getLevel()).changeAmount(1);
+					} //ansonsten ausschuss
+				}
+				company.changeMoney((-1)*Config.getProductionVariableCosts()*job.getAmount());
 				job.setCompleted(true);
+				
 			}
 		}
 		
 	}
 	public void produce (int level, int amount){ 
 		if (capacity>=amount) {
-			if (countAlreadyNeededRessources()+amount <= company.getWarehouse().getRessources()){
+			if (countAlreadyNeededRessources()+amount <= company.getWarehouse().getAmountRessources()){
 				if (company.getWarehouse().getSingleProduct(level)==null) {
 					company.getWarehouse().addProduct(new Product(level, company));
 				}

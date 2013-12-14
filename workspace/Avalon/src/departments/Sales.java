@@ -9,44 +9,37 @@ public class Sales  extends Department{
 	public Sales(Company company) {
 		super(company);
 	}
-
-
-
+	
 	private int revenue;
 	
 	
 	public int getRevenue() {
 		return revenue;
 	}
-	
 
-
-	public void setPrice(Product p, int price){
-		p.setPrice(price);
+	public void setPrice(int level, int price){
+		if (price>0){
+			company.getWarehouse().getSingleProduct(level).setPrice(price);
+		}
 	}
 	
-	public void sell (Product product, int amount){ 
+	public void sell (int level, int amount){ 
 		//HIER ÄNDERN JOOOBSS!!!!!!
-		int target_amount=company.getWarehouse().getSingleProduct(product).getAmount();    //Helper
-		int target_price=company.getWarehouse().getSingleProduct(product).getPrice();
+		int target_amount=company.getWarehouse().getSingleProduct(level).getAmount();    //Helper
+		int target_price=company.getWarehouse().getSingleProduct(level).getPrice();
 		
 		if (target_amount<amount) {
-			 // ToDo: Error Massaage oder so?
+			 // TODO: Fehlermeldung: nicht genug produkte im lager
 		}
 		else {
-			
-			company.getWarehouse().getSingleProduct(product).setAmount(target_amount-amount);
+			company.getWarehouse().getSingleProduct(level).setAmount(target_amount-amount);
+			company.changeMoney(amount*target_price);
 			this.revenue+=amount*target_price;
 		}
-		
 	}
-
-
-
+	
 	@Override
 	public void simulate() {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

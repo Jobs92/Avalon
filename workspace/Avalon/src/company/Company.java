@@ -48,7 +48,7 @@ public class Company {
 	public Company() {
 		super();
 		money = Config.getCompanyStartMoney();
-		popularity = 0;
+		popularity = Config.getCompanyStartPopularity();
 		departments = new ArrayList<Department>();
 		departments.add(new Sales(this));
 		departments.add(new Marketing(this));
@@ -58,7 +58,6 @@ public class Company {
 		departments.add(new Purchase(this));
 		departments.add(new Production(this));
 		inbox = new ArrayList<Message>();
-		// products = new ArrayList<product.Product>();
 	}
 
 	public String getPlayername() {

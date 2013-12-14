@@ -2,26 +2,35 @@ package departments;
 
 import java.util.ArrayList;
 
+import otherclasses.Ressources;
 import company.Company;
 
 public class Warehouse  extends Department{
 	
 	
 	private ArrayList<product.Product> products;
-	private int ressources;
+	private ArrayList<otherclasses.Ressources> ressources;
 	
 	public Warehouse(Company company) {
 		super(company);
 		products = new ArrayList<product.Product>();
-		ressources=0;
+		ressources = new ArrayList<otherclasses.Ressources>();
 	}
 	
-	public int getRessources() {
-		return ressources;
+	public int getAmountRessources() {
+		return ressources.size();
+	}
+	
+	public Ressources getRessource(){
+		Ressources r = ressources.get(ressources.size()-1);
+		ressources.remove(r);
+		return r;
 	}
 
-	public void changeRessources(int ressources) {
-		this.ressources += ressources;
+	public void addRessources(int amount, int quality) {
+		for (int i = 0; i < amount; i++) {
+			ressources.add(new Ressources(quality));
+		}
 	}
 
 	public ArrayList<product.Product> getProducts() {

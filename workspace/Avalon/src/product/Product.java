@@ -21,9 +21,9 @@ public class Product {
 	public int sell(int amount) {
 		int dif = this.amount - amount;
 		if (this.amount >= amount) {
-			company.getSales().sell(this, amount);
+			company.getSales().sell(level, amount);
 		} else {
-			company.getSales().sell(this, this.amount);
+			company.getSales().sell(level, this.amount);
 		}
 		return dif;
 	}
@@ -68,8 +68,8 @@ public class Product {
 		return amount;
 	}
 
-	public void setAmount(int amount) {
-		this.amount = amount;
+	public void changeAmount(int amount) {
+		this.amount += amount;
 	}
 
 	public int getQuality() {
