@@ -1,23 +1,24 @@
 package otherclasses;
 		
 
-public class Jobs {
+public class ProductionJobs {
 	private int level;
 	private int amount;
 	private boolean completed;
 	
+	public ProductionJobs (int level, int amount){
+		this.level = level;
+		this.amount = amount;
+	}
+	
 	public int getLevel() {
 		return level;
 	}
-	public void setLevel(int level) {
-		this.level = level;
-	}
+	
 	public int getAmount() {
 		return amount;
 	}
-	public void setAmount(int amount) {
-		this.amount = amount;
-	}
+	
 	public boolean isCompleted() {
 		return completed;
 	}

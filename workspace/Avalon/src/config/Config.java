@@ -44,6 +44,7 @@ public class Config {
 	private static int productionFixcost;
 	private static int costsUpgradeProduction;
 	private static double upgradeProduction;
+	private static double productionVariableCosts;
 	
 	private Properties prop;
 	
@@ -91,6 +92,7 @@ public class Config {
     		this.maxLevelProduction = Integer.parseInt(prop.getProperty("maxLevelProduction"));
     		this.costsUpgradeProduction = Integer.parseInt(prop.getProperty("costsUpgradeProduction"));
     		this.upgradeProduction = Double.parseDouble(prop.getProperty("upgradeProduction"));
+    		this.productionVariableCosts = Double.parseDouble(prop.getProperty("productionVariableCosts"));
     		
     		
 
@@ -100,6 +102,10 @@ public class Config {
 	}
 	
 	
+	public static double getProductionVariableCosts() {
+		return productionVariableCosts;
+	}
+
 	public static double getUpgradeProduction() {
 		return upgradeProduction;
 	}

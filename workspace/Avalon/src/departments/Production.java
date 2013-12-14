@@ -2,6 +2,7 @@ package departments;
 
 import java.util.ArrayList;
 
+import otherclasses.ProductionJobs;
 import company.Company;
 import config.Config;
 import product.Product;
@@ -10,11 +11,11 @@ public class Production extends Department {
 	private int fixcost = Config.getProductionFixcost();
 	private int level;
 	private int capacity;
-	private ArrayList<otherclasses.Jobs> history;
+	private ArrayList<otherclasses.ProductionJobs> allProductionJobs;
 	
 	public Production(Company company){
 		super(company);
-		history = new ArrayList<otherclasses.Jobs>();
+		allProductionJobs = new ArrayList<otherclasses.ProductionJobs>();
 		level = 1;
 		capacity=config.Config.getProductionCapacity();
 	}
@@ -30,24 +31,43 @@ public class Production extends Department {
 	@Override
 	public void simulate() {
 		super.company.changeMoney((-1)*fixcost);
-		//TODO: simulate production
-		// TODO Auto-generated method stub
-		
-	}
-	public void produce (int level, int amount){ 
-		if (capacity<amount) {
-			 // ToDo: Error Massaage oder so?
-		}
-		else {
-			
-			if (company.getWarehouse().getSingleProduct(level)==null) {
-				company.getWarehouse().addProduct(new Product(level, company));
-				company.getWarehouse().getSingleProduct(level).setAmount(amount);
-			} else {
-				company.getWarehouse().getSingleProduct(level).setAmount(company.getWarehouse().getSingleProduct(level).getAmount()+amount);
+		for (ProductionJobs job : allProductionJobs) {
+			if (!job.isCompleted()){
+				int amount = company.getWarehouse().getSingleProduct(job.getLevel()).getAmount()+job.getAmount();
+				company.getWarehouse().getSingleProduct(job.getLevel()).setAmount(amount);
+				company.getWarehouse().changeRessources((-1)*amount);
+				company.changeMoney((-1)*Config.getProductionVariableCosts()*amount);
 			}
 		}
 		
+	}
+	public void produce (int level, int amount){ 
+		if (capacity>=amount) {
+			if (countAlreadyNeededRessources()+amount <= company.getWarehouse().getRessources()){
+				if (company.getWarehouse().getSingleProduct(level)==null) {
+					company.getWarehouse().addProduct(new Product(level, company));
+				}
+				ProductionJobs job = new ProductionJobs(level, amount);
+				allProductionJobs.add(job);
+			}else{
+				//TODO:Fehlermeldung: keine ressourcen
+			}
+		}
+		else {
+			 // TODO:Fehlermeldung: keine kapazitaet
+			
+		}
+		
+	}
+
+	private int countAlreadyNeededRessources() {
+		int amount = 0;
+		for (ProductionJobs job : allProductionJobs) {
+			if (!job.isCompleted()){
+				amount+=job.getAmount();
+			}
+		}
+		return amount;
 	}
 
 	public void upgrade(){
