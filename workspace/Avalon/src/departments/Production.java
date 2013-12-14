@@ -37,6 +37,7 @@ public class Production extends Department {
 				company.getWarehouse().getSingleProduct(job.getLevel()).setAmount(amount);
 				company.getWarehouse().changeRessources((-1)*amount);
 				company.changeMoney((-1)*Config.getProductionVariableCosts()*amount);
+				job.setCompleted(true);
 			}
 		}
 		

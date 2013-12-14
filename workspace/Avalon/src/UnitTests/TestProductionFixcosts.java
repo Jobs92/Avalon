@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import gameManager.GameManager;
 import market.Market;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,7 +15,7 @@ import otherclasses.Supplier;
 import company.Company;
 import config.Config;
 
-public class TestProduction {
+public class TestProductionFixcosts {
 	private Company company1;
 	private Company company2;
 	private Company company3;
@@ -60,6 +61,12 @@ public class TestProduction {
 			}
 		}
 		
+	}
+	
+	@After
+	public void removeInstances(){
+		GameManager.sharedInstance().deleteInstance();
+		Market.sharedInstance().deleteInstance();
 	}
 
 }
