@@ -15,7 +15,7 @@ import otherclasses.Supplier;
 import company.Company;
 import config.Config;
 
-public class TestProductionJobs {
+public class TestJobsProduction {
 	private Company company1;
 	private Company company2;
 	private Company company3;
@@ -40,8 +40,12 @@ public class TestProductionJobs {
 		gameManager.startGame();
 	}
 
-
-	@SuppressWarnings("deprecation")
+//	@Test
+//	public void testAddCompany() {
+//		gameManager.addPlayer(company3);
+//		assertEquals(gameManager.getPlayer().size(), 1);
+//	}
+	
 	@Test
 	public void testNextRound() {
 		company1.getWarehouse().changeRessources(10);
@@ -61,5 +65,6 @@ public class TestProductionJobs {
 		GameManager.sharedInstance().deleteInstance();
 		Market.sharedInstance().deleteInstance();
 	}
+	
 
 }

@@ -15,7 +15,7 @@ import otherclasses.Supplier;
 import company.Company;
 import config.Config;
 
-public class TestProductionFixcosts {
+public class TestFixcostProduction {
 	private Company company1;
 	private Company company2;
 	private Company company3;
@@ -40,8 +40,12 @@ public class TestProductionFixcosts {
 		gameManager.startGame();
 	}
 
-
-	@SuppressWarnings("deprecation")
+//	@Test
+//	public void testAddCompany() {
+//		gameManager.addPlayer(company3);
+//		assertEquals(gameManager.getPlayer().size(), 1);
+//	}
+	
 	@Test
 	public void testNextRound() {
 		company1.setReady(true);
@@ -60,7 +64,6 @@ public class TestProductionFixcosts {
 				assertEquals(10, company2.getProduction().getLevel());
 			}
 		}
-		
 	}
 	
 	@After
@@ -68,5 +71,6 @@ public class TestProductionFixcosts {
 		GameManager.sharedInstance().deleteInstance();
 		Market.sharedInstance().deleteInstance();
 	}
+	
 
 }

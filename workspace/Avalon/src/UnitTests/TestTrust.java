@@ -42,7 +42,6 @@ public class TestTrust {
 	}
 
 
-	@SuppressWarnings("deprecation")
 	@Test
 	public void testNextRound() {
 		company1.changeMoney(4000000);
