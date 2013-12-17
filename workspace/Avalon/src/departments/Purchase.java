@@ -21,6 +21,7 @@ public class Purchase extends Department {
 	@Override
 	public void simulate() {
 		int sum = 0;
+		ArrayList<Order> delayedOrders = new ArrayList<Order>();
 		for (Order order : orders) {
 			if (super.company.getMoney() >= order.getCost()){ //Not enough money
 				if (utils.Probability.propability(order.getTrust())){
@@ -28,20 +29,13 @@ public class Purchase extends Department {
 					super.company.changeMoney((-1)*order.getCost());
 					order.setActive(false);
 				}else{
+					delayedOrders.add(order);
 					//TODO: Meldung: Supplier hats nicht geschafft
 				}
 
 			}
 		}
-		clearOrders();
+		orders = delayedOrders;
 	}
 
-	private void clearOrders() {
-		for (int i = 0; i < orders.size(); i++) {
-			if (!orders.get(i).isActive()){
-				orders.remove(orders.get(i));
-			}
-		}
-		
-	}
 }

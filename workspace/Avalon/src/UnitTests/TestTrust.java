@@ -53,7 +53,7 @@ public class TestTrust {
 		company1.setReady(true);
 		company2.setReady(true);
 		System.out.println(company1.getWarehouse().getAmountRessources());
-		assertEquals(90, company1.getWarehouse().getAmountRessources()/(amount*1.0), 90);	
+		assertEquals(90, company1.getWarehouse().getAmountRessources()/(amount*1.0), 90);
 	}
 	
 	@After
