@@ -22,19 +22,16 @@ public class Purchase extends Department {
 		int sum = 0;
 		ArrayList<Order> delayedOrders = new ArrayList<Order>();
 		for (Order order : orders) {
-			if (super.company.getMoney() >= order.getCost()) { // Not enough
-																// money
-				if (utils.Probability.propability(order.getTrust())) {
-					super.company.getWarehouse().addRessources(
-							order.getAmount(), order.getQuality());
-					super.company.changeMoney((-1) * order.getCost());
+			if (utils.Probability.propability(order.getTrust())) {
+				if (super.company.changeMoney((-1) * order.getCost())){
+					super.company.getWarehouse().addRessources(order.getAmount(), order.getQuality());
 					order.setActive(false);
-				} else {
-					delayedOrders.add(order);
-					// TODO: Meldung: Supplier hats nicht geschafft
 				}
-
+			}else {
+				delayedOrders.add(order);
+				// TODO: Meldung: Supplier hats nicht geschafft
 			}
+
 		}
 		orders = delayedOrders;
 	}
