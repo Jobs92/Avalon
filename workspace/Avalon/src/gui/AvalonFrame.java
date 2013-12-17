@@ -1,6 +1,8 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
@@ -14,6 +16,9 @@ import javax.swing.border.LineBorder;
 
 @SuppressWarnings("serial")
 public class AvalonFrame extends JFrame {
+	private JPanel gamePanel = new JPanel();
+	private MessagePanel messagePanel = new MessagePanel();
+
 	private CompanyPanel companyPanel = new CompanyPanel();
 	private SalesPanel salesPanel = new SalesPanel();
 	private PurchasePanel purchasePanel = new PurchasePanel();
@@ -25,24 +30,27 @@ public class AvalonFrame extends JFrame {
 	public AvalonFrame() {
 		setVisible(true);
 		setBounds(200, 200, 1000, 800);
-		setLayout(new GridLayout(2, 3, 5, 5));
+		setLayout(new BorderLayout());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		getContentPane().setBackground(Color.white);
 
-		initFrame();
-		// pack();
+		gamePanel.setLayout(new GridLayout(2, 3));
+		initGamePanel();
+		add(gamePanel, BorderLayout.CENTER);
+		
+		messagePanel.setPreferredSize(new Dimension(300, 100));
+		add(messagePanel, BorderLayout.EAST);
 	}
 
-	private void initFrame() {
+	private void initGamePanel() {
 		panels.add(companyPanel);
 		panels.add(salesPanel);
 		panels.add(purchasePanel);
 		panels.add(researchPanel);
 		panels.add(marketingPanel);
 		panels.add(lawPanel);
-
 		for (JPanel panel : panels) {
-			add(panel);
+			gamePanel.add(panel);
 		}
 	}
 

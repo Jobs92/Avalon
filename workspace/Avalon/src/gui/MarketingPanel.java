@@ -1,10 +1,9 @@
 package gui;
 
-import java.awt.LayoutManager;
-
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
+@SuppressWarnings("serial")
 public class MarketingPanel extends JPanel {
 
 	public MarketingPanel() {

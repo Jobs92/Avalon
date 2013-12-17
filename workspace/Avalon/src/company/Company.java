@@ -21,7 +21,7 @@ public class Company {
 	private double money;
 	private ArrayList<Message> inbox;
 	private boolean ready;
-	
+
 	private ArrayList<Department> departments;
 	private int id;
 
@@ -87,8 +87,8 @@ public class Company {
 	public Purchase getPurchase() {
 		return (Purchase) departments.get(5);
 	}
-	
-	public Production getProduction(){
+
+	public Production getProduction() {
 		return (Production) departments.get(6);
 	}
 
@@ -97,8 +97,13 @@ public class Company {
 		return this.money;
 	}
 
-	public void changeMoney(double value) {
-		this.money = this.money + value;
+	public boolean changeMoney(double value) {
+		if (value > this.money) {
+			return false;
+		} else {
+			this.money = this.money + value;
+			return true;
+		}
 	}
 
 	// popularity functions

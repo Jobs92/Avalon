@@ -45,12 +45,23 @@ public abstract class CampaignDepartment extends Department {
 		return explicitCampaigns.size();
 	}
 
-	public void improveDepartment() {
-		for (Campaign campaign : campaigns) {
-			campaign.updateProbability(1);
+	public boolean upgradeDepartment() {
+		if (isMaxLevel()) {
+			return false;
+		} else {
+			if (company.changeMoney((-1) * getCostForNextLevel())) {
+				for (Campaign campaign : campaigns) {
+					campaign.updateProbability(1);
+				}
+				this.level += 1;
+				return true;
+			} else {
+				return false;
+			}
 		}
-		this.level += 1;
 	}
+
+	protected abstract boolean isMaxLevel();
 
 	public abstract int getCostForNextLevel();
 

@@ -45,6 +45,8 @@ public class Config {
 	private static int costsUpgradeProduction;
 	private static double upgradeProduction;
 	private static double productionVariableCosts;
+	private static int maxLevelMarketing;
+	private static double marketingFixcost;
 	
 	private Properties prop;
 	
@@ -200,6 +202,14 @@ public class Config {
 
 	public static void setProductionCapacity(int productionCapacity) {
 		Config.productionCapacity = productionCapacity;
+	}
+
+	public static int getMaxLevelMarketing() {
+		return maxLevelMarketing;
+	}
+
+	public static double getMarketingFixcost() {
+		return marketingFixcost;
 	}
 
 }

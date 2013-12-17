@@ -1,7 +1,6 @@
 package departments;
 
 import company.Company;
-
 import config.Config;
 import product.Product;
 import campaigns.SpyingCampaign;
@@ -28,7 +27,8 @@ public class Research extends CampaignDepartment {
 	public void applyResearchResults() {
 		this.researchLevel += notAppliedLevels;
 
-		Product newProduct = new Product(this.researchLevel + this.spiedLevels, company);
+		Product newProduct = new Product(this.researchLevel + this.spiedLevels,
+				company);
 		company.getWarehouse().addProduct(newProduct);
 		notAppliedLevels = 0;
 	}
@@ -62,5 +62,14 @@ public class Research extends CampaignDepartment {
 
 	public int getSpiedLevels() {
 		return this.spiedLevels;
+	}
+
+	@Override
+	protected boolean isMaxLevel() {
+		int maxLevel = Config.getMaxLevelResearch();
+		if (level == maxLevel) {
+			return true;
+		}
+		return false;
 	}
 }
