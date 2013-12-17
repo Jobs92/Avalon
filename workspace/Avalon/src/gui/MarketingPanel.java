@@ -30,7 +30,7 @@ public class MarketingPanel extends JPanel {
 			campaigns.add(new JCheckBox("Campaign " + i));
 
 			JButton b = new JButton("Info");
-			b.setName(String.valueOf(i));
+			b.setName(String.valueOf(i - 1));
 			b.addActionListener(new ActionListener() {
 
 				@Override

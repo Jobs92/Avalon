@@ -35,7 +35,7 @@ public class PurchasePanel extends JPanel {
 			supplierLabels.add(new JLabel("Supplier " + i));
 
 			JButton b = new JButton("Info");
-			b.setName(String.valueOf(i));
+			b.setName(String.valueOf(i-1));
 			b.addActionListener(new ActionListener() {
 				
 				@Override
