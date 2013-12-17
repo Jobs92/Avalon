@@ -107,6 +107,10 @@ public class Market {
 	public ArrayList<Company> getCompanies() {
 		return companies;
 	}
+	
+	public Company getCompanyById(int id){
+		return companies.get(id);
+	}
 
 	public void addCompany(Company company) {
 		companies.add(company);
