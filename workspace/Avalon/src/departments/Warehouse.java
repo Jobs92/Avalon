@@ -3,6 +3,7 @@ package departments;
 import java.util.ArrayList;
 
 import otherclasses.Ressources;
+import product.Product;
 import company.Company;
 
 public class Warehouse  extends Department{
@@ -15,8 +16,15 @@ public class Warehouse  extends Department{
 		super(company);
 		products = new ArrayList<product.Product>();
 		ressources = new ArrayList<otherclasses.Ressources>();
+		initialize();
 	}
 	
+	private void initialize() {
+		//Create first product 
+		Product p = new Product(1, company);
+		products.add(p);
+	}
+
 	public int getAmountRessources() {
 		return ressources.size();
 	}

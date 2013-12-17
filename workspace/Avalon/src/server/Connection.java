@@ -53,7 +53,7 @@ public class Connection extends Thread{
 				try {
 					if ((txt = in.readLine()) != null) {
 						System.out.println("Server bekommt: " + txt);
-						MessageHandler.sharedInstance().handleMessage(txt, this);
+						ServerMessageHandler.sharedInstance().handleMessage(txt, this);
 					}
 					
 	

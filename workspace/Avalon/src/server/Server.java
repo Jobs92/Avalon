@@ -12,7 +12,8 @@ class Server {
          while (true){
         	 Socket skt = server.accept();
         	 Connection conn = new Connection(skt);
-        	 MessageHandler.sharedInstance().addPlayer(conn);
+        	 ServerMessageHandler.sharedInstance().addPlayer(conn);
+        	 System.out.println("Neue Vervindung");
          }
       }
       catch(Exception e) {
