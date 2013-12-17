@@ -72,5 +72,9 @@ public abstract class CampaignDepartment extends Department {
 	public ArrayList<ExplicitCampaign> getExplicitCampaigns() {
 		return explicitCampaigns;
 	}
+	
+	public Campaign getCampaignByID(int id){
+		return campaigns.get(id);
+	}
 
 }

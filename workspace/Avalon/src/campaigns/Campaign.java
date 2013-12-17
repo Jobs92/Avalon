@@ -6,7 +6,7 @@ public abstract class Campaign {
 	public static final int MARKETING = 0;
 	public static final int REASEARCH = 1;
 	public static final int SPYING = 2;
-	
+
 	protected String description;
 	protected String title;
 	protected int successProbability;
@@ -43,9 +43,9 @@ public abstract class Campaign {
 		return successProbability;
 	}
 
-	public void updateProbability(int level){
+	public void updateProbability(int level) {
 		successProbability = successProbability + level;
-		//TODO: also update levels???
+		// TODO: also update levels???
 	}
 
 	public Campaign(Department department, String title, int cost,
@@ -59,11 +59,6 @@ public abstract class Campaign {
 		this.duration = duration;
 		this.level = level;
 	}
-	
+
 	public abstract ExplicitCampaign startCampaign();
 }
-
-
-
-
-

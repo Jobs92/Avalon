@@ -1,5 +1,7 @@
 package departments;
 
+import java.util.ArrayList;
+
 import company.Company;
 import config.Config;
 import product.Product;
@@ -10,6 +12,8 @@ public class Research extends CampaignDepartment {
 	private int patentLevel;
 	private int researchLevel;
 	private int spiedLevels;
+	
+	private ArrayList<SpyingCampaign> spyingCampains;
 
 	public Research(Company company) {
 		super(company);
@@ -71,5 +75,9 @@ public class Research extends CampaignDepartment {
 			return true;
 		}
 		return false;
+	}
+	
+	public SpyingCampaign getSpyingCampaignByID(int id){
+		return spyingCampains.get(id);
 	}
 }
