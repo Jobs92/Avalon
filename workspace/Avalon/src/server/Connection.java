@@ -40,6 +40,10 @@ public class Connection extends Thread {
 		company = new Company();
 		GameManager.sharedInstance().addPlayer(company);
 	}
+	
+	public Company getCompany(){
+		return company;
+	}
 
 	public void run() {
 		// send("CONNECTED ");
