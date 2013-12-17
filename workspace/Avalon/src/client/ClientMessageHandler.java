@@ -2,8 +2,6 @@ package client;
 
 import java.util.ArrayList;
 
-import market.Market;
-
 public class ClientMessageHandler {
 
 	private ArrayList<Connection> players = new ArrayList<Connection>();
@@ -18,6 +16,7 @@ public class ClientMessageHandler {
 
 	public void handleMessage(String txt, Connection sender) {
 		//TODO: interprete Strings
+		//Fredi kann nicht debuggen
 		System.out.println("Client Handler handlet: " + txt);
 		
 	}
