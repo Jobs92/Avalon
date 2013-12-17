@@ -56,12 +56,12 @@ public class TestGameManager {
 		assertEquals(2, gameManager.getRound());
 		company2.setReady(true);
 		assertEquals(3, gameManager.getRound());
-		company1.changeMoney(100000);
+		company1.changeMoney(1000000);
 		company1.setReady(true);
 		company2.setReady(true);
 		assertEquals(false, GameManager.sharedInstance().getActive());
 		assertEquals(company1, GameManager.sharedInstance().getWinner());
-	}
+	} 
 	
 	@After
 	public void removeInstances(){
