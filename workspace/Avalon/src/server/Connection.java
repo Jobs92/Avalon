@@ -9,7 +9,6 @@ import company.Company;
 
 public class Connection extends Thread {
 
-	private int id;
 	private boolean active;
 	private Socket socket;
 	private Company company;

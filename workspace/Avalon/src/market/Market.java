@@ -154,4 +154,8 @@ public class Market {
 		this.sharedInstance = null;
 	}
 
+	public Supplier getSupplierById(int supplierId) {
+		return supplier.get(supplierId);
+	}
+
 }

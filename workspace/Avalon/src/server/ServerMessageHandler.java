@@ -2,8 +2,9 @@ package server;
 
 import java.util.ArrayList;
 
-import campaigns.ExplicitCampaign;
-import campaigns.ExplicitSpyingCampaign;
+import otherclasses.Order;
+import campaigns.MarketingCampaign;
+import campaigns.ResearchCampaign;
 import campaigns.SpyingCampaign;
 import market.Market;
 
@@ -20,7 +21,6 @@ public class ServerMessageHandler {
 	}
 
 	private ServerMessageHandler() {
-
 	}
 
 	public void handleMessage(String txt, Connection sender) {
@@ -48,20 +48,24 @@ public class ServerMessageHandler {
 			int amount = Integer.parseInt(txt.substring("PRODUCE ".length()));
 			produce(sender, amount);
 		}
+		if (txt.startsWith("STARTRESEARCHCAMPAIGN")){
+			int campaign = Integer.parseInt(txt.substring("STARTRESEARCHCAMPAIGN ".length()));
+			startResearchCampaign(sender, campaign);
+		}
 		if (txt.startsWith("UPGRADERESEARCH")){
 			upgradeResearch(sender);
 		}
-		if (txt.startsWith("PATENT ")){
-			int level = Integer.parseInt(txt.substring("PATENT ".length()));
-			patent(sender, level);
+		if (txt.startsWith("PATENT")){
+			patent(sender);
 		}
-		if (txt.startsWith("RELEASE ")){
-			int level = Integer.parseInt(txt.substring("RELEASE ".length()));
-			release(sender, level);
+		if (txt.startsWith("RELEASE")){
+			release(sender);
 		}
 		if (txt.startsWith("SPY ")){
-			int opponent = Integer.parseInt(txt.substring("SPY ".length()));
-			spy(sender, opponent);
+			String[] split = txt.substring("SPY ".length()).split("#");
+			int id = Integer.parseInt(split[0]);
+			int opponent = Integer.parseInt(split[1]);
+			spy(sender, opponent, id);
 		}
 		if (txt.startsWith("PRICE ")){
 			String[] split = txt.substring("PRICE ".length()).split("#");
@@ -112,55 +116,52 @@ public class ServerMessageHandler {
 		sender.getCompany().getSales().setPrice(level, price);
 	}
 
-	private void spy(Connection sender, int opponent) {
-		//auf martin warten
-//		ExplicitSpyingCampaign sc = new ExplicitSpyingCampaign(Market.sharedInstance().getCompanyById(opponent), campaign)
-//		sender.getCompany().getResearch().startCampaign(spyingCampaign, target);
+	private void spy(Connection sender, int opponent, int id) {
+		SpyingCampaign spyingCampaign = sender.getCompany().getResearch().getSpyingCampaignByID(id);
+		sender.getCompany().getResearch().startCampaign(spyingCampaign, opponent);;
 	}
 
-	private void release(Connection sender, int level) {
-//		sender.getCompany().getResearch().
-		
+	private void release(Connection sender) {
+		sender.getCompany().getResearch().applyResearchResults();
 	}
 
-	private void patent(Connection sender, int level) {
-		// TODO Auto-generated method stub
-		
+	private void patent(Connection sender) {
+		sender.getCompany().getResearch().patentResearchLevel();
 	}
 
 	private void upgradeResearch(Connection sender) {
-		// TODO Auto-generated method stub
-		
+		sender.getCompany().getResearch().upgradeDepartment();
+	}
+	
+	private void startResearchCampaign(Connection sender, int id) {
+		ResearchCampaign campaign = (ResearchCampaign)sender.getCompany().getResearch().getCampaignByID(id);
+		sender.getCompany().getResearch().startCampaign(campaign);
 	}
 
 	private void produce(Connection sender, int amount) {
-		// TODO Auto-generated method stub
-		
+		sender.getCompany().getProduction().produce(sender.getCompany().getWarehouse().getHighestProduct().getLevel(), amount);	
 	}
 
 	private void upgradeProduction(Connection sender) {
-		// TODO Auto-generated method stub
-		
+		sender.getCompany().getProduction().upgrade();
 	}
 
 	private void buyRessources(Connection sender, int supplierId, int amount) {
-		// TODO Auto-generated method stub
-		
+		Order order = new Order(Market.sharedInstance().getSupplierById(supplierId), amount);
+		sender.getCompany().getPurchase().addOrder(order);
 	}
 
-	private void startMarketingCampaign(Connection sender, int campaign) {
-		// TODO Auto-generated method stub
-		
+	private void startMarketingCampaign(Connection sender, int id) {
+		MarketingCampaign campaign = (MarketingCampaign)sender.getCompany().getMarketing().getCampaignByID(id);
+		sender.getCompany().getMarketing().startCampaign(campaign);
 	}
 
 	private void upgradeMarketing(Connection sender) {
-		// TODO Auto-generated method stub
-		
+		sender.getCompany().getMarketing().upgradeDepartment();
 	}
 
 	private void isReady(Connection sender) {
-		// TODO Auto-generated method stub
-		
+		sender.getCompany().setReady(true);	
 	}
 
 	public void addPlayer(Connection p) {
