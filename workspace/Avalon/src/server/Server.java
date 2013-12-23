@@ -3,7 +3,7 @@ package server;
 import java.io.*;
 import java.net.*;
 
-class Server {
+public class Server {
 	private static ServerSocket server;
 
 	public static void main(String args[]) {

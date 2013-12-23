@@ -4,8 +4,10 @@ import gameManager.GameManager;
 
 import java.util.ArrayList;
 
+import server.Connection;
 import config.Config;
 import utils.Message;
+import utils.SnapshotData;
 import departments.Department;
 import departments.LegalDepartment;
 import departments.Marketing;
@@ -21,6 +23,7 @@ public class Company {
 	private double money;
 	private ArrayList<Message> inbox;
 	private boolean ready;
+	private Connection connection;
 
 	private ArrayList<Department> departments;
 	private int id;
@@ -44,9 +47,24 @@ public class Company {
 	// private LegalDepartment legaldepartment;
 	// private Purchase purchase;
 	// private Sales sales;
-
-	public Company() {
+	
+	public Company(){
+		// For Unit tests withot Client/Server Architecture
+		money = Config.getCompanyStartMoney();
+		popularity = Config.getCompanyStartPopularity();
+		departments = new ArrayList<Department>();
+		departments.add(new Sales(this));
+		departments.add(new Marketing(this));
+		departments.add(new Research(this));
+		departments.add(new Warehouse(this));
+		departments.add(new LegalDepartment(this));
+		departments.add(new Purchase(this));
+		departments.add(new Production(this));
+		inbox = new ArrayList<Message>();
+	}
+	public Company(Connection connection) {
 		super();
+		this.connection = connection;
 		money = Config.getCompanyStartMoney();
 		popularity = Config.getCompanyStartPopularity();
 		departments = new ArrayList<Department>();
@@ -98,6 +116,7 @@ public class Company {
 	}
 
 	public boolean changeMoney(double value) {
+		System.out.println("bezahlt wird: "+ money);
 		if (value > this.money) {
 			return false;
 		} else {
@@ -140,6 +159,12 @@ public class Company {
 
 	public int getId() {
 		return this.id;
+	}
+	
+	public void informPlayer(){
+		SnapshotData snapshot = new SnapshotData();
+		snapshot.setMoney(this.money);
+		connection.sendSnapshot(snapshot);
 	}
 
 	// public void addProduct(product.Product product){

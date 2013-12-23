@@ -3,14 +3,18 @@ package client;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+
+import utils.SnapshotData;
 
 public class Connection extends Thread {
 	private Socket socket;
 	private PrintWriter out = null;
 	private BufferedReader in = null;
+	private ObjectInputStream in_object;
 	private boolean active = true;
 
 	public Connection(Socket socket) {
@@ -23,6 +27,7 @@ public class Connection extends Thread {
 			out = new PrintWriter(socket.getOutputStream(), true);
 			in = new BufferedReader(new InputStreamReader(
 					socket.getInputStream()));
+			in_object = new ObjectInputStream(socket.getInputStream());
 		} catch (IOException e) {
 			close();
 			e.printStackTrace();
@@ -35,14 +40,15 @@ public class Connection extends Thread {
 	// Receive Messages from the server
 	public void run() {
 		String txt;
+		SnapshotData sd;
 		while (active) {
 			try {
-				if ((txt = in.readLine()) != null) {
-					System.out.println("Client bekommt: " + txt);
-					ClientMessageHandler.sharedInstance().handleMessage(txt,
-							this);
+				if ((sd = (SnapshotData) in_object.readObject()) != null) {
+					System.out.println("Client bekommt money: " + sd.getMoney());
+//					ClientMessageHandler.sharedInstance().handleMessage(txt,
+//							this);
 				}
-			} catch (IOException e) {
+			} catch (IOException | ClassNotFoundException e) {
 				close();
 			}
 		}

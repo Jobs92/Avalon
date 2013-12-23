@@ -157,5 +157,11 @@ public class Market {
 	public Supplier getSupplierById(int supplierId) {
 		return supplier.get(supplierId);
 	}
+	
+	public void informPlayers() {
+		for (Company c: companies) {
+			c.informPlayer();
+		}
+	}
 
 }

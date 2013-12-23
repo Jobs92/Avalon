@@ -45,7 +45,7 @@ public class GameManager {
 	}
 
 	private void nextRound() {
-		
+		market.informPlayers();
 		round++;
 		// Player decide further actions
 		waitForPlayer();

@@ -5,6 +5,7 @@ import gameManager.GameManager;
 import java.net.*;
 import java.io.*;
 
+import utils.SnapshotData;
 import company.Company;
 
 public class Connection extends Thread {
@@ -14,6 +15,7 @@ public class Connection extends Thread {
 	private Company company;
 	private PrintWriter out;
 	private BufferedReader in;
+	private ObjectOutputStream out_object;
 
 	public Connection(Socket socket) {
 		this.socket = socket;
@@ -25,6 +27,7 @@ public class Connection extends Thread {
 			out = new PrintWriter(socket.getOutputStream(), true);
 			in = new BufferedReader(new InputStreamReader(
 					socket.getInputStream()));
+			out_object = new ObjectOutputStream(socket.getOutputStream());
 		} catch (IOException e) {
 			close();
 			e.printStackTrace();
@@ -36,7 +39,7 @@ public class Connection extends Thread {
 	}
 
 	private void createCompany() {
-		company = new Company();
+		company = new Company(this);
 		GameManager.sharedInstance().addPlayer(company);
 	}
 	
@@ -67,6 +70,14 @@ public class Connection extends Thread {
 	public void send(String txt) {
 		System.out.println("Server sendet: " + txt);
 		out.println(txt);
+	}
+	
+	public void sendSnapshot(SnapshotData sd){
+		try {
+			out_object.writeObject(sd);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void close() {
