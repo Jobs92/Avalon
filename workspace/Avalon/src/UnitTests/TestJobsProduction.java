@@ -48,10 +48,10 @@ public class TestJobsProduction {
 	
 	@Test
 	public void testNextRound() {
-		company1.getWarehouse().changeRessources(10);
+		company1.getWarehouse().addRessources(10, 1);
 		company1.getProduction().produce(1, 5);
 		company2.getProduction().produce(1, 5);
-		company2.getWarehouse().changeRessources(110);
+		company2.getWarehouse().addRessources(110, 1);
 		company2.getProduction().produce(1, 110);
 		company1.setReady(true);
 		company2.setReady(true);
