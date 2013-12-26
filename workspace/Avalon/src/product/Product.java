@@ -18,7 +18,7 @@ public class Product {
 		this.amount = 0;
 	}
 
-	public int sell(int amount) {
+	public int sell(int amount) {  // Doppelte Logik
 		int dif = this.amount - amount;
 		if (this.amount >= amount) {
 			company.getSales().sell(level, amount);
