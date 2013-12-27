@@ -4,15 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 
 @SuppressWarnings("serial")
 public class AvalonFrame extends JFrame {
@@ -26,6 +25,7 @@ public class AvalonFrame extends JFrame {
 	private ResearchPanel researchPanel = new ResearchPanel();
 	private LawPanel lawPanel = new LawPanel();
 	private ArrayList<JPanel> panels = new ArrayList<JPanel>();
+	private JButton nextRoundButton = new JButton("Next Round");
 
 	public AvalonFrame() {
 		setVisible(true);
@@ -37,12 +37,15 @@ public class AvalonFrame extends JFrame {
 		gamePanel.setLayout(new GridLayout(2, 3));
 		initGamePanel();
 		add(gamePanel, BorderLayout.CENTER);
-		
+
 		messagePanel.setPreferredSize(new Dimension(300, 100));
 		add(messagePanel, BorderLayout.EAST);
+
+		add(nextRoundButton, BorderLayout.SOUTH);
 	}
 
 	private void initGamePanel() {
+		//add panels
 		panels.add(companyPanel);
 		panels.add(salesPanel);
 		panels.add(purchasePanel);
@@ -52,14 +55,16 @@ public class AvalonFrame extends JFrame {
 		for (JPanel panel : panels) {
 			gamePanel.add(panel);
 		}
-	}
-
-	private static JButton simplify(JButton button) {
-		Border line = new LineBorder(Color.BLACK);
-		Border margin = new EmptyBorder(5, 15, 5, 15);
-		Border compound = new CompoundBorder(line, margin);
-		button.setBorder(compound);
-		return button;
+		
+		//configure button
+		nextRoundButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// send confirm
+				JOptionPane.showConfirmDialog(null, "Next Round");
+			}
+		});
 	}
 
 	public static void main(String[] args) {
