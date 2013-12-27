@@ -16,6 +16,8 @@ import javax.swing.border.TitledBorder;
 public class MarketingPanel extends JPanel {
 	private ArrayList<JCheckBox> campaigns = new ArrayList<JCheckBox>();
 	private ArrayList<JButton> info = new ArrayList<JButton>();
+	private JButton upgradeButton = new JButton("Upgrade Marketing");
+	private JButton startButton = new JButton("Start Campaigns");
 
 	public MarketingPanel() {
 		TitledBorder tb = new TitledBorder("Marketing");
@@ -48,7 +50,26 @@ public class MarketingPanel extends JPanel {
 			supplierPanel.add(info.get(i));
 		}
 
+		upgradeButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO send upgrade
+				JOptionPane.showConfirmDialog(null, "upgrade marketing");
+			}
+		});
+		
+		startButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO send start for selected marketing campaigns
+				startButton.setEnabled(false);
+			}
+		});
+
 		add(supplierPanel, BorderLayout.NORTH);
+		add(startButton,BorderLayout.SOUTH);
 	}
 
 	protected void makeInfoPopup(int index) {

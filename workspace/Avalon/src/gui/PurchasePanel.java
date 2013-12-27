@@ -21,6 +21,7 @@ public class PurchasePanel extends JPanel {
 	private ArrayList<JButton> info = new ArrayList<JButton>();
 	private ArrayList<JTextField> amount = new ArrayList<JTextField>();
 	private JLabel sumLabel = new JLabel("Sum: ");
+	private JButton buyButton = new JButton("Confirm");
 
 	public PurchasePanel() {
 		TitledBorder tb = new TitledBorder("Purchase");
@@ -35,9 +36,9 @@ public class PurchasePanel extends JPanel {
 			supplierLabels.add(new JLabel("Supplier " + i));
 
 			JButton b = new JButton("Info");
-			b.setName(String.valueOf(i-1));
+			b.setName(String.valueOf(i - 1));
 			b.addActionListener(new ActionListener() {
-				
+
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					JButton b = (JButton) e.getSource();
@@ -45,7 +46,7 @@ public class PurchasePanel extends JPanel {
 				}
 			});
 			info.add(b);
-			
+
 			JTextField t = new JTextField();
 			t.addKeyListener(new KeyListener() {
 				@Override
@@ -71,13 +72,22 @@ public class PurchasePanel extends JPanel {
 			supplierPanel.add(amount.get(i));
 		}
 
+		buyButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO send confirm
+				buyButton.setEnabled(false);
+			}
+		});
+
 		add(supplierPanel, BorderLayout.NORTH);
 		add(sumLabel, BorderLayout.CENTER);
+		add(buyButton, BorderLayout.SOUTH);
 	}
 
 	protected void makeInfoPopup(int index) {
-		String infoString = "Index="+String.valueOf(index);
-		//TODO: Must be loaded		
+		String infoString = "Index=" + String.valueOf(index);
+		// TODO: Must be loaded
 		JOptionPane.showMessageDialog(this, infoString);
 	}
 
