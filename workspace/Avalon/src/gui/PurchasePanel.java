@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,6 +28,7 @@ public class PurchasePanel extends JPanel {
 		TitledBorder tb = new TitledBorder("Purchase");
 		setBorder(tb);
 		setLayout(new BorderLayout());
+		setBackground(new Color(189,255,122));
 
 		JPanel supplierPanel = new JPanel();
 		supplierPanel.setLayout(new GridLayout(3, 3));

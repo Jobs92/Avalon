@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,6 +24,7 @@ public class MarketingPanel extends JPanel {
 		TitledBorder tb = new TitledBorder("Marketing");
 		setBorder(tb);
 		setLayout(new BorderLayout());
+		setBackground(new Color(201, 148, 255));
 
 		JPanel supplierPanel = new JPanel();
 		supplierPanel.setLayout(new GridLayout(3, 3));
@@ -58,9 +60,9 @@ public class MarketingPanel extends JPanel {
 				JOptionPane.showConfirmDialog(null, "upgrade marketing");
 			}
 		});
-		
+
 		startButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO send start for selected marketing campaigns
@@ -69,7 +71,7 @@ public class MarketingPanel extends JPanel {
 		});
 
 		add(supplierPanel, BorderLayout.NORTH);
-		add(startButton,BorderLayout.SOUTH);
+		add(startButton, BorderLayout.SOUTH);
 	}
 
 	protected void makeInfoPopup(int index) {

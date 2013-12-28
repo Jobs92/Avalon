@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.util.Vector;
 
 import javax.swing.JList;
@@ -20,6 +21,7 @@ public class SalesPanel extends JPanel {
 		TitledBorder tb = new TitledBorder("Sales");
 		setBorder(tb);
 		setLayout(new BorderLayout());
+		setBackground(new Color(255,189,122));
 
 		for (int i = 0; i < 5; i++) {
 			data.add("Product #" + (i + 1));

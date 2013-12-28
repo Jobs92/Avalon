@@ -2,16 +2,22 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.TitledBorder;
 
 @SuppressWarnings("serial")
 public class AvalonFrame extends JFrame {
@@ -33,6 +39,7 @@ public class AvalonFrame extends JFrame {
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		getContentPane().setBackground(Color.white);
+		setTitle("Avalon - Wirtschaftssimulation");
 
 		gamePanel.setLayout(new GridLayout(2, 3));
 		initGamePanel();
@@ -42,12 +49,30 @@ public class AvalonFrame extends JFrame {
 		add(messagePanel, BorderLayout.EAST);
 
 		add(nextRoundButton, BorderLayout.SOUTH);
+		
+		JLabel headerLabel = new JLabel("AVALON");
+		headerLabel.setFont(new Font(null, Font.PLAIN, 20));
+		add(headerLabel, BorderLayout.NORTH);
 	}
 
 	private void initGamePanel() {
 		//add panels
+		JPanel t = new JPanel();
+		t.setBorder(new TitledBorder("outer"));
+//		t.setLayout(new BorderLayout());
+//		t.setLayout(new BoxLayout(t, BoxLayout.Y_AXIS));
+//		t.setLayout(new GridLayout(2, 1));
+		t.setLayout(new FlowLayout());
+		
+		t.add(new JButton("iejaoi"));
+		t.add(salesPanel);
+		t.add(marketingPanel);
+		
+//		t.add(new JButton("iejaoi"));
+//		t.add(new JButton("aaaa"));
 		panels.add(companyPanel);
-		panels.add(salesPanel);
+		panels.add(t);
+//		panels.add(salesPanel);
 		panels.add(purchasePanel);
 		panels.add(researchPanel);
 		panels.add(marketingPanel);

@@ -33,7 +33,7 @@ public class TestMarketing {
 
 	@Test
 	public void testImproveMarketing() {
-		marketing.improveDepartment();
+		marketing.upgradeDepartment();
 		// does not work due to GameManager faults <-- Halts Maul LG Freddy
 		assertEquals(96, campaign.getSuccessProbability());
 	}

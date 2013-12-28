@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
@@ -29,6 +30,7 @@ public class LawPanel extends JPanel {
 		TitledBorder tb = new TitledBorder("Law");
 		setBorder(tb);
 		setLayout(new BorderLayout());
+		setBackground(new Color(0,179,0));
 
 		initEnemyPanel();
 		initSuesPanel();
