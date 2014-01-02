@@ -19,7 +19,10 @@ public class Config {
 	private static int probWinLawsuit;
 	private static int costsUpgradeLegalDeparment;
 	private static int legalDepartmentFixcost;
-	
+	private static double costsCheckCampaign;
+	private static double costsFoundSpyingCampaign;
+	private static int relativeAmountCostsLawsuit;
+
 	//Research
 	private static  int maxLevelResearch;
 	private static int researchFixcost;
@@ -146,6 +149,18 @@ public class Config {
 
 	public static int getLegalDepartmentFixcost() {
 		return legalDepartmentFixcost;
+	}
+	
+	public static double getCostsCheckCampaign() {
+		return costsCheckCampaign;
+	}
+	
+	public static double getCostsFoundSpyingCampaign() {
+		return costsFoundSpyingCampaign;
+	}
+
+	public static int getRelativeAmountCostsLawsuit() {
+		return relativeAmountCostsLawsuit;
 	}
 
 	public static int getConsumerGroupOscillation() {

@@ -1,4 +1,5 @@
 package lawsuits;
+import config.Config;
 import campaigns.ExplicitSpyingCampaign;
 import departments.LegalDepartment;
 
@@ -6,18 +7,25 @@ public class Lawsuit {
 	private LegalDepartment claimant;
 	private LegalDepartment defendant;
 	private ExplicitSpyingCampaign spying;
-	private int amount = 0;
+	private double amount = 0;
 	private int duration = 0;
 	private boolean active;
+	private boolean started;
 	
-	public Lawsuit(LegalDepartment c, LegalDepartment d){
+	public Lawsuit(LegalDepartment c, LegalDepartment d, double amount){
 		claimant = c;
 		defendant = d;
-		defendant.beSued(this);
-		active = true;
+		this.amount = amount;
+		
 	}
 	
-	public int getAmount() {
+	public void startLawsuit(){
+		defendant.beSued(this);
+		active = true;
+		started = true;
+	}
+	
+	public double getAmount() {
 		return amount;
 	}
 	
@@ -28,14 +36,69 @@ public class Lawsuit {
 	public boolean isActive() {
 		return active;
 	}
+
+	public boolean isStarted() {
+		return started;
+	}
 	
+	public LegalDepartment getClaimant(){
+		return claimant;
+	}
+
 	public void simulate(){
-		int dif = claimant.getLevel() - defendant.getLevel();
-		//TODO: lawsuit simulieren
+		duration++;
 		
-		double weightLevel = 1; //TODO: load from config
-		double weightRound = 1; //TODO: load from config
+		//Process Costs
+		double costs = amount*Config.getRelativeAmountCostsLawsuit();
+		if (!claimant.getCompany().changeMoney(costs)){
+			//Insolvenz
+		}
+		if (!defendant.getCompany().changeMoney(costs)){
+			//Insolvenz
+		}
 		
-		double param = (weightLevel*dif + weightRound*duration)/2.0;
+		//Check Winner
+		double quotient = (claimant.getLevel()*1.0)/defendant.getLevel();
+		
+		double weightLevel = Config.getWeightLevel(); 
+		double weightRound = Config.getWeightRound();
+		
+		double paramWin = (weightLevel*quotient + weightRound*duration)/(weightLevel + weightRound);
+		double paramLose = (weightLevel*(1/quotient) + weightRound*duration)/(weightLevel + weightRound);
+		
+		if (utils.Probability.propability((int) (Config.getProbWinLawsuit() * paramWin))){
+			//Claimant wins lawsuit
+			//TODO: Message to inform Players
+			
+			//Refund Process Costs
+			double refundedCosts = duration * Config.getRelativeAmountCostsLawsuit() * amount;
+			
+			double totalCosts = amount + refundedCosts;
+			
+			//Pay amount
+			if (defendant.getCompany().changeMoney((-1)*totalCosts)){
+				claimant.getCompany().changeMoney(totalCosts);
+			}else{
+				//Insolvenz
+				claimant.getCompany().changeMoney(defendant.getCompany().getMoney());
+			}
+			
+			
+		}else if (utils.Probability.propability((int) (Config.getProbWinLawsuit() * paramLose))){
+			//Defendant wins lawsuit
+			//TODO: Message to inform Players
+			
+			//Refund Process Costs
+			double refundedCosts = duration * Config.getRelativeAmountCostsLawsuit() * amount;
+			
+			//Pay amount
+			if (defendant.getCompany().changeMoney((-1)*refundedCosts)){
+				claimant.getCompany().changeMoney(refundedCosts);
+			}else{
+				//Insolvenz
+				claimant.getCompany().changeMoney(defendant.getCompany().getMoney());
+			}
+		}
+		
 	}
 }
