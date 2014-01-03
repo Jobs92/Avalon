@@ -1,4 +1,6 @@
 package lawsuits;
+import java.util.ArrayList;
+
 import config.Config;
 import campaigns.ExplicitSpyingCampaign;
 import departments.LegalDepartment;
@@ -6,13 +8,13 @@ import departments.LegalDepartment;
 public class Lawsuit {
 	private LegalDepartment claimant;
 	private LegalDepartment defendant;
-	private ExplicitSpyingCampaign spying;
+	private ArrayList<ExplicitSpyingCampaign> spying;
 	private double amount = 0;
 	private int duration = 0;
 	private boolean active;
 	private boolean started;
 	
-	public Lawsuit(LegalDepartment c, LegalDepartment d, double amount){
+	public Lawsuit(LegalDepartment c, LegalDepartment d, ArrayList<ExplicitSpyingCampaign> spyings, double amount){
 		claimant = c;
 		defendant = d;
 		this.amount = amount;
@@ -43,6 +45,10 @@ public class Lawsuit {
 	
 	public LegalDepartment getClaimant(){
 		return claimant;
+	}
+	
+	public LegalDepartment getDefendant(){
+		return defendant;
 	}
 
 	public void simulate(){

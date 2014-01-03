@@ -13,7 +13,6 @@ public class LegalDepartment extends Department {
 	private int level = 1;
 	private ArrayList<Lawsuit> lawsuitsAsClaimant = new ArrayList<Lawsuit>();
 	private ArrayList<Lawsuit> lawsuitsAsDefendant = new ArrayList<Lawsuit>();
-	private ArrayList<ExplicitSpyingCampaign> foundSpyingCampaigns = new ArrayList<ExplicitSpyingCampaign>();
 	private ArrayList<ExplicitSpyingCampaign> checkedCampaigns = new ArrayList<ExplicitSpyingCampaign>(); //Remember already checked Campaigns
 
 	public LegalDepartment(Company company) {
@@ -21,28 +20,39 @@ public class LegalDepartment extends Department {
 	}
 
 	public void checkOpponent(Company c) {
-		ArrayList<ExplicitCampaign> allCampaigns = c.getResearch().getExplicitCampaigns();
-		int amountSpyingCampaigns = 0;
-		//Check all Campaigns
-		for (int i = 0; i < allCampaigns.size(); i++) {
-			ExplicitResearchCampaign campaign = (ExplicitResearchCampaign) allCampaigns.get(i);
-			if (!checkedCampaigns.contains(campaign) && company.changeMoney((-1)*Config.getCostsCheckCampaign())){
-				if (campaign.getClass() == ExplicitSpyingCampaign.class && ((ExplicitSpyingCampaign) campaign).getSpiedPlayer() == company.getId()) {
-					foundSpyingCampaigns.add((ExplicitSpyingCampaign) campaign);
-					amountSpyingCampaigns++;
+		
+		//Player has do sue opponent, before he checks him again
+		if (!alreadyChecked(c)){
+			ArrayList<ExplicitCampaign> allCampaigns = c.getResearch().getExplicitCampaigns();
+			ArrayList<ExplicitSpyingCampaign> foundSpyingCampaigns = new ArrayList<ExplicitSpyingCampaign>();
+			//Check all Campaigns
+			for (int i = 0; i < allCampaigns.size(); i++) {
+				ExplicitResearchCampaign campaign = (ExplicitResearchCampaign) allCampaigns.get(i);
+				
+				//Pay amount 
+				if (!checkedCampaigns.contains(campaign) && company.changeMoney((-1)*Config.getCostsCheckCampaign())){
+					if (campaign.getClass() == ExplicitSpyingCampaign.class && ((ExplicitSpyingCampaign) campaign).getSpiedPlayer() == company.getId()) {
+						foundSpyingCampaigns.add((ExplicitSpyingCampaign) campaign);
+					}
+				}else{
+					//TODO: Message Geld reicht nicht aus
 				}
-			}else{
-				//TODO: Message Geld reicht nicht aus
+			}
+			
+			//Create Lawsuit, if amount spying campaigns > 0
+			if (foundSpyingCampaigns.size() != 0){
+				double sum = Config.getCostsFoundSpyingCampaign() * foundSpyingCampaigns.size();
+				Lawsuit l = new Lawsuit(this, company.getLegaldepartment(), foundSpyingCampaigns, sum);
+				lawsuitsAsClaimant.add(l);
 			}
 		}
-		
-		//Create Lawsuit, if amount spying campaigns > 0
-		if (amountSpyingCampaigns != 0){
-			double sum = Config.getCostsFoundSpyingCampaign() * amountSpyingCampaigns;
-			Lawsuit l = new Lawsuit(this, company.getLegaldepartment(), sum);
-			lawsuitsAsClaimant.add(l);
+	}
+	
+	private boolean alreadyChecked(Company c){
+		for (Lawsuit l : lawsuitsAsClaimant) {
+			if (c.getLegaldepartment() == l.getDefendant() && !l.isActive() && !l.isStarted()) return true;
 		}
-		
+		return false;
 	}
 
 	public int getLevel() {
