@@ -8,7 +8,7 @@ import departments.LegalDepartment;
 public class Lawsuit {
 	private LegalDepartment claimant;
 	private LegalDepartment defendant;
-	private ArrayList<ExplicitSpyingCampaign> spying;
+	private ArrayList<ExplicitSpyingCampaign> spyings;
 	private double amount = 0;
 	private int duration = 0;
 	private boolean active;
@@ -18,7 +18,7 @@ public class Lawsuit {
 		claimant = c;
 		defendant = d;
 		this.amount = amount;
-		
+		this.spyings = spyings;
 	}
 	
 	public void startLawsuit(){
