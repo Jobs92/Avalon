@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.GridLayout;
 
 import javax.swing.JOptionPane;
@@ -12,6 +13,9 @@ import javax.swing.JTextPane;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+
+import client.Connection;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
@@ -24,14 +28,12 @@ public class GUI_Connect extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
-	private Handler handler;
 
 	/**
 	 * Launch the application.
 	 */
 
-	public GUI_Connect(Handler handler) {
-		this.handler = handler;
+	public GUI_Connect() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 242, 200);
 		contentPane = new JPanel();
@@ -45,7 +47,7 @@ public class GUI_Connect extends JFrame {
 		
 		textField = new JTextField();
 		textField.setBounds(103, 42, 112, 20);
-		textField.setText("Mane eingeben...");
+		textField.setText("Namen eingeben...");
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
@@ -55,7 +57,7 @@ public class GUI_Connect extends JFrame {
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
 		
-		JLabel lblNickname = new JLabel("Nickname     :");
+		JLabel lblNickname = new JLabel("Nickname:");
 		lblNickname.setBounds(10, 45, 99, 14);
 		contentPane.add(lblNickname);
 		
@@ -82,7 +84,7 @@ public class GUI_Connect extends JFrame {
 		
 		try {
 			Socket socket = new Socket(textField_1.getText() , 56557);
-			Conn conn = new Conn(socket, handler);
+			Connection conn = new Connection(socket);
 
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
