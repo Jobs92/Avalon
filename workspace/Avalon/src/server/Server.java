@@ -1,5 +1,7 @@
 package server;
 
+import gameManager.GameManager;
+
 import java.io.*;
 import java.net.*;
 

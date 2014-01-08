@@ -51,6 +51,7 @@ public class Company {
 
 	public Company() {
 		// For Unit tests withot Client/Server Architecture
+		GameManager.sharedInstance();
 		money = Config.getCompanyStartMoney();
 		popularity = Config.getCompanyStartPopularity();
 		departments = new ArrayList<Department>();
@@ -66,6 +67,7 @@ public class Company {
 
 	public Company(Connection connection) {
 		super();
+		GameManager.sharedInstance();
 		this.connection = connection;
 		money = Config.getCompanyStartMoney();
 		popularity = Config.getCompanyStartPopularity();
@@ -165,8 +167,24 @@ public class Company {
 
 	public void informPlayer() {
 		DataSnapshot snapshot = new DataSnapshot();
+
+		//Fill DataSnapshot object with data
 		snapshot.setMoney(this.money);
+		snapshot.setImage(this.popularity);
+		snapshot.setFixCosts(calcFixcosts());
+		snapshot.setHighestProductLevel(getWarehouse().getHighestProduct().getLevel());
+		snapshot.setProductsOnStock(getWarehouse().getTotalAmountProducts());
+		snapshot.setRound(GameManager.sharedInstance().getRound());
+		
 		connection.sendSnapshot(snapshot);
+	}
+
+	private double calcFixcosts() {
+		double sum = 0;
+		for (Department d : departments) {
+			sum += d.getFixcost();
+		}
+		return sum;
 	}
 
 	public String getName() {
