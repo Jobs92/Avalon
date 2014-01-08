@@ -1,6 +1,8 @@
 package lawsuits;
 import java.util.ArrayList;
 
+import market.Market;
+import utils.Message;
 import config.Config;
 import campaigns.ExplicitSpyingCampaign;
 import departments.LegalDepartment;
@@ -75,6 +77,13 @@ public class Lawsuit {
 		if (utils.Probability.propability((int) (Config.getProbWinLawsuit() * paramWin))){
 			//Claimant wins lawsuit
 			//TODO: Message to inform Players
+			
+			Message m = new Message();
+			m.setTitle("Gerichtsverfahren beendet");
+			m.setType(Message.GAME);
+			m.setTargetPlayer(claimant.getCompany().getId());
+			m.setMessage("Sie haben das Gerichtsverfahren gegen " + defendant.getCompany().getId() + " gewonnen!");
+			Market.sharedInstance().sendMessage(m);
 			
 			//Refund Process Costs
 			double refundedCosts = duration * Config.getRelativeAmountCostsLawsuit() * amount;
