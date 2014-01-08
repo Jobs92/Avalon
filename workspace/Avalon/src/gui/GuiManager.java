@@ -7,6 +7,8 @@ import utils.DataSnapshot;
 public class GuiManager {
 
 	private DataSnapshot ds;
+	AvalonFrame mainFrame;
+	JFrame loginFrame;
 	private static GuiManager sharedInstance = null;
 
 	public static GuiManager sharedInstance() {
@@ -17,8 +19,17 @@ public class GuiManager {
 	}
 
 	private GuiManager() {
-		JFrame frame = new GUI_Connect();
-		frame.setVisible(true);
+		loginFrame = new GUI_Connect();
+		loginFrame.setVisible(true);
+	}
+
+	public void update(DataSnapshot ds) {
+		mainFrame.fill();
+	}
+
+	public void successfullLogin() {
+		loginFrame.setVisible(false);
+		mainFrame = new AvalonFrame();
 	}
 
 	public static void main(String[] args) {

@@ -47,30 +47,30 @@ public class AvalonFrame extends JFrame {
 		add(messagePanel, BorderLayout.EAST);
 
 		add(nextRoundButton, BorderLayout.SOUTH);
-		
+
 		JLabel headerLabel = new JLabel("AVALON");
 		headerLabel.setFont(new Font(null, Font.PLAIN, 20));
 		add(headerLabel, BorderLayout.NORTH);
 	}
 
 	private void initGamePanel() {
-		//add panels
+		// add panels
 		JPanel t = new JPanel();
 		t.setBorder(new TitledBorder("outer"));
-//		t.setLayout(new BorderLayout());
-//		t.setLayout(new BoxLayout(t, BoxLayout.Y_AXIS));
-//		t.setLayout(new GridLayout(2, 1));
+		// t.setLayout(new BorderLayout());
+		// t.setLayout(new BoxLayout(t, BoxLayout.Y_AXIS));
+		// t.setLayout(new GridLayout(2, 1));
 		t.setLayout(new FlowLayout());
-		
+
 		t.add(new JButton("iejaoi"));
 		t.add(salesPanel);
 		t.add(marketingPanel);
-		
-//		t.add(new JButton("iejaoi"));
-//		t.add(new JButton("aaaa"));
+
+		// t.add(new JButton("iejaoi"));
+		// t.add(new JButton("aaaa"));
 		panels.add(companyPanel);
 		panels.add((AvalonPanel) t);
-//		panels.add(salesPanel);
+		// panels.add(salesPanel);
 		panels.add(purchasePanel);
 		panels.add(researchPanel);
 		panels.add(marketingPanel);
@@ -78,16 +78,22 @@ public class AvalonFrame extends JFrame {
 		for (JPanel panel : panels) {
 			gamePanel.add(panel);
 		}
-		
-		//configure button
+
+		// configure button
 		nextRoundButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// send confirm
 				JOptionPane.showConfirmDialog(null, "Next Round");
 			}
 		});
+	}
+
+	public void fill() {
+		for (AvalonPanel p : panels) {
+			p.fill();
+		}
 	}
 
 	public static void main(String[] args) {
