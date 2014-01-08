@@ -6,7 +6,7 @@ public class Api {
 	public Api(Connection connection){
 		this.connection = connection;
 	}
-	
+
 	public void produce(int x){
 		String s = "PRODUCE " + x;
 		connection.send(s);

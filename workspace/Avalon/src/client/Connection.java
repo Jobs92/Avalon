@@ -29,6 +29,10 @@ public class Connection extends Thread {
 			in = new BufferedReader(new InputStreamReader(
 					socket.getInputStream()));
 			in_object = new ObjectInputStream(socket.getInputStream());
+			
+			//Create Api
+			Api api = new Api(this);
+			GuiManager.sharedInstance().setApi(api);
 		} catch (IOException e) {
 			close();
 			e.printStackTrace();
