@@ -80,6 +80,9 @@ public class GUI_Connect extends JFrame {
 		try {
 			Socket socket = new Socket(textField_1.getText() , 56557);
 			Connection conn = new Connection(socket);
+			if (conn.connect()){
+				GuiManager.sharedInstance().successfullLogin();
+			}
 
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block

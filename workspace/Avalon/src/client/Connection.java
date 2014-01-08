@@ -1,5 +1,7 @@
 package client;
 
+import gui.GuiManager;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -19,10 +21,9 @@ public class Connection extends Thread {
 
 	public Connection(Socket socket) {
 		this.socket = socket;
-		initialize();
 	}
 
-	private void initialize() {
+	public boolean connect() {
 		try {
 			out = new PrintWriter(socket.getOutputStream(), true);
 			in = new BufferedReader(new InputStreamReader(
@@ -31,21 +32,23 @@ public class Connection extends Thread {
 		} catch (IOException e) {
 			close();
 			e.printStackTrace();
+			return false;
 		}
 
 		active = true;
 		start();
+		return true;
 	}
 
 	// Receive Messages from the server
 	public void run() {
 		String txt;
-		DataSnapshot sd;
+		DataSnapshot ds;
 		while (active) {
 			try {
-				if ((sd = (DataSnapshot) in_object.readObject()) != null) {
-					//TODO: gui.update(sd);
-					System.out.println("Client bekommt money: " + sd.getMoney());
+				if ((ds = (DataSnapshot) in_object.readObject()) != null) {
+					GuiManager.sharedInstance().update(ds);
+					System.out.println("Client bekommt money: " + ds.getMoney());
 //					ClientMessageHandler.sharedInstance().handleMessage(txt,
 //							this);
 				}
