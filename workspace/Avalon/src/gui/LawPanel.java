@@ -16,7 +16,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 @SuppressWarnings("serial")
-public class LawPanel extends JPanel {
+public class LawPanel extends AvalonPanel {
 	private JPanel enemyPanel = new JPanel();
 	private JPanel suesPanel = new JPanel();
 	private JButton upgradeButton = new JButton("Upgrade");
@@ -124,6 +124,12 @@ public class LawPanel extends JPanel {
 			}
 		});
 		enemyPanel.add(new JScrollPane(enemies));
+	}
+
+	@Override
+	protected void fill() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

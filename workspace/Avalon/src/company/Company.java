@@ -24,6 +24,7 @@ public class Company {
 	private ArrayList<Message> inbox;
 	private boolean ready;
 	private Connection connection;
+	private String name;
 
 	private ArrayList<Department> departments;
 	private int id;
@@ -47,8 +48,8 @@ public class Company {
 	// private LegalDepartment legaldepartment;
 	// private Purchase purchase;
 	// private Sales sales;
-	
-	public Company(){
+
+	public Company() {
 		// For Unit tests withot Client/Server Architecture
 		money = Config.getCompanyStartMoney();
 		popularity = Config.getCompanyStartPopularity();
@@ -62,6 +63,7 @@ public class Company {
 		departments.add(new Production(this));
 		inbox = new ArrayList<Message>();
 	}
+
 	public Company(Connection connection) {
 		super();
 		this.connection = connection;
@@ -116,7 +118,7 @@ public class Company {
 	}
 
 	public boolean changeMoney(double value) {
-		System.out.println("bezahlt wird: "+ money);
+		System.out.println("bezahlt wird: " + money);
 		if (value > this.money) {
 			return false;
 		} else {
@@ -160,11 +162,19 @@ public class Company {
 	public int getId() {
 		return this.id;
 	}
-	
-	public void informPlayer(){
+
+	public void informPlayer() {
 		DataSnapshot snapshot = new DataSnapshot();
 		snapshot.setMoney(this.money);
 		connection.sendSnapshot(snapshot);
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	// public void addProduct(product.Product product){

@@ -4,12 +4,11 @@ import java.awt.Color;
 import java.awt.GridLayout;
 
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
 @SuppressWarnings("serial")
-public class CompanyPanel extends JPanel {
+public class CompanyPanel extends AvalonPanel {
 
 	private JLabel labelMoney = new JLabel("Money");
 	private JLabel money = new JLabel("0", SwingConstants.RIGHT);
@@ -50,5 +49,19 @@ public class CompanyPanel extends JPanel {
 
 		add(labelProductsOnStock);
 		add(productsOnStock);
+	}
+
+	@Override
+	protected void fill() {
+		money.setText(String.valueOf(GuiManager.sharedInstance().getDs()
+				.getMoney()));
+		fixcosts.setText(String.valueOf(GuiManager.sharedInstance().getDs()
+				.getFixCosts()));
+		varCosts.setText(String.valueOf(GuiManager.sharedInstance().getDs()
+				.getVarCosts()));
+		productLevel.setText(String.valueOf(GuiManager.sharedInstance().getDs()
+				.getHighestProductLevel()));
+		productsOnStock.setText(String.valueOf(GuiManager.sharedInstance()
+				.getDs().getProductsOnStock()));
 	}
 }

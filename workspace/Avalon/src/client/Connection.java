@@ -44,6 +44,7 @@ public class Connection extends Thread {
 		while (active) {
 			try {
 				if ((sd = (DataSnapshot) in_object.readObject()) != null) {
+					//TODO: gui.update(sd);
 					System.out.println("Client bekommt money: " + sd.getMoney());
 //					ClientMessageHandler.sharedInstance().handleMessage(txt,
 //							this);

@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 @SuppressWarnings("serial")
-public class PurchasePanel extends JPanel {
+public class PurchasePanel extends AvalonPanel {
 	private ArrayList<JLabel> supplierLabels = new ArrayList<JLabel>();
 	private ArrayList<JButton> info = new ArrayList<JButton>();
 	private ArrayList<JTextField> amount = new ArrayList<JTextField>();
@@ -102,6 +102,12 @@ public class PurchasePanel extends JPanel {
 			}
 		}
 		sumLabel.setText("Sum: " + sum);
+	}
+
+	@Override
+	protected void fill() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

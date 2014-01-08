@@ -7,6 +7,8 @@ public class DataSnapshot implements Serializable{
 	private double image;
 	private double fixCosts;
 	private double varCosts;
+	private int highestProductLevel;
+	private int productsOnStock;
 	private String[] products;
 	private String[] supplier;
 	private int[] level; //Research#LegalDepartment#Marketing#spying#patent
@@ -84,6 +86,22 @@ public class DataSnapshot implements Serializable{
 
 	public void setRound(int round) {
 		this.round = round;
+	}
+
+	public int getHighestProductLevel() {
+		return highestProductLevel;
+	}
+
+	public void setHighestProductLevel(int highestProductLevel) {
+		this.highestProductLevel = highestProductLevel;
+	}
+
+	public int getProductsOnStock() {
+		return productsOnStock;
+	}
+
+	public void setProductsOnStock(int productsOnStock) {
+		this.productsOnStock = productsOnStock;
 	}
 	
 	

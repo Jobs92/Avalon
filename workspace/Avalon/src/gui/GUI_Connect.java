@@ -1,15 +1,9 @@
 package gui;
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import java.awt.GridLayout;
-
 import javax.swing.JOptionPane;
-import javax.swing.JTextPane;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -23,6 +17,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 
+@SuppressWarnings("serial")
 public class GUI_Connect extends JFrame {
 
 	private JPanel contentPane;
@@ -57,7 +52,7 @@ public class GUI_Connect extends JFrame {
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
 		
-		JLabel lblNickname = new JLabel("Nickname:");
+		JLabel lblNickname = new JLabel("Companyname:");
 		lblNickname.setBounds(10, 45, 99, 14);
 		contentPane.add(lblNickname);
 		

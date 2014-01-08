@@ -28,7 +28,7 @@ public class AvalonFrame extends JFrame {
 	private MarketingPanel marketingPanel = new MarketingPanel();
 	private ResearchPanel researchPanel = new ResearchPanel();
 	private LawPanel lawPanel = new LawPanel();
-	private ArrayList<JPanel> panels = new ArrayList<JPanel>();
+	private ArrayList<AvalonPanel> panels = new ArrayList<AvalonPanel>();
 	private JButton nextRoundButton = new JButton("Next Round");
 
 	public AvalonFrame() {
@@ -69,7 +69,7 @@ public class AvalonFrame extends JFrame {
 //		t.add(new JButton("iejaoi"));
 //		t.add(new JButton("aaaa"));
 		panels.add(companyPanel);
-		panels.add(t);
+		panels.add((AvalonPanel) t);
 //		panels.add(salesPanel);
 		panels.add(purchasePanel);
 		panels.add(researchPanel);

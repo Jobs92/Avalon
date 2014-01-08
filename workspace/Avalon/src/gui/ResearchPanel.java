@@ -21,7 +21,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 @SuppressWarnings("serial")
-public class ResearchPanel extends JPanel {
+public class ResearchPanel extends AvalonPanel {
 
 	public ResearchPanel() {
 		TitledBorder tb = new TitledBorder("Research");
@@ -145,5 +145,11 @@ public class ResearchPanel extends JPanel {
 		String infoString = "Index=" + String.valueOf(index);
 		// TODO: Must be loaded
 		JOptionPane.showMessageDialog(this, infoString);
+	}
+
+	@Override
+	protected void fill() {
+		// TODO Auto-generated method stub
+		
 	}
 }

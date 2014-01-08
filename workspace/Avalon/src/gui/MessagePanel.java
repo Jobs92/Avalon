@@ -13,7 +13,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 @SuppressWarnings("serial")
-public class MessagePanel extends JPanel {
+public class MessagePanel extends AvalonPanel {
 	private JList<String> inbox;
 	private Vector<String> data = new Vector<String>();
 	private Vector<Message> extendedData = new Vector<Message>();
@@ -48,5 +48,11 @@ public class MessagePanel extends JPanel {
 		});
 
 		add(new JScrollPane(inbox), BorderLayout.CENTER);
+	}
+
+	@Override
+	protected void fill() {
+		// TODO Auto-generated method stub
+		
 	}
 }

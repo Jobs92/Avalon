@@ -13,7 +13,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 @SuppressWarnings("serial")
-public class SalesPanel extends JPanel {
+public class SalesPanel extends AvalonPanel {
 	private JList<String> products;// = new JList<String>();
 	private Vector<String> data = new Vector<String>();
 
@@ -44,5 +44,11 @@ public class SalesPanel extends JPanel {
 		});
 
 		add(new JScrollPane(products));
+	}
+
+	@Override
+	protected void fill() {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 @SuppressWarnings("serial")
-public class MarketingPanel extends JPanel {
+public class MarketingPanel extends AvalonPanel {
 	private ArrayList<JCheckBox> campaigns = new ArrayList<JCheckBox>();
 	private ArrayList<JButton> info = new ArrayList<JButton>();
 	private JButton upgradeButton = new JButton("Upgrade Marketing");
@@ -78,6 +78,12 @@ public class MarketingPanel extends JPanel {
 		String infoString = "Index=" + String.valueOf(index);
 		// TODO: Must be loaded
 		JOptionPane.showMessageDialog(this, infoString);
+	}
+
+	@Override
+	protected void fill() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

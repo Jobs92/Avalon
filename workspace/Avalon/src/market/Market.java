@@ -41,8 +41,7 @@ public class Market {
 		for (ConsumerGroup cg : consumerGroups) {
 			cg.simulate();
 		}
-
-		// auch zurückschicken kommt hier irgendwo rein
+		//TODO: push image for bestseller
 	}
 
 	private void oscillateConsumerGroup() {
