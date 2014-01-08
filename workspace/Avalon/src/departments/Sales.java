@@ -1,11 +1,18 @@
 package departments;
 
+import gameManager.GameManager;
+
+import java.util.ArrayList;
+
+import otherclasses.SalesHistory;
 import company.Company;
 
 
 
 public class Sales  extends Department{
 	
+	
+	private ArrayList<otherclasses.SalesHistory> salesHistory;
 	public Sales(Company company) {
 		super(company);
 	}
@@ -42,11 +49,33 @@ public class Sales  extends Department{
 			company.getWarehouse().getSingleProduct(level).changeAmount(0-amount);
 			company.changeMoney(amount*currentPrice);
 			this.revenue+=amount*currentPrice;
+			
+			if (salesHistory.get(salesHistory.size()).getRound() == GameManager.sharedInstance().getRound() && level==salesHistory.get(salesHistory.size()).getLevel()){
+				salesHistory.get(salesHistory.size()).updateAmount(availableAmount);
+			}
+			else {
+					salesHistory.add(new SalesHistory(level, amount, GameManager.sharedInstance().getRound()));
+			}
+		
 		
 		
 		
        return div;
 	}
+	
+	public int getTotalAmount(int round){
+		int totalAmount=0;
+		for (otherclasses.SalesHistory list : salesHistory) {
+			if (list.getRound()==round) {
+				totalAmount +=list.getAmount();
+			}
+		}
+		
+		
+		return totalAmount;
+		
+	}
+	
 	
 	@Override
 	public void simulate() {
