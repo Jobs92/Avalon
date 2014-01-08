@@ -55,21 +55,21 @@ public class AvalonFrame extends JFrame {
 
 	private void initGamePanel() {
 		// add panels
-		JPanel t = new JPanel();
-		t.setBorder(new TitledBorder("outer"));
+//		JPanel t = new JPanel();
+//		t.setBorder(new TitledBorder("outer"));
 		// t.setLayout(new BorderLayout());
 		// t.setLayout(new BoxLayout(t, BoxLayout.Y_AXIS));
 		// t.setLayout(new GridLayout(2, 1));
-		t.setLayout(new FlowLayout());
-
-		t.add(new JButton("iejaoi"));
-		t.add(salesPanel);
-		t.add(marketingPanel);
+//		t.setLayout(new FlowLayout());
+//
+//		t.add(new JButton("iejaoi"));
+//		t.add(salesPanel);
+//		t.add(marketingPanel);
 
 		// t.add(new JButton("iejaoi"));
 		// t.add(new JButton("aaaa"));
 		panels.add(companyPanel);
-		panels.add((AvalonPanel) t);
+//		panels.add((AvalonPanel) t);
 		// panels.add(salesPanel);
 		panels.add(purchasePanel);
 		panels.add(researchPanel);
