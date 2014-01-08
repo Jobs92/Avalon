@@ -2,11 +2,13 @@ package gui;
 
 import javax.swing.JFrame;
 
+import client.Api;
 import utils.DataSnapshot;
 
 public class GuiManager {
 
 	private DataSnapshot ds;
+	private Api api;
 	AvalonFrame mainFrame;
 	JFrame loginFrame;
 	private static GuiManager sharedInstance = null;
@@ -21,6 +23,14 @@ public class GuiManager {
 	private GuiManager() {
 		loginFrame = new GUI_Connect();
 		loginFrame.setVisible(true);
+	}
+
+	public Api getApi() {
+		return api;
+	}
+
+	public void setApi(Api api) {
+		this.api = api;
 	}
 
 	public void update(DataSnapshot ds) {
