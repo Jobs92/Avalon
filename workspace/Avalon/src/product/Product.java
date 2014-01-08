@@ -18,14 +18,14 @@ public class Product {
 		this.amount = 0;
 	}
 
-	public int sell(int amount) {  // Doppelte Logik
+	public int sell(int amount) { 
 		int dif = this.amount - amount;
 		if (this.amount >= amount) {
 			company.getSales().sell(level, amount);
 		} else {
 			company.getSales().sell(level, this.amount);
 		}
-		return dif;
+		return ((-1)*dif);
 	}
 
 	public void addLevel(int level) {
@@ -84,4 +84,5 @@ public class Product {
 		this.quality += quality;
 	}
 
+	
 }

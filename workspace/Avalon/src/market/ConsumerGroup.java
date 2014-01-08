@@ -1,6 +1,7 @@
 package market;
 
 import java.util.ArrayList;
+
 import product.Product;
 
 public class ConsumerGroup {
@@ -23,6 +24,7 @@ public class ConsumerGroup {
 		double averageLevel = calculateAverageLevel();
 		double averagePrice = calculateAveragePrice();
 		double sum = 0.0;
+		// calculate attractivity for each product for this consumer group
 		for (Product product : products) {
 			double i = product.getCompany().getPopularity() / averagePopularity;
 			double l = product.getLevel() / averageLevel;
@@ -33,19 +35,39 @@ public class ConsumerGroup {
 			sum += attractivity;
 			product.setAttractivity(attractivity);
 		}
+		// calculate demand for this consumer group
 		int demand = Market.sharedInstance().getDemand();
 		demand = (int) (demand * percentage / 100.0);
 
+		// sort products by attractivity
+		sort(products);
+
+		// calculate relative attractivity for each product
+		int rest = 0;
 		for (Product product : products) {
-			double a = product.getAttractivity() / sum;
-			product.setAttractivity(a);
-			int amount = (int)(a * demand);
-			int rest = product.sell(amount);
-			//TODO hier gehts weiter mit überschüssigen produkten (frediproblem)
-			if (res) {
-				
+			double relativeAttractivity = product.getAttractivity() / sum;
+			product.setAttractivity(relativeAttractivity);
+			int amount = (int) (relativeAttractivity * demand + rest);
+			rest = product.sell(amount);
+			if (rest < 0) {
+				rest = 0;
 			}
 		}
+	}
+
+	private void sort(ArrayList<Product> input) {
+		Product temp = null;
+		for (int i = 1; i < input.size(); i++) {
+			for (int j = 0; j < input.size() - i; j++) {
+				if (input.get(j).getAttractivity() > input.get(i)
+						.getAttractivity()) {
+					temp = input.get(j);
+					input.set(j, input.get(j + 1));
+					input.set(j + 1, temp);
+				}
+			}
+		}
+
 	}
 
 	public double calculateAveragePopularity() {

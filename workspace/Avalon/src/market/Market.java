@@ -35,12 +35,12 @@ public class Market {
 	}
 
 	public void simulateMarket() {
-//		int demand = saisonalOscillate(calculateDemand());
-//		demand = (int) (demand * buyingPower / 100.0);
-//		oscillateConsumerGroup();
-//		for (ConsumerGroup cg : consumerGroups) {
-//			cg.simulate();
-//		}
+		int demand = saisonalOscillate(calculateDemand());
+		demand = (int) (demand * buyingPower / 100.0);
+		oscillateConsumerGroup();
+		for (ConsumerGroup cg : consumerGroups) {
+			cg.simulate();
+		}
 
 		// auch zurückschicken kommt hier irgendwo rein
 	}
@@ -150,6 +150,7 @@ public class Market {
 		}
 	}
 	
+	@SuppressWarnings("static-access")
 	public void deleteInstance(){
 		this.sharedInstance = null;
 	}
