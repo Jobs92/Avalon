@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import server.Connection;
 import config.Config;
 import utils.Message;
-import utils.SnapshotData;
+import utils.DataSnapshot;
 import departments.Department;
 import departments.LegalDepartment;
 import departments.Marketing;
@@ -162,7 +162,7 @@ public class Company {
 	}
 	
 	public void informPlayer(){
-		SnapshotData snapshot = new SnapshotData();
+		DataSnapshot snapshot = new DataSnapshot();
 		snapshot.setMoney(this.money);
 		connection.sendSnapshot(snapshot);
 	}

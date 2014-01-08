@@ -5,7 +5,7 @@ import gameManager.GameManager;
 import java.net.*;
 import java.io.*;
 
-import utils.SnapshotData;
+import utils.DataSnapshot;
 import company.Company;
 
 public class Connection extends Thread {
@@ -72,7 +72,7 @@ public class Connection extends Thread {
 		out.println(txt);
 	}
 	
-	public void sendSnapshot(SnapshotData sd){
+	public void sendSnapshot(DataSnapshot sd){
 		try {
 			out_object.writeObject(sd);
 		} catch (IOException e) {

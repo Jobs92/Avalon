@@ -1,9 +1,9 @@
 package client;
 
-public class api {
+public class Api {
 	private Connection connection;
 	
-	public api(Connection connection){
+	public Api(Connection connection){
 		this.connection = connection;
 	}
 	

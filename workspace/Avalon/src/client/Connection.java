@@ -8,7 +8,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import utils.SnapshotData;
+import utils.DataSnapshot;
 
 public class Connection extends Thread {
 	private Socket socket;
@@ -40,10 +40,10 @@ public class Connection extends Thread {
 	// Receive Messages from the server
 	public void run() {
 		String txt;
-		SnapshotData sd;
+		DataSnapshot sd;
 		while (active) {
 			try {
-				if ((sd = (SnapshotData) in_object.readObject()) != null) {
+				if ((sd = (DataSnapshot) in_object.readObject()) != null) {
 					System.out.println("Client bekommt money: " + sd.getMoney());
 //					ClientMessageHandler.sharedInstance().handleMessage(txt,
 //							this);

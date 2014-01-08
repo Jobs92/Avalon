@@ -2,7 +2,7 @@ package utils;
 
 import java.io.Serializable;
 
-public class SnapshotData implements Serializable{
+public class DataSnapshot implements Serializable{
 	private double money;
 	private double image;
 	private double fixCosts;
