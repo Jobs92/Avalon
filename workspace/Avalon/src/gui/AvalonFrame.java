@@ -85,6 +85,7 @@ public class AvalonFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// send confirm
+				GuiManager.sharedInstance().getApi().ready();
 				JOptionPane.showConfirmDialog(null, "Next Round");
 			}
 		});
