@@ -24,6 +24,7 @@ public class GuiManager {
 	}
 
 	public void update(DataSnapshot ds) {
+		this.ds = ds;
 		mainFrame.fill();
 	}
 
