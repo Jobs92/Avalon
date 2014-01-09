@@ -4,6 +4,8 @@ import gameManager.GameManager;
 
 import java.util.ArrayList;
 
+import otherclasses.Supplier;
+import market.Market;
 import server.Connection;
 import config.Config;
 import utils.Message;
@@ -187,6 +189,11 @@ public class Company {
 		snapshot.addLevel("Marketing", this.getMarketing().getLevel());
 		snapshot.addLevel("LegalDepartment", this.getLegaldepartment().getLevel());
 		snapshot.addLevel("Research", this.getResearch().getLevel());
+		
+		//Supplier
+		for (Supplier s : Market.sharedInstance().getSupplier()) {
+			snapshot.addSupplier(s.getPrice(), s.getTrustiness(), s.getQuality());
+		}
 		
 		connection.sendSnapshot(snapshot);
 	}

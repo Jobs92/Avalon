@@ -9,11 +9,11 @@ public class DataSnapshot implements Serializable{
 	private double money;
 	private double image;
 	private double fixCosts;
-	private double varCosts;
+	private double varCosts; // <-- ???
 	private int highestProductLevel;
 	private int productsOnStock;
 	private String[] products;
-	private String[] supplier;
+	private ArrayList<Dictionary<String, Double>> supplier = new ArrayList<Dictionary<String, Double>>();
 	private Dictionary<String, Integer> levels = new Hashtable<String, Integer>(); //Research#LegalDepartment#Marketing#spying#patent
 	private ArrayList<Dictionary<String, String>> messages = new ArrayList<Dictionary<String, String>>();
 	private int round;
@@ -59,12 +59,24 @@ public class DataSnapshot implements Serializable{
 		this.products = products;
 	}
 
-	public String[] getSupplier() {
+	public ArrayList<Dictionary<String, Double>> getSupplier() {
 		return supplier;
+		/**
+		 * Für Martin:
+		 * for (Dictionary<String, String> s : ds.getSupplier()) {
+		 *		double trust = m.get("trust");
+		 *		double quality = m.get("quality");
+		 *		double price = m.get("price");
+			}
+		 */
 	}
 
-	public void setSupplier(String[] supplier) {
-		this.supplier = supplier;
+	public void addSupplier(double price, double trust, double quality) {
+		Dictionary<String, Double> d = new Hashtable<String, Double>();
+		d.put("trust", trust);
+		d.put("price", price);
+		d.put("quality", quality);
+		supplier.add(d);
 	}
 	
 	public int getLevel(String s){
@@ -84,7 +96,7 @@ public class DataSnapshot implements Serializable{
 		/**
 		 * Für Martin:
 		 * Ich geb dir die Messages in einer Array List mit Dictionaries. du kannst dann so drauf zugreifen:
-		 * for (Dictionary<String, String> m : ds.getMessages) {
+		 * for (Dictionary<String, String> m : ds.getMessages()) {
 		 *		String titel = m.get("title");
 		 *		String message = m.get("message");
 			}
