@@ -180,8 +180,14 @@ public class Company {
 		for (Message m : this.getMessagesFromInbox()) {
 			snapshot.addMessage(m.getTitle(), m.getMessage());
 		}
+		clearInbox();
 		
 		connection.sendSnapshot(snapshot);
+	}
+
+	private void clearInbox() {
+		inbox = new ArrayList<Message>();
+		
 	}
 
 	private double calcFixcosts() {
