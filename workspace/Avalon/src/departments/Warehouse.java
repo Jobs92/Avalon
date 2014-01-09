@@ -69,4 +69,12 @@ public class Warehouse  extends Department{
 	public void simulate() {
 	}
 
+	public int getTotalAmountProducts() {
+		int sum = 0;
+		for (Product p : products) {
+			sum += p.getAmount();
+		}
+		return sum;
+	}
+
 }
