@@ -5,7 +5,6 @@ import java.util.Vector;
 
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
@@ -52,7 +51,7 @@ public class MessagePanel extends AvalonPanel {
 
 	@Override
 	protected void fill() {
-		// TODO Auto-generated method stub
-		
+		String[] messages = GuiManager.sharedInstance().getDs().getMessages();
+		inbox.setListData(messages);
 	}
 }

@@ -12,20 +12,19 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 @SuppressWarnings("serial")
-public class SalesPanel extends AvalonPanel {
+public class ProductionPanel extends AvalonPanel {
 	private JList<String> products;// = new JList<String>();
 	private Vector<String> data = new Vector<String>();
 
-	public SalesPanel() {
-		TitledBorder tb = new TitledBorder("Sales");
+	public ProductionPanel() {
+		TitledBorder tb = new TitledBorder("Production");
 		setBorder(tb);
 		setLayout(new BorderLayout());
-		setBackground(new Color(255, 189, 122));
+		setBackground(Color.ORANGE);
 
 		for (int i = 0; i < 5; i++) {
 			data.add("Product #" + (i + 1));
 		}
-
 		products = new JList<String>(data);
 		products.addListSelectionListener(new ListSelectionListener() {
 
@@ -36,7 +35,7 @@ public class SalesPanel extends AvalonPanel {
 				// TODO: must be loaded
 				String initialValue = "null";
 				String value = JOptionPane.showInputDialog(null,
-						"Set Price for " + s, initialValue);
+						"Set Production Amount for " + s, initialValue);
 				System.out.println(value);
 				// TODO: value is new price
 			}
@@ -47,8 +46,8 @@ public class SalesPanel extends AvalonPanel {
 
 	@Override
 	protected void fill() {
-		String[] productNames = GuiManager.sharedInstance().getDs()
-				.getProducts();
+		String[] productNames = GuiManager.sharedInstance().getDs().getProducts();
 		products.setListData(productNames);
 	}
+
 }
