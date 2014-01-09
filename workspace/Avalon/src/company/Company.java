@@ -176,6 +176,11 @@ public class Company {
 		snapshot.setProductsOnStock(getWarehouse().getTotalAmountProducts());
 		snapshot.setRound(GameManager.sharedInstance().getRound());
 		
+		//Messages
+		for (Message m : this.getMessagesFromInbox()) {
+			snapshot.addMessage(m.getTitle(), m.getMessage());
+		}
+		
 		connection.sendSnapshot(snapshot);
 	}
 
