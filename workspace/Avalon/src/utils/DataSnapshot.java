@@ -1,6 +1,9 @@
 package utils;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Hashtable;
 
 public class DataSnapshot implements Serializable{
 	private double money;
@@ -12,7 +15,7 @@ public class DataSnapshot implements Serializable{
 	private String[] products;
 	private String[] supplier;
 	private int[] level; //Research#LegalDepartment#Marketing#spying#patent
-	private String[] messages;
+	private ArrayList<Dictionary<String, String>> messages = new ArrayList<Dictionary<String, String>>();
 	private int round;
 	
 
@@ -72,12 +75,24 @@ public class DataSnapshot implements Serializable{
 		this.level = level;
 	}
 
-	public String[] getMessages() {
+	public ArrayList<Dictionary<String, String>> getMessages() {
 		return messages;
+		/**
+		 * Für Martin:
+		 * Ich geb dir die Messages in einer Array List mit Dictionaries. du kannst dann so drauf zugreifen:
+		 * for (Dictionary<String, String> m : ds.getMessages) {
+		 *		String titel = m.get("title");
+		 *		String message = m.get("message");
+			}
+		 */
 	}
 
-	public void setMessages(String[] messages) {
-		this.messages = messages;
+	public void addMessage(String title, String message) {
+		Dictionary<String, String> d = new Hashtable<String, String>();
+		d.put("title", title);
+		d.put("message", message);
+		
+		this.messages.add(d);
 	}
 
 	public int getRound() {
