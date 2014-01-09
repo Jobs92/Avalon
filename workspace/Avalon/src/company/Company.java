@@ -182,6 +182,12 @@ public class Company {
 		}
 		clearInbox();
 		
+		//Levels
+		snapshot.addLevel("Production", this.getProduction().getLevel());
+		snapshot.addLevel("Marketing", this.getMarketing().getLevel());
+		snapshot.addLevel("LegalDepartment", this.getLegaldepartment().getLevel());
+		snapshot.addLevel("Research", this.getResearch().getLevel());
+		
 		connection.sendSnapshot(snapshot);
 	}
 

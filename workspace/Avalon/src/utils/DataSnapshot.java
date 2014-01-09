@@ -14,7 +14,7 @@ public class DataSnapshot implements Serializable{
 	private int productsOnStock;
 	private String[] products;
 	private String[] supplier;
-	private int[] level; //Research#LegalDepartment#Marketing#spying#patent
+	private Dictionary<String, Integer> levels = new Hashtable<String, Integer>(); //Research#LegalDepartment#Marketing#spying#patent
 	private ArrayList<Dictionary<String, String>> messages = new ArrayList<Dictionary<String, String>>();
 	private int round;
 	
@@ -66,13 +66,17 @@ public class DataSnapshot implements Serializable{
 	public void setSupplier(String[] supplier) {
 		this.supplier = supplier;
 	}
-
-	public int[] getLevel() {
-		return level;
+	
+	public int getLevel(String s){
+		return levels.get(s);
 	}
 
-	public void setLevel(int[] level) {
-		this.level = level;
+	public Dictionary<String, Integer> getLevels() {
+		return levels;
+	}
+
+	public void addLevel(String s, int level) {
+		levels.put(s, level);
 	}
 
 	public ArrayList<Dictionary<String, String>> getMessages() {
