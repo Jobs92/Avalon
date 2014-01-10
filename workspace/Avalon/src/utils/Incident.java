@@ -5,6 +5,7 @@ public class Incident {
 	private String description;
 	private int target; // if everyone: -1
 	private int probability;
+	private IncidentType type;
 
 	public Incident(String title, String description, int target,
 			int probability) {
@@ -45,6 +46,14 @@ public class Incident {
 
 	public void setProbability(int probability) {
 		this.probability = probability;
+	}
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
 	}
 
 }

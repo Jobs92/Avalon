@@ -84,7 +84,7 @@ public class MarketingPanel extends AvalonPanel {
 		int accepted = JOptionPane.showConfirmDialog(null,
 				"Do you want to spy to upgrade the Research department for "
 						+ GuiManager.sharedInstance().getDs()
-								.getUpgradeCost("marketing") + "?", "Upgrade",
+								.getUpgradeCosts("marketing") + "?", "Upgrade",
 				JOptionPane.YES_NO_OPTION);
 		if (accepted == 0) {
 			upgradeButton.setEnabled(false);
