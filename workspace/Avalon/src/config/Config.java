@@ -27,6 +27,7 @@ public class Config {
 	private static  int maxLevelResearch;
 	private static int researchFixcost;
 	private static int costsUpgradeResearch;
+	private static double costsPatent;
 	
 	//Marketing
 	private static int costsUpgradeMarketing;
@@ -205,6 +206,10 @@ public class Config {
 
 	public static int getCostsUpgradeResearch() {
 		return costsUpgradeResearch;
+	}
+	
+	public static double getCostsPatent(){
+		return costsPatent;
 	}
 
 	public static int getCostsUpgradeMarketing() {

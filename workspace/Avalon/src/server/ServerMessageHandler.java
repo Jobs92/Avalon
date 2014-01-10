@@ -27,6 +27,9 @@ public class ServerMessageHandler {
 
 	public void handleMessage(String txt, Connection sender) {
 		System.out.println("ServerHandler handlet: " + txt);
+		if (txt.startsWith("NAME")){
+			setName(sender, txt.substring("NAME ".length()));
+		}
 		if (txt.startsWith("READY")){
 			isReady(sender);
 		}
@@ -92,6 +95,10 @@ public class ServerMessageHandler {
 		if (txt.startsWith("UPGRADELEGALDEPARTMENT")){
 			upgradeLegalDepartment(sender);
 		}
+	}
+
+	private void setName(Connection sender, String name) {
+		sender.getCompany().setName(name);
 	}
 
 	private void upgradeLegalDepartment(Connection sender) {

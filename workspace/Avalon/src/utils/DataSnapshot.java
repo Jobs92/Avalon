@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
+import java.util.Vector;
 
 public class DataSnapshot implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -13,6 +14,8 @@ public class DataSnapshot implements Serializable{
 	private double varCosts; // <-- ???
 	private int highestProductLevel;
 	private int productsOnStock;
+	private int patentLevel;
+	private double costsPatent;
 	private ArrayList<Dictionary<String, String>> products = new ArrayList<Dictionary<String, String>>();
 	private ArrayList<Dictionary<String, Double>> supplier = new ArrayList<Dictionary<String, Double>>();
 	private Dictionary<String, Integer> levels = new Hashtable<String, Integer>(); //Research#LegalDepartment#Marketing#spying#patent
@@ -20,14 +23,22 @@ public class DataSnapshot implements Serializable{
 	private ArrayList<Dictionary<String, String>> messages = new ArrayList<Dictionary<String, String>>();
 	private ArrayList<Dictionary<String, String>> marketingcampaigns = new ArrayList<Dictionary<String, String>>();
 	private int round;
-	private String[] enemyNames;
+	private Vector<String> enemyNames;
 	
-	public String[] getEnemyNames() {
+	public double getCostsPatent() {
+		return costsPatent;
+	}
+
+	public void setCostsPatent(double costsPatent) {
+		this.costsPatent = costsPatent;
+	}
+
+	public Vector<String> getEnemyNames() {
 		return enemyNames;
 	}
 
-	public void setEnemyNames(String[] enemyNames) {
-		this.enemyNames = enemyNames;
+	public void addEnemyName(String enemyName) {
+		this.enemyNames.add(enemyName);
 	}
 
 	public double getMoney() {
@@ -36,6 +47,18 @@ public class DataSnapshot implements Serializable{
 
 	public void setMoney(double money) {
 		this.money = money;
+	}
+
+	public int getPatentLevel() {
+		return patentLevel;
+	}
+
+	public void setPatentLevel(int patentLevel) {
+		this.patentLevel = patentLevel;
+	}
+
+	public void setLevels(Dictionary<String, Integer> levels) {
+		this.levels = levels;
 	}
 
 	public double getImage() {
