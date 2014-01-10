@@ -193,7 +193,7 @@ public class ResearchPanel extends AvalonPanel {
 		int accepted = JOptionPane.showConfirmDialog(null,
 				"Do you wantto upgrade the Research department for "
 						+ GuiManager.sharedInstance().getDs()
-								.getResearchUpgradeCost() + "?", "Upgrade",
+								.getUpgradeCost("research") + "?", "Upgrade",
 				JOptionPane.YES_NO_OPTION);
 		if (accepted == 0) {
 			upgradeButton.setEnabled(false);
@@ -208,7 +208,7 @@ public class ResearchPanel extends AvalonPanel {
 				.sharedInstance().getDs().getPatentLevel()));
 		upgradeButton.setEnabled(true);
 		setBorder(new TitledBorder("Research("
-				+ GuiManager.sharedInstance().getDs().getResearchLevel() + ")"));
+				+ GuiManager.sharedInstance().getDs().getLevel("research") + ")"));
 		campaigns = GuiManager.sharedInstance().getDs().getResearchCampaigns();
 		for (int i = 0; i < 3; i++) {
 			campaignsCB.get(i).setText(campaigns.get(i).get("title"));

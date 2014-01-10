@@ -59,7 +59,7 @@ public class LawPanel extends AvalonPanel {
 		int accepted = JOptionPane.showConfirmDialog(null,
 				"Do you want to spy to upgrade the Law department for "
 						+ GuiManager.sharedInstance().getDs()
-								.getLawUpgradeCost() + "?", "Upgrade",
+								.getUpgradeCosts("legalDepartment") + "?", "Upgrade",
 				JOptionPane.YES_NO_OPTION);
 		if (accepted == 0) {
 			upgradeButton.setEnabled(false);
@@ -187,7 +187,7 @@ public class LawPanel extends AvalonPanel {
 	protected void fill() {
 		upgradeButton.setEnabled(true);
 		setBorder(new TitledBorder("Law("
-				+ GuiManager.sharedInstance().getDs().getLawLevel() + ")"));
+				+ GuiManager.sharedInstance().getDs().getLevel("legalDepartment") + ")"));
 		enemyData = GuiManager.sharedInstance().getDs().getEnemyNames();
 		suesData = GuiManager.sharedInstance().getDs().getSues();
 
