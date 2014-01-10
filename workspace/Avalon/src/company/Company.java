@@ -190,6 +190,12 @@ public class Company {
 		snapshot.addLevel("LegalDepartment", this.getLegaldepartment().getLevel());
 		snapshot.addLevel("Research", this.getResearch().getLevel());
 		
+		//Upgrades
+		snapshot.addUpgradeCosts("Production", Config.getCostsUpgradeProduction());
+		snapshot.addLevel("Marketing", Config.getCostsUpgradeMarketing());
+		snapshot.addLevel("LegalDepartment", Config.getCostsUpgradeLegalDeparment());
+		snapshot.addLevel("Research", Config.getCostsUpgradeResearch());
+		
 		//Supplier
 		for (Supplier s : Market.sharedInstance().getSupplier()) {
 			snapshot.addSupplier(s.getPrice(), s.getTrustiness(), s.getQuality());

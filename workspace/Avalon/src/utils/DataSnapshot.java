@@ -15,6 +15,7 @@ public class DataSnapshot implements Serializable{
 	private ArrayList<Dictionary<String, String>> products = new ArrayList<Dictionary<String, String>>();
 	private ArrayList<Dictionary<String, Double>> supplier = new ArrayList<Dictionary<String, Double>>();
 	private Dictionary<String, Integer> levels = new Hashtable<String, Integer>(); //Research#LegalDepartment#Marketing#spying#patent
+	private Dictionary<String, Double> upgradeCosts = new Hashtable<String, Double>();
 	private ArrayList<Dictionary<String, String>> messages = new ArrayList<Dictionary<String, String>>();
 	private ArrayList<Dictionary<String, String>> marketingcampaigns = new ArrayList<Dictionary<String, String>>();
 	private int round;
@@ -58,6 +59,18 @@ public class DataSnapshot implements Serializable{
 
 	public void setProducts(ArrayList<Dictionary<String, String>> products) {
 		this.products = products;
+	}
+	
+	public Dictionary<String, Double> getUpgradeCosts(){
+		return upgradeCosts;
+	}
+	
+	public double getUpgradeCosts(String key){
+		return upgradeCosts.get(key);
+	}
+	
+	public void addUpgradeCosts(String key, double value){
+		upgradeCosts.put(key, value);
 	}
 	
 	public void addMarktetingCampaign(int cost, int duration, int successProbability, int level, String description){
