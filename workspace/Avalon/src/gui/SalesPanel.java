@@ -2,6 +2,8 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Dictionary;
 import java.util.Vector;
 
 import javax.swing.JList;
@@ -14,7 +16,9 @@ import javax.swing.event.ListSelectionListener;
 @SuppressWarnings("serial")
 public class SalesPanel extends AvalonPanel {
 	private JList<String> products;// = new JList<String>();
+	private ArrayList<Dictionary<String, String>> productData;
 	private Vector<String> data = new Vector<String>();
+	private String[] names;
 
 	public SalesPanel() {
 		TitledBorder tb = new TitledBorder("Sales");
@@ -32,23 +36,37 @@ public class SalesPanel extends AvalonPanel {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				int i = products.getSelectedIndex();
-				String s = data.get(i);
-				// TODO: must be loaded
-				String initialValue = "null";
-				String value = JOptionPane.showInputDialog(null,
-						"Set Price for " + s, initialValue);
-				System.out.println(value);
-				// TODO: value is new price
+				makePopup(i);
 			}
 		});
 
+		products.setBackground(getBackground());
 		add(new JScrollPane(products));
+	}
+
+	protected void makePopup(int i) {
+		String value = JOptionPane.showInputDialog(null, "Set Price for "
+				+ names[i], productData.get(i).get("price"));
+		GuiManager
+				.sharedInstance()
+				.getApi()
+				.setPrice(Integer.valueOf(productData.get(i).get("level")),
+						Integer.valueOf(value));
 	}
 
 	@Override
 	protected void fill() {
-		String[] productNames = GuiManager.sharedInstance().getDs()
-				.getProducts();
-		products.setListData(productNames);
+		productData = GuiManager.sharedInstance().getDs().getProducts();
+
+		names = new String[productData.size()];
+		for (int i = 0; i < names.length; i++) {
+			names[i] = "Product (Level " + productData.get(i).get("level")
+					+ " )";
+		}
+		products.setListData(names);
+	}
+
+	@Override
+	protected void send() {
 	}
 }

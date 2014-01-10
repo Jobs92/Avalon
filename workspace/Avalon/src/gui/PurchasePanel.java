@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.Dictionary;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -22,20 +23,22 @@ public class PurchasePanel extends AvalonPanel {
 	private ArrayList<JButton> info = new ArrayList<JButton>();
 	private ArrayList<JTextField> amount = new ArrayList<JTextField>();
 	private JLabel sumLabel = new JLabel("Sum: ");
-	private JButton buyButton = new JButton("Confirm");
+	// private JButton buyButton = new JButton("Confirm");
+	private ArrayList<Dictionary<String, Double>> supplier;
 
 	public PurchasePanel() {
 		TitledBorder tb = new TitledBorder("Purchase");
 		setBorder(tb);
 		setLayout(new BorderLayout());
-		setBackground(new Color(189,255,122));
+		setBackground(new Color(189, 255, 122));
 
 		JPanel supplierPanel = new JPanel();
+		supplierPanel.setBackground(getBackground());
 		supplierPanel.setLayout(new GridLayout(3, 3));
 
 		// init arraylists
 		for (int i = 1; i <= 3; i++) {
-			supplierLabels.add(new JLabel("Supplier " + i));
+			supplierLabels.add(new JLabel("Supplier #" + i));
 
 			JButton b = new JButton("Info");
 			b.setName(String.valueOf(i - 1));
@@ -74,23 +77,26 @@ public class PurchasePanel extends AvalonPanel {
 			supplierPanel.add(amount.get(i));
 		}
 
-		buyButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO send confirm
-				buyButton.setEnabled(false);
-			}
-		});
+		// buyButton.addActionListener(new ActionListener() {
+		// @Override
+		// public void actionPerformed(ActionEvent e) {
+		// // TODO send confirm
+		// buyButton.setEnabled(false);
+		// }
+		// });
 
 		add(supplierPanel, BorderLayout.NORTH);
 		add(sumLabel, BorderLayout.CENTER);
-		add(buyButton, BorderLayout.SOUTH);
+		// add(buyButton, BorderLayout.SOUTH);
 	}
 
 	protected void makeInfoPopup(int index) {
-		String infoString = "Index=" + String.valueOf(index);
-		// TODO: Must be loaded
-		JOptionPane.showMessageDialog(this, infoString);
+		String infoString = "Trust: " + supplier.get(index).get("trust")
+				+ ", quality: " + supplier.get(index).get("quality")
+				+ ", price: " + supplier.get(index).get("price");
+		JOptionPane.showMessageDialog(null, infoString, "Supplier #" + index,
+				JOptionPane.INFORMATION_MESSAGE);
+		// JOptionPane.showMessageDialog(this, infoString);
 	}
 
 	private void updateSum() {
@@ -106,8 +112,14 @@ public class PurchasePanel extends AvalonPanel {
 
 	@Override
 	protected void fill() {
-		// TODO Auto-generated method stub
-		
+		supplier = GuiManager.sharedInstance().getDs().getSupplier();
+	}
+
+	@Override
+	protected void send() {
+		for (int i = 0; i < amount.size(); i++) {
+			GuiManager.sharedInstance().getApi().buy(i, Integer.valueOf(amount.get(i).getText()));
+		}
 	}
 
 }

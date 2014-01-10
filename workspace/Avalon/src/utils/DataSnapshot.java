@@ -12,7 +12,7 @@ public class DataSnapshot implements Serializable{
 	private double varCosts; // <-- ???
 	private int highestProductLevel;
 	private int productsOnStock;
-	private String[] products;
+	private ArrayList<Dictionary<String, String>> products = new ArrayList<Dictionary<String, String>>();
 	private ArrayList<Dictionary<String, Double>> supplier = new ArrayList<Dictionary<String, Double>>();
 	private Dictionary<String, Integer> levels = new Hashtable<String, Integer>(); //Research#LegalDepartment#Marketing#spying#patent
 	private ArrayList<Dictionary<String, String>> messages = new ArrayList<Dictionary<String, String>>();
@@ -51,11 +51,11 @@ public class DataSnapshot implements Serializable{
 		this.varCosts = varCosts;
 	}
 
-	public String[] getProducts() {
+	public ArrayList<Dictionary<String, String>> getProducts() {
 		return products;
 	}
 
-	public void setProducts(String[] products) {
+	public void setProducts(ArrayList<Dictionary<String, String>> products) {
 		this.products = products;
 	}
 

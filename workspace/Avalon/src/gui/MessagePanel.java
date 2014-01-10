@@ -65,4 +65,8 @@ public class MessagePanel extends AvalonPanel {
 		}
 		inbox.setListData(titles);
 	}
+
+	@Override
+	protected void send() {
+	}
 }

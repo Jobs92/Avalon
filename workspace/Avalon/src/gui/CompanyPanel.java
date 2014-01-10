@@ -64,4 +64,8 @@ public class CompanyPanel extends AvalonPanel {
 		productsOnStock.setText(String.valueOf(GuiManager.sharedInstance()
 				.getDs().getProductsOnStock()));
 	}
+
+	@Override
+	protected void send() {
+	}
 }

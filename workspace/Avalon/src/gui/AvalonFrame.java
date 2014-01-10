@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import client.Api;
+
 @SuppressWarnings("serial")
 public class AvalonFrame extends JFrame {
 	private JPanel gamePanel = new JPanel();
@@ -90,10 +92,23 @@ public class AvalonFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// send confirm
-				GuiManager.sharedInstance().getApi().ready();
-				JOptionPane.showConfirmDialog(null, "Next Round");
+				int accepted = JOptionPane
+						.showConfirmDialog(null, "Next Round");
+				if (accepted == 0) {
+					send();
+				}
 			}
 		});
+	}
+
+	protected void send() {
+		Api api = GuiManager.sharedInstance().getApi();
+		for (AvalonPanel p : panels) {
+			p.send();
+		}
+		//production
+		api.ready();
+		
 	}
 
 	public void fill() {
