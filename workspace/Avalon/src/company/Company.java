@@ -201,6 +201,15 @@ public class Company {
 			snapshot.addSupplier(s.getPrice(), s.getTrustiness(), s.getQuality());
 		}
 		
+		//Names
+		String[] enemyNames = new String[Market.sharedInstance().getCompanies().size()-1];
+		for (int i = 0; i < Market.sharedInstance().getCompanies().size(); i++) {
+			if (Market.sharedInstance().getCompanies().get(i) != this){
+				enemyNames[i] = Market.sharedInstance().getCompanies().get(i).getName();
+			}
+		}
+		snapshot.setEnemyNames(enemyNames);
+		
 		connection.sendSnapshot(snapshot);
 	}
 

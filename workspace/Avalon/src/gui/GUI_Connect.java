@@ -80,6 +80,10 @@ public class GUI_Connect extends JFrame {
 		try {
 			Socket socket = new Socket(textField_1.getText() , 56557);
 			Connection conn = new Connection(socket);
+			
+			//send chosen name
+			GuiManager.sharedInstance().getApi().setName(textField.getText());
+			
 			if (conn.connect()){
 				GuiManager.sharedInstance().successfullLogin();
 			}

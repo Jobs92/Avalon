@@ -20,7 +20,15 @@ public class DataSnapshot implements Serializable{
 	private ArrayList<Dictionary<String, String>> messages = new ArrayList<Dictionary<String, String>>();
 	private ArrayList<Dictionary<String, String>> marketingcampaigns = new ArrayList<Dictionary<String, String>>();
 	private int round;
+	private String[] enemyNames;
 	
+	public String[] getEnemyNames() {
+		return enemyNames;
+	}
+
+	public void setEnemyNames(String[] enemyNames) {
+		this.enemyNames = enemyNames;
+	}
 
 	public double getMoney() {
 		return money;
