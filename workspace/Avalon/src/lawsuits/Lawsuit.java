@@ -34,6 +34,19 @@ public class Lawsuit {
 	}
 	
 	public void endLawsuit(){
+		Message m = new Message();
+		m.setTitle("Gerichtsverfahren beendet");
+		m.setType(Message.GAME);
+		
+		
+		m.setTargetPlayer(claimant.getCompany().getId());
+		m.setMessage("Das Gerichtsverfahren gegen " + defendant.getCompany().getName() + " ist nun beendet!");
+		Market.sharedInstance().sendMessage(m);
+		
+		m.setTargetPlayer(defendant.getCompany().getId());
+		m.setMessage("Das Gerichtsverfahren gegen " + claimant.getCompany().getName() + " ist nun beendet!");
+		Market.sharedInstance().sendMessage(m);
+		
 		active = false;
 	}
 
@@ -76,14 +89,8 @@ public class Lawsuit {
 		
 		if (utils.Probability.propability((int) (Config.getProbWinLawsuit() * paramWin))){
 			//Claimant wins lawsuit
-			//TODO: Message to inform Players
 			
-			Message m = new Message();
-			m.setTitle("Gerichtsverfahren beendet");
-			m.setType(Message.GAME);
-			m.setTargetPlayer(claimant.getCompany().getId());
-			m.setMessage("Sie haben das Gerichtsverfahren gegen " + defendant.getCompany().getId() + " gewonnen!");
-			Market.sharedInstance().sendMessage(m);
+			informPlayer(claimant, defendant);
 			
 			//Refund Process Costs
 			double refundedCosts = duration * Config.getRelativeAmountCostsLawsuit() * amount;
@@ -101,7 +108,8 @@ public class Lawsuit {
 			
 		}else if (utils.Probability.propability((int) (Config.getProbWinLawsuit() * paramLose))){
 			//Defendant wins lawsuit
-			//TODO: Message to inform Players
+
+			informPlayer(defendant, claimant);
 			
 			//Refund Process Costs
 			double refundedCosts = duration * Config.getRelativeAmountCostsLawsuit() * amount;
@@ -115,5 +123,23 @@ public class Lawsuit {
 			}
 		}
 		
+	}
+
+	private void informPlayer(LegalDepartment winner, LegalDepartment loser) {
+		//Inform Winner
+		Message m = new Message();
+		m.setTitle("Gerichtsverfahren gewonnen");
+		m.setType(Message.GAME);
+		m.setTargetPlayer(winner.getCompany().getId());
+		m.setMessage("Sie haben das Gerichtsverfahren gegen " + loser.getCompany().getName() + " gewonnen!");
+		Market.sharedInstance().sendMessage(m);
+		
+		//Inform Loser
+		m = new Message();
+		m.setTitle("Gerichtsverfahren verloren");
+		m.setType(Message.GAME);
+		m.setTargetPlayer(loser.getCompany().getId());
+		m.setMessage("Sie haben das Gerichtsverfahren gegen " + winner.getCompany().getName() + " verloren!");
+		Market.sharedInstance().sendMessage(m);
 	}
 }

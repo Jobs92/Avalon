@@ -1,13 +1,14 @@
 package departments;
 
 import java.util.ArrayList;
-
+import utils.Message;
 import campaigns.ExplicitCampaign;
 import campaigns.ExplicitResearchCampaign;
 import campaigns.ExplicitSpyingCampaign;
 import company.Company;
 import config.Config;
 import lawsuits.Lawsuit;
+import market.Market;
 
 public class LegalDepartment extends Department {
 	private int level = 1;
@@ -29,13 +30,24 @@ public class LegalDepartment extends Department {
 			for (int i = 0; i < allCampaigns.size(); i++) {
 				ExplicitResearchCampaign campaign = (ExplicitResearchCampaign) allCampaigns.get(i);
 				
-				//Pay amount 
-				if (!checkedCampaigns.contains(campaign) && company.changeMoney((-1)*Config.getCostsCheckCampaign())){
-					if (campaign.getClass() == ExplicitSpyingCampaign.class && ((ExplicitSpyingCampaign) campaign).getSpiedPlayer() == company.getId()) {
-						foundSpyingCampaigns.add((ExplicitSpyingCampaign) campaign);
+				//Check: Campaign already checked
+				if (!checkedCampaigns.contains(campaign)){
+					//Pay amount for checking
+					if (company.changeMoney((-1)*Config.getCostsCheckCampaign())){
+						//Check whether campaign is spying campaign
+						if (campaign.getClass() == ExplicitSpyingCampaign.class && ((ExplicitSpyingCampaign) campaign).getSpiedPlayer() == company.getId()) {
+							foundSpyingCampaigns.add((ExplicitSpyingCampaign) campaign);
+						}
+					}else{
+						//Not enough money
+						Message m = new Message();
+						m.setTitle("Geld reicht nicht aus");
+						m.setType(Message.GAME);
+						m.setTargetPlayer(company.getId());
+						m.setMessage("Sie haben nicht genügend Geld um bei " + c.getName() + " weiter nach Spionagekampagnen zu suchen!");
+						Market.sharedInstance().sendMessage(m);
+						break;
 					}
-				}else{
-					//TODO: Message Geld reicht nicht aus
 				}
 			}
 			
@@ -44,7 +56,29 @@ public class LegalDepartment extends Department {
 				double sum = Config.getCostsFoundSpyingCampaign() * foundSpyingCampaigns.size();
 				Lawsuit l = new Lawsuit(this, company.getLegaldepartment(), foundSpyingCampaigns, sum);
 				lawsuitsAsClaimant.add(l);
+				
+				Message m = new Message();
+				m.setTitle("Spionagekampagnen gefunden!");
+				m.setType(Message.GAME);
+				m.setTargetPlayer(company.getId());
+				m.setMessage(c.getName() + " hat Sie ausspioniert!");
+				Market.sharedInstance().sendMessage(m);
+			}else{
+				Message m = new Message();
+				m.setTitle("Keine Spionagekampagnen gefunden!");
+				m.setType(Message.GAME);
+				m.setTargetPlayer(company.getId());
+				m.setMessage(c.getName() + " hat Sie nicht ausspioniert!");
+				Market.sharedInstance().sendMessage(m);
 			}
+			
+		}else{
+			Message m = new Message();
+			m.setTitle("Aktion nicht möglich");
+			m.setType(Message.GAME);
+			m.setTargetPlayer(company.getId());
+			m.setMessage("Sie müssen " + c.getName() + " erst verklagen, bevor Sie erneut nach Spionagekampagnen suchen wollen!");
+			Market.sharedInstance().sendMessage(m);
 		}
 	}
 	
@@ -60,24 +94,55 @@ public class LegalDepartment extends Department {
 	}
 
 	public void upgrade() {
-		int amount = 0; // TODO aus Config Datei holen
-		company.changeMoney(amount * -1);
-		level++;
+		int amount = Config.getCostsUpgradeLegalDeparment();
+		if (company.changeMoney(amount * -1)) {
+			level++;	
+		}else{
+			Message m = new Message();
+			m.setTitle("Geld reicht nicht aus");
+			m.setType(Message.GAME);
+			m.setTargetPlayer(company.getId());
+			m.setMessage("Sie haben nicht genügend Geld um Ihre Rechtsabteilung zu upgraden!");
+			Market.sharedInstance().sendMessage(m);
+		}	
 	}
 
 	public void beSued(Lawsuit l) {
 		lawsuitsAsDefendant.add(l);
+		
+		Message m = new Message();
+		m.setTitle("Sie wurden verklagt!");
+		m.setType(Message.GAME);
+		m.setTargetPlayer(company.getId());
+		m.setMessage(l.getClaimant().getCompany().getName() + " hat Sie verklagt!");
+		Market.sharedInstance().sendMessage(m);
 	}
 
 	public void sueOpponent(Company c) {
 		LegalDepartment opponent = c.getLegaldepartment();
-		if (this.isAvailable() && opponent.isAvailable()) {
-			for (Lawsuit l : lawsuitsAsClaimant) {
-				if (!l.isActive() && !l.isStarted()){
-					l.startLawsuit();
-					break;
+		if (this.isAvailable()) {
+			if (opponent.isAvailable()){
+				for (Lawsuit l : lawsuitsAsClaimant) {
+					if (!l.isActive() && !l.isStarted()){
+						l.startLawsuit();
+						break;
+					}
 				}
+			}else{
+				Message m = new Message();
+				m.setTitle("Klage nicht möglich");
+				m.setType(Message.GAME);
+				m.setTargetPlayer(company.getId());
+				m.setMessage(opponent.getCompany().getName() + " ist zur Zeit an einem anderen Gerichtsverfahren beteiligt und kann nicht verklagt werden!");
+				Market.sharedInstance().sendMessage(m);
 			}
+		}else{
+			Message m = new Message();
+			m.setTitle("Klage nicht möglich");
+			m.setType(Message.GAME);
+			m.setTargetPlayer(company.getId());
+			m.setMessage("Sie können " + opponent.getCompany().getName() + "  zur Zeit nicht verklagen, da Sie schon an einem anderen Gerichtsverfahren beteiligt sind!");
+			Market.sharedInstance().sendMessage(m);
 		}
 	}
 
@@ -108,9 +173,14 @@ public class LegalDepartment extends Department {
 			if (company.changeMoney((-1)*amount)){
 				l.getClaimant().getCompany().changeMoney(amount);
 			}else{
-				//TODO: Message payAmount not possible
+				
+				Message m = new Message();
+				m.setTitle("Geld reicht nicht aus");
+				m.setType(Message.GAME);
+				m.setTargetPlayer(company.getId());
+				m.setMessage("Sie haben nicht genügend Geld um die aktuelle Klage zu bezahlen!");
+				Market.sharedInstance().sendMessage(m);
 			}
-			
 			l.endLawsuit();
 		}
 	}
