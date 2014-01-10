@@ -21,7 +21,7 @@ public class GameManager {
 	}
 
 	public static GameManager sharedInstance() {
-		if (GameManager.sharedInstance == null) {
+		if (GameManager.sharedInstance == null) { 
 			GameManager.sharedInstance = new GameManager();
 		}
 		return GameManager.sharedInstance;
