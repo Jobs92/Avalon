@@ -185,10 +185,16 @@ public class Company {
 		clearInbox();
 		
 		//Levels
-		snapshot.addLevel("Production", this.getProduction().getLevel());
-		snapshot.addLevel("Marketing", this.getMarketing().getLevel());
-		snapshot.addLevel("LegalDepartment", this.getLegaldepartment().getLevel());
-		snapshot.addLevel("Research", this.getResearch().getLevel());
+		snapshot.addLevel("production", this.getProduction().getLevel());
+		snapshot.addLevel("marketing", this.getMarketing().getLevel());
+		snapshot.addLevel("legalDepartment", this.getLegaldepartment().getLevel());
+		snapshot.addLevel("research", this.getResearch().getLevel());
+		
+		//Upgrades
+		snapshot.addUpgradeCosts("production", Config.getCostsUpgradeProduction());
+		snapshot.addLevel("marketing", Config.getCostsUpgradeMarketing());
+		snapshot.addLevel("legalDepartment", Config.getCostsUpgradeLegalDeparment());
+		snapshot.addLevel("research", Config.getCostsUpgradeResearch());
 		
 		//Supplier
 		for (Supplier s : Market.sharedInstance().getSupplier()) {
