@@ -6,6 +6,7 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 
 public class DataSnapshot implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private double money;
 	private double image;
 	private double fixCosts;
