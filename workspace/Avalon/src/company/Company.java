@@ -178,7 +178,7 @@ public class Company {
 		snapshot.setProductsOnStock(getWarehouse().getTotalAmountProducts());
 		snapshot.setRound(GameManager.sharedInstance().getRound());
 		snapshot.setPatentLevel(this.getResearch().getPatentLevel());
-		snapshot.setCostsPatent(Config.getCostsPatent());
+		snapshot.setPatentCost(Config.getCostsPatent());
 		
 		//Messages
 		for (Message m : this.getMessagesFromInbox()) {

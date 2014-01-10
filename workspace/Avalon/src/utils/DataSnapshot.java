@@ -15,7 +15,7 @@ public class DataSnapshot implements Serializable{
 	private int highestProductLevel;
 	private int productsOnStock;
 	private int patentLevel;
-	private double costsPatent;
+	private double patentCost;
 	private ArrayList<Dictionary<String, String>> products = new ArrayList<Dictionary<String, String>>();
 	private ArrayList<Dictionary<String, Double>> supplier = new ArrayList<Dictionary<String, Double>>();
 	private Dictionary<String, Integer> levels = new Hashtable<String, Integer>(); //Research#LegalDepartment#Marketing#spying#patent
@@ -25,12 +25,12 @@ public class DataSnapshot implements Serializable{
 	private int round;
 	private Vector<String> enemyNames;
 	
-	public double getCostsPatent() {
-		return costsPatent;
+	public double getPatentCost() {
+		return patentCost;
 	}
 
-	public void setCostsPatent(double costsPatent) {
-		this.costsPatent = costsPatent;
+	public void setPatentCost(double patentCost) {
+		this.patentCost = patentCost;
 	}
 
 	public Vector<String> getEnemyNames() {
