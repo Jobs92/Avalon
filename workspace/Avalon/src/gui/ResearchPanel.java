@@ -54,7 +54,7 @@ public class ResearchPanel extends AvalonPanel {
 		add(patentPanel, BorderLayout.CENTER);
 		add(enemyPanel, BorderLayout.CENTER);
 		upgradeButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				makeUpgradePopup();
@@ -133,7 +133,6 @@ public class ResearchPanel extends AvalonPanel {
 				}
 				int i = enemies.getSelectedIndex();
 				makeEnemyPopup(i);
-				
 
 				// String enemy = enemyData.get(i);
 				// JButton check = new JButton("Spy Enemy");
@@ -166,16 +165,13 @@ public class ResearchPanel extends AvalonPanel {
 
 	protected void makeEnemyPopup(int i) {
 		int accepted = JOptionPane.showConfirmDialog(null,
-			"Do you want to spy "
-					+ enemyData.get(i)
-					+ " for "
-					+ GuiManager.sharedInstance().getDs()
-							.getSpyCost() + "?", "Spy",
-			JOptionPane.YES_NO_OPTION);
-	if (accepted == 0) {
-		// accepted
-		//TODO
-	}
+				"Do you want to spy " + enemyData.get(i) + " for "
+						+ GuiManager.sharedInstance().getDs().getSpyCost()
+						+ "?", "Spy", JOptionPane.YES_NO_OPTION);
+		if (accepted == 0) {
+			// accepted
+			// TODO
+		}
 	}
 
 	protected void makeInfoPopup(int index) {
@@ -188,9 +184,10 @@ public class ResearchPanel extends AvalonPanel {
 		JOptionPane.showMessageDialog(null, infoString, campaigns.get(index)
 				.get("title") + index, JOptionPane.INFORMATION_MESSAGE);
 	}
-	
+
 	protected void makeUpgradePopup() {
-		int accepted = JOptionPane.showConfirmDialog(null,
+		int accepted = JOptionPane.showConfirmDialog(
+				null,
 				"Do you wantto upgrade the Research department for "
 						+ GuiManager.sharedInstance().getDs()
 								.getUpgradeCosts("research") + "?", "Upgrade",
@@ -208,12 +205,14 @@ public class ResearchPanel extends AvalonPanel {
 				.sharedInstance().getDs().getPatentLevel()));
 		upgradeButton.setEnabled(true);
 		setBorder(new TitledBorder("Research("
-				+ GuiManager.sharedInstance().getDs().getLevel("research") + ")"));
+				+ GuiManager.sharedInstance().getDs().getLevel("research")
+				+ ")"));
 		campaigns = GuiManager.sharedInstance().getDs().getResearchCampaigns();
 		for (int i = 0; i < 3; i++) {
 			campaignsCB.get(i).setText(campaigns.get(i).get("title"));
 		}
-		enemies = GuiManager.sharedInstance().getDs().getEnemyNames();
+		enemyData = GuiManager.sharedInstance().getDs().getEnemyNames();
+		enemies.setListData(enemyData);
 	}
 
 	@Override

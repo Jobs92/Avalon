@@ -12,7 +12,7 @@ public class Research extends CampaignDepartment {
 	private int patentLevel;
 	private int researchLevel;
 	private int spiedLevels;
-	
+
 	private ArrayList<SpyingCampaign> spyingCampains;
 
 	public Research(Company company) {
@@ -57,6 +57,7 @@ public class Research extends CampaignDepartment {
 	}
 
 	public void patentResearchLevel() {
+		company.changeMoney(Config.getCostsPatent() * researchLevel);
 		patentLevel = researchLevel;
 	}
 
@@ -76,8 +77,8 @@ public class Research extends CampaignDepartment {
 		}
 		return false;
 	}
-	
-	public SpyingCampaign getSpyingCampaignByID(int id){
+
+	public SpyingCampaign getSpyingCampaignByID(int id) {
 		return spyingCampains.get(id);
 	}
 }
