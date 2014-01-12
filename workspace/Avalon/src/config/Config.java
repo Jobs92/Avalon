@@ -41,6 +41,7 @@ public class Config {
 	private static int[] supplierTrust = new int[3];
 	private static  int[] supplierQuality = new int[3];
 	private static double[] supplierPrice = new double[3];
+	private static String[] supplierName = new String [3];
 
 	//Production
 	private static int productionCapacity;
@@ -90,6 +91,11 @@ public class Config {
     		String[] price = prop.getProperty("supplierPrice").split(";");
     		for (int i = 0; i < trust.length; i++) {
 				this.supplierPrice[i] = Double.parseDouble(price[i]);
+			}
+    		
+    		String[] name = prop.getProperty("supplierName").split(";");
+    		for (int i = 0; i < trust.length; i++) {
+				this.supplierName[i] = name[i];
 			}
     		
     		//Production
@@ -174,6 +180,10 @@ public class Config {
 
 	public static double[] getSupplierPrice() {
 		return supplierPrice;
+	}
+	
+	public static String[] getSupplierName() {
+		return supplierName;
 	}
 
 	public static double getCompanyStartMoney() {

@@ -10,6 +10,10 @@ public class Order {
 		this.amount = amount;
 		this.supplier = supplier;
 	}
+	
+	public Supplier getSupplier(){
+		return supplier;
+	}
 
 	public double getCost() {
 		return amount * supplier.getPrice();

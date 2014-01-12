@@ -38,7 +38,7 @@ public class GameManager {
 		//Generate Supplier
 		int amountSupplier = Math.min(Config.getSupplierTrust().length, Math.min(Config.getSupplierQuality().length, Config.getSupplierPrice().length));
 		for (int i = 0; i < amountSupplier; i++) {
-			Supplier s = new Supplier(Config.getSupplierPrice()[i], Config.getSupplierTrust()[i], Config.getSupplierQuality()[i]);
+			Supplier s = new Supplier(Config.getSupplierPrice()[i], Config.getSupplierTrust()[i], Config.getSupplierQuality()[i], Config.getSupplierName()[i]);
 			market.addSupplier(s);
 		}
 		

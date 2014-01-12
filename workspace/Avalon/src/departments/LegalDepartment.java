@@ -194,6 +194,7 @@ public class LegalDepartment extends Department {
 
 	@Override
 	public void simulate() {
+		super.payFixcosts();
 		Lawsuit l;
 		for (int i = 0; i < lawsuitsAsClaimant.size(); i++) {
 			l = lawsuitsAsClaimant.get(i);

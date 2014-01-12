@@ -19,5 +19,11 @@ public abstract class Department {
 	public Company getCompany() {
 		return company;
 	}
+	
+	public void payFixcosts(){
+		if (!company.changeMoney((-1)*fixcost)){
+			//Insolvenz
+		}
+	}
 
 }
