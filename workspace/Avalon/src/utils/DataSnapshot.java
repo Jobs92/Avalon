@@ -23,7 +23,7 @@ public class DataSnapshot implements Serializable{
 	private ArrayList<Dictionary<String, String>> messages = new ArrayList<Dictionary<String, String>>();
 	private ArrayList<Dictionary<String, String>> marketingcampaigns = new ArrayList<Dictionary<String, String>>();
 	private int round;
-	private Vector<String> enemyNames;
+	private Vector<String> enemyNames = new Vector<String>();
 	
 	public double getPatentCost() {
 		return patentCost;
