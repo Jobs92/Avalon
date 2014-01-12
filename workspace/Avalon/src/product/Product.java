@@ -9,13 +9,15 @@ public class Product {
 	private int price;
 	private int amount;
 	private int quality;
+	private String name;
 	private Company company;
 
-	public Product(int level, Company company) {
+	public Product(int level, String name, Company company) {
 		super();
 		this.company = company;
 		this.level = level;
 		this.amount = 0;
+		this.name = name;
 	}
 
 	public int sell(int amount) { 
@@ -82,6 +84,10 @@ public class Product {
 
 	public void addQuality(int quality) {
 		this.quality += quality;
+	}
+	
+	public String getName(){
+		return name;
 	}
 
 	

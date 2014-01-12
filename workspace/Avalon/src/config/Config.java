@@ -53,6 +53,9 @@ public class Config {
 	private static int maxLevelMarketing;
 	private static double marketingFixcost;
 	
+	//Warehouse
+	private static String startProductName;
+	
 	private Properties prop;
 	
 	public Config(){
@@ -105,6 +108,9 @@ public class Config {
     		this.costsUpgradeProduction = Integer.parseInt(prop.getProperty("costsUpgradeProduction"));
     		this.upgradeProduction = Double.parseDouble(prop.getProperty("upgradeProduction"));
     		this.productionVariableCosts = Double.parseDouble(prop.getProperty("productionVariableCosts"));
+    		
+    		//Warehouse
+    		this.startProductName = prop.getProperty("startProductName");
     		
     		
 
@@ -240,6 +246,10 @@ public class Config {
 
 	public static double getMarketingFixcost() {
 		return marketingFixcost;
+	}
+	
+	public static String getStartProductName(){
+		return startProductName;
 	}
 
 }

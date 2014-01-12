@@ -28,10 +28,10 @@ public class Research extends CampaignDepartment {
 		explicitCampaigns.add(spyingCampaign.startSpyingCampaign(target));
 	}
 
-	public void applyResearchResults() {
+	public void applyResearchResults(String name) {
 		this.researchLevel += notAppliedLevels;
 
-		Product newProduct = new Product(this.researchLevel + this.spiedLevels,
+		Product newProduct = new Product(this.researchLevel + this.spiedLevels, name, 
 				company);
 		company.getWarehouse().addProduct(newProduct);
 		notAppliedLevels = 0;

@@ -64,7 +64,8 @@ public class ServerMessageHandler {
 			patent(sender);
 		}
 		if (txt.startsWith("RELEASE")){
-			release(sender);
+			String name = txt.substring("RELEASE ".length());
+			release(sender, name);
 		}
 		if (txt.startsWith("SPY ")){
 			String[] split = txt.substring("SPY ".length()).split("#");
@@ -130,8 +131,8 @@ public class ServerMessageHandler {
 		sender.getCompany().getResearch().startCampaign(spyingCampaign, opponent);;
 	}
 
-	private void release(Connection sender) {
-		sender.getCompany().getResearch().applyResearchResults();
+	private void release(Connection sender, String name) {
+		sender.getCompany().getResearch().applyResearchResults(name);
 	}
 
 	private void patent(Connection sender) {

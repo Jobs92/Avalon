@@ -57,8 +57,8 @@ public class Api {
 		connection.send(s);
 	}
 	
-	public void release(){
-		String s = "RELEASE ";
+	public void release(String name){
+		String s = "RELEASE " + name;
 		connection.send(s);
 	}
 	

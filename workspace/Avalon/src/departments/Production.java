@@ -78,9 +78,9 @@ public class Production extends Department {
 	public void produce (int level, int amount){ 
 		if (capacity>=amount + countAlreadyNeededRessources()) {
 			if (countAlreadyNeededRessources()+amount <= company.getWarehouse().getAmountRessources()){
-				if (company.getWarehouse().getSingleProduct(level)==null) {
-					company.getWarehouse().addProduct(new Product(level, company));
-				}
+//				if (company.getWarehouse().getSingleProduct(level)==null) {
+//					company.getWarehouse().addProduct(new Product(level, company));
+//				}
 				ProductionJobs job = new ProductionJobs(level, amount);
 				allProductionJobs.add(job);
 			}else{

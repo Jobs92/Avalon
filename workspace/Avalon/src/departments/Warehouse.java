@@ -1,10 +1,13 @@
 package departments;
 
+import gameManager.GameManager;
+
 import java.util.ArrayList;
 
 import otherclasses.Ressources;
 import product.Product;
 import company.Company;
+import config.Config;
 
 public class Warehouse  extends Department{
 	
@@ -21,7 +24,7 @@ public class Warehouse  extends Department{
 	
 	private void initialize() {
 		//Create first product 
-		Product p = new Product(1, company);
+		Product p = new Product(1, Config.getStartProductName(), company);
 		products.add(p);
 	}
 
