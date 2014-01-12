@@ -64,7 +64,7 @@ public class Market {
 	}
 
 	private int oscillate(int i, int range) {
-		return (int) ((((Math.random() - 0.5) * 10 * 2) + 100) / 100 * 40);
+		return (int) ((((Math.random() - 0.5) * range * 2) + 100) / 100 * i);
 	}
 
 	private int saisonalOscillate(int i) {
