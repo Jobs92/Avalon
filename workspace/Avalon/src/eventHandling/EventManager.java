@@ -17,6 +17,8 @@ public class EventManager {
 		groupEvents=new ArrayList<Event>();
 		singleEvents=new ArrayList<Event>();
 		
+		
+		//TODO: Events in config!!!
 		//new Groupevents		
 		groupEvents.add(new Event("Steuererhöhung", "cost", 5000));
 		groupEvents.add(new Event("Umweltkatastrophe", "cost", 10000));
