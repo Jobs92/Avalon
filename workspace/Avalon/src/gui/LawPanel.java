@@ -14,6 +14,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.ListModel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
@@ -25,10 +26,10 @@ public class LawPanel extends AvalonPanel {
 	private JPanel suesPanel = new JPanel();
 	private JButton upgradeButton = new JButton("Upgrade");
 
-	private JList<String> enemies;
-	private JList<String> sues;
-	private Vector<String> enemyData = new Vector<String>();
-	private ArrayList<Dictionary<String, String>> suesData = new ArrayList<Dictionary<String, String>>();
+	private JList<String> enemies = new JList<String>();
+	private JList<String> sues = new JList<String>();
+	private ArrayList<Dictionary<String, String>> enemyData = new ArrayList<Dictionary<String, String>>();
+	private Dictionary<String, String> suesData;
 
 	public LawPanel() {
 		TitledBorder tb = new TitledBorder("Law");
@@ -42,11 +43,12 @@ public class LawPanel extends AvalonPanel {
 		// add(enemyPanel);
 		// add(upgradeButton);
 		suesPanel.setBackground(getBackground());
+		suesPanel.setBorder(new TitledBorder("Current Sue"));
 		enemyPanel.setBackground(getBackground());
+		enemyPanel.setBorder(new TitledBorder("Opponents"));
 		add(suesPanel, BorderLayout.NORTH);
 		add(enemyPanel, BorderLayout.CENTER);
 		upgradeButton.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				makeUpgradePopup();
@@ -56,11 +58,12 @@ public class LawPanel extends AvalonPanel {
 	}
 
 	protected void makeUpgradePopup() {
-		int accepted = JOptionPane.showConfirmDialog(null,
+		int accepted = JOptionPane.showConfirmDialog(
+				null,
 				"Do you want to spy to upgrade the Law department for "
 						+ GuiManager.sharedInstance().getDs()
-								.getUpgradeCosts("legalDepartment") + "?", "Upgrade",
-				JOptionPane.YES_NO_OPTION);
+								.getUpgradeCosts("legalDepartment") + "?",
+				"Upgrade", JOptionPane.YES_NO_OPTION);
 		if (accepted == 0) {
 			upgradeButton.setEnabled(false);
 			// accepted
@@ -91,10 +94,12 @@ public class LawPanel extends AvalonPanel {
 	}
 
 	private void initEnemyPanel() {
-		for (int i = 0; i < 3; i++) {
-			enemyData.add("Enemy #" + (i + 1));
+
+		String[] listData = new String[3];
+		for (int i = 0; i < listData.length; i++) {
+			listData[i] = "Enemy #" + (i + 1);
 		}
-		enemies = new JList<String>(enemyData);
+		enemies = new JList<String>(listData);
 		enemies.addListSelectionListener(new ListSelectionListener() {
 
 			@Override
@@ -114,7 +119,11 @@ public class LawPanel extends AvalonPanel {
 	private void makeEnemyPopup(int index) {
 		String infoString = "Choose action.";
 
+		boolean sueable = !enemyData.get(index).get("amount")
+				.equalsIgnoreCase("0");
+
 		final JButton sue = new JButton("Sue Enemy");
+		sue.setEnabled(sueable);
 		sue.addActionListener(new ActionListener() {
 
 			@Override
@@ -129,6 +138,7 @@ public class LawPanel extends AvalonPanel {
 		});
 
 		final JButton check = new JButton("Check Enemy");
+		check.setEnabled(!sueable);
 		check.addActionListener(new ActionListener() {
 
 			@Override
@@ -148,9 +158,9 @@ public class LawPanel extends AvalonPanel {
 	}
 
 	private void makeSuePopup(int index) {
-		String infoString = " Duration: " + suesData.get(index).get("duration")
-				+ ", price: " + suesData.get(index).get("cost") + ", amount: "
-				+ suesData.get(index).get("amount");
+		String infoString = " Duration: " + suesData.get("duration")
+				+ ", price: " + suesData.get("cost") + ", amount: "
+				+ suesData.get("amount");
 
 		final JButton abort = new JButton("Abort Sue");
 		abort.addActionListener(new ActionListener() {
@@ -178,7 +188,7 @@ public class LawPanel extends AvalonPanel {
 			}
 		});
 		Object[] options = { abort, pay };
-		JOptionPane.showOptionDialog(null, infoString, sues.getSelectedValue(),
+		JOptionPane.showOptionDialog(this, infoString, sues.getSelectedValue(),
 				JOptionPane.YES_NO_CANCEL_OPTION,
 				JOptionPane.YES_NO_CANCEL_OPTION, null, options, null);
 	}
@@ -187,18 +197,31 @@ public class LawPanel extends AvalonPanel {
 	protected void fill() {
 		upgradeButton.setEnabled(true);
 		setBorder(new TitledBorder("Law("
-				+ GuiManager.sharedInstance().getDs().getLevel("legalDepartment") + ")"));
-		enemyData = GuiManager.sharedInstance().getDs().getEnemyNames();
-		suesData = GuiManager.sharedInstance().getDs().getSues();
+				+ GuiManager.sharedInstance().getDs()
+						.getLevel("legalDepartment") + ")"));
+		enemyData = GuiManager.sharedInstance().getDs().getCheckedEnemies();
+		suesData = GuiManager.sharedInstance().getDs().getLawsuit();
 
-		String[] listData = new String[suesData.size()];
-		for (int i = 0; i < listData.length; i++) {
-			listData[i] = suesData.get(i).get("claimant") + " vs "
-					+ suesData.get(i).get("defendant");
+		String[] suesListData = new String[1];
+		if (suesData != null) {
+			suesListData[0] = suesData.get("claimant") + " vs "
+					+ suesData.get("defendant");
+		} else {
+			suesListData[0] = "No current sue";
 		}
-		sues.setListData(listData);
+		sues.setListData(suesListData);
 
-		enemies.setListData(enemyData);
+		String[] enemyListData = new String[enemyData.size()];
+		for (int i = 0; i < enemyListData.length; i++) {
+			String s = enemyData.get(i).get("name");
+			if (enemyData.get(i).get("amount").equalsIgnoreCase("0")) {
+				s += "(not yet checked)";
+			} else {
+				s += "(amount: " + enemyData.get(i).get("amount") + ")";
+			}
+			enemyListData[i] = s;
+		}
+		enemies.setListData(enemyListData);
 	}
 
 	@Override

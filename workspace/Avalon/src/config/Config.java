@@ -28,6 +28,15 @@ public class Config {
 	private static int researchFixcost;
 	private static int costsUpgradeResearch;
 	private static double costsPatent;
+	private static double costSpy;
+
+	//Research Campaigns
+	private static String[] titleResearch;
+	private static String[] descriptionResearch;
+	private static double[] costResearch;
+	private static int[] levelResearch;
+	private static int[] successprobabilityResearch;
+	private static int[] durationResearch;
 	
 	//Marketing
 	private static int costsUpgradeMarketing;
@@ -69,54 +78,105 @@ public class Config {
     		prop.load(new FileInputStream("config.properties"));
     		
     		//General
-    		this.amountWin = Integer.parseInt(prop.getProperty("amountWin"));
-    		this.companyStartMoney = Integer.parseInt(prop.getProperty("companyStartMoney"));
-    		this.companyStartPopularity = Integer.parseInt(prop.getProperty("companyStartPopularity"));
+    		amountWin = Integer.parseInt(prop.getProperty("amountWin"));
+    		companyStartMoney = Integer.parseInt(prop.getProperty("companyStartMoney"));
+    		companyStartPopularity = Integer.parseInt(prop.getProperty("companyStartPopularity"));
     		
     		//Legal Department
-    		this.weightLevel = Double.parseDouble(prop.getProperty("weightLevel"));
-    		this.weightRound = Double.parseDouble(prop.getProperty("weightRound"));
-    		this.probWinLawsuit = Integer.parseInt(prop.getProperty("probWinLawsuit"));
-    		this.legalDepartmentFixcost = Integer.parseInt(prop.getProperty("legalDepartmentFixcost"));
-    		this.costsUpgradeLegalDeparment = Integer.parseInt(prop.getProperty("costsUpgradeLegalDepartment"));
+    		weightLevel = Double.parseDouble(prop.getProperty("weightLevel"));
+    		weightRound = Double.parseDouble(prop.getProperty("weightRound"));
+    		probWinLawsuit = Integer.parseInt(prop.getProperty("probWinLawsuit"));
+    		legalDepartmentFixcost = Integer.parseInt(prop.getProperty("legalDepartmentFixcost"));
+    		costsUpgradeLegalDeparment = Integer.parseInt(prop.getProperty("costsUpgradeLegalDepartment"));
     		
     		//Supplier
     		String[] trust = prop.getProperty("supplierTrust").split(";");
     		for (int i = 0; i < trust.length; i++) {
-				this.supplierTrust[i] = Integer.parseInt(trust[i]);
+				supplierTrust[i] = Integer.parseInt(trust[i]);
 			}
     		
     		String[] quality = prop.getProperty("supplierQuality").split(";");
     		for (int i = 0; i < trust.length; i++) {
-				this.supplierQuality[i] = Integer.parseInt(quality[i]);
+				supplierQuality[i] = Integer.parseInt(quality[i]);
 			}
     		
     		String[] price = prop.getProperty("supplierPrice").split(";");
     		for (int i = 0; i < trust.length; i++) {
-				this.supplierPrice[i] = Double.parseDouble(price[i]);
+				supplierPrice[i] = Double.parseDouble(price[i]);
 			}
     		
     		String[] name = prop.getProperty("supplierName").split(";");
     		for (int i = 0; i < trust.length; i++) {
-				this.supplierName[i] = name[i];
+				supplierName[i] = name[i];
 			}
     		
     		//Production
-    		this.productionCapacity = Integer.parseInt(prop.getProperty("productionCapacity"));
-    		this.productionFixcost = Integer.parseInt(prop.getProperty("productionFixcost"));
-    		this.maxLevelProduction = Integer.parseInt(prop.getProperty("maxLevelProduction"));
-    		this.costsUpgradeProduction = Integer.parseInt(prop.getProperty("costsUpgradeProduction"));
-    		this.upgradeProduction = Double.parseDouble(prop.getProperty("upgradeProduction"));
-    		this.productionVariableCosts = Double.parseDouble(prop.getProperty("productionVariableCosts"));
+    		productionCapacity = Integer.parseInt(prop.getProperty("productionCapacity"));
+    		productionFixcost = Integer.parseInt(prop.getProperty("productionFixcost"));
+    		maxLevelProduction = Integer.parseInt(prop.getProperty("maxLevelProduction"));
+    		costsUpgradeProduction = Integer.parseInt(prop.getProperty("costsUpgradeProduction"));
+    		upgradeProduction = Double.parseDouble(prop.getProperty("upgradeProduction"));
+    		productionVariableCosts = Double.parseDouble(prop.getProperty("productionVariableCosts"));
     		
     		//Warehouse
-    		this.startProductName = prop.getProperty("startProductName");
+    		startProductName = prop.getProperty("startProductName");
     		
-    		
+    		//Research
+    		titleResearch = prop.getProperty("titleResearch").split(";");
+    		descriptionResearch = prop.getProperty("descriptionResearch").split(";");
+    		String[] tmpCost = prop.getProperty("costResearch").split(";");
+    		for (int i = 0; i < tmpCost.length; i++) {
+				costResearch[i] = Double.parseDouble(tmpCost[i]);
+			}
+    		String[] tmpDuration = prop.getProperty("durationResearch").split(";");
+    		for (int i = 0; i < tmpCost.length; i++) {
+				durationResearch[i] = Integer.parseInt(tmpDuration[i]);
+			}
+    		String[] tmpLevel = prop.getProperty("levelResearch").split(";");
+    		for (int i = 0; i < tmpCost.length; i++) {
+				levelResearch[i] = Integer.parseInt(tmpLevel[i]);
+			}
+    		String[] probLevel = prop.getProperty("successprobabilityResearch").split(";");
+    		for (int i = 0; i < tmpCost.length; i++) {
+				successprobabilityResearch[i] = Integer.parseInt(probLevel[i]);
+			}
 
     	} catch (IOException ex) {
 		System.err.println(ex);
     	}	
+	}
+	
+
+	public static double getCostSpy() {
+		return costSpy;
+	}
+
+	public static String[] getTitleResearch() {
+		return titleResearch;
+	}
+
+	public static String[] getDescriptionResearch() {
+		return descriptionResearch;
+	}
+
+	public static double[] getCostResearch() {
+		return costResearch;
+	}
+
+	public static int[] getLevelResearch() {
+		return levelResearch;
+	}
+
+	public static int[] getSuccessprobabilityResearch() {
+		return successprobabilityResearch;
+	}
+
+	public static int[] getDurationResearch() {
+		return durationResearch;
+	}
+
+	public Properties getProp() {
+		return prop;
 	}
 	
 	

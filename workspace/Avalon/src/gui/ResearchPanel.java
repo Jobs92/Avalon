@@ -36,6 +36,7 @@ public class ResearchPanel extends AvalonPanel {
 	private JButton upgradeButton = new JButton("Upgrade");
 	private ArrayList<Dictionary<String, String>> campaigns = new ArrayList<Dictionary<String, String>>();
 	private JLabel labelPatentLevelNumber;
+	private JButton releaseButton = new JButton("Release new Product");
 
 	public ResearchPanel() {
 		TitledBorder tb = new TitledBorder("Research");
@@ -53,15 +54,33 @@ public class ResearchPanel extends AvalonPanel {
 		add(researchCampainPanel, BorderLayout.NORTH);
 		add(patentPanel, BorderLayout.CENTER);
 		add(enemyPanel, BorderLayout.CENTER);
-		upgradeButton.addActionListener(new ActionListener() {
 
+		upgradeButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				makeUpgradePopup();
 			}
 		});
-		add(upgradeButton, BorderLayout.SOUTH);
 
+		releaseButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				makeReleasePopup();
+			}
+		});
+
+		JPanel p = new JPanel();
+		p.setBackground(getBackground());
+		p.add(upgradeButton);
+		p.add(releaseButton);
+		add(p, BorderLayout.SOUTH);
+
+	}
+
+	protected void makeReleasePopup() {
+		String name = JOptionPane.showInputDialog(this,
+				"Release a new Product. Choose name.");
+		GuiManager.sharedInstance().getApi().release(name);
 	}
 
 	private void initResearchCampainPanel() {
@@ -133,31 +152,6 @@ public class ResearchPanel extends AvalonPanel {
 				}
 				int i = enemies.getSelectedIndex();
 				makeEnemyPopup(i);
-
-				// String enemy = enemyData.get(i);
-				// JButton check = new JButton("Spy Enemy");
-				// check.addActionListener(new ActionListener() {
-				//
-				// @Override
-				// public void actionPerformed(ActionEvent e) {
-				// // TODO Abort sue
-				//
-				// }
-				// });
-				//
-				// JButton spy = new JButton("Spy enemy");
-				// spy.addActionListener(new ActionListener() {
-				//
-				// @Override
-				// public void actionPerformed(ActionEvent e) {
-				// // TODO pay sue
-				//
-				// }
-				// });
-				// Object[] options = { spy };
-				// JOptionPane.showOptionDialog(null, enemy, enemy,
-				// JOptionPane.CANCEL_OPTION,
-				// JOptionPane.INFORMATION_MESSAGE, null, options, null);
 			}
 		});
 		enemyPanel.add(new JScrollPane(enemies));
@@ -170,7 +164,7 @@ public class ResearchPanel extends AvalonPanel {
 						+ "?", "Spy", JOptionPane.YES_NO_OPTION);
 		if (accepted == 0) {
 			// accepted
-			// TODO
+			GuiManager.sharedInstance().getApi().spy(i);
 		}
 	}
 
@@ -180,7 +174,7 @@ public class ResearchPanel extends AvalonPanel {
 				+ ", price: " + campaigns.get(index).get("cost")
 				+ ", levelupgrade: " + campaigns.get(index).get("level")
 				+ ", successprobability: "
-				+ campaigns.get(index).get("successprobability");
+				+ campaigns.get(index).get("successprobability") + "%";
 		JOptionPane.showMessageDialog(null, infoString, campaigns.get(index)
 				.get("title") + index, JOptionPane.INFORMATION_MESSAGE);
 	}
