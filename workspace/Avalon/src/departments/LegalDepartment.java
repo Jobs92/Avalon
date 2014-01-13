@@ -88,6 +88,24 @@ public class LegalDepartment extends Department {
 		}
 		return false;
 	}
+	
+	public Lawsuit getCurrentLawsuit(){
+		
+		// Check lawsuits as Claimant
+		for (int i = 0; i < lawsuitsAsClaimant.size(); i++) {
+			if (lawsuitsAsClaimant.get(i).isActive() && lawsuitsAsClaimant.get(i).isStarted()) {
+				return lawsuitsAsClaimant.get(i);
+			}
+		}
+
+		// Check lawsuits as Defendant
+		for (int i = 0; i < lawsuitsAsDefendant.size(); i++) {
+			if (lawsuitsAsDefendant.get(i).isActive()&& lawsuitsAsDefendant.get(i).isStarted()) {
+				return lawsuitsAsDefendant.get(i);
+			}
+		}
+		return null;
+	}
 
 	public int getLevel() {
 		return level;
@@ -150,20 +168,10 @@ public class LegalDepartment extends Department {
 		// A legal Departmant has the capacity for only one lawsuit at the same
 		// time
 
-		// Check lawsuits as Claimant
-		for (int i = 0; i < lawsuitsAsClaimant.size(); i++) {
-			if (lawsuitsAsClaimant.get(i).isActive()) {
-				return false;
-			}
+		if (this.getCurrentLawsuit() == null){
+			return true;
 		}
-
-		// Check lawsuits as Defendant
-		for (int i = 0; i < lawsuitsAsDefendant.size(); i++) {
-			if (lawsuitsAsDefendant.get(i).isActive()) {
-				return false;
-			}
-		}
-		return true;
+		return false;
 	}
 
 	public void payAmount() {

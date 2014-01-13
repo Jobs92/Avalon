@@ -12,6 +12,7 @@ public class Lawsuit {
 	private LegalDepartment defendant;
 	private ArrayList<ExplicitSpyingCampaign> spyings;
 	private double amount = 0;
+	private double costs = 0;
 	private int duration = 0;
 	private boolean active;
 	private boolean started;
@@ -21,6 +22,11 @@ public class Lawsuit {
 		defendant = d;
 		this.amount = amount;
 		this.spyings = spyings;
+		costs = amount*Config.getRelativeAmountCostsLawsuit();
+	}
+	
+	public double getCosts(){
+		return costs;
 	}
 	
 	public void startLawsuit(){
@@ -58,6 +64,10 @@ public class Lawsuit {
 		return started;
 	}
 	
+	public int getDuration(){
+		return duration;
+	}
+	
 	public LegalDepartment getClaimant(){
 		return claimant;
 	}
@@ -70,7 +80,7 @@ public class Lawsuit {
 		duration++;
 		
 		//Process Costs
-		double costs = amount*Config.getRelativeAmountCostsLawsuit();
+		
 		if (!claimant.getCompany().changeMoney(costs)){
 			//Insolvenz
 		}

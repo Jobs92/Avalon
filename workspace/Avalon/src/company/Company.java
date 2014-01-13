@@ -4,7 +4,9 @@ import gameManager.GameManager;
 
 import java.util.ArrayList;
 
+import campaigns.MarketingCampaign;
 import otherclasses.Supplier;
+import lawsuits.Lawsuit;
 import market.Market;
 import server.Connection;
 import config.Config;
@@ -179,6 +181,7 @@ public class Company {
 		snapshot.setRound(GameManager.sharedInstance().getRound());
 		snapshot.setPatentLevel(this.getResearch().getPatentLevel());
 		snapshot.setPatentCost(Config.getCostsPatent());
+		snapshot.setSpyCost(Config.getCostSpy());
 		
 		//Messages
 		for (Message m : this.getMessagesFromInbox()) {
@@ -208,6 +211,22 @@ public class Company {
 			if (Market.sharedInstance().getCompanies().get(i) != this){
 				snapshot.addEnemyName(Market.sharedInstance().getCompanies().get(i).getName());
 			}
+		}
+		
+		//LegalDepartment
+		Lawsuit l;
+		if ((l = this.getLegaldepartment().getCurrentLawsuit()) != null){
+			snapshot.setLawsuit(l.getClaimant().getCompany().getName(), l.getDefendant().getCompany().getName(), l.getDuration(), l.getAmount(), l.getCosts());
+		}
+		
+		//MarketingCampaigns
+		for (MarketingCampaign c : this.getMarketing().getCampaigns()) {
+			snapshot.addMarktetingCampaign(c.getCost(), c.getDuration(), c.getSuccessProbability(), c.getLevel(), c.getDescription(), c.getTitle());
+		}
+		
+		//ResearchCampaigns
+		for (ResearchCampaign c : this.getResearch().getCampaigns()) {
+			snapshot.addMarktetingCampaign(c.getCost(), c.getDuration(), c.getSuccessProbability(), c.getLevel(), c.getDescription(), c.getTitle());
 		}
 		
 		connection.sendSnapshot(snapshot);

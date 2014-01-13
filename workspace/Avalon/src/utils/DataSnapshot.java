@@ -8,12 +8,28 @@ import java.util.Vector;
 
 public class DataSnapshot implements Serializable{
 	private static final long serialVersionUID = 1L;
+	
+	//Generell
 	private double money;
 	private double image;
 	private double fixCosts;
 	private double varCosts; // <-- ???
 	private int highestProductLevel;
 	private int productsOnStock;
+	
+	//Research
+	private ArrayList<Dictionary<String, String>> researchCampaigns = new ArrayList<Dictionary<String, String>>();
+	private double spyCost;
+	
+	
+	//Sales
+	
+	//LegalDepartment
+	private Dictionary<String, String> lawsuit = new Hashtable<String, String>();//claimant, defendant, duration, amount, costs
+	private ArrayList<Dictionary<String, String>> checkedEnemies = new ArrayList<Dictionary<String, String>>();
+	
+	
+	//Marketing
 	private int patentLevel;
 	private double patentCost;
 	private ArrayList<Dictionary<String, String>> products = new ArrayList<Dictionary<String, String>>();
@@ -21,12 +37,58 @@ public class DataSnapshot implements Serializable{
 	private Dictionary<String, Integer> levels = new Hashtable<String, Integer>(); //Research#LegalDepartment#Marketing#spying#patent
 	private Dictionary<String, Double> upgradeCosts = new Hashtable<String, Double>();
 	private ArrayList<Dictionary<String, String>> messages = new ArrayList<Dictionary<String, String>>();
-	private ArrayList<Dictionary<String, String>> marketingcampaigns = new ArrayList<Dictionary<String, String>>();
+	private ArrayList<Dictionary<String, String>> marketingCampaigns = new ArrayList<Dictionary<String, String>>();
 	private int round;
 	private Vector<String> enemyNames = new Vector<String>();
 	
+	public void setLawsuit(String claimant, String defendant, int duration, double amount, double costs){
+		lawsuit.put("claimant", claimant);
+		lawsuit.put("defendant", defendant);
+		lawsuit.put("duration", duration+ "");
+		lawsuit.put("amount", amount+ "");
+		lawsuit.put("costs", costs+ "");
+	}
+	
+	public Dictionary<String, String> getLawsuit(){
+		return lawsuit;
+	}
+	
+	public void addCheckedEnemy(String name, int amount){
+		Dictionary<String, String> d = new Hashtable<String, String>();
+		d.put("name", name);
+		d.put("amount", amount+"");
+		checkedEnemies.add(d);
+	}
+	
+	public ArrayList<Dictionary<String, String>> getCheckedEnemies(){
+		return checkedEnemies;
+	}
+	
+	public void addResearchCampaign(String title, String description, double cost, int duration, int level, int successprobability){
+		Dictionary<String, String> d = new Hashtable<String, String>();
+		d.put("title", title);
+		d.put("description", description);
+		d.put("cost", cost+"");
+		d.put("duration", duration+"");
+		d.put("level", level+"");
+		d.put("successprobability", successprobability+"");
+		researchCampaigns.add(d);
+	}
+	
+	public ArrayList<Dictionary<String, String>> getResearchCampaigns(){
+		return researchCampaigns;
+	}
+	
 	public double getPatentCost() {
 		return patentCost;
+	}
+	
+	public void setSpyCost(double cost){
+		this.spyCost = cost;
+	}
+	
+	public double getSpyCost(){
+		return spyCost;
 	}
 
 	public void setPatentCost(double patentCost) {
@@ -105,17 +167,18 @@ public class DataSnapshot implements Serializable{
 		upgradeCosts.put(key, value);
 	}
 	
-	public void addMarktetingCampaign(int cost, int duration, int successProbability, int level, String description){
+	public void addMarktetingCampaign(int cost, int duration, int successProbability, int level, String description, String title){
 		Dictionary<String, String> d = new Hashtable<String, String>();
 		d.put("cost", cost + "");
 		d.put("duration", duration+ "");
 		d.put("successProbability", successProbability+ "");
 		d.put("description", description+ "");
-		marketingcampaigns.add(d);
+		d.put("title", title);
+		marketingCampaigns.add(d);
 	}
 	
 	public ArrayList<Dictionary<String, String>> getMarketingCampaigns() {
-		return marketingcampaigns;
+		return marketingCampaigns;
 		/**
 		 * Für Martin:
 		 * for (Dictionary<String, String> s : ds.getSupplier()) {
