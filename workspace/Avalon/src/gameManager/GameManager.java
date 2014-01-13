@@ -41,6 +41,8 @@ public class GameManager {
 			Supplier s = new Supplier(Config.getSupplierPrice()[i], Config.getSupplierTrust()[i], Config.getSupplierQuality()[i], Config.getSupplierName()[i]);
 			market.addSupplier(s);
 		}
+		// Generate Business Events
+		eventManager.createEvents(); 
 		
 	}
 
