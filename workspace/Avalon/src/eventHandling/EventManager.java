@@ -1,9 +1,110 @@
 package eventHandling;
 
+
+import java.util.ArrayList;
+
+import market.Market;
+import utils.Message;
+import company.Company;
+
 public class EventManager {
+	
+	private ArrayList<Event> groupEvents;
+	private ArrayList<Event> singleEvents;
+	
+	
+	public void createEvents(){
+		groupEvents=new ArrayList<Event>();
+		singleEvents=new ArrayList<Event>();
+		
+		
+		//TODO: Events in config!!!
+		//new Groupevents		
+		groupEvents.add(new Event("Steuererhöhung", "cost", 5000));
+		groupEvents.add(new Event("Umweltkatastrophe", "cost", 10000));
+		groupEvents.add(new Event("Ökozulage", "cost", 6000));
+		
+		//new Singleevents		
+		singleEvents.add(new Event("Produktionsfehler", "cost", 5000));
+		singleEvents.add(new Event("Wettbewerbsgewinn", "earn",10000));
+		singleEvents.add(new Event("Auszeichnung Smartphone", "imageUp", 3));
+		singleEvents.add(new Event("schlechte Testberichte", "imageDown", 3));
+
+
+	}
 
 	public void simEvents() {
-		// TODO Auto-generated method stub
+		double groupChance=0.2;
+		double singleChance=0.3;
+		
+		ArrayList<company.Company> players = market.Market.sharedInstance().getCompanies();
+		
+		if (Math.random()<=groupChance) {   // GruppenEvent
+			Event e = groupEvents.get((int) (1+(groupEvents.size()-1)*Math.random()));
+			
+			String text = e.getText(); 				//extract event data;
+			String type = e.getType();
+						int value = e.getValue();
+			
+			for (Company company : players) {
+				Message m = new Message();
+				m.setTitle(text);
+				m.setType(Message.GAME);
+				m.setTargetPlayer(company.getId());
+				m.setMessage("Das Ereignis "+text+" ist eingetreten!");
+				Market.sharedInstance().sendMessage(m);
+				
+				if (type.equals("cost")) {
+					company.changeMoney(-1*value);
+				}
+				else if (type.equals("earn")) {
+					company.changeMoney(value);
+				}
+				
+				
+				
+				
+			}
+			
+		}
+		else  {   // EinzelEvent
+			
+		for (Company company : players) {
+			if (Math.random()<=singleChance) {
+						
+					Event e = singleEvents.get((int) (1+(singleEvents.size()-1)*Math.random()));
+					
+					String text = e.getText(); 				//extract event data;
+					String type = e.getType();
+					int value = e.getValue();
+					
+					Message m = new Message();
+					m.setTitle(text);
+					m.setType(Message.GAME);
+					m.setTargetPlayer(company.getId());
+					m.setMessage("Das Ereignis "+text+" ist eingetreten!");
+					Market.sharedInstance().sendMessage(m);
+					
+					if (type.equals("cost")) {
+						company.changeMoney(-1*value);
+					}
+					else if (type.equals("earn")) {
+						company.changeMoney(value);
+					}
+					else if (type.equals("imageUp")) {
+						company.addPopularity(value);
+					}
+					else if (type.equals("imageDown")) {
+						company.addPopularity(-1*value);
+					}
+					
+					
+			}
+			else {} // Do noting!
+		}
+			
+					
+		}
 		
 	}
 
