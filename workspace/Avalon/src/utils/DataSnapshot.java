@@ -17,6 +17,8 @@ public class DataSnapshot implements Serializable{
 	private int highestProductLevel;
 	private int productsOnStock;
 	
+	private Dictionary<String,String> departmentFixcosts = new Hashtable<String, String>();
+	
 	//Research
 	private ArrayList<Dictionary<String, String>> researchCampaigns = new ArrayList<Dictionary<String, String>>();
 	private double spyCost;
@@ -51,6 +53,14 @@ public class DataSnapshot implements Serializable{
 	
 	public Dictionary<String, String> getLawsuit(){
 		return lawsuit;
+	}
+	
+	public String getDepartmentFixcosts(String key){
+		return departmentFixcosts.get(key);
+	}
+	
+	public void addDepartmentFixcost(String key, double value){
+		departmentFixcosts.put(key, value+"");
 	}
 	
 	public void addCheckedEnemy(String name, int amount){

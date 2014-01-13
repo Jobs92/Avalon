@@ -184,6 +184,14 @@ public class Company {
 		snapshot.setPatentCost(Config.getCostsPatent());
 		snapshot.setSpyCost(Config.getCostSpy());
 		
+		//Department Fixcosts
+		snapshot.addDepartmentFixcost("marketing", this.getMarketing().getFixcost());
+		snapshot.addDepartmentFixcost("legalDepartment", this.getLegaldepartment().getFixcost());
+		snapshot.addDepartmentFixcost("research", this.getResearch().getFixcost());
+		snapshot.addDepartmentFixcost("production", this.getProduction().getFixcost());
+		snapshot.addDepartmentFixcost("sales", this.getSales().getFixcost());
+		snapshot.addDepartmentFixcost("purchase", this.getPurchase().getFixcost());
+		
 		//Messages
 		for (Message m : this.getMessagesFromInbox()) {
 			snapshot.addMessage(m.getTitle(), m.getMessage());
