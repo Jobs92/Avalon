@@ -35,6 +35,14 @@ public class Config {
 	private static int[] levelResearch;
 	private static int[] successprobabilityResearch;
 	private static int[] durationResearch;
+	
+	//Spying Campaign
+	private static String titleSpying;
+	private static String descriptionSpying;
+	private static double costSpying;
+	private static int levelSpying;
+	private static int successprobabilitySpying;
+	private static int durationSpying;
 
 	// Marketing
 	private static int costsUpgradeMarketing;
@@ -161,6 +169,13 @@ public class Config {
 			for (int i = 0; i < tmpCost.length; i++) {
 				successprobabilityResearch[i] = Integer.parseInt(probLevel[i]);
 			}
+			//Spying campaign
+			titleSpying = prop.getProperty("titleSpying");
+			descriptionSpying = prop.getProperty("descriptionSpying");
+			durationSpying = Integer.parseInt(prop.getProperty("durationSpying"));
+			costSpying = Double.parseDouble(prop.getProperty("costSpying"));
+			successprobabilitySpying = Integer.parseInt(prop.getProperty("successprobabilitySpying"));
+			levelSpying = Integer.parseInt(prop.getProperty("levelSpying"));
 
 			// Marketing
 			titleMarketing = prop.getProperty("titleMarketing").split(";");
@@ -213,6 +228,30 @@ public class Config {
 
 	public static int[] getSuccessprobabilityMarketing() {
 		return successprobabilityMarketing;
+	}
+
+	public static String getTitleSpying() {
+		return titleSpying;
+	}
+
+	public static String getDescriptionSpying() {
+		return descriptionSpying;
+	}
+
+	public static double getCostSpying() {
+		return costSpying;
+	}
+
+	public static int getLevelSpying() {
+		return levelSpying;
+	}
+
+	public static int getSuccessprobabilitySpying() {
+		return successprobabilitySpying;
+	}
+
+	public static int getDurationSpying() {
+		return durationSpying;
 	}
 
 	public static int[] getDurationMarketing() {
