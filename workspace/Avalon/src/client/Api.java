@@ -62,8 +62,8 @@ public class Api {
 		connection.send(s);
 	}
 	
-	public void spy(int campaign, int opponent){
-		String s = "SPY " + campaign + "#" + opponent;
+	public void spy(int opponent){
+		String s = "SPY " + opponent;
 		connection.send(s);
 	}
 	

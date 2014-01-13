@@ -71,7 +71,7 @@ public class ServerMessageHandler {
 			String[] split = txt.substring("SPY ".length()).split("#");
 			int id = Integer.parseInt(split[0]);
 			int opponent = Integer.parseInt(split[1]);
-			spy(sender, opponent, id);
+			spy(sender, opponent);
 		}
 		if (txt.startsWith("PRICE ")){
 			String[] split = txt.substring("PRICE ".length()).split("#");
@@ -126,8 +126,8 @@ public class ServerMessageHandler {
 		sender.getCompany().getSales().setPrice(level, price);
 	}
 
-	private void spy(Connection sender, int opponent, int id) {
-		SpyingCampaign spyingCampaign = sender.getCompany().getResearch().getSpyingCampaignByID(id);
+	private void spy(Connection sender, int opponent) {
+		SpyingCampaign spyingCampaign = sender.getCompany().getResearch().getSpyingCampaignByID(0);
 		sender.getCompany().getResearch().startCampaign(spyingCampaign, opponent);;
 	}
 
