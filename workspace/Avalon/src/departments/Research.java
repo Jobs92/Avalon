@@ -2,9 +2,11 @@ package departments;
 
 import java.util.ArrayList;
 
+import market.Market;
 import company.Company;
 import config.Config;
 import product.Product;
+import utils.Message;
 import campaigns.SpyingCampaign;
 
 public class Research extends CampaignDepartment {
@@ -73,6 +75,12 @@ public class Research extends CampaignDepartment {
 	protected boolean isMaxLevel() {
 		int maxLevel = Config.getMaxLevelResearch();
 		if (level == maxLevel) {
+			Message m = new Message();
+			m.setTitle("Level-Update-Error");
+			m.setType(Message.GAME);
+			m.setTargetPlayer(company.getId());
+			m.setMessage("Sie haben das maximale Level dieses Breichs erreicht!");
+			Market.sharedInstance().sendMessage(m);
 			return true;
 		}
 		return false;

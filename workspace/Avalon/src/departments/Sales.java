@@ -4,7 +4,9 @@ import gameManager.GameManager;
 
 import java.util.ArrayList;
 
+import market.Market;
 import otherclasses.SalesHistory;
+import utils.Message;
 import company.Company;
 
 
@@ -41,7 +43,13 @@ public class Sales  extends Department{
 			
 			 div=amount-availableAmount;
 			 amount=availableAmount;   // Change amount!
-			 // TODO: Fehlermeldung: nicht genug produkte im lager
+			 //Fehlermeldung: nicht genug produkte im lager
+				Message m = new Message();
+				m.setTitle("Lager leer!");
+				m.setType(Message.GAME);
+				m.setTargetPlayer(company.getId());
+				m.setMessage("Sie haben nicht genügend Produkte im Lager!");
+				Market.sharedInstance().sendMessage(m);
 		}
 		else { }
 			
