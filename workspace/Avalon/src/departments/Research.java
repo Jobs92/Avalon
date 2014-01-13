@@ -7,6 +7,7 @@ import company.Company;
 import config.Config;
 import product.Product;
 import utils.Message;
+import campaigns.ResearchCampaign;
 import campaigns.SpyingCampaign;
 
 public class Research extends CampaignDepartment {
@@ -33,8 +34,8 @@ public class Research extends CampaignDepartment {
 	public void applyResearchResults(String name) {
 		this.researchLevel += notAppliedLevels;
 
-		Product newProduct = new Product(this.researchLevel + this.spiedLevels, name, 
-				company);
+		Product newProduct = new Product(this.researchLevel + this.spiedLevels,
+				name, company);
 		company.getWarehouse().addProduct(newProduct);
 		notAppliedLevels = 0;
 	}
@@ -49,7 +50,21 @@ public class Research extends CampaignDepartment {
 
 	@Override
 	protected void loadCampaigns() {
-		// TODO
+		for (int i = 0; i < 3; i++) {
+			ResearchCampaign m = new ResearchCampaign(this,
+					Config.getTitleResearch()[i],
+					Config.getCostResearch()[i],
+					Config.getDurationResearch()[i],
+					Config.getSuccessprobabilityResearch()[i], 
+					Config.getLevelResearch()[i],
+					Config.getDescriptionResearch()[i]);
+			addCampaign(m);
+		}
+		SpyingCampaign s = new SpyingCampaign(this, Config.getTitleSpying(),
+				Config.getCostSpying(), Config.getDurationSpying(),
+				Config.getSuccessprobabilitySpying(), Config.getLevelSpying(),
+				Config.getDescriptionSpying());
+		addCampaign(s);
 	}
 
 	@Override

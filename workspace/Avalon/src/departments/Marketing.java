@@ -1,5 +1,6 @@
 package departments;
 
+import campaigns.MarketingCampaign;
 import market.Market;
 import utils.Message;
 import company.Company;
@@ -15,7 +16,16 @@ public class Marketing extends CampaignDepartment {
 
 	@Override
 	protected void loadCampaigns() {
-		// TODO
+		for (int i = 0; i < 3; i++) {
+			MarketingCampaign m = new MarketingCampaign(this,
+					Config.getTitleMarketing()[i],
+					Config.getCostMarketing()[i],
+					Config.getDurationMarketing()[i],
+					Config.getSuccessprobabilityMarketing()[i],
+					Config.getLevelMarketing()[i],
+					Config.getDescriptionMarketing()[i]);
+			addCampaign(m);
+		}
 	}
 
 	@Override
@@ -27,13 +37,14 @@ public class Marketing extends CampaignDepartment {
 	@Override
 	protected boolean isMaxLevel() {
 		int maxLevel = Config.getMaxLevelMarketing();
-		if (level==maxLevel) {	Message m = new Message();
-		m.setTitle("Level-Update-Error");
-		m.setType(Message.GAME);
-		m.setTargetPlayer(company.getId());
-		m.setMessage("Sie haben das maximale Level dieses Breichs erreicht!");
-		Market.sharedInstance().sendMessage(m);
-			
+		if (level == maxLevel) {
+			Message m = new Message();
+			m.setTitle("Level-Update-Error");
+			m.setType(Message.GAME);
+			m.setTargetPlayer(company.getId());
+			m.setMessage("Sie haben das maximale Level dieses Breichs erreicht!");
+			Market.sharedInstance().sendMessage(m);
+
 		}
 		return false;
 	}

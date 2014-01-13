@@ -10,7 +10,7 @@ public abstract class Campaign {
 	protected String description;
 	protected String title;
 	protected int successProbability;
-	protected int cost;
+	protected double cost;
 	protected int duration;
 	protected int level;
 	protected Department department;
@@ -23,7 +23,7 @@ public abstract class Campaign {
 		return title;
 	}
 
-	public int getCost() {
+	public double getCost() {
 		return cost;
 	}
 
@@ -48,7 +48,7 @@ public abstract class Campaign {
 		// TODO: also update levels???
 	}
 
-	public Campaign(Department department, String title, int cost,
+	public Campaign(Department department, String title, double cost,
 			int duration, int successProbability, int level, String description) {
 		super();
 		this.department = department;

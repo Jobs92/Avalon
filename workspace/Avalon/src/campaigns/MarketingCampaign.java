@@ -4,9 +4,9 @@ import departments.Department;
 
 public class MarketingCampaign extends Campaign {
 
-	public MarketingCampaign(Department department, String title, int cost,
+	public MarketingCampaign(Department department, String title, double d,
 			int duration, int successProbability, int level, String description) {
-		super(department, title, cost, duration, successProbability, level,
+		super(department, title, d, duration, successProbability, level,
 				description);
 	}
 
