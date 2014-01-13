@@ -74,6 +74,7 @@ public class Connection extends Thread {
 	
 	public void sendSnapshot(DataSnapshot sd){
 		try {
+			System.out.println("sent snapshot");
 			out_object.writeObject(sd);
 		} catch (IOException e) {
 			e.printStackTrace();

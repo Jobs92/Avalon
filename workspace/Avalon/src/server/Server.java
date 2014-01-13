@@ -11,7 +11,7 @@ public class Server {
 	public static void main(String args[]) {
 		try {
 			server = new ServerSocket(56557);
-			System.out.print(server.getLocalPort());
+			System.out.println(server.getLocalPort());
 			while (true) {
 				Socket skt = server.accept();
 				Connection conn = new Connection(skt);
@@ -19,7 +19,7 @@ public class Server {
 				System.out.println("Neue Vervindung");
 			}
 		} catch (Exception e) {
-			System.out.print("Whoops! It didn't work!\n");
+			System.err.println(e);
 		}
 	}
 

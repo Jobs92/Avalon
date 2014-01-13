@@ -4,6 +4,7 @@ import gameManager.GameManager;
 
 import java.util.ArrayList;
 
+import campaigns.Campaign;
 import campaigns.MarketingCampaign;
 import otherclasses.Supplier;
 import lawsuits.Lawsuit;
@@ -220,12 +221,12 @@ public class Company {
 		}
 		
 		//MarketingCampaigns
-		for (MarketingCampaign c : this.getMarketing().getCampaigns()) {
+		for (Campaign c : this.getMarketing().getCampaigns()) {
 			snapshot.addMarktetingCampaign(c.getCost(), c.getDuration(), c.getSuccessProbability(), c.getLevel(), c.getDescription(), c.getTitle());
 		}
 		
 		//ResearchCampaigns
-		for (ResearchCampaign c : this.getResearch().getCampaigns()) {
+		for (Campaign c : this.getResearch().getCampaigns()) {
 			snapshot.addMarktetingCampaign(c.getCost(), c.getDuration(), c.getSuccessProbability(), c.getLevel(), c.getDescription(), c.getTitle());
 		}
 		
