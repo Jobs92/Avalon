@@ -77,7 +77,9 @@ public class ProductionPanel extends AvalonPanel {
 
 	@Override
 	protected void fill() {
-		setBorder(new TitledBorder("Production (Level "+GuiManager.sharedInstance().getDs().getLevel("production")+")"));
+		setBorder(new TitledBorder("Production (Level: "
+				+ GuiManager.sharedInstance().getDs()
+						.getLevel("production") +", Fixcosts: "+GuiManager.sharedInstance().getDs().getDepartmentFixcosts("production")+")"));
 		productLabel.setText("Product (Level "
 				+ GuiManager.sharedInstance().getDs().getHighestProductLevel()
 				+ ")");

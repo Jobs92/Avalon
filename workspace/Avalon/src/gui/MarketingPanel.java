@@ -106,8 +106,9 @@ public class MarketingPanel extends AvalonPanel {
 	@Override
 	protected void fill() {
 		upgradeButton.setEnabled(true);
-		setBorder(new TitledBorder("Marketing("
-				+ GuiManager.sharedInstance().getDs().getLevel("marketing") + ")"));
+		setBorder(new TitledBorder("Marketing(Level: "
+				+ GuiManager.sharedInstance().getDs()
+						.getLevel("marketing") +", Fixcosts: "+GuiManager.sharedInstance().getDs().getDepartmentFixcosts("marketing")+")"));
 		campaigns = GuiManager.sharedInstance().getDs().getMarketingCampaigns();
 	}
 

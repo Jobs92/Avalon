@@ -14,7 +14,6 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.ListModel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
@@ -196,9 +195,9 @@ public class LawPanel extends AvalonPanel {
 	@Override
 	protected void fill() {
 		upgradeButton.setEnabled(true);
-		setBorder(new TitledBorder("Law("
+		setBorder(new TitledBorder("Law(Level: "
 				+ GuiManager.sharedInstance().getDs()
-						.getLevel("legalDepartment") + ")"));
+						.getLevel("legalDepartment") +", Fixcosts: "+GuiManager.sharedInstance().getDs().getDepartmentFixcosts("legalDepartment")+")"));
 		enemyData = GuiManager.sharedInstance().getDs().getCheckedEnemies();
 		suesData = GuiManager.sharedInstance().getDs().getLawsuit();
 

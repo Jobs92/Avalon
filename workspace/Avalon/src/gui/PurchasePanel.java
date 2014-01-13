@@ -112,6 +112,7 @@ public class PurchasePanel extends AvalonPanel {
 
 	@Override
 	protected void fill() {
+		setBorder(new TitledBorder("Purchase (Fixcosts: "+GuiManager.sharedInstance().getDs().getDepartmentFixcosts("purchase")+")"));
 		supplier = GuiManager.sharedInstance().getDs().getSupplier();
 	}
 
