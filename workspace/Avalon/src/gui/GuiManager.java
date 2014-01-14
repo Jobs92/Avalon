@@ -41,6 +41,9 @@ public class GuiManager {
 	public void successfullLogin() {
 		loginFrame.setVisible(false);
 		mainFrame = new AvalonFrame();
+		
+		//for testing
+		api.startGame();
 	}
 
 	public static void main(String[] args) {
