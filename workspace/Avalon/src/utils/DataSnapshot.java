@@ -74,16 +74,7 @@ public class DataSnapshot implements Serializable{
 		return checkedEnemies;
 	}
 	
-	public void addResearchCampaign(String title, String description, double cost, int duration, int level, int successprobability){
-		Dictionary<String, String> d = new Hashtable<String, String>();
-		d.put("title", title);
-		d.put("description", description);
-		d.put("cost", cost+"");
-		d.put("duration", duration+"");
-		d.put("level", level+"");
-		d.put("successprobability", successprobability+"");
-		researchCampaigns.add(d);
-	}
+
 	
 	public ArrayList<Dictionary<String, String>> getResearchCampaigns(){
 		return researchCampaigns;
@@ -185,6 +176,17 @@ public class DataSnapshot implements Serializable{
 		d.put("description", description+ "");
 		d.put("title", title);
 		marketingCampaigns.add(d);
+	}
+	
+	public void addResearchCampaign(double cost, int duration, int successProbability, int level, String title, String description){
+		Dictionary<String, String> d = new Hashtable<String, String>();
+		d.put("title", title);
+		d.put("description", description);
+		d.put("cost", cost+"");
+		d.put("duration", duration+"");
+		d.put("level", level+"");
+		d.put("successprobability", successProbability+"");
+		researchCampaigns.add(d);
 	}
 	
 	public ArrayList<Dictionary<String, String>> getMarketingCampaigns() {

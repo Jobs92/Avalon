@@ -235,7 +235,7 @@ public class Company {
 		
 		//ResearchCampaigns
 		for (Campaign c : this.getResearch().getCampaigns()) {
-			snapshot.addMarketingCampaign(c.getCost(), c.getDuration(), c.getSuccessProbability(), c.getLevel(), c.getDescription(), c.getTitle());
+			snapshot.addResearchCampaign(c.getCost(), c.getDuration(), c.getSuccessProbability(), c.getLevel(), c.getDescription(), c.getTitle());
 		}
 		
 		connection.sendSnapshot(snapshot);
