@@ -48,7 +48,7 @@ public class GUI_Connect extends JFrame {
 		
 		textField_1 = new JTextField();
 		textField_1.setBounds(103, 79, 112, 20);
-		textField_1.setText("91.89.60.182");
+		textField_1.setText("localhost");
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
 		
@@ -82,7 +82,7 @@ public class GUI_Connect extends JFrame {
 			Connection conn = new Connection(socket);
 			
 			//send chosen name
-			GuiManager.sharedInstance().getApi().setName(textField.getText());
+			GuiManager.sharedInstance().getApi().setName(nick);
 			
 			if (conn.connect()){
 				GuiManager.sharedInstance().successfullLogin();
