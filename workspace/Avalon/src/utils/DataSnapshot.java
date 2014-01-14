@@ -168,7 +168,7 @@ public class DataSnapshot implements Serializable{
 		upgradeCosts.put(key, value);
 	}
 	
-	public void addMarketingCampaign(double cost, int duration, int successProbability, int level, String description, String title){
+	public void addMarketingCampaign(double cost, int duration, int successProbability, int level, String title, String description){
 		Dictionary<String, String> d = new Hashtable<String, String>();
 		d.put("cost", cost + "");
 		d.put("duration", duration+ "");

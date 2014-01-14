@@ -230,12 +230,12 @@ public class Company {
 		
 		//MarketingCampaigns
 		for (Campaign c : this.getMarketing().getCampaigns()) {
-			snapshot.addMarketingCampaign(c.getCost(), c.getDuration(), c.getSuccessProbability(), c.getLevel(), c.getDescription(), c.getTitle());
+			snapshot.addMarketingCampaign(c.getCost(), c.getDuration(), c.getSuccessProbability(), c.getLevel(), c.getTitle(), c.getDescription());
 		}
 		
 		//ResearchCampaigns
 		for (Campaign c : this.getResearch().getCampaigns()) {
-			snapshot.addResearchCampaign(c.getCost(), c.getDuration(), c.getSuccessProbability(), c.getLevel(), c.getDescription(), c.getTitle());
+			snapshot.addResearchCampaign(c.getCost(), c.getDuration(), c.getSuccessProbability(), c.getLevel(), c.getTitle(), c.getDescription());
 		}
 		
 		connection.sendSnapshot(snapshot);
