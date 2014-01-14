@@ -8,15 +8,12 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Vector;
-
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;

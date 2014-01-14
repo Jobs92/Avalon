@@ -151,21 +151,25 @@ public class Config {
 			descriptionResearch = prop.getProperty("descriptionResearch")
 					.split(";");
 			String[] tmpCost = prop.getProperty("costResearch").split(";");
+			costResearch = new double[tmpCost.length];
 			for (int i = 0; i < tmpCost.length; i++) {
 				costResearch[i] = Double.parseDouble(tmpCost[i]);
 			}
 			String[] tmpDuration = prop.getProperty("durationResearch").split(
 					";");
+			durationResearch = new int[tmpDuration.length];
 			for (int i = 0; i < tmpCost.length; i++) {
 
 				durationResearch[i] = Integer.parseInt(tmpDuration[i]);
 			}
 			String[] tmpLevel = prop.getProperty("levelResearch").split(";");
+			levelResearch = new int[tmpLevel.length];
 			for (int i = 0; i < tmpCost.length; i++) {
 				levelResearch[i] = Integer.parseInt(tmpLevel[i]);
 			}
 			String[] probLevel = prop.getProperty("successprobabilityResearch")
 					.split(";");
+			successprobabilityResearch = new int[probLevel.length];
 			for (int i = 0; i < tmpCost.length; i++) {
 				successprobabilityResearch[i] = Integer.parseInt(probLevel[i]);
 			}
@@ -183,11 +187,13 @@ public class Config {
 					.split(";");
 			String[] tmpMarketingCost = prop.getProperty("costMarketing")
 					.split(";");
+			costMarketing = new double[tmpMarketingCost.length];
 			for (int i = 0; i < tmpMarketingCost.length; i++) {
 				costMarketing[i] = Double.parseDouble(tmpMarketingCost[i]);
 			}
 			String[] tmpMarketingDuration = prop.getProperty(
 					"durationMarketing").split(";");
+			durationMarketing = new int[tmpMarketingDuration.length];
 			for (int i = 0; i < tmpMarketingCost.length; i++) {
 
 				durationMarketing[i] = Integer
@@ -195,11 +201,13 @@ public class Config {
 			}
 			String[] tmpMarketingLevel = prop.getProperty("levelMarketing")
 					.split(";");
+			levelMarketing = new int[tmpMarketingLevel.length];
 			for (int i = 0; i < tmpMarketingCost.length; i++) {
 				levelMarketing[i] = Integer.parseInt(tmpMarketingLevel[i]);
 			}
 			String[] probMarketingLevel = prop.getProperty(
 					"successprobabilityMarketing").split(";");
+			successprobabilityMarketing = new int[probMarketingLevel.length];
 			for (int i = 0; i < tmpMarketingCost.length; i++) {
 				successprobabilityMarketing[i] = Integer
 						.parseInt(probMarketingLevel[i]);
