@@ -10,6 +10,9 @@ public class Api {
 	public void setName(String name){
 		String s = "NAME " + name;
 		connection.send(s);
+		
+		//For Testing
+		connection.send("STARTGAME ");
 	}
 
 	public void produce(int x){

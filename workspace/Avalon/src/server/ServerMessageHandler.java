@@ -33,6 +33,9 @@ public class ServerMessageHandler {
 		if (txt.startsWith("READY")){
 			isReady(sender);
 		}
+		if (txt.startsWith("STARTGAME")){
+			startGame();
+		}
 		if (txt.startsWith("UPGRADEMARKETING")){
 			upgradeMarketing(sender);
 		}
@@ -100,6 +103,10 @@ public class ServerMessageHandler {
 
 	private void setName(Connection sender, String name) {
 		sender.getCompany().setName(name);
+	}
+	
+	private void startGame(){
+		GameManager.sharedInstance().startGame();
 	}
 
 	private void upgradeLegalDepartment(Connection sender) {
