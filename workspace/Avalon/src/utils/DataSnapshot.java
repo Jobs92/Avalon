@@ -35,7 +35,7 @@ public class DataSnapshot implements Serializable{
 	private int patentLevel;
 	private double patentCost;
 	private ArrayList<Dictionary<String, String>> products = new ArrayList<Dictionary<String, String>>();
-	private ArrayList<Dictionary<String, Double>> supplier = new ArrayList<Dictionary<String, Double>>();
+	private ArrayList<Dictionary<String, String>> supplier = new ArrayList<Dictionary<String, String>>();
 	private Dictionary<String, Integer> levels = new Hashtable<String, Integer>(); //Research#LegalDepartment#Marketing#spying#patent
 	private Dictionary<String, Double> upgradeCosts = new Hashtable<String, Double>();
 	private ArrayList<Dictionary<String, String>> messages = new ArrayList<Dictionary<String, String>>();
@@ -201,7 +201,7 @@ public class DataSnapshot implements Serializable{
 		 */
 	}
 
-	public ArrayList<Dictionary<String, Double>> getSupplier() {
+	public ArrayList<Dictionary<String, String>> getSupplier() {
 		return supplier;
 		/**
 		 * Für Martin:
@@ -213,11 +213,12 @@ public class DataSnapshot implements Serializable{
 		 */
 	}
 
-	public void addSupplier(double price, double trust, double quality) {
-		Dictionary<String, Double> d = new Hashtable<String, Double>();
-		d.put("trust", trust);
-		d.put("price", price);
-		d.put("quality", quality);
+	public void addSupplier(String name, double price, double trust, double quality) {
+		Dictionary<String, String> d = new Hashtable<String, String>();
+		d.put("name", name);
+		d.put("trust", String.valueOf(trust));
+		d.put("price",String.valueOf(price));
+		d.put("quality", String.valueOf(quality));
 		supplier.add(d);
 	}
 	

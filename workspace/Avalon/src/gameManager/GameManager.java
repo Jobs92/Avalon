@@ -15,7 +15,6 @@ public class GameManager {
 	private Market market = Market.sharedInstance();
 	private EventManager eventManager = new EventManager();
 	private static GameManager sharedInstance;
-	private Config c = new Config();
 	
 	private GameManager(){
 	}

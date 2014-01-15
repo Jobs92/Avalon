@@ -97,9 +97,9 @@ public class MarketingPanel extends AvalonPanel {
 		String infoString = campaigns.get(index).get("description")
 				+ " Duration: " + campaigns.get(index).get("duration")
 				+ ", price: " + campaigns.get(index).get("cost")
-				+ ", levelupgrade: " + campaigns.get(index).get("level")
+				+ ", Imageupgrade: " + campaigns.get(index).get("level")
 				+ ", successprobability: "
-				+ campaigns.get(index).get("successprobability");
+				+ campaigns.get(index).get("successProbability");
 		JOptionPane.showMessageDialog(null, infoString, campaigns.get(index)
 				.get("title") + index, JOptionPane.INFORMATION_MESSAGE);
 	}

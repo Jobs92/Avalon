@@ -24,7 +24,7 @@ public class PurchasePanel extends AvalonPanel {
 	private ArrayList<JTextField> amount = new ArrayList<JTextField>();
 	private JLabel sumLabel = new JLabel("Sum: ");
 	// private JButton buyButton = new JButton("Confirm");
-	private ArrayList<Dictionary<String, Double>> supplier;
+	private ArrayList<Dictionary<String, String>> supplier;
 
 	public PurchasePanel() {
 		TitledBorder tb = new TitledBorder("Purchase");
@@ -114,6 +114,9 @@ public class PurchasePanel extends AvalonPanel {
 	protected void fill() {
 		setBorder(new TitledBorder("Purchase (Fixcosts: "+GuiManager.sharedInstance().getDs().getDepartmentFixcosts("purchase")+")"));
 		supplier = GuiManager.sharedInstance().getDs().getSupplier();
+		for (int i = 0; i < supplierLabels.size(); i++) {
+			supplierLabels.get(i).setText(supplier.get(i).get("name"));
+		}
 	}
 
 	@Override

@@ -5,7 +5,6 @@ import gameManager.GameManager;
 import java.util.ArrayList;
 
 import campaigns.Campaign;
-import campaigns.MarketingCampaign;
 import otherclasses.Supplier;
 import lawsuits.Lawsuit;
 import market.Market;
@@ -212,7 +211,7 @@ public class Company {
 		
 		//Supplier
 		for (Supplier s : Market.sharedInstance().getSupplier()) {
-			snapshot.addSupplier(s.getPrice(), s.getTrustiness(), s.getQuality());
+			snapshot.addSupplier(s.getName(), s.getPrice(), s.getTrustiness(), s.getQuality());
 		}
 		
 		//Names
