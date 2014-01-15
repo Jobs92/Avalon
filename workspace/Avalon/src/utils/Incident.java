@@ -48,11 +48,11 @@ public class Incident {
 		this.probability = probability;
 	}
 
-	public int getType() {
+	public IncidentType getType() {
 		return type;
 	}
 
-	public void setType(int type) {
+	public void setType(IncidentType type) {
 		this.type = type;
 	}
 

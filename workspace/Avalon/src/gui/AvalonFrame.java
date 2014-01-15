@@ -108,7 +108,6 @@ public class AvalonFrame extends JFrame {
 		}
 		//production
 		api.ready();
-		
 	}
 
 	public void fill() {

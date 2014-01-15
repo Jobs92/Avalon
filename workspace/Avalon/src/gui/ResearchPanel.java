@@ -166,11 +166,11 @@ public class ResearchPanel extends AvalonPanel {
 	}
 
 	protected void makeInfoPopup(int index) {
-		String infoString = campaigns.get(index).get("description")
-				+ " Duration: " + campaigns.get(index).get("duration")
-				+ ", price: " + campaigns.get(index).get("cost")
-				+ ", levelupgrade: " + campaigns.get(index).get("level")
-				+ ", successprobability: "
+		String infoString = "Description: "
+				+ campaigns.get(index).get("description") + " Duration: "
+				+ campaigns.get(index).get("duration") + ", price: "
+				+ campaigns.get(index).get("cost") + ", levelupgrade: "
+				+ campaigns.get(index).get("level") + ", successprobability: "
 				+ campaigns.get(index).get("successprobability") + "%";
 		JOptionPane.showMessageDialog(null, infoString, campaigns.get(index)
 				.get("title") + index, JOptionPane.INFORMATION_MESSAGE);
@@ -196,8 +196,10 @@ public class ResearchPanel extends AvalonPanel {
 				.sharedInstance().getDs().getPatentLevel()));
 		upgradeButton.setEnabled(true);
 		setBorder(new TitledBorder("Research(Level: "
+				+ GuiManager.sharedInstance().getDs().getLevel("research")
+				+ ", Fixcosts: "
 				+ GuiManager.sharedInstance().getDs()
-						.getLevel("research") +", Fixcosts: "+GuiManager.sharedInstance().getDs().getDepartmentFixcosts("research")+")"));
+						.getDepartmentFixcosts("research") + ")"));
 		campaigns = GuiManager.sharedInstance().getDs().getResearchCampaigns();
 		for (int i = 0; i < 3; i++) {
 			campaignsCB.get(i).setText(campaigns.get(i).get("title"));

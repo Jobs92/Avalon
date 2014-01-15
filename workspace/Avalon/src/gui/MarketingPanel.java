@@ -80,7 +80,8 @@ public class MarketingPanel extends AvalonPanel {
 	}
 
 	protected void makeUpgradePopup() {
-		int accepted = JOptionPane.showConfirmDialog(null,
+		int accepted = JOptionPane.showConfirmDialog(
+				null,
 				"Do you want to spy to upgrade the Research department for "
 						+ GuiManager.sharedInstance().getDs()
 								.getUpgradeCosts("marketing") + "?", "Upgrade",
@@ -107,9 +108,14 @@ public class MarketingPanel extends AvalonPanel {
 	protected void fill() {
 		upgradeButton.setEnabled(true);
 		setBorder(new TitledBorder("Marketing(Level: "
+				+ GuiManager.sharedInstance().getDs().getLevel("marketing")
+				+ ", Fixcosts: "
 				+ GuiManager.sharedInstance().getDs()
-						.getLevel("marketing") +", Fixcosts: "+GuiManager.sharedInstance().getDs().getDepartmentFixcosts("marketing")+")"));
+						.getDepartmentFixcosts("marketing") + ")"));
 		campaigns = GuiManager.sharedInstance().getDs().getMarketingCampaigns();
+		for (int i = 0; i < campaignsCB.size(); i++) {
+			campaignsCB.get(i).setText(campaigns.get(i).get("title"));
+		}
 	}
 
 	@Override
