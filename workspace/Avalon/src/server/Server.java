@@ -17,7 +17,7 @@ public class Server {
 				System.out.println("Neue Vervindung");
 			}
 		} catch (Exception e) {
-			System.err.println(e);
+			e.printStackTrace();
 		}
 	}
 

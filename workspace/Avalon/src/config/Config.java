@@ -196,8 +196,7 @@ public class Config {
 			durationMarketing = new int[tmpMarketingDuration.length];
 			for (int i = 0; i < tmpMarketingCost.length; i++) {
 
-				durationMarketing[i] = Integer
-						.parseInt(tmpMarketingDuration[i]);
+				durationMarketing[i] = Integer.parseInt(tmpMarketingDuration[i]);
 			}
 			String[] tmpMarketingLevel = prop.getProperty("levelMarketing")
 					.split(";");

@@ -17,6 +17,8 @@ public class GameManager {
 	private static GameManager sharedInstance;
 	
 	private GameManager(){
+		//Load Config
+		new Config();
 	}
 
 	public static GameManager sharedInstance() {
