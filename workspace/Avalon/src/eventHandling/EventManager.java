@@ -78,7 +78,7 @@ public class EventManager {
 			}
 			
 		}
-		else  {   // EinzelEvent
+		else  {   // Singleevent
 			
 		for (Company company : players) {
 			if (Math.random()<=singleChance) {
