@@ -78,6 +78,12 @@ public class Config {
 
 	// Warehouse
 	private static String startProductName;
+	
+	// Events
+	private static String[] eventText;
+	private static String[] eventType;
+	private static int[] eventValue;
+	private static boolean[] eventAllPlayers;
 
 	private Properties prop;
 
@@ -211,6 +217,32 @@ public class Config {
 				successprobabilityMarketing[i] = Integer
 						.parseInt(probMarketingLevel[i]);
 			}
+			
+			// Events
+			eventText = prop.getProperty("eventText").split(";");
+			eventType = prop.getProperty("eventType").split(";");
+			String[] tmpEventValue = prop.getProperty("eventValue").split(";");
+			eventValue = new int[tmpEventValue.length];
+			
+			for (int i = 0; i < tmpEventValue.length; i++) {
+				eventValue[i] = Integer.parseInt(tmpEventValue[i]);
+			}
+			
+			String[] tmpEventAllPlayers = prop.getProperty("eventAllPlayers").split(";");
+			eventAllPlayers = new boolean[tmpEventValue.length];
+			
+			for (int i = 0; i < tmpEventAllPlayers.length; i++) {
+				if (tmpEventAllPlayers[i]=="true") {
+					eventAllPlayers[i]=true;
+				}
+				else if (tmpEventAllPlayers[i]=="false"){
+					eventAllPlayers[i]=false;
+				}
+				else{
+					// Error Handling??
+				}
+			}
+		
 
 		} catch (IOException ex) {
 			System.err.println(ex);
@@ -427,6 +459,22 @@ public class Config {
 
 	public static String getStartProductName() {
 		return startProductName;
+	}
+
+	public static String[] getEventText() {
+		return eventText;
+	}
+
+	public static String[] getEventType() {
+		return eventType;
+	}
+
+	public static int[] getEventValue() {
+		return eventValue;
+	}
+
+	public static boolean[] getEventAllPlayers() {
+		return eventAllPlayers;
 	}
 
 }
