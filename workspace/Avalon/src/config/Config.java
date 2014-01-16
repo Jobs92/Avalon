@@ -84,6 +84,7 @@ public class Config {
 	private static String[] eventType;
 	private static int[] eventValue;
 	private static boolean[] eventAllPlayers;
+	private static int eventAmount;
 
 	private Properties prop;
 
@@ -221,16 +222,15 @@ public class Config {
 			// Events
 			eventText = prop.getProperty("eventText").split(";");
 			eventType = prop.getProperty("eventType").split(";");
+			eventAmount = Integer.parseInt(prop.getProperty("eventAmount"));
 			String[] tmpEventValue = prop.getProperty("eventValue").split(";");
-			eventValue = new int[tmpEventValue.length];
-			
+			eventValue = new int[tmpEventValue.length];			
 			for (int i = 0; i < tmpEventValue.length; i++) {
 				eventValue[i] = Integer.parseInt(tmpEventValue[i]);
 			}
 			
 			String[] tmpEventAllPlayers = prop.getProperty("eventAllPlayers").split(";");
-			eventAllPlayers = new boolean[tmpEventValue.length];
-			
+			eventAllPlayers = new boolean[tmpEventValue.length];			
 			for (int i = 0; i < tmpEventAllPlayers.length; i++) {
 				if (tmpEventAllPlayers[i]=="true") {
 					eventAllPlayers[i]=true;
@@ -475,6 +475,10 @@ public class Config {
 
 	public static boolean[] getEventAllPlayers() {
 		return eventAllPlayers;
+	}
+
+	public static int getEventAmount() {
+		return eventAmount;
 	}
 
 }

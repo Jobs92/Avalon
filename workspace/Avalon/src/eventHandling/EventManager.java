@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import market.Market;
 import utils.Message;
 import company.Company;
+import config.Config;
 
 public class EventManager {
 	
@@ -18,17 +19,27 @@ public class EventManager {
 		singleEvents=new ArrayList<Event>();
 		
 		
-		//TODO: Events in config!!!
-		//new Groupevents		
-		groupEvents.add(new Event("Steuererhöhung", "cost", 5000));
-		groupEvents.add(new Event("Umweltkatastrophe", "cost", 10000));
-		groupEvents.add(new Event("Ökozulage", "cost", 6000));
 		
-		//new Singleevents		
-		singleEvents.add(new Event("Produktionsfehler", "cost", 5000));
-		singleEvents.add(new Event("Wettbewerbsgewinn", "earn",10000));
-		singleEvents.add(new Event("Auszeichnung Smartphone", "imageUp", 3));
-		singleEvents.add(new Event("schlechte Testberichte", "imageDown", 3));
+		for (int i = 0; i < Config.getEventAmount(); i++) {
+			if (Config.getEventAllPlayers()[i]==true) {   //new Groupevents
+				groupEvents.add(new Event(Config.getEventText()[i], Config.getEventType()[i] , Config.getEventValue()[i]));
+			}
+			else if (Config.getEventAllPlayers()[i]==false) { //new Singleevents
+				groupEvents.add(new Event(Config.getEventText()[i], Config.getEventType()[i] , Config.getEventValue()[i]));
+			}
+				
+		}
+		
+//		//new Groupevents		
+//		groupEvents.add(new Event("Steuererhöhung", "cost", 5000));
+//		groupEvents.add(new Event("Umweltkatastrophe", "cost", 10000));
+//		groupEvents.add(new Event("Ökozulage", "cost", 6000));
+//		
+//		//new Singleevents		
+//		singleEvents.add(new Event("Produktionsfehler", "cost", 5000));
+//		singleEvents.add(new Event("Wettbewerbsgewinn", "earn",10000));
+//		singleEvents.add(new Event("Auszeichnung Smartphone", "imageUp", 3));
+//		singleEvents.add(new Event("schlechte Testberichte", "imageDown", 3));
 
 
 	}
