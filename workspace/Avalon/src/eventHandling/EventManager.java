@@ -25,7 +25,7 @@ public class EventManager {
 				groupEvents.add(new Event(Config.getEventText()[i], Config.getEventType()[i] , Config.getEventValue()[i]));
 			}
 			else if (Config.getEventAllPlayers()[i]==false) { //new Singleevents
-				groupEvents.add(new Event(Config.getEventText()[i], Config.getEventType()[i] , Config.getEventValue()[i]));
+				singleEvents.add(new Event(Config.getEventText()[i], Config.getEventType()[i] , Config.getEventValue()[i]));
 			}
 				
 		}
@@ -43,16 +43,23 @@ public class EventManager {
 
 
 	}
+//	public static void main (String args[]){
+//		EventManager evManager=new EventManager();
+//		new Config();
+//		evManager.createEvents();
+//		System.out.println("bla");
+//		evManager.simEvents();
+//	}
 
 	public void simEvents() {
-		double groupChance=0.2;
-		double singleChance=0.3;
+		double groupChance=0.1;
+		double singleChance=0.9;
 		
 		ArrayList<company.Company> players = market.Market.sharedInstance().getCompanies();
 		
 		if (Math.random()<=groupChance) {   // GruppenEvent
 			Event e = groupEvents.get((int) (1+(groupEvents.size()-1)*Math.random()));
-			
+//			System.out.println("GroupEvent "+e.getText());
 			String text = e.getText(); 				//extract event data;
 			String type = e.getType();
 						int value = e.getValue();
@@ -79,12 +86,12 @@ public class EventManager {
 			
 		}
 		else  {   // Singleevent
-			
+
 		for (Company company : players) {
 			if (Math.random()<=singleChance) {
 						
 					Event e = singleEvents.get((int) (1+(singleEvents.size()-1)*Math.random()));
-					
+//					System.out.println("SingleEvent "+e.getText());
 					String text = e.getText(); 				//extract event data;
 					String type = e.getType();
 					int value = e.getValue();

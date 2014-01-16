@@ -232,10 +232,10 @@ public class Config {
 			String[] tmpEventAllPlayers = prop.getProperty("eventAllPlayers").split(";");
 			eventAllPlayers = new boolean[tmpEventValue.length];			
 			for (int i = 0; i < tmpEventAllPlayers.length; i++) {
-				if (tmpEventAllPlayers[i]=="true") {
+				if (tmpEventAllPlayers[i].equals("true")) {
 					eventAllPlayers[i]=true;
 				}
-				else if (tmpEventAllPlayers[i]=="false"){
+				else if (tmpEventAllPlayers[i].equals("false")){
 					eventAllPlayers[i]=false;
 				}
 				else{
@@ -463,6 +463,10 @@ public class Config {
 
 	public static String[] getEventText() {
 		return eventText;
+	}
+	
+	public static int getEventTextLength() {
+		return eventText.length;
 	}
 
 	public static String[] getEventType() {
