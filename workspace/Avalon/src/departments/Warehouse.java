@@ -1,7 +1,5 @@
 package departments;
 
-import gameManager.GameManager;
-
 import java.util.ArrayList;
 
 import otherclasses.Ressources;
@@ -9,21 +7,20 @@ import product.Product;
 import company.Company;
 import config.Config;
 
-public class Warehouse  extends Department{
-	
-	
+public class Warehouse extends Department {
+
 	private ArrayList<product.Product> products;
 	private ArrayList<otherclasses.Ressources> ressources;
-	
+
 	public Warehouse(Company company) {
 		super(company);
 		products = new ArrayList<product.Product>();
 		ressources = new ArrayList<otherclasses.Ressources>();
 		initialize();
 	}
-	
+
 	private void initialize() {
-		//Create first product 
+		// Create first product
 		Product p = new Product(1, Config.getStartProductName(), company);
 		products.add(p);
 	}
@@ -31,9 +28,9 @@ public class Warehouse  extends Department{
 	public int getAmountRessources() {
 		return ressources.size();
 	}
-	
-	public Ressources getRessource(){
-		Ressources r = ressources.get(ressources.size()-1);
+
+	public Ressources getRessource() {
+		Ressources r = ressources.get(ressources.size() - 1);
 		ressources.remove(r);
 		return r;
 	}
@@ -47,25 +44,25 @@ public class Warehouse  extends Department{
 	public ArrayList<product.Product> getProducts() {
 		return products;
 	}
-	
-	public product.Product getSingleProduct(int level){
+
+	public product.Product getSingleProduct(int level) {
 		for (int i = 0; i < products.size(); i++) {
-			
-			if (products.get(i).getLevel()==level) {
+
+			if (products.get(i).getLevel() == level) {
 				return products.get(i);
 			}
-			
+
 		}
 		return null;
-		
+
 	}
 
-	public void addProduct(product.Product product){
+	public void addProduct(product.Product product) {
 		products.add(product);
 	}
-	
-	public product.Product getHighestProduct(){
-		return products.get(products.size()-1);
+
+	public product.Product getHighestProduct() {
+		return products.get(products.size() - 1);
 	}
 
 	@Override

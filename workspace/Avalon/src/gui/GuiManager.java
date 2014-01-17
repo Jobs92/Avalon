@@ -21,7 +21,7 @@ public class GuiManager {
 	}
 
 	private GuiManager() {
-		loginFrame = new GUI_Connect();
+		loginFrame = new GuiConnect();
 		loginFrame.setVisible(true);
 	}
 

@@ -72,7 +72,7 @@ public class ServerMessageHandler {
 		}
 		if (txt.startsWith("SPY ")){
 			String[] split = txt.substring("SPY ".length()).split("#");
-			int id = Integer.parseInt(split[0]);
+//			int id = Integer.parseInt(split[0]);
 			int opponent = Integer.parseInt(split[1]);
 			spy(sender, opponent);
 		}

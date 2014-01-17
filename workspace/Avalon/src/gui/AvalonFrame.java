@@ -34,7 +34,11 @@ public class AvalonFrame extends JFrame {
 
 	public AvalonFrame() {
 		setVisible(true);
-		setBounds(200, 200, 1000, 800);
+		setBounds(
+				0,
+				0,
+				java.awt.Toolkit.getDefaultToolkit().getScreenSize().width,
+				java.awt.Toolkit.getDefaultToolkit().getScreenSize().height - 50);
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		getContentPane().setBackground(Color.white);
@@ -106,7 +110,7 @@ public class AvalonFrame extends JFrame {
 		for (AvalonPanel p : panels) {
 			p.send();
 		}
-		//production
+		// production
 		api.ready();
 	}
 

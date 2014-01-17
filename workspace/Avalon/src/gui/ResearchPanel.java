@@ -43,6 +43,7 @@ public class ResearchPanel extends AvalonPanel {
 		enemyPanel.setBackground(getBackground());
 		patentPanel.setBackground(getBackground());
 		researchCampainPanel.setBackground(getBackground());
+		researchCampainPanel.setBorder(new TitledBorder("Campaigns"));
 
 		initEnemyPanel();
 		initPatentLevelPanel();
@@ -167,10 +168,10 @@ public class ResearchPanel extends AvalonPanel {
 
 	protected void makeInfoPopup(int index) {
 		String infoString = "Description: "
-				+ campaigns.get(index).get("description") + " Duration: "
-				+ campaigns.get(index).get("duration") + ", price: "
-				+ campaigns.get(index).get("cost") + ", levelupgrade: "
-				+ campaigns.get(index).get("level") + ", successprobability: "
+				+ campaigns.get(index).get("description") + "\nDuration: "
+				+ campaigns.get(index).get("duration") + "\nPrice: "
+				+ campaigns.get(index).get("cost") + "\nLevelupgrade: "
+				+ campaigns.get(index).get("level") + "\nSuccessprobability: "
 				+ campaigns.get(index).get("successprobability") + "%";
 		JOptionPane.showMessageDialog(null, infoString, campaigns.get(index)
 				.get("title") + index, JOptionPane.INFORMATION_MESSAGE);

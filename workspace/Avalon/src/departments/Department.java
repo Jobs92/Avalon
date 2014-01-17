@@ -1,9 +1,11 @@
 package departments;
 
-import market.Market;
-import utils.Message;
 import company.Company;
 
+/**
+ * @author Martin
+ * Abstract superclass for all departments.
+ */
 public abstract class Department {
 	protected double fixcost;
 	protected Company company;
@@ -12,6 +14,9 @@ public abstract class Department {
 		this.company = company;
 	}
 
+	/**
+	 * Is called every round to simulate the department-specific behaviour.
+	 */
 	public abstract void simulate();
 
 	public double getFixcost() {

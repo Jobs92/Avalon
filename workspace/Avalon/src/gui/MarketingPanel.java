@@ -95,10 +95,10 @@ public class MarketingPanel extends AvalonPanel {
 
 	private void makeInfoPopup(int index) {
 		String infoString = campaigns.get(index).get("description")
-				+ " Duration: " + campaigns.get(index).get("duration")
-				+ ", price: " + campaigns.get(index).get("cost")
-				+ ", Imageupgrade: " + campaigns.get(index).get("level")
-				+ ", successprobability: "
+				+ "\nDuration: " + campaigns.get(index).get("duration")
+				+ "\nPrice: " + campaigns.get(index).get("cost")
+				+ "\nImageupgrade: " + campaigns.get(index).get("level")
+				+ "\nSuccessprobability: "
 				+ campaigns.get(index).get("successProbability");
 		JOptionPane.showMessageDialog(null, infoString, campaigns.get(index)
 				.get("title") + index, JOptionPane.INFORMATION_MESSAGE);

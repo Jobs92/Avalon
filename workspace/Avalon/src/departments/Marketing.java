@@ -42,7 +42,7 @@ public class Marketing extends CampaignDepartment {
 			m.setTitle("Level-Update-Error");
 			m.setType(Message.GAME);
 			m.setTargetPlayer(company.getId());
-			m.setMessage("Sie haben das maximale Level dieses Breichs erreicht!");
+			m.setMessage("Sie haben das maximale Level dieses Bereichs erreicht!");
 			Market.sharedInstance().sendMessage(m);
 
 		}

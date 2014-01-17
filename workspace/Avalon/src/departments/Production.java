@@ -7,7 +7,6 @@ import otherclasses.ProductionJobs;
 import otherclasses.Ressources;
 import company.Company;
 import config.Config;
-import product.Product;
 import utils.Message;
 
 public class Production extends Department {
