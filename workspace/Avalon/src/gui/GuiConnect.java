@@ -83,7 +83,7 @@ public class GuiConnect extends JFrame {
 		contentPane.add(btnConnect);
 
 		JLabel lblWillkommen = new JLabel("Welcome to Avalon!");
-		lblWillkommen.setBounds(5, 11, 500, 14);
+		lblWillkommen.setBounds(10, 11, 500, 14);
 		contentPane.add(lblWillkommen);
 	}
 

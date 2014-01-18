@@ -7,6 +7,14 @@ import company.Company;
 import campaigns.Campaign;
 import campaigns.ExplicitCampaign;
 
+/**
+ * @author Martin
+ * Abstract superclass for departments which are able to start campaigns (Marketing and Research).
+ */
+/**
+ * @author Martin
+ *
+ */
 public abstract class CampaignDepartment extends Department {
 
 	protected int level;
@@ -25,6 +33,9 @@ public abstract class CampaignDepartment extends Department {
 		loadCampaigns();
 	}
 
+	/**
+	 * Load campaigns from Config into departments.
+	 */
 	protected abstract void loadCampaigns();
 
 	public void simulate() {
@@ -33,10 +44,18 @@ public abstract class CampaignDepartment extends Department {
 		}
 	}
 
+	/**
+	 * Add campaign templates.
+	 * @param abstract campaign
+	 */
 	public void addCampaign(Campaign campaign) {
 		campaigns.add(campaign);
 	}
 
+	/**
+	 * Starts the given campaign. Adds explicit campaign to the department.
+	 * @param campaign
+	 */
 	public void startCampaign(Campaign campaign) {
 		explicitCampaigns.add((ExplicitCampaign) campaign.startCampaign());
 	}
@@ -69,14 +88,24 @@ public abstract class CampaignDepartment extends Department {
 		return level;
 	}
 
+	/**
+	 * @return All currently running explicit campaigns.
+	 */
 	public ArrayList<ExplicitCampaign> getExplicitCampaigns() {
 		return explicitCampaigns;
 	}
 	
+	/**
+	 * @return All abstract campaigns.
+	 */
 	public ArrayList<Campaign> getCampaigns() {
 		return campaigns;
 	}
 
+	/**
+	 * @param campaign id
+	 * @return campaign with given id
+	 */
 	public Campaign getCampaignByID(int id){
 		return campaigns.get(id);
 	}

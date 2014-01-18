@@ -1,5 +1,8 @@
 package utils;
 
+/**
+ * @author Martin Message class for inbox messages.
+ */
 public class Message {
 	public static int PRIVATE = 0;
 	public static int GAME = 1;
@@ -63,6 +66,5 @@ public class Message {
 	public void setType(int type) {
 		this.type = type;
 	}
-	
 
 }

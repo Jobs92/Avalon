@@ -3,6 +3,9 @@ package campaigns;
 import utils.Probability;
 import gameManager.GameManager;
 
+/**
+ * @author Martin Abstract superclass for all explicit campaigns.
+ */
 public abstract class ExplicitCampaign {
 
 	private int endRound;
@@ -15,6 +18,10 @@ public abstract class ExplicitCampaign {
 				+ campaign.getDuration();
 	}
 
+	/**
+	 * Checks if the campaign is finished, if so it calculates whether it was
+	 * successfull or not.
+	 */
 	public void simulate() {
 		if (GameManager.sharedInstance().getRound() == endRound) {
 			if (Probability.propability(campaign.getSuccessProbability())) {
@@ -25,8 +32,14 @@ public abstract class ExplicitCampaign {
 		}
 	}
 
+	/**
+	 * Success-handler.
+	 */
 	protected abstract void campaignFinishedSuccessfully();
 
+	/**
+	 * Failure-handler.
+	 */
 	protected abstract void campaignFailed();
 
 }

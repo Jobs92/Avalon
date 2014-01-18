@@ -27,10 +27,25 @@ public class Research extends CampaignDepartment {
 		this.fixcost = Config.getResearchFixcost();
 	}
 
+	/**
+	 * Starts a specific spying campaign and adds it to the Research department.
+	 * 
+	 * @param spyingCampaign
+	 *            template
+	 * @param target
+	 *            id
+	 */
 	public void startCampaign(SpyingCampaign spyingCampaign, int target) {
 		explicitCampaigns.add(spyingCampaign.startSpyingCampaign(target));
 	}
 
+	/**
+	 * Apply the accumulated research levels to release a new product with the
+	 * current level.
+	 * 
+	 * @param name
+	 *            for new product.
+	 */
 	public void applyResearchResults(String name) {
 		this.researchLevel += notAppliedLevels;
 
@@ -52,10 +67,9 @@ public class Research extends CampaignDepartment {
 	protected void loadCampaigns() {
 		for (int i = 0; i < 3; i++) {
 			ResearchCampaign m = new ResearchCampaign(this,
-					Config.getTitleResearch()[i],
-					Config.getCostResearch()[i],
+					Config.getTitleResearch()[i], Config.getCostResearch()[i],
 					Config.getDurationResearch()[i],
-					Config.getSuccessprobabilityResearch()[i], 
+					Config.getSuccessprobabilityResearch()[i],
 					Config.getLevelResearch()[i],
 					Config.getDescriptionResearch()[i]);
 			addCampaign(m);
@@ -73,6 +87,10 @@ public class Research extends CampaignDepartment {
 		return cost;
 	}
 
+	/**
+	 * Patent the current research-level to save it. The level cannot fall under
+	 * this level due to lost lawsuits.
+	 */
 	public void patentResearchLevel() {
 		company.changeMoney(Config.getCostsPatent() * researchLevel);
 		patentLevel = researchLevel;

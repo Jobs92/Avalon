@@ -1,7 +1,5 @@
 package otherclasses;
 
-import company.Company;
-
 public class Ressources {
 
 	private int quality;
@@ -9,8 +7,8 @@ public class Ressources {
 	public Ressources(int quality) {
 		this.quality = quality;
 	}
-	
-	public int getQuality(){
+
+	public int getQuality() {
 		return quality;
 	}
 }

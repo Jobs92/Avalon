@@ -1,6 +1,5 @@
 package market;
 
-
 import gameManager.GameManager;
 
 import java.util.ArrayList;
@@ -35,19 +34,19 @@ public class Market {
 	}
 
 	public void simulateMarket() {
-		
-		//For Testing
-		if (true){
+
+		// For Testing
+		if (true) {
 			return;
 		}
-		
+
 		int demand = saisonalOscillate(calculateDemand());
 		demand = (int) (Config.getDemand() * buyingPower / 100.0);
 		oscillateConsumerGroup();
 		for (ConsumerGroup cg : consumerGroups) {
 			cg.simulate();
 		}
-		//TODO: push image for bestseller
+		// TODO: push image for bestseller
 	}
 
 	private void oscillateConsumerGroup() {
@@ -112,8 +111,8 @@ public class Market {
 	public ArrayList<Company> getCompanies() {
 		return companies;
 	}
-	
-	public Company getCompanyById(int id){
+
+	public Company getCompanyById(int id) {
 		return companies.get(id);
 	}
 
@@ -154,18 +153,17 @@ public class Market {
 			companies.get(message.getTargetPlayer()).addMessageToInbox(message);
 		}
 	}
-	
-	@SuppressWarnings("static-access")
-	public void deleteInstance(){
-		this.sharedInstance = null;
+
+	public void deleteInstance() {
+		sharedInstance = null;
 	}
 
 	public Supplier getSupplierById(int supplierId) {
 		return supplier.get(supplierId);
 	}
-	
+
 	public void informPlayers() {
-		for (Company c: companies) {
+		for (Company c : companies) {
 			c.informPlayer();
 		}
 	}

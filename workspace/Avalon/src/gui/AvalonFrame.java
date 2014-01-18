@@ -48,9 +48,6 @@ public class AvalonFrame extends JFrame {
 		initGamePanel();
 		add(gamePanel, BorderLayout.CENTER);
 
-		// messagePanel.setPreferredSize(new Dimension(300, 100));
-		// add(messagePanel, BorderLayout.EAST);
-
 		add(nextRoundButton, BorderLayout.SOUTH);
 
 		JPanel headerPanel = new JPanel();
@@ -64,22 +61,8 @@ public class AvalonFrame extends JFrame {
 
 	private void initGamePanel() {
 		// add panels
-		// JPanel container = new JPanel();
-		// t.setBorder(new TitledBorder("outer"));
-		// t.setLayout(new BorderLayout());
-		// t.setLayout(new BoxLayout(t, BoxLayout.Y_AXIS));
-		// t.setLayout(new GridLayout(2, 1));
-		// t.setLayout(new FlowLayout());
-		//
-		// t.add(new JButton("iejaoi"));
-		// t.add(salesPanel);
-		// t.add(marketingPanel);
-
-		// t.add(new JButton("iejaoi"));
-		// t.add(new JButton("aaaa"));
 		panels.add(companyPanel);
 		panels.add(productionPanel);
-		// panels.add((AvalonPanel) t);
 		panels.add(salesPanel);
 		panels.add(purchasePanel);
 		panels.add(researchPanel);
@@ -97,7 +80,10 @@ public class AvalonFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// send confirm
 				int accepted = JOptionPane
-						.showConfirmDialog(null, "Next Round");
+						.showConfirmDialog(
+								null,
+								"Do you really want to finish this round and go on with the next round?",
+								"Next Round", JOptionPane.YES_NO_OPTION);
 				if (accepted == 0) {
 					send();
 				}

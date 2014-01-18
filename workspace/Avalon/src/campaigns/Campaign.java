@@ -2,6 +2,11 @@ package campaigns;
 
 import departments.Department;
 
+/**
+ * @author Martin
+ * Abstract superclass for all campaign templates.
+ *
+ */
 public abstract class Campaign {
 	public static final int MARKETING = 0;
 	public static final int REASEARCH = 1;
@@ -43,6 +48,10 @@ public abstract class Campaign {
 		return successProbability;
 	}
 
+	/**
+	 * Raise the probabilities of all campaigns by the given level.
+	 * @param level
+	 */
 	public void updateProbability(int level) {
 		successProbability = successProbability + level;
 		// TODO: also update levels???
@@ -60,5 +69,9 @@ public abstract class Campaign {
 		this.level = level;
 	}
 
+	/**
+	 * Start a explicit campaign.
+	 * @return explicit campaign
+	 */
 	public abstract ExplicitCampaign startCampaign();
 }

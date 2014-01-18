@@ -38,11 +38,8 @@ public class LawPanel extends AvalonPanel {
 
 		initEnemyPanel();
 		initSuesPanel();
-		// add(suesPanel);
-		// add(enemyPanel);
-		// add(upgradeButton);
 		suesPanel.setBackground(getBackground());
-		suesPanel.setBorder(new TitledBorder("Current Sue"));
+		suesPanel.setBorder(new TitledBorder("Current Lawsuits"));
 		enemyPanel.setBackground(getBackground());
 		enemyPanel.setBorder(new TitledBorder("Opponents"));
 		add(suesPanel, BorderLayout.NORTH);
@@ -115,20 +112,21 @@ public class LawPanel extends AvalonPanel {
 		enemyPanel.add(new JScrollPane(enemies));
 	}
 
-	private void makeEnemyPopup(int index) {
+	private void makeEnemyPopup(final int index) {
 		String infoString = "Choose action.";
 
 		boolean sueable = !enemyData.get(index).get("amount")
 				.equalsIgnoreCase("0");
 
-		final JButton sue = new JButton("Sue Enemy");
+		final JButton sue = new JButton("Sue Enemy for "
+				+ enemyData.get(index).get("amount"));
 		sue.setEnabled(sueable);
 		sue.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO: REALLY??? no parameters?
-				GuiManager.sharedInstance().getApi().abandonLawsuit();
+				GuiManager.sharedInstance().getApi().sueOpponent(index);
 				System.out.println("enemy sued");
 				// close popup
 				Window win = SwingUtilities.getWindowAncestor(sue);
@@ -197,16 +195,20 @@ public class LawPanel extends AvalonPanel {
 		upgradeButton.setEnabled(true);
 		setBorder(new TitledBorder("Law(Level: "
 				+ GuiManager.sharedInstance().getDs()
-						.getLevel("legalDepartment") +", Fixcosts: "+GuiManager.sharedInstance().getDs().getDepartmentFixcosts("legalDepartment")+")"));
+						.getLevel("legalDepartment")
+				+ ", Fixcosts: "
+				+ GuiManager.sharedInstance().getDs()
+						.getDepartmentFixcosts("legalDepartment") + ")"));
 		enemyData = GuiManager.sharedInstance().getDs().getCheckedEnemies();
 		suesData = GuiManager.sharedInstance().getDs().getLawsuit();
 
-		String[] suesListData = new String[1];
-		if (suesData != null) {
+		String[] suesListData = new String[suesData.size()];
+		if (suesData.size() > 0) {
 			suesListData[0] = suesData.get("claimant") + " vs "
 					+ suesData.get("defendant");
 		} else {
-			suesListData[0] = "No current sue";
+			suesListData = new String[1];
+			suesListData[0] = "No current lawsuits";
 		}
 		sues.setListData(suesListData);
 
