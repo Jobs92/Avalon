@@ -116,8 +116,11 @@ public class Market {
 		return companies.get(id);
 	}
 
-	public void addCompany(Company company) {
+	public int addCompany(Company company) {
+		//Index = id
+		int id = companies.size();
 		companies.add(company);
+		return id;
 	}
 
 	public void addSupplier(Supplier s) {

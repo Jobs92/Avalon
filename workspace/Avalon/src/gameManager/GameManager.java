@@ -109,8 +109,8 @@ public class GameManager {
 		}
 	}
 
-	public void addPlayer(Company c) {
-		market.addCompany(c);
+	public int addPlayer(Company c) {
+		return market.addCompany(c);
 	}
 	
 	public boolean getActive(){

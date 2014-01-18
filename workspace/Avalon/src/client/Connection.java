@@ -15,7 +15,7 @@ import utils.DataSnapshot;
 public class Connection extends Thread {
 	private Socket socket;
 	private PrintWriter out = null;
-	private BufferedReader in = null;
+	private BufferedReader inTxt = null;
 	private ObjectInputStream in_object;
 	private boolean active = true;
 
@@ -25,8 +25,8 @@ public class Connection extends Thread {
 
 	public boolean connect() {
 		try {
-			out = new PrintWriter(socket.getOutputStream(), true);
-			in = new BufferedReader(new InputStreamReader(
+			out = new PrintWriter(socket.getOutputStream());
+			inTxt = new BufferedReader(new InputStreamReader(
 					socket.getInputStream()));
 			in_object = new ObjectInputStream(socket.getInputStream());
 			
@@ -46,18 +46,24 @@ public class Connection extends Thread {
 
 	// Receive Messages from the server
 	public void run() {
-		String txt;
 		DataSnapshot ds;
 		while (active) {
 			try {
-				if ((ds = (DataSnapshot) in_object.readObject()) != null) {
-					GuiManager.sharedInstance().update(ds);
-					System.out.println("Client bekommt money: " + ds.getMoney());
-//					ClientMessageHandler.sharedInstance().handleMessage(txt,
-//							this);
+				if (GuiManager.sharedInstance().gameStarted()){
+					if ((ds = (DataSnapshot) in_object.readObject()) != null) {
+						GuiManager.sharedInstance().update(ds);
+					}
+				}else{
+					String s;
+					if ((s = inTxt.readLine()) != null) {
+						System.out.println("hat String " + s);
+						ClientMessageHandler.handleMessage(s);
+					}
+
 				}
-			} catch (IOException | ClassNotFoundException e) {
+			}catch (IOException | ClassNotFoundException e) {
 				close();
+				break;
 			}
 		}
 	}
@@ -66,14 +72,19 @@ public class Connection extends Thread {
 		System.out.println("Client sendet: " + txt);
 		out.println(txt);
 	}
+	
+	public void flush(){
+		out.flush();
+	}
 
 	public void close() {
 		active = false;
 		// more todo?
 		try {
 			out.close();
-			in.close();
-			close();
+			inTxt.close();
+			socket.close();
+			System.out.println("Schlieﬂt Verbindung...");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

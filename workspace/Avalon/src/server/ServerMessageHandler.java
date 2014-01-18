@@ -4,6 +4,8 @@ import gameManager.GameManager;
 
 import java.util.ArrayList;
 
+import company.Company;
+
 import otherclasses.Order;
 import campaigns.MarketingCampaign;
 import campaigns.ResearchCampaign;
@@ -30,10 +32,15 @@ public class ServerMessageHandler {
 		if (txt.startsWith("NAME")){
 			setName(sender, txt.substring("NAME ".length()));
 		}
+		if(txt.startsWith("CHAT")){
+		 String s = "CHAT " + sender.getCompany().getId() + sender.getCompany().getName() + ": " + txt.substring("CHAT ".length());
+		 sendChat(s);
+		}
 		if (txt.startsWith("READY")){
 			isReady(sender);
 		}
 		if (txt.startsWith("STARTGAME")){
+			broadcast("GAMESTARTED");
 			startGame();
 		}
 		if (txt.startsWith("UPGRADEMARKETING")){
@@ -99,6 +106,16 @@ public class ServerMessageHandler {
 		if (txt.startsWith("UPGRADELEGALDEPARTMENT")){
 			upgradeLegalDepartment(sender);
 		}
+	}
+	
+	private void broadcast(String s){
+		for (Company c : Market.sharedInstance().getCompanies()) {
+			c.getConnection().send(s);
+		}
+	}
+	
+	private void sendChat(String s){
+		broadcast(s);
 	}
 
 	private void setName(Connection sender, String name) {

@@ -38,6 +38,10 @@ public class Company {
 	public boolean isReady() {
 		return ready;
 	}
+	
+	public void setId(int id){
+		this.id = id;
+	}
 
 	public void setReady(boolean ready) {
 		this.ready = ready;
@@ -259,6 +263,10 @@ public class Company {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public Connection getConnection(){
+		return connection;
 	}
 
 	// public void addProduct(product.Product product){

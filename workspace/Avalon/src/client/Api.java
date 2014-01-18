@@ -7,14 +7,22 @@ public class Api {
 		this.connection = connection;
 	}
 	
+	public void sendChat(String txt){
+		String s = "CHAT " + txt;
+		connection.send(s);
+		connection.flush();
+	}
+	
 	public void startGame(){
 		//For Testing
 		connection.send("STARTGAME ");
+		connection.flush();
 	}
 	
 	public void setName(String name){
 		String s = "NAME " + name;
 		connection.send(s);
+		connection.flush();
 	}
 
 	public void produce(int x){
@@ -25,6 +33,7 @@ public class Api {
 	public void ready(){
 		String s = "READY ";
 		connection.send(s);
+		connection.flush();
 	}
 	
 	public void upgradeMarketing(){

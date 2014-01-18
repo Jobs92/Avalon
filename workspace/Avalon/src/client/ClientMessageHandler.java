@@ -1,5 +1,7 @@
 package client;
 
+import gui.GuiManager;
+
 import java.util.ArrayList;
 
 public class ClientMessageHandler {
@@ -14,10 +16,15 @@ public class ClientMessageHandler {
 		return ClientMessageHandler.sharedInstance;
 	}
 
-	public void handleMessage(String txt, Connection sender) {
-		//TODO: interprete Strings
-		//Fredi kann nicht debuggen<
-		System.out.println("Client Handler handlet: " + txt);
+	public static void handleMessage(String txt) {
+		if (txt.startsWith("CHAT")){
+			int id = Integer.parseInt(txt.substring(5,6));
+			String s = txt.substring(6);
+			GuiManager.sharedInstance().handleChat(s, id);
+		}
+		if (txt.startsWith("GAMESTARTED")){
+			GuiManager.sharedInstance().startGame();
+		}
 		
 	}
 	

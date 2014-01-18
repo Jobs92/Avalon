@@ -1,16 +1,20 @@
 package gui;
 
+import java.awt.Color;
+
 import javax.swing.JFrame;
 
 import client.Api;
 import utils.DataSnapshot;
 
 public class GuiManager {
-
+	private Color colors[] = {Color.red,Color.blue,Color.PINK,Color.green,Color.ORANGE,Color.magenta};
 	private DataSnapshot ds;
 	private Api api;
 	AvalonFrame mainFrame;
 	JFrame loginFrame;
+	GUI_Lobby lobbyFrame;
+	private boolean gameStarted;
 	private static GuiManager sharedInstance = null;
 
 	public static GuiManager sharedInstance() {
@@ -28,6 +32,14 @@ public class GuiManager {
 	public Api getApi() {
 		return api;
 	}
+	
+	public boolean gameStarted(){
+		return gameStarted;
+	}
+
+	public Color[] getColors() {
+		return colors;
+	}
 
 	public void setApi(Api api) {
 		this.api = api;
@@ -40,10 +52,21 @@ public class GuiManager {
 
 	public void successfullLogin() {
 		loginFrame.setVisible(false);
-		mainFrame = new AvalonFrame();
+		lobbyFrame = new GUI_Lobby();
+//		mainFrame = new AvalonFrame();
 		
 		//for testing
-		api.startGame();
+//		api.startGame();
+	}
+	
+	public void startGame(){
+		gameStarted = true;
+		lobbyFrame.setVisible(false);
+		mainFrame = new AvalonFrame();
+	}
+	
+	public void handleChat(String txt, int id){
+		lobbyFrame.handleChat(txt, id);
 	}
 
 	public static void main(String[] args) {
