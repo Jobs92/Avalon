@@ -112,7 +112,9 @@ public class PurchasePanel extends AvalonPanel {
 
 	@Override
 	protected void fill() {
-		setBorder(new TitledBorder("Purchase (Fixcosts: "+GuiManager.sharedInstance().getDs().getDepartmentFixcosts("purchase")+")"));
+		setBorder(new TitledBorder("Purchase (Fixcosts: "
+				+ GuiManager.sharedInstance().getDs()
+						.getDepartmentFixcosts("purchase") + ")"));
 		supplier = GuiManager.sharedInstance().getDs().getSupplier();
 		for (int i = 0; i < supplierLabels.size(); i++) {
 			supplierLabels.get(i).setText(supplier.get(i).get("name"));
@@ -122,7 +124,11 @@ public class PurchasePanel extends AvalonPanel {
 	@Override
 	protected void send() {
 		for (int i = 0; i < amount.size(); i++) {
-			GuiManager.sharedInstance().getApi().buy(i, Integer.valueOf(amount.get(i).getText()));
+			String value = amount.get(i).getText();
+			if (!value.equalsIgnoreCase("")) {
+				GuiManager.sharedInstance().getApi()
+						.buy(i, Integer.valueOf(value));
+			}
 		}
 	}
 

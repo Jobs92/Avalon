@@ -57,7 +57,9 @@ public class SalesPanel extends AvalonPanel {
 	@Override
 	protected void fill() {
 		productData = GuiManager.sharedInstance().getDs().getProducts();
-		setBorder(new TitledBorder("Sales(Fixcosts: "+GuiManager.sharedInstance().getDs().getDepartmentFixcosts("sales")+")"));
+		setBorder(new TitledBorder("Sales(Fixcosts: "
+				+ GuiManager.sharedInstance().getDs()
+						.getDepartmentFixcosts("sales") + ")"));
 
 		names = new String[productData.size()];
 		for (int i = 0; i < names.length; i++) {

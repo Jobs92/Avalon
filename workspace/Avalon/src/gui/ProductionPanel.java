@@ -30,7 +30,7 @@ public class ProductionPanel extends AvalonPanel {
 		add(productLabel);
 		amountTF.setPreferredSize(new Dimension(100, 30));
 		add(amountTF);
-		
+
 		upgradeButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -61,13 +61,14 @@ public class ProductionPanel extends AvalonPanel {
 		// products.setBackground(getBackground());
 		// add(new JScrollPane(products));
 	}
-	
+
 	protected void makeUpgradePopup() {
-		int accepted = JOptionPane.showConfirmDialog(null,
+		int accepted = JOptionPane.showConfirmDialog(
+				null,
 				"Do you want to spy to upgrade the Production department for "
 						+ GuiManager.sharedInstance().getDs()
-								.getUpgradeCosts("production") + "?", "Upgrade",
-				JOptionPane.YES_NO_OPTION);
+								.getUpgradeCosts("production") + "?",
+				"Upgrade", JOptionPane.YES_NO_OPTION);
 		if (accepted == 0) {
 			upgradeButton.setEnabled(false);
 			// accepted
@@ -78,8 +79,10 @@ public class ProductionPanel extends AvalonPanel {
 	@Override
 	protected void fill() {
 		setBorder(new TitledBorder("Production (Level: "
+				+ GuiManager.sharedInstance().getDs().getLevel("production")
+				+ ", Fixcosts: "
 				+ GuiManager.sharedInstance().getDs()
-						.getLevel("production") +", Fixcosts: "+GuiManager.sharedInstance().getDs().getDepartmentFixcosts("production")+")"));
+						.getDepartmentFixcosts("production") + ")"));
 		productLabel.setText("Product (Level "
 				+ GuiManager.sharedInstance().getDs().getHighestProductLevel()
 				+ ")");
@@ -90,8 +93,11 @@ public class ProductionPanel extends AvalonPanel {
 
 	@Override
 	protected void send() {
-		GuiManager.sharedInstance().getApi()
-				.produce(Integer.valueOf(amountTF.getText()));
+		String value = amountTF.getText();
+		if (!value.equalsIgnoreCase("")) {
+			GuiManager.sharedInstance().getApi()
+					.produce(Integer.valueOf(value));
+		}
 	}
 
 }
