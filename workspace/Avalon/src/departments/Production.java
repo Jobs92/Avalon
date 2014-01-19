@@ -10,7 +10,6 @@ import config.Config;
 import utils.Message;
 
 public class Production extends Department {
-	private int fixcost = Config.getProductionFixcost();
 	private int level;
 	private int capacity;
 	private ArrayList<otherclasses.ProductionJobs> allProductionJobs;
@@ -20,6 +19,7 @@ public class Production extends Department {
 		allProductionJobs = new ArrayList<otherclasses.ProductionJobs>();
 		level = 1;
 		capacity=config.Config.getProductionCapacity();
+		fixcost = Config.getProductionFixcost();
 	}
 	
 	public int getLevel() {

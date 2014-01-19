@@ -6,6 +6,7 @@ import market.Market;
 import otherclasses.Order;
 import utils.Message;
 import company.Company;
+import config.Config;
 
 public class Purchase extends Department {
 	int amount;
@@ -14,6 +15,7 @@ public class Purchase extends Department {
 	public Purchase(Company company) {
 		super(company);
 		orders = new ArrayList<Order>();
+		fixcost = Config.getProductionFixcost();
 	}
 
 	public void addOrder(Order order) {

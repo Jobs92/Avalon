@@ -18,6 +18,7 @@ public class LegalDepartment extends Department {
 
 	public LegalDepartment(Company company) {
 		super(company);
+		fixcost = Config.getLegalDepartmentFixcost();
 	}
 
 	public void checkOpponent(Company c) {
