@@ -47,6 +47,9 @@ public class DataSnapshot implements Serializable {
 	private int round;
 	private Vector<String> enemyNames = new Vector<String>();
 
+	// Production
+	private String resources;
+
 	public void setLawsuit(String claimant, String defendant, int duration,
 			double amount, double costs) {
 		lawsuit.put("claimant", claimant);
@@ -122,20 +125,20 @@ public class DataSnapshot implements Serializable {
 	public void setPatentLevel(int patentLevel) {
 		this.patentLevel = patentLevel;
 	}
-	
-	public int getResearchLevel(){
+
+	public int getResearchLevel() {
 		return researchLevel;
 	}
-	
-	public void setResearchLevel(int level){
+
+	public void setResearchLevel(int level) {
 		researchLevel = level;
 	}
-	
-	public int getNotAppliedLevels(){
+
+	public int getNotAppliedLevels() {
 		return notAppliedLevels;
 	}
-	
-	public void setNotAppliedLevels(int level){
+
+	public void setNotAppliedLevels(int level) {
 		this.notAppliedLevels = level;
 	}
 
@@ -291,6 +294,14 @@ public class DataSnapshot implements Serializable {
 
 	public void setProductsOnStock(int productsOnStock) {
 		this.productsOnStock = productsOnStock;
+	}
+
+	public void setResources(int resources) {
+		this.resources = String.valueOf(resources);
+	}
+
+	public String getResources() {
+		return resources;
 	}
 
 }

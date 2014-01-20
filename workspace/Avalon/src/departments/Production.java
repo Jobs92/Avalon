@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import market.Market;
 import otherclasses.ProductionJobs;
-import otherclasses.Ressources;
+import otherclasses.Resources;
 import company.Company;
 import config.Config;
 import utils.Message;
@@ -39,7 +39,7 @@ public class Production extends Department {
 				int defectiveGoods = 0;
 				for (int i = 0; i < job.getAmount(); i++) {
 					if (company.changeMoney((-1)*Config.getProductionVariableCosts())){
-						Ressources r = company.getWarehouse().getRessource();
+						Resources r = company.getWarehouse().getResource();
 						if (utils.Probability.propability(r.getQuality())){
 							company.getWarehouse().getSingleProduct(job.getLevel()).changeAmount(1);
 						} else{
@@ -76,7 +76,7 @@ public class Production extends Department {
 	}
 	public void produce (int level, int amount){ 
 		if (capacity>=amount + countAlreadyNeededRessources()) {
-			if (countAlreadyNeededRessources()+amount <= company.getWarehouse().getAmountRessources()){
+			if (countAlreadyNeededRessources()+amount <= company.getWarehouse().getAmountResources()){
 //				if (company.getWarehouse().getSingleProduct(level)==null) {
 //					company.getWarehouse().addProduct(new Product(level, company));
 //				}

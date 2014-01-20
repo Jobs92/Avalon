@@ -38,8 +38,8 @@ public class Company {
 	public boolean isReady() {
 		return ready;
 	}
-	
-	public void setId(int id){
+
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -176,11 +176,12 @@ public class Company {
 	public void informPlayer() {
 		DataSnapshot snapshot = new DataSnapshot();
 
-		//Fill DataSnapshot object with data
+		// Fill DataSnapshot object with data
 		snapshot.setMoney(this.money);
 		snapshot.setImage(this.popularity);
 		snapshot.setFixCosts(calcFixcosts());
-		snapshot.setHighestProductLevel(getWarehouse().getHighestProduct().getLevel());
+		snapshot.setHighestProductLevel(getWarehouse().getHighestProduct()
+				.getLevel());
 		snapshot.setProductsOnStock(getWarehouse().getTotalAmountProducts());
 		snapshot.setRound(GameManager.sharedInstance().getRound());
 		snapshot.setPatentLevel(this.getResearch().getPatentLevel());
@@ -188,67 +189,86 @@ public class Company {
 		snapshot.setSpyCost(Config.getCostSpy());
 		snapshot.setNotAppliedLevels(this.getResearch().getNotAppliedLevels());
 		snapshot.setResearchLevel(getResearch().getResearchLevel());
-		
-		//Department Fixcosts
-		snapshot.addDepartmentFixcost("marketing", this.getMarketing().getFixcost());
-		snapshot.addDepartmentFixcost("legalDepartment", this.getLegaldepartment().getFixcost());
-		snapshot.addDepartmentFixcost("research", this.getResearch().getFixcost());
-		snapshot.addDepartmentFixcost("production", this.getProduction().getFixcost());
+
+		// Department Fixcosts
+		snapshot.addDepartmentFixcost("marketing", this.getMarketing()
+				.getFixcost());
+		snapshot.addDepartmentFixcost("legalDepartment", this
+				.getLegaldepartment().getFixcost());
+		snapshot.addDepartmentFixcost("research", this.getResearch()
+				.getFixcost());
+		snapshot.addDepartmentFixcost("production", this.getProduction()
+				.getFixcost());
 		snapshot.addDepartmentFixcost("sales", this.getSales().getFixcost());
-		snapshot.addDepartmentFixcost("purchase", this.getPurchase().getFixcost());
-		
-		//Messages
+		snapshot.addDepartmentFixcost("purchase", this.getPurchase()
+				.getFixcost());
+
+		// Messages
 		for (Message m : this.getMessagesFromInbox()) {
 			snapshot.addMessage(m.getTitle(), m.getMessage());
 		}
 		clearInbox();
-		
-		//Levels
+
+		// Levels
 		snapshot.addLevel("production", this.getProduction().getLevel());
 		snapshot.addLevel("marketing", this.getMarketing().getLevel());
-		snapshot.addLevel("legalDepartment", this.getLegaldepartment().getLevel());
+		snapshot.addLevel("legalDepartment", this.getLegaldepartment()
+				.getLevel());
 		snapshot.addLevel("research", this.getResearch().getLevel());
-		
-		//Upgrades
-		snapshot.addUpgradeCosts("production", Config.getCostsUpgradeProduction());
+
+		// Upgrades
+		snapshot.addUpgradeCosts("production",
+				Config.getCostsUpgradeProduction());
 		snapshot.addUpgradeCosts("marketing", Config.getCostsUpgradeMarketing());
-		snapshot.addUpgradeCosts("legalDepartment", Config.getCostsUpgradeLegalDeparment());
+		snapshot.addUpgradeCosts("legalDepartment",
+				Config.getCostsUpgradeLegalDeparment());
 		snapshot.addUpgradeCosts("research", Config.getCostsUpgradeResearch());
-		
-		//Supplier
+
+		// Supplier
 		for (Supplier s : Market.sharedInstance().getSupplier()) {
-			snapshot.addSupplier(s.getName(), s.getPrice(), s.getTrustiness(), s.getQuality());
+			snapshot.addSupplier(s.getName(), s.getPrice(), s.getTrustiness(),
+					s.getQuality());
 		}
-		
-		//Names
+
+		// Names
 		for (int i = 0; i < Market.sharedInstance().getCompanies().size(); i++) {
-			if (Market.sharedInstance().getCompanies().get(i) != this){
-				snapshot.addEnemyName(Market.sharedInstance().getCompanies().get(i).getName());
+			if (Market.sharedInstance().getCompanies().get(i) != this) {
+				snapshot.addEnemyName(Market.sharedInstance().getCompanies()
+						.get(i).getName());
 			}
 		}
-		
-		//LegalDepartment
+
+		// LegalDepartment
 		Lawsuit l;
-		if ((l = this.getLegaldepartment().getCurrentLawsuit()) != null){
-			snapshot.setLawsuit(l.getClaimant().getCompany().getName(), l.getDefendant().getCompany().getName(), l.getDuration(), l.getAmount(), l.getCosts());
+		if ((l = this.getLegaldepartment().getCurrentLawsuit()) != null) {
+			snapshot.setLawsuit(l.getClaimant().getCompany().getName(), l
+					.getDefendant().getCompany().getName(), l.getDuration(),
+					l.getAmount(), l.getCosts());
 		}
-		
-		//MarketingCampaigns
+
+		// MarketingCampaigns
 		for (Campaign c : this.getMarketing().getCampaigns()) {
-			snapshot.addMarketingCampaign(c.getCost(), c.getDuration(), c.getSuccessProbability(), c.getLevel(), c.getTitle(), c.getDescription());
+			snapshot.addMarketingCampaign(c.getCost(), c.getDuration(),
+					c.getSuccessProbability(), c.getLevel(), c.getTitle(),
+					c.getDescription());
 		}
-		
-		//ResearchCampaigns
+
+		// ResearchCampaigns
 		for (Campaign c : this.getResearch().getCampaigns()) {
-			snapshot.addResearchCampaign(c.getCost(), c.getDuration(), c.getSuccessProbability(), c.getLevel(), c.getTitle(), c.getDescription());
+			snapshot.addResearchCampaign(c.getCost(), c.getDuration(),
+					c.getSuccessProbability(), c.getLevel(), c.getTitle(),
+					c.getDescription());
 		}
-		
+
+		// Production
+		snapshot.setResources(getWarehouse().getAmountResources());
+
 		connection.sendSnapshot(snapshot);
 	}
 
 	private void clearInbox() {
 		inbox = new ArrayList<Message>();
-		
+
 	}
 
 	private double calcFixcosts() {
@@ -266,8 +286,8 @@ public class Company {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	public Connection getConnection(){
+
+	public Connection getConnection() {
 		return connection;
 	}
 

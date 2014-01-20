@@ -1,10 +1,10 @@
 package otherclasses;
 
-public class Ressources {
+public class Resources {
 
 	private int quality;
 
-	public Ressources(int quality) {
+	public Resources(int quality) {
 		this.quality = quality;
 	}
 

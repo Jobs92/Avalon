@@ -29,7 +29,7 @@ public class Purchase extends Department {
 		for (Order order : orders) {
 			if (utils.Probability.propability(order.getTrust())) {
 				if (super.company.changeMoney((-1) * order.getCost())){
-					super.company.getWarehouse().addRessources(order.getAmount(), order.getQuality());
+					super.company.getWarehouse().addResources(order.getAmount(), order.getQuality());
 					order.setActive(false);
 				}else{
 					Message m = new Message();

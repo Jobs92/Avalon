@@ -57,14 +57,14 @@ public class TestQuality {
 
 	@Test
 	public void testQuality() {
-		int amountRessources = company1.getWarehouse().getAmountRessources();
-		System.out.println("Anzahl Ressourcen vor Prod.:"+ company1.getWarehouse().getAmountRessources());
+		int amountRessources = company1.getWarehouse().getAmountResources();
+		System.out.println("Anzahl Ressourcen vor Prod.:"+ company1.getWarehouse().getAmountResources());
 		System.out.println("Soviel soll produziert werden: " + amountRessources);
 		System.out.println("Highest Produkt: " + company1.getWarehouse().getHighestProduct().getLevel());
 		company1.getProduction().produce(company1.getWarehouse().getHighestProduct().getLevel(), amountRessources);
 		company1.setReady(true);
 		company2.setReady(true);
-		System.out.println("Restliche Ressourcen: " + company1.getWarehouse().getAmountRessources());
+		System.out.println("Restliche Ressourcen: " + company1.getWarehouse().getAmountResources());
 		System.out.println("Anzahl Produkte" + company1.getWarehouse().getHighestProduct().getAmount());
 		System.out.println(company1.getWarehouse().getHighestProduct().getAmount()/(amountRessources*1.0));
 		assertEquals(Config.getSupplierQuality()[0], company1.getWarehouse().getHighestProduct().getAmount()/(amountRessources*1.0), 90);
