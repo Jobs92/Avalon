@@ -58,6 +58,13 @@ public class GuiConnect extends JFrame {
 			public void keyPressed(KeyEvent e) {
 				textField.setText("");
 				textField.removeKeyListener(this);
+				textField.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						connect();
+					}
+				});
 			}
 		});
 		contentPane.add(textField);
@@ -113,7 +120,7 @@ public class GuiConnect extends JFrame {
 	}
 
 	public void wrongNick(String string) {
-		JOptionPane.showMessageDialog(this, string, "Fehler",
+		JOptionPane.showMessageDialog(this, string, "Error",
 				JOptionPane.ERROR_MESSAGE);
 
 	}

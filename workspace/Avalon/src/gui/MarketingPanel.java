@@ -82,7 +82,7 @@ public class MarketingPanel extends AvalonPanel {
 	protected void makeUpgradePopup() {
 		int accepted = JOptionPane.showConfirmDialog(
 				null,
-				"Do you want to spy to upgrade the Research department for "
+				"Do you want to upgrade the Research department for "
 						+ GuiManager.sharedInstance().getDs()
 								.getUpgradeCosts("marketing") + "?", "Upgrade",
 				JOptionPane.YES_NO_OPTION);

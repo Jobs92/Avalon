@@ -56,7 +56,7 @@ public class LawPanel extends AvalonPanel {
 	protected void makeUpgradePopup() {
 		int accepted = JOptionPane.showConfirmDialog(
 				null,
-				"Do you want to spy to upgrade the Law department for "
+				"Do you want to upgrade the Law department for "
 						+ GuiManager.sharedInstance().getDs()
 								.getUpgradeCosts("legalDepartment") + "?",
 				"Upgrade", JOptionPane.YES_NO_OPTION);

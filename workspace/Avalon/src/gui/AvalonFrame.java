@@ -85,6 +85,7 @@ public class AvalonFrame extends JFrame {
 								"Do you really want to finish this round and go on with the next round?",
 								"Next Round", JOptionPane.YES_NO_OPTION);
 				if (accepted == 0) {
+					nextRoundButton.setEnabled(false);
 					send();
 				}
 			}
@@ -102,11 +103,15 @@ public class AvalonFrame extends JFrame {
 
 	public void fill() {
 		// update round
+		nextRoundButton.setEnabled(true);
 		roundLabel.setText("Round #"
 				+ GuiManager.sharedInstance().getDs().getRound());
 		for (AvalonPanel p : panels) {
 			p.fill();
 		}
+		JOptionPane.showConfirmDialog(this, "You are entering round #"
+				+ GuiManager.sharedInstance().getDs().getRound(), "Next Round",
+				JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	public static void main(String[] args) {

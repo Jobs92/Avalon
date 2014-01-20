@@ -63,8 +63,8 @@ public class SalesPanel extends AvalonPanel {
 
 		names = new String[productData.size()];
 		for (int i = 0; i < names.length; i++) {
-			names[i] = "Product (Level " + productData.get(i).get("level")
-					+ " )";
+			names[i] = productData.get(i).get("name") + " (Level "
+					+ productData.get(i).get("level") + " )";
 		}
 		products.setListData(names);
 		refresh();
