@@ -14,6 +14,7 @@ public class DataSnapshot implements Serializable {
 	private double fixCosts;
 	private double varCosts; // <-- ???
 	private int highestProductLevel;
+	private String highestProductName;
 	private int productsOnStock;
 
 	private Dictionary<String, String> departmentFixcosts = new Hashtable<String, String>();
@@ -64,6 +65,14 @@ public class DataSnapshot implements Serializable {
 
 	public String getDepartmentFixcosts(String key) {
 		return departmentFixcosts.get(key);
+	}
+	
+	public String getHighestProductName(){
+		return highestProductName;
+	}
+	
+	public void setHighestProductName(String s){
+		highestProductName = s;
 	}
 
 	public void addDepartmentFixcost(String key, double value) {
