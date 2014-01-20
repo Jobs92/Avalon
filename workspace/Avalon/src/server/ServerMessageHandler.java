@@ -78,9 +78,7 @@ public class ServerMessageHandler {
 			release(sender, name);
 		}
 		if (txt.startsWith("SPY ")){
-			String[] split = txt.substring("SPY ".length()).split("#");
-//			int id = Integer.parseInt(split[0]);
-			int opponent = Integer.parseInt(split[1]);
+			int opponent = Integer.parseInt(txt.substring("SPY ".length()));
 			spy(sender, opponent);
 		}
 		if (txt.startsWith("PRICE ")){
