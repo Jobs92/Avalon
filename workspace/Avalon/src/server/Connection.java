@@ -55,7 +55,7 @@ public class Connection extends Thread {
 		while (active) {
 			try {
 				if ((txt = in.readLine()) != null) {
-					System.out.println("Server bekommt: " + txt);
+					System.out.println("Server bekommt von "+company.getName()+" : " + txt);
 					ServerMessageHandler.sharedInstance().handleMessage(txt,
 							this);
 				}
