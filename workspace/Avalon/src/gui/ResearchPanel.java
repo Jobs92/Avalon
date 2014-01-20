@@ -138,9 +138,9 @@ public class ResearchPanel extends AvalonPanel {
 
 	private void initEnemyPanel() {
 		for (int i = 0; i < 3; i++) {
-//			enemyData.add("Enemy #" + (i + 1));
+			// enemyData.add("Enemy #" + (i + 1));
 		}
-//		enemies = new JList<String>(enemyData);
+		enemies = new JList<String>();
 		enemies.setBackground(getBackground());
 		enemies.addListSelectionListener(new ListSelectionListener() {
 
@@ -163,7 +163,8 @@ public class ResearchPanel extends AvalonPanel {
 						+ "?", "Spy", JOptionPane.YES_NO_OPTION);
 		if (accepted == 0) {
 			// accepted
-			GuiManager.sharedInstance().getApi().spy(Integer.parseInt(enemyData.get(i).get("id")));
+			GuiManager.sharedInstance().getApi()
+					.spy(Integer.parseInt(enemyData.get(i).get("id")));
 		}
 	}
 

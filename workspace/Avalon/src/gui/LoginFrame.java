@@ -30,6 +30,7 @@ public class LoginFrame extends JFrame {
 	 */
 
 	public LoginFrame() {
+		setTitle("Avalon - Unternehmenssimulation - Login");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 242, 200);
 		contentPane = new JPanel();
