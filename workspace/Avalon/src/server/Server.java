@@ -3,9 +3,16 @@ package server;
 import java.io.*;
 import java.net.*;
 
+/**
+ * @author Frederik
+ *
+ */
 public class Server {
 	private static ServerSocket server;
 
+	/**
+	 * @param args
+	 */
 	public static void main(String args[]) {
 		try {
 			server = new ServerSocket(56557);
