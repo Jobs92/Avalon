@@ -85,6 +85,7 @@ public class Company {
 
 	public Company(Connection connection) {
 		super();
+		active = true;
 		GameManager.sharedInstance();
 		this.connection = connection;
 		money = Config.getCompanyStartMoney();
