@@ -15,7 +15,7 @@ public abstract class ExplicitCampaign {
 	public ExplicitCampaign(Campaign campaign) {
 		this.campaign = campaign;
 		this.endRound = GameManager.sharedInstance().getRound()
-				+ campaign.getDuration();
+				+ campaign.getDuration() - 1;
 	}
 
 	/**
