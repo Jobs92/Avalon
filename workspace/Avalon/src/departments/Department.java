@@ -30,12 +30,7 @@ public abstract class Department {
 	public void payFixcosts(){
 		if (!company.changeMoney((-1)*fixcost)){
 			//Insolvenz
-//			Message m = new Message();
-//			m.setTitle("Zahlungsunfähig");
-//			m.setType(Message.GAME);
-//			m.setTargetPlayer(company.getId());
-//			m.setMessage("Sie können ihre Kosten nicht mehr bezahlen!");
-//			Market.sharedInstance().sendMessage(m);
+			company.insolvency();
 		}
 	}
 

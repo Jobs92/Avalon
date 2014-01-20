@@ -78,7 +78,7 @@ public class GameManager {
 	public void informReady(){
 		ArrayList<Company> player = market.getCompanies();
 		for (int i = 0; i < player.size(); i++) {
-			if (!player.get(i).isReady()){
+			if (player.get(i).isActive() && !player.get(i).isReady()){
 				//Not all player ready
 				return;
 			}

@@ -29,6 +29,7 @@ public class Company {
 	private boolean ready;
 	private Connection connection;
 	private String name;
+	private boolean active;
 
 	private ArrayList<Department> departments;
 	private int id;
@@ -60,6 +61,7 @@ public class Company {
 	public Company() {
 		// For Unit tests withot Client/Server Architecture
 		GameManager.sharedInstance();
+		active = true;
 		money = Config.getCompanyStartMoney();
 		popularity = Config.getCompanyStartPopularity();
 		departments = new ArrayList<Department>();
@@ -71,6 +73,14 @@ public class Company {
 		departments.add(new Purchase(this));
 		departments.add(new Production(this));
 		inbox = new ArrayList<Message>();
+	}
+	
+	public boolean isActive(){
+		return active;
+	}
+	
+	public void setActive(boolean b){
+		active = b;
 	}
 
 	public Company(Connection connection) {
@@ -88,6 +98,18 @@ public class Company {
 		departments.add(new Purchase(this));
 		departments.add(new Production(this));
 		inbox = new ArrayList<Message>();
+	}
+	
+	public void insolvency(){
+		active = false;
+		
+		//Inform Playder
+		Message m = new Message();
+		m.setTitle("Insolvenz");
+		m.setType(Message.GAME);
+		m.setTargetPlayer(id);
+		m.setMessage("Sie haben nicht genügend liquide Mittel um ihre Verbindlichkeiten zu begleichen. Sie sind insolvent.");
+		Market.sharedInstance().sendMessage(m);
 	}
 
 	public String getPlayername() {
@@ -232,9 +254,10 @@ public class Company {
 
 		// Names
 		for (int i = 0; i < Market.sharedInstance().getCompanies().size(); i++) {
-			if (Market.sharedInstance().getCompanies().get(i) != this) {
+			if (Market.sharedInstance().getCompanies().get(i) != this && Market.sharedInstance().getCompanies().get(i).isActive()) {
 				snapshot.addEnemyName(Market.sharedInstance().getCompanies()
-						.get(i).getName());
+						.get(i).getName(), Market.sharedInstance().getCompanies()
+						.get(i).getId());
 			}
 		}
 

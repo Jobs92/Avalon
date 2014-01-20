@@ -45,7 +45,7 @@ public class DataSnapshot implements Serializable {
 	private ArrayList<Dictionary<String, String>> messages = new ArrayList<Dictionary<String, String>>();
 	private ArrayList<Dictionary<String, String>> marketingCampaigns = new ArrayList<Dictionary<String, String>>();
 	private int round;
-	private Vector<String> enemyNames = new Vector<String>();
+	private ArrayList<Dictionary<String, String>> enemyNames = new ArrayList<Dictionary<String, String>>();
 
 	// Production
 	private String resources;
@@ -71,10 +71,11 @@ public class DataSnapshot implements Serializable {
 		departmentFixcosts.put(key, value + "");
 	}
 
-	public void addCheckedEnemy(String name, int amount) {
+	public void addCheckedEnemy(String name, int amount, int id) {
 		Dictionary<String, String> d = new Hashtable<String, String>();
 		d.put("name", name);
 		d.put("amount", amount + "");
+		d.put("id", id+"");
 		checkedEnemies.add(d);
 	}
 
@@ -102,12 +103,15 @@ public class DataSnapshot implements Serializable {
 		this.patentCost = patentCost;
 	}
 
-	public Vector<String> getEnemyNames() {
+	public ArrayList<Dictionary<String, String>> getEnemyNames() {
 		return enemyNames;
 	}
 
-	public void addEnemyName(String enemyName) {
-		this.enemyNames.add(enemyName);
+	public void addEnemyName(String enemyName, int id) {
+		Dictionary<String, String> d = new Hashtable<String, String>();
+		d.put("name", enemyName);
+		d.put("id", id+"");
+		this.enemyNames.add(d);
 	}
 
 	public double getMoney() {
