@@ -72,6 +72,13 @@ public class LoginFrame extends JFrame {
 		textField.setColumns(10);
 
 		textField_1 = new JTextField();
+		textField_1.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				connect();
+			}
+		});
 		textField_1.setBounds(103, 79, 112, 20);
 		textField_1.setText("localhost");
 		contentPane.add(textField_1);
