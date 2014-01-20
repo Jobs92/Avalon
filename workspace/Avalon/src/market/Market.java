@@ -169,7 +169,9 @@ public class Market {
 
 	public void informPlayers() {
 		for (Company c : companies) {
-			c.informPlayer();
+			if (c.isActive()){
+				c.informPlayer();
+			}
 		}
 	}
 
