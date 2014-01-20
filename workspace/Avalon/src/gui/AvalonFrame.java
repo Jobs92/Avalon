@@ -107,6 +107,7 @@ public class AvalonFrame extends JFrame {
 		for (AvalonPanel p : panels) {
 			p.fill();
 		}
+		revalidate();
 	}
 
 	public static void main(String[] args) {

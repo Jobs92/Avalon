@@ -3,6 +3,7 @@ package gui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,6 +16,7 @@ import javax.swing.border.TitledBorder;
 @SuppressWarnings("serial")
 public class ProductionPanel extends AvalonPanel {
 	private JLabel productLabel = new JLabel("Product (Level 1)");
+	private JLabel resourceLabel = new JLabel("Available Resources: 0");
 	private JTextField amountTF = new JTextField("0");
 	private JButton upgradeButton = new JButton("Upgrade");
 
@@ -24,13 +26,14 @@ public class ProductionPanel extends AvalonPanel {
 	public ProductionPanel() {
 		TitledBorder tb = new TitledBorder("Production");
 		setBorder(tb);
-		setLayout(new FlowLayout());
+		setLayout(new GridLayout(2, 2));
 		setBackground(Color.ORANGE);
 
 		add(productLabel);
 		amountTF.setPreferredSize(new Dimension(100, 30));
 		add(amountTF);
 
+		add(resourceLabel);
 		upgradeButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -39,27 +42,6 @@ public class ProductionPanel extends AvalonPanel {
 			}
 		});
 		add(upgradeButton);
-
-		// for (int i = 0; i < 5; i++) {
-		// data.add("Product #" + (i + 1));
-		// }
-		// products = new JList<String>(data);
-		// products.addListSelectionListener(new ListSelectionListener() {
-		//
-		// @Override
-		// public void valueChanged(ListSelectionEvent e) {
-		// int i = products.getSelectedIndex();
-		// String s = data.get(i);
-		// String value = JOptionPane.showInputDialog(null,
-		// "Set Production Amount for " + s, 0);
-		// System.out.println(value);
-		//
-		// GuiManager.sharedInstance().getApi().produce(Integer.valueOf(value));
-		// }
-		// });
-		//
-		// products.setBackground(getBackground());
-		// add(new JScrollPane(products));
 	}
 
 	protected void makeUpgradePopup() {
@@ -86,9 +68,8 @@ public class ProductionPanel extends AvalonPanel {
 		productLabel.setText("Product (Level "
 				+ GuiManager.sharedInstance().getDs().getHighestProductLevel()
 				+ ")");
-		// ArrayList<Dictionary<String, String>> productNames =
-		// GuiManager.sharedInstance().getDs().getProducts();
-		// products.setListData(productNames);
+		resourceLabel.setText("Available Resources: "
+				+ GuiManager.sharedInstance().getDs().getRessources());
 	}
 
 	@Override

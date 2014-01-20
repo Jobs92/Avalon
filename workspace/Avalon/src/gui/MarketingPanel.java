@@ -115,6 +115,7 @@ public class MarketingPanel extends AvalonPanel {
 		campaigns = GuiManager.sharedInstance().getDs().getMarketingCampaigns();
 		for (int i = 0; i < campaignsCB.size(); i++) {
 			campaignsCB.get(i).setText(campaigns.get(i).get("title"));
+			campaignsCB.get(i).setSelected(false);
 		}
 	}
 
