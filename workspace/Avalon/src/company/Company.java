@@ -211,6 +211,7 @@ public class Company {
 		snapshot.setSpyCost(Config.getCostSpy());
 		snapshot.setNotAppliedLevels(this.getResearch().getNotAppliedLevels());
 		snapshot.setResearchLevel(getResearch().getResearchLevel());
+		snapshot.setHighestProductName(getWarehouse().getHighestProduct().getName());
 
 		// Department Fixcosts
 		snapshot.addDepartmentFixcost("marketing", this.getMarketing()
