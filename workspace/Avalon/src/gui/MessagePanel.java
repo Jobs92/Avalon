@@ -7,7 +7,6 @@ import java.util.Dictionary;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
-import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -36,7 +35,7 @@ public class MessagePanel extends AvalonPanel {
 
 		inbox = new JList<String>();
 		inbox.setListData(titles);
-		inbox.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		// inbox.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		inbox.addListSelectionListener(new ListSelectionListener() {
 
@@ -45,8 +44,11 @@ public class MessagePanel extends AvalonPanel {
 				if (e.getValueIsAdjusting())
 					return;
 				int i = inbox.getSelectedIndex();
-				JOptionPane.showMessageDialog(null, messages[i], titles[i],
-						JOptionPane.INFORMATION_MESSAGE);
+				System.out.println("index: message: " + i);
+				if (i > -1) {
+					JOptionPane.showMessageDialog(null, messages[i], titles[i],
+							JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 		});
 
