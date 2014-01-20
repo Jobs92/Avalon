@@ -84,7 +84,8 @@ public class Connection extends Thread {
 
 	public void close() {
 		active = false;
-
+		System.out.println(company.getName() + " hat das Spiel verlassen.");
+		company.setActive(false);
 		// close Socket
 		try {
 			socket.close();

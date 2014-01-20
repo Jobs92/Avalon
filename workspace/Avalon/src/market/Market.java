@@ -96,7 +96,9 @@ public class Market {
 
 	public void simulate() {
 		for (Company c : companies) {
-			c.simulate();
+			if (c.isActive()){
+				c.simulate();
+			}
 		}
 	}
 

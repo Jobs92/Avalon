@@ -83,9 +83,11 @@ public class Lawsuit {
 		
 		if (!claimant.getCompany().changeMoney(costs)){
 			//Insolvenz
+			claimant.getCompany().insolvency();
 		}
 		if (!defendant.getCompany().changeMoney(costs)){
 			//Insolvenz
+			defendant.getCompany().insolvency();
 		}
 		
 		//Check Winner
@@ -112,7 +114,9 @@ public class Lawsuit {
 				claimant.getCompany().changeMoney(totalCosts);
 			}else{
 				//Insolvenz
+				
 				claimant.getCompany().changeMoney(defendant.getCompany().getMoney());
+				defendant.getCompany().insolvency();
 			}
 			
 			
@@ -125,11 +129,12 @@ public class Lawsuit {
 			double refundedCosts = duration * Config.getRelativeAmountCostsLawsuit() * amount;
 			
 			//Pay amount
-			if (defendant.getCompany().changeMoney((-1)*refundedCosts)){
-				claimant.getCompany().changeMoney(refundedCosts);
+			if (claimant.getCompany().changeMoney((-1)*refundedCosts)){
+				defendant.getCompany().changeMoney(refundedCosts);
 			}else{
 				//Insolvenz
-				claimant.getCompany().changeMoney(defendant.getCompany().getMoney());
+				defendant.getCompany().changeMoney(claimant.getCompany().getMoney());
+				claimant.getCompany().insolvency();
 			}
 		}
 		
