@@ -103,15 +103,18 @@ public class AvalonFrame extends JFrame {
 
 	public void fill() {
 		// update round
+		int round = GuiManager.sharedInstance().getDs().getRound() + 1;
 		nextRoundButton.setEnabled(true);
-		roundLabel.setText("Round #"
-				+ GuiManager.sharedInstance().getDs().getRound());
+		roundLabel.setText("Round #" + round);
 		for (AvalonPanel p : panels) {
 			p.fill();
 		}
-		JOptionPane.showConfirmDialog(this, "You are entering round #"
-				+ GuiManager.sharedInstance().getDs().getRound(), "Next Round",
-				JOptionPane.INFORMATION_MESSAGE);
+		if (round > 1) {
+			JOptionPane.showConfirmDialog(this, "You are entering round #"
+					+ GuiManager.sharedInstance().getDs().getRound() + 1,
+					"Next Round", JOptionPane.INFORMATION_MESSAGE,
+					JOptionPane.OK_OPTION);
+		}
 	}
 
 	public static void main(String[] args) {

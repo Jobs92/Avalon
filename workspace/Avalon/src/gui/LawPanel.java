@@ -125,8 +125,11 @@ public class LawPanel extends AvalonPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO: REALLY??? no parameters?
-				GuiManager.sharedInstance().getApi().sueOpponent(index);
+				GuiManager
+						.sharedInstance()
+						.getApi()
+						.sueOpponent(
+								Integer.parseInt(enemyData.get(index).get("id")));
 				System.out.println("enemy sued");
 				// close popup
 				Window win = SwingUtilities.getWindowAncestor(sue);
@@ -223,7 +226,7 @@ public class LawPanel extends AvalonPanel {
 			enemyListData[i] = s;
 		}
 		enemies.setListData(enemyListData);
-		
+
 		refresh();
 	}
 

@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Vector;
+
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -27,7 +28,7 @@ public class ResearchPanel extends AvalonPanel {
 	private JPanel researchCampainPanel = new JPanel();
 
 	private JList<String> enemies;
-	private Vector<String> enemyData = new Vector<String>();
+	private ArrayList<Dictionary<String, String>> enemyData = new ArrayList<Dictionary<String, String>>();
 	private ArrayList<JCheckBox> campaignsCB = new ArrayList<JCheckBox>();
 	private ArrayList<JButton> info = new ArrayList<JButton>();
 	private JButton upgradeButton = new JButton("Upgrade");
@@ -63,6 +64,7 @@ public class ResearchPanel extends AvalonPanel {
 		releaseButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				releaseButton.setEnabled(false);
 				makeReleasePopup();
 			}
 		});
@@ -137,9 +139,9 @@ public class ResearchPanel extends AvalonPanel {
 
 	private void initEnemyPanel() {
 		for (int i = 0; i < 3; i++) {
-			enemyData.add("Enemy #" + (i + 1));
+//			enemyData.add("Enemy #" + (i + 1));
 		}
-		enemies = new JList<String>(enemyData);
+//		enemies = new JList<String>(enemyData);
 		enemies.setBackground(getBackground());
 		enemies.addListSelectionListener(new ListSelectionListener() {
 
@@ -157,12 +159,12 @@ public class ResearchPanel extends AvalonPanel {
 
 	protected void makeEnemyPopup(int i) {
 		int accepted = JOptionPane.showConfirmDialog(null,
-				"Do you want to spy " + enemyData.get(i) + " for "
+				"Do you want to spy " + enemyData.get(i).get("name") + " for "
 						+ GuiManager.sharedInstance().getDs().getSpyCost()
 						+ "?", "Spy", JOptionPane.YES_NO_OPTION);
 		if (accepted == 0) {
 			// accepted
-			GuiManager.sharedInstance().getApi().spy(i);
+			GuiManager.sharedInstance().getApi().spy(Integer.parseInt(enemyData.get(i).get("id")));
 		}
 	}
 
@@ -180,7 +182,7 @@ public class ResearchPanel extends AvalonPanel {
 	protected void makeUpgradePopup() {
 		int accepted = JOptionPane.showConfirmDialog(
 				null,
-				"Do you wantto upgrade the Research department for "
+				"Do you want to upgrade the Research department for "
 						+ GuiManager.sharedInstance().getDs()
 								.getUpgradeCosts("research") + "?", "Upgrade",
 				JOptionPane.YES_NO_OPTION);
@@ -204,6 +206,7 @@ public class ResearchPanel extends AvalonPanel {
 						+ GuiManager.sharedInstance().getDs()
 								.getNotAppliedLevels()));
 		upgradeButton.setEnabled(true);
+		releaseButton.setEnabled(true);
 		setBorder(new TitledBorder("Research(Level: "
 				+ GuiManager.sharedInstance().getDs().getLevel("research")
 				+ ", Fixcosts: "
@@ -215,8 +218,12 @@ public class ResearchPanel extends AvalonPanel {
 			campaignsCB.get(i).setSelected(false);
 		}
 		refresh();
-		enemyData = GuiManager.sharedInstance().getDs().getEnemyNames();
-		enemies.setListData(enemyData);
+		enemyData = GuiManager.sharedInstance().getDs().getEnemies();
+		String[] enemyListData = new String[enemyData.size()];
+		for (int i = 0; i < enemyData.size(); i++) {
+			enemyListData[i] = enemyData.get(i).get("name");
+		}
+		enemies.setListData(enemyListData);
 	}
 
 	@Override

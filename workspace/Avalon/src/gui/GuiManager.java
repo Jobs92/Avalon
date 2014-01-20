@@ -13,7 +13,7 @@ public class GuiManager {
 	private Api api;
 	AvalonFrame mainFrame;
 	JFrame loginFrame;
-	GUI_Lobby lobbyFrame;
+	LobbyFrame lobbyFrame;
 	private boolean gameStarted;
 	private static GuiManager sharedInstance = null;
 
@@ -25,7 +25,7 @@ public class GuiManager {
 	}
 
 	private GuiManager() {
-		loginFrame = new GuiConnect();
+		loginFrame = new LoginFrame();
 		loginFrame.setVisible(true);
 	}
 
@@ -52,7 +52,7 @@ public class GuiManager {
 
 	public void successfullLogin() {
 		loginFrame.setVisible(false);
-		lobbyFrame = new GUI_Lobby();
+		lobbyFrame = new LobbyFrame();
 //		mainFrame = new AvalonFrame();
 		
 		//for testing

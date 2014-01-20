@@ -19,7 +19,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 @SuppressWarnings("serial")
-public class GuiConnect extends JFrame {
+public class LoginFrame extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -29,7 +29,7 @@ public class GuiConnect extends JFrame {
 	 * Launch the application.
 	 */
 
-	public GuiConnect() {
+	public LoginFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 242, 200);
 		contentPane = new JPanel();
