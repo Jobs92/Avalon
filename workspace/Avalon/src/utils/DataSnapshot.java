@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
-import java.util.Vector;
 
 public class DataSnapshot implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -103,7 +102,7 @@ public class DataSnapshot implements Serializable {
 		this.patentCost = patentCost;
 	}
 
-	public ArrayList<Dictionary<String, String>> getEnemyNames() {
+	public ArrayList<Dictionary<String, String>> getEnemies() {
 		return enemyNames;
 	}
 
