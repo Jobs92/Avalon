@@ -62,6 +62,10 @@ public class Research extends CampaignDepartment {
 	public void addSpiedLevels(int level) {
 		spiedLevels += level;
 	}
+	
+	public int getResearchLevel(){
+		return researchLevel;
+	}
 
 	@Override
 	protected void loadCampaigns() {

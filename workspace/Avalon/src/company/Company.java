@@ -186,7 +186,7 @@ public class Company {
 		snapshot.setPatentLevel(this.getResearch().getPatentLevel());
 		snapshot.setPatentCost(Config.getCostsPatent());
 		snapshot.setSpyCost(Config.getCostSpy());
-		snapshot.setResearchLevel(1); //TODO: how to get ResearchLevel??
+		snapshot.setResearchLevel(getResearch().getResearchLevel());
 		
 		//Department Fixcosts
 		snapshot.addDepartmentFixcost("marketing", this.getMarketing().getFixcost());
