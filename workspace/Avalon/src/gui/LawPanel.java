@@ -113,84 +113,90 @@ public class LawPanel extends AvalonPanel {
 	}
 
 	private void makeEnemyPopup(final int index) {
-		String infoString = "Choose action.";
+		if (index > -1) {
+			String infoString = "Choose action.";
 
-		boolean sueable = !enemyData.get(index).get("amount")
-				.equalsIgnoreCase("0");
+			boolean sueable = !enemyData.get(index).get("amount")
+					.equalsIgnoreCase("0");
 
-		final JButton sue = new JButton("Sue Enemy for "
-				+ enemyData.get(index).get("amount"));
-		sue.setEnabled(sueable);
-		sue.addActionListener(new ActionListener() {
+			final JButton sue = new JButton("Sue Enemy for "
+					+ enemyData.get(index).get("amount"));
+			sue.setEnabled(sueable);
+			sue.addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				GuiManager
-						.sharedInstance()
-						.getApi()
-						.sueOpponent(
-								Integer.parseInt(enemyData.get(index).get("id")));
-				System.out.println("enemy sued");
-				// close popup
-				Window win = SwingUtilities.getWindowAncestor(sue);
-				win.setVisible(false);
-			}
-		});
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					GuiManager
+							.sharedInstance()
+							.getApi()
+							.sueOpponent(
+									Integer.parseInt(enemyData.get(index).get(
+											"id")));
+					System.out.println("enemy sued");
+					// close popup
+					Window win = SwingUtilities.getWindowAncestor(sue);
+					win.setVisible(false);
+				}
+			});
 
-		final JButton check = new JButton("Check Enemy");
-		check.setEnabled(!sueable);
-		check.addActionListener(new ActionListener() {
+			final JButton check = new JButton("Check Enemy");
+			check.setEnabled(!sueable);
+			check.addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				int i = enemies.getSelectedIndex();
-				GuiManager.sharedInstance().getApi().checkOpponent(i);
-				System.out.println("enemy checked");
-				// close popup
-				Window win = SwingUtilities.getWindowAncestor(check);
-				win.setVisible(false);
-			}
-		});
-		Object[] options = { sue, check };
-		JOptionPane.showOptionDialog(null, infoString,
-				enemies.getSelectedValue(), JOptionPane.YES_NO_CANCEL_OPTION,
-				JOptionPane.YES_NO_CANCEL_OPTION, null, options, null);
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					int i = enemies.getSelectedIndex();
+					GuiManager.sharedInstance().getApi().checkOpponent(i);
+					System.out.println("enemy checked");
+					// close popup
+					Window win = SwingUtilities.getWindowAncestor(check);
+					win.setVisible(false);
+				}
+			});
+			Object[] options = { sue, check };
+			JOptionPane.showOptionDialog(null, infoString,
+					enemies.getSelectedValue(),
+					JOptionPane.YES_NO_CANCEL_OPTION,
+					JOptionPane.YES_NO_CANCEL_OPTION, null, options, null);
+		}
 	}
 
 	private void makeSuePopup(int index) {
-		String infoString = " Duration: " + suesData.get("duration")
-				+ ", price: " + suesData.get("cost") + ", amount: "
-				+ suesData.get("amount");
+		if (index > -1) {
+			String infoString = " Duration: " + suesData.get("duration")
+					+ ", price: " + suesData.get("cost") + ", amount: "
+					+ suesData.get("amount");
 
-		final JButton abort = new JButton("Abort Sue");
-		abort.addActionListener(new ActionListener() {
+			final JButton abort = new JButton("Abort Sue");
+			abort.addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Abort sue
-				System.out.println("sue aborted");
-				// close popup
-				Window win = SwingUtilities.getWindowAncestor(abort);
-				win.setVisible(false);
-			}
-		});
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Abort sue
+					System.out.println("sue aborted");
+					// close popup
+					Window win = SwingUtilities.getWindowAncestor(abort);
+					win.setVisible(false);
+				}
+			});
 
-		final JButton pay = new JButton("Pay");
-		pay.addActionListener(new ActionListener() {
+			final JButton pay = new JButton("Pay");
+			pay.addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO pay sue
-				System.out.println("sue payed");
-				// close popup
-				Window win = SwingUtilities.getWindowAncestor(pay);
-				win.setVisible(false);
-			}
-		});
-		Object[] options = { abort, pay };
-		JOptionPane.showOptionDialog(this, infoString, sues.getSelectedValue(),
-				JOptionPane.YES_NO_CANCEL_OPTION,
-				JOptionPane.YES_NO_CANCEL_OPTION, null, options, null);
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO pay sue
+					System.out.println("sue payed");
+					// close popup
+					Window win = SwingUtilities.getWindowAncestor(pay);
+					win.setVisible(false);
+				}
+			});
+			Object[] options = { abort, pay };
+			JOptionPane.showOptionDialog(this, infoString,
+					sues.getSelectedValue(), JOptionPane.YES_NO_CANCEL_OPTION,
+					JOptionPane.YES_NO_CANCEL_OPTION, null, options, null);
+		}
 	}
 
 	@Override

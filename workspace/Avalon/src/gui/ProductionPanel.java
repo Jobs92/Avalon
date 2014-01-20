@@ -65,7 +65,7 @@ public class ProductionPanel extends AvalonPanel {
 				+ GuiManager.sharedInstance().getDs()
 						.getDepartmentFixcosts("production") + ")"));
 		productLabel.setText(GuiManager.sharedInstance().getDs()
-//				.getHighestProductName()
+				.getHighestProductName()
 				+ " (Level "
 				+ GuiManager.sharedInstance().getDs().getHighestProductLevel()
 				+ ")");

@@ -45,13 +45,15 @@ public class SalesPanel extends AvalonPanel {
 	}
 
 	protected void makePopup(int i) {
-		String value = JOptionPane.showInputDialog(null, "Set Price for "
-				+ names[i], productData.get(i).get("price"));
-		GuiManager
-				.sharedInstance()
-				.getApi()
-				.setPrice(Integer.valueOf(productData.get(i).get("level")),
-						Integer.valueOf(value));
+		if (i > -1) {
+			String value = JOptionPane.showInputDialog(null, "Set Price for "
+					+ names[i], productData.get(i).get("price"));
+			GuiManager
+					.sharedInstance()
+					.getApi()
+					.setPrice(Integer.valueOf(productData.get(i).get("level")),
+							Integer.valueOf(value));
+		}
 	}
 
 	@Override

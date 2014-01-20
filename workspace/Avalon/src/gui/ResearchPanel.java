@@ -157,26 +157,33 @@ public class ResearchPanel extends AvalonPanel {
 	}
 
 	protected void makeEnemyPopup(int i) {
-		int accepted = JOptionPane.showConfirmDialog(null,
-				"Do you want to spy " + enemyData.get(i).get("name") + " for "
-						+ GuiManager.sharedInstance().getDs().getSpyCost()
-						+ "?", "Spy", JOptionPane.YES_NO_OPTION);
-		if (accepted == 0) {
-			// accepted
-			GuiManager.sharedInstance().getApi()
-					.spy(Integer.parseInt(enemyData.get(i).get("id")));
+		if (i > -1) {
+			int accepted = JOptionPane.showConfirmDialog(null,
+					"Do you want to spy " + enemyData.get(i).get("name")
+							+ " for "
+							+ GuiManager.sharedInstance().getDs().getSpyCost()
+							+ "?", "Spy", JOptionPane.YES_NO_OPTION);
+			if (accepted == 0) {
+				// accepted
+				GuiManager.sharedInstance().getApi()
+						.spy(Integer.parseInt(enemyData.get(i).get("id")));
+			}
 		}
 	}
 
 	protected void makeInfoPopup(int index) {
-		String infoString = "Description: "
-				+ campaigns.get(index).get("description") + "\nDuration: "
-				+ campaigns.get(index).get("duration") + "\nPrice: "
-				+ campaigns.get(index).get("cost") + "\nLevelupgrade: "
-				+ campaigns.get(index).get("level") + "\nSuccessprobability: "
-				+ campaigns.get(index).get("successprobability") + "%";
-		JOptionPane.showMessageDialog(null, infoString, campaigns.get(index)
-				.get("title") + index, JOptionPane.INFORMATION_MESSAGE);
+		if (index > -1) {
+			String infoString = "Description: "
+					+ campaigns.get(index).get("description") + "\nDuration: "
+					+ campaigns.get(index).get("duration") + "\nPrice: "
+					+ campaigns.get(index).get("cost") + "\nLevelupgrade: "
+					+ campaigns.get(index).get("level")
+					+ "\nSuccessprobability: "
+					+ campaigns.get(index).get("successprobability") + "%";
+			JOptionPane.showMessageDialog(null, infoString, campaigns
+					.get(index).get("title") + index,
+					JOptionPane.INFORMATION_MESSAGE);
+		}
 	}
 
 	protected void makeUpgradePopup() {

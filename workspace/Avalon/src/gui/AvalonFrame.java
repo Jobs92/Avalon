@@ -31,6 +31,7 @@ public class AvalonFrame extends JFrame {
 	private ArrayList<AvalonPanel> panels = new ArrayList<AvalonPanel>();
 	private JButton nextRoundButton = new JButton("Next Round");
 	private JLabel roundLabel = new JLabel("Round");
+	private JButton refreshButton = new JButton("Refresh");
 
 	public AvalonFrame() {
 		setVisible(true);
@@ -55,7 +56,16 @@ public class AvalonFrame extends JFrame {
 		JLabel headerLabel = new JLabel("AVALON");
 		headerLabel.setFont(new Font(null, Font.PLAIN, 20));
 		headerPanel.add(headerLabel, BorderLayout.WEST);
-		headerPanel.add(roundLabel, BorderLayout.EAST);
+		headerPanel.add(roundLabel, BorderLayout.CENTER);
+		refreshButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				for (AvalonPanel p : panels) {
+					p.fill();
+				}
+			}
+		});
+		headerPanel.add(refreshButton, BorderLayout.EAST);
 		add(headerPanel, BorderLayout.NORTH);
 	}
 

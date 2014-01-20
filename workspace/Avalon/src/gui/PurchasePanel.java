@@ -77,26 +77,18 @@ public class PurchasePanel extends AvalonPanel {
 			supplierPanel.add(amount.get(i));
 		}
 
-		// buyButton.addActionListener(new ActionListener() {
-		// @Override
-		// public void actionPerformed(ActionEvent e) {
-		// // TODO send confirm
-		// buyButton.setEnabled(false);
-		// }
-		// });
-
 		add(supplierPanel, BorderLayout.NORTH);
 		add(sumLabel, BorderLayout.CENTER);
-		// add(buyButton, BorderLayout.SOUTH);
 	}
 
 	protected void makeInfoPopup(int index) {
+		if (index > -1) {
 		String infoString = "Trust: " + supplier.get(index).get("trust")
 				+ ", quality: " + supplier.get(index).get("quality")
 				+ ", price: " + supplier.get(index).get("price");
 		JOptionPane.showMessageDialog(null, infoString, "Supplier #" + index,
 				JOptionPane.INFORMATION_MESSAGE);
-		// JOptionPane.showMessageDialog(this, infoString);
+		}
 	}
 
 	private void updateSum() {
