@@ -195,9 +195,14 @@ public class ResearchPanel extends AvalonPanel {
 	protected void fill() {
 		labelPatentLevelNumber.setText(String.valueOf(GuiManager
 				.sharedInstance().getDs().getPatentLevel())
+				+ ", Productlevel: "
+				+ String.valueOf(GuiManager.sharedInstance().getDs()
+						.getResearchLevel())
 				+ ", Researchlevel: "
 				+ String.valueOf(GuiManager.sharedInstance().getDs()
-						.getResearchLevel()));
+						.getResearchLevel()
+						+ GuiManager.sharedInstance().getDs()
+								.getNotAppliedLevels()));
 		upgradeButton.setEnabled(true);
 		setBorder(new TitledBorder("Research(Level: "
 				+ GuiManager.sharedInstance().getDs().getLevel("research")
