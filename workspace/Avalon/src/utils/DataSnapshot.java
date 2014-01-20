@@ -23,6 +23,7 @@ public class DataSnapshot implements Serializable {
 	private ArrayList<Dictionary<String, String>> researchCampaigns = new ArrayList<Dictionary<String, String>>();
 	private double spyCost;
 	private int researchLevel;
+	private int notAppliedLevels;
 
 	// Sales
 
@@ -128,6 +129,14 @@ public class DataSnapshot implements Serializable {
 	
 	public void setResearchLevel(int level){
 		researchLevel = level;
+	}
+	
+	public int getNotAppliedLevels(){
+		return notAppliedLevels;
+	}
+	
+	public void setNotAppliedLevels(int level){
+		this.notAppliedLevels = level;
 	}
 
 	public void setLevels(Dictionary<String, Integer> levels) {
