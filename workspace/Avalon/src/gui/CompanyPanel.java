@@ -63,6 +63,7 @@ public class CompanyPanel extends AvalonPanel {
 				.getHighestProductLevel()));
 		productsOnStock.setText(String.valueOf(GuiManager.sharedInstance()
 				.getDs().getProductsOnStock()));
+		refresh();
 	}
 
 	@Override

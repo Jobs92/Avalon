@@ -69,7 +69,8 @@ public class ProductionPanel extends AvalonPanel {
 				+ GuiManager.sharedInstance().getDs().getHighestProductLevel()
 				+ ")");
 		resourceLabel.setText("Available Resources: "
-				+ GuiManager.sharedInstance().getDs().getRessources());
+				+ GuiManager.sharedInstance().getDs().getResources());
+		refresh();
 	}
 
 	@Override

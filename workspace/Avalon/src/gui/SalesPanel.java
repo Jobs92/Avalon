@@ -67,6 +67,7 @@ public class SalesPanel extends AvalonPanel {
 					+ " )";
 		}
 		products.setListData(names);
+		refresh();
 	}
 
 	@Override

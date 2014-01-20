@@ -223,6 +223,8 @@ public class LawPanel extends AvalonPanel {
 			enemyListData[i] = s;
 		}
 		enemies.setListData(enemyListData);
+		
+		refresh();
 	}
 
 	@Override

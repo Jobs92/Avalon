@@ -66,6 +66,7 @@ public class MessagePanel extends AvalonPanel {
 			messages[i] = input.get(i).get("message");
 		}
 		inbox.setListData(titles);
+		refresh();
 	}
 
 	@Override

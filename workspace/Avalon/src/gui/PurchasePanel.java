@@ -119,6 +119,7 @@ public class PurchasePanel extends AvalonPanel {
 		for (int i = 0; i < supplierLabels.size(); i++) {
 			supplierLabels.get(i).setText(supplier.get(i).get("name"));
 		}
+		refresh();
 	}
 
 	@Override

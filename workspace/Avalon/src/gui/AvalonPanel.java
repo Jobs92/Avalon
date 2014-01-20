@@ -17,4 +17,12 @@ public abstract class AvalonPanel extends JPanel {
 	 * 
 	 */
 	protected abstract void send();
+
+	/**
+	 * Refreshes the GUI to avoid bugs.
+	 */
+	protected void refresh() {
+		revalidate();
+		repaint();
+	}
 }

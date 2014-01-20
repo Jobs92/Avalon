@@ -214,6 +214,7 @@ public class ResearchPanel extends AvalonPanel {
 			campaignsCB.get(i).setText(campaigns.get(i).get("title"));
 			campaignsCB.get(i).setSelected(false);
 		}
+		refresh();
 		enemyData = GuiManager.sharedInstance().getDs().getEnemyNames();
 		enemies.setListData(enemyData);
 	}

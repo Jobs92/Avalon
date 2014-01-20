@@ -117,6 +117,8 @@ public class MarketingPanel extends AvalonPanel {
 			campaignsCB.get(i).setText(campaigns.get(i).get("title"));
 			campaignsCB.get(i).setSelected(false);
 		}
+		
+		refresh();
 	}
 
 	@Override
