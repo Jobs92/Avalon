@@ -122,7 +122,7 @@ public class ResearchPanel extends AvalonPanel {
 				int accepted = JOptionPane.showConfirmDialog(null,
 						"Do you want to patent for "
 								+ GuiManager.sharedInstance().getDs()
-										.getPatentCost() + "?", "Patent",
+										.getPatentCost() * GuiManager.sharedInstance().getDs().getRound() + "?", "Patent",
 						JOptionPane.YES_NO_OPTION);
 				if (accepted == 0) {
 					// accepted
