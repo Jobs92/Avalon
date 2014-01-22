@@ -224,7 +224,7 @@ public class LawPanel extends AvalonPanel {
 		String[] enemyListData = new String[enemyData.size()];
 		for (int i = 0; i < enemyListData.length; i++) {
 			String s = enemyData.get(i).get("name");
-			if (enemyData.get(i).get("amount").equalsIgnoreCase("0")) {
+			if (enemyData.get(i).get("amount").equalsIgnoreCase("0.0")) {
 				s += "(not yet checked)";
 			} else {
 				s += "(amount: " + enemyData.get(i).get("amount") + ")";

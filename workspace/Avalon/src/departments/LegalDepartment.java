@@ -90,6 +90,15 @@ public class LegalDepartment extends Department {
 		return false;
 	}
 	
+	public double getAmountForEnemy(Company c){
+		for (Lawsuit l : lawsuitsAsClaimant) {
+			if (!l.isActive() && !l.isStarted()){
+				return l.getAmount();
+			}
+		}
+		return 0;
+	}
+	
 	public Lawsuit getCurrentLawsuit(){
 		
 		// Check lawsuits as Claimant

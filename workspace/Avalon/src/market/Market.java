@@ -106,6 +106,15 @@ public class Market {
 		products.add(product);
 	}
 
+	public boolean productAlreadyOnMarket(Product p){
+		for (Product product : products) {
+			if (product == p){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public int getDemand() {
 		return demand;
 	}
