@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import market.Market;
 import otherclasses.SalesHistory;
+import product.Product;
 import utils.Message;
 import company.Company;
 
@@ -28,7 +29,11 @@ public class Sales  extends Department{
 
 	public void setPrice(int level, int price){
 		if (price>0){
-			company.getWarehouse().getSingleProduct(level).setPrice(price);
+			Product p = company.getWarehouse().getSingleProduct(level);
+			p.setPrice(price);
+			if (!Market.sharedInstance().productAlreadyOnMarket(p)){
+				Market.sharedInstance().addProduct(p);
+			}
 		}
 	}
 	

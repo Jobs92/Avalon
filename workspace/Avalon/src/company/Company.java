@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import campaigns.Campaign;
 import otherclasses.Supplier;
+import product.Product;
 import lawsuits.Lawsuit;
 import market.Market;
 import server.Connection;
@@ -255,12 +256,16 @@ public class Company {
 		}
 
 		// Names
-		for (int i = 0; i < Market.sharedInstance().getCompanies().size(); i++) {
-			if (Market.sharedInstance().getCompanies().get(i) != this && Market.sharedInstance().getCompanies().get(i).isActive()) {
-				snapshot.addEnemyName(Market.sharedInstance().getCompanies()
-						.get(i).getName(), Market.sharedInstance().getCompanies()
-						.get(i).getId());
+		for (Company c : Market.sharedInstance().getCompanies()) {
+			if (c != this && c.isActive()) {
+				// Enemy Names
+				snapshot.addEnemyName(c.getName(), c.getId());
+				
+				//Checked Enemies
+				double amount = this.getLegaldepartment().getAmountForEnemy(c);
+				snapshot.addCheckedEnemy(c.getName(), amount, c.getId());
 			}
+	
 		}
 
 		// LegalDepartment
@@ -283,6 +288,20 @@ public class Company {
 			snapshot.addResearchCampaign(c.getCost(), c.getDuration(),
 					c.getSuccessProbability(), c.getLevel(), c.getTitle(),
 					c.getDescription());
+		}
+		
+		//Products
+		for (Product p : this.getWarehouse().getProducts()) {
+			if (p.getAmount() > 0){
+				snapshot.addProduct(p.getName(), p.getLevel(), p.getAmount(), p.getPrice());
+			}
+		}
+		
+		//Market Products
+		for (Product p : Market.sharedInstance().getProducts()) {
+			if (p.getAmount() > 0){
+				snapshot.addMarketProduct(p.getCompany().getName(), p.getName(), p.getLevel(), p.getPrice());
+			}
 		}
 
 		// Production

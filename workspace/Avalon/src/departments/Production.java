@@ -75,34 +75,35 @@ public class Production extends Department {
 		
 	}
 	public void produce (int level, int amount){ 
-		if (capacity>=amount + countAlreadyNeededRessources()) {
-			if (countAlreadyNeededRessources()+amount <= company.getWarehouse().getAmountResources()){
-//				if (company.getWarehouse().getSingleProduct(level)==null) {
-//					company.getWarehouse().addProduct(new Product(level, company));
-//				}
-				ProductionJobs job = new ProductionJobs(level, amount);
-				allProductionJobs.add(job);
-			}else{
-				//Fehlermeldung: keine ressourcen
+		if (amount >0){
+			if (capacity>=amount + countAlreadyNeededRessources()) {
+				if (countAlreadyNeededRessources()+amount <= company.getWarehouse().getAmountResources()){
+	//				if (company.getWarehouse().getSingleProduct(level)==null) {
+	//					company.getWarehouse().addProduct(new Product(level, company));
+	//				}
+					ProductionJobs job = new ProductionJobs(level, amount);
+					allProductionJobs.add(job);
+				}else{
+					//Fehlermeldung: keine ressourcen
+					Message m = new Message();
+					m.setTitle("Nicht genügend Ressourcen");
+					m.setType(Message.GAME);
+					m.setTargetPlayer(company.getId());
+					m.setMessage("Sie haben nicht genügend Ressourcen um " + amount + " weitere Smartphones zu produzieren!");
+					Market.sharedInstance().sendMessage(m);
+				}
+			}
+			else {
+				 //Fehlermeldung: keine kapazitaet
 				Message m = new Message();
-				m.setTitle("Nicht genügend Ressourcen");
+				m.setTitle("Kapazität reicht nicht aus");
 				m.setType(Message.GAME);
 				m.setTargetPlayer(company.getId());
-				m.setMessage("Sie haben nicht genügend Ressourcen um " + amount + " weitere Smartphones zu produzieren!");
+				m.setMessage("Ihre Kapazitäten reichen nicht aus um " + amount + " weitere Smartphones zu produzieren!");
 				Market.sharedInstance().sendMessage(m);
+				
 			}
 		}
-		else {
-			 //Fehlermeldung: keine kapazitaet
-			Message m = new Message();
-			m.setTitle("Kapazität reicht nicht aus");
-			m.setType(Message.GAME);
-			m.setTargetPlayer(company.getId());
-			m.setMessage("Ihre Kapazitäten reichen nicht aus um " + amount + " weitere Smartphones zu produzieren!");
-			Market.sharedInstance().sendMessage(m);
-			
-		}
-		
 	}
 
 	private int countAlreadyNeededRessources() {
