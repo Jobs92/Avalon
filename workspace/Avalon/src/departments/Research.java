@@ -24,7 +24,7 @@ public class Research extends CampaignDepartment {
 		this.patentLevel = 1;
 		this.researchLevel = 1;
 		this.spiedLevels = 0;
-		this.fixcost = Config.getResearchFixcost();
+		updateFixcost();
 	}
 
 	/**
@@ -129,5 +129,10 @@ public class Research extends CampaignDepartment {
 
 	public SpyingCampaign getSpyingCampaignByID(int id) {
 		return spyingCampains.get(id);
+	}
+
+	@Override
+	protected void updateFixcost() {
+		fixcost = Config.getResearchFixcost() * level;	
 	}
 }

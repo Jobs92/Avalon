@@ -19,7 +19,7 @@ public class Production extends Department {
 		allProductionJobs = new ArrayList<otherclasses.ProductionJobs>();
 		level = 1;
 		capacity=config.Config.getProductionCapacity();
-		fixcost = Config.getProductionFixcost();
+		updateFixcost();
 	}
 	
 	public int getLevel() {
@@ -118,8 +118,9 @@ public class Production extends Department {
 
 	public void upgrade(){
 		if (this.level+1 <= Config.getMaxLevelProduction()){
-			level++;
 			if (super.company.changeMoney((-1)*Config.getCostsUpgradeProduction())){
+				level++;
+				updateFixcost();
 				this.capacity=(int)(this.capacity*Config.getUpgradeProduction());
 			}else{
 				Message m = new Message();
@@ -130,5 +131,16 @@ public class Production extends Department {
 				Market.sharedInstance().sendMessage(m);
 			}
 		}
-	}		
+	}	
+	
+	public void downgrade(){
+		if (level >1){
+			level--;
+			updateFixcost();
+		}
+	}
+	
+	public void updateFixcost(){
+		fixcost = Config.getProductionFixcost() * level;
+	}
 }

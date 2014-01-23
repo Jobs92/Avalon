@@ -41,6 +41,11 @@ public class Api {
 		connection.send(s);
 	}
 	
+	public void downMarketing(){
+		String s = "DOWNGRADEMARKETING ";
+		connection.send(s);
+	}
+	
 	public void startMarketingCampaign(int campaign){
 		String s = "STARTMARKETINGCAMPAIGN " + campaign;
 		connection.send(s);
@@ -56,6 +61,11 @@ public class Api {
 		connection.send(s);
 	}
 	
+	public void downgradeProduction(){
+		String s = "DOWNGRADEPRODUCTION ";
+		connection.send(s);
+	}
+	
 	public void startResearchCampaign(int campaign){
 		String s = "STARTRESEARCHCAMPAIGN " + campaign;
 		connection.send(s);
@@ -63,6 +73,11 @@ public class Api {
 	
 	public void upgradeResearch(){
 		String s = "UPGRADERESEARCH ";
+		connection.send(s);
+	}
+	
+	public void downgradeResearch(){
+		String s = "DOWNGRADERESEARCH ";
 		connection.send(s);
 	}
 	
@@ -108,6 +123,11 @@ public class Api {
 	
 	public void upgradeLegalDepartment(){
 		String s = "UPGRADELEGALDEPARTMENT ";
+		connection.send(s);
+	}
+	
+	public void downgradeLegalDepartment(){
+		String s = "DOWNGRADELEGALDEPARTMENT ";
 		connection.send(s);
 	}
 }

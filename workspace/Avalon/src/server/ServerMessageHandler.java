@@ -46,6 +46,9 @@ public class ServerMessageHandler {
 		if (txt.startsWith("UPGRADEMARKETING")){
 			upgradeMarketing(sender);
 		}
+		if (txt.startsWith("DOWNGRADEMARKETING")){
+			downgradeMarketing(sender);
+		}
 		if (txt.startsWith("STARTMARKETINGCAMPAIGN ")){
 			int campaign = Integer.parseInt(txt.substring("STARTMARKETINGCAMPAIGN ".length()));
 			startMarketingCampaign(sender, campaign);
@@ -59,6 +62,9 @@ public class ServerMessageHandler {
 		if (txt.startsWith("UPGRADEPRODUCTION")){
 			upgradeProduction(sender);
 		}
+		if (txt.startsWith("DOWNGRADEPRODUCTION")){
+			downgradeProduction(sender);
+		}
 		if (txt.startsWith("PRODUCE ")){
 			int amount = Integer.parseInt(txt.substring("PRODUCE ".length()));
 			produce(sender, amount);
@@ -69,6 +75,9 @@ public class ServerMessageHandler {
 		}
 		if (txt.startsWith("UPGRADERESEARCH")){
 			upgradeResearch(sender);
+		}
+		if (txt.startsWith("DOWNGRADERESEARCH")){
+			downgradeResearch(sender);
 		}
 		if (txt.startsWith("PATENT")){
 			patent(sender);
@@ -101,11 +110,27 @@ public class ServerMessageHandler {
 		if (txt.startsWith("ABANDONLAWSUIT")){
 			abandonLawsuit(sender);
 		}
-		if (txt.startsWith("UPGRADELEGALDEPARTMENT")){
-			upgradeLegalDepartment(sender);
+		if (txt.startsWith("DOWNGRADELEGALDEPARTMENT")){
+			downgradeLegalDepartment(sender);
 		}
 	}
 	
+	private void downgradeMarketing(Connection sender) {
+		sender.getCompany().getMarketing().downgrade();
+	}
+
+	private void downgradeProduction(Connection sender) {
+		sender.getCompany().getProduction().downgrade();
+	}
+
+	private void downgradeResearch(Connection sender) {
+		sender.getCompany().getResearch().downgrade();
+	}
+
+	private void downgradeLegalDepartment(Connection sender) {
+		sender.getCompany().getLegaldepartment().downgrade();
+	}
+
 	private void broadcast(String s){
 		for (Company c : Market.sharedInstance().getCompanies()) {
 			c.getConnection().send(s);

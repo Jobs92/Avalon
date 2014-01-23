@@ -20,6 +20,7 @@ public class Config {
 	private static double costsCheckCampaign;
 	private static double costsFoundSpyingCampaign;
 	private static int relativeAmountCostsLawsuit;
+	private static int maxLevelLegalDepartment;
 
 	// Research
 	private static int maxLevelResearch;
@@ -247,6 +248,12 @@ public class Config {
 		} catch (IOException ex) {
 			System.err.println(ex);
 		}
+	}
+	
+	
+
+	public static int getMaxLevelLegalDepartment() {
+		return maxLevelLegalDepartment;
 	}
 
 	public static String[] getTitleMarketing() {

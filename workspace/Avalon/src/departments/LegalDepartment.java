@@ -18,7 +18,7 @@ public class LegalDepartment extends Department {
 
 	public LegalDepartment(Company company) {
 		super(company);
-		fixcost = Config.getLegalDepartmentFixcost();
+		updateFixcost();
 	}
 
 	public void checkOpponent(Company c) {
@@ -122,17 +122,31 @@ public class LegalDepartment extends Department {
 	}
 
 	public void upgrade() {
-		int amount = Config.getCostsUpgradeLegalDeparment();
-		if (company.changeMoney(amount * -1)) {
-			level++;	
-		}else{
-			Message m = new Message();
-			m.setTitle("Geld reicht nicht aus");
-			m.setType(Message.GAME);
-			m.setTargetPlayer(company.getId());
-			m.setMessage("Sie haben nicht genügend Geld um Ihre Rechtsabteilung zu upgraden!");
-			Market.sharedInstance().sendMessage(m);
-		}	
+		if (level < Config.getMaxLevelLegalDepartment()){
+			int amount = Config.getCostsUpgradeLegalDeparment();
+			if (company.changeMoney(amount * -1)) {
+				level++;	
+				updateFixcost();
+			}else{
+				Message m = new Message();
+				m.setTitle("Geld reicht nicht aus");
+				m.setType(Message.GAME);
+				m.setTargetPlayer(company.getId());
+				m.setMessage("Sie haben nicht genügend Geld um Ihre Rechtsabteilung zu upgraden!");
+				Market.sharedInstance().sendMessage(m);
+			}	
+		}
+	}
+	
+	public void downgrade(){
+		if (level >1){
+			level--;
+			updateFixcost();
+		}
+	}
+	
+	public void updateFixcost(){
+		fixcost = Config.getLegalDepartmentFixcost() * level;
 	}
 
 	public void beSued(Lawsuit l) {

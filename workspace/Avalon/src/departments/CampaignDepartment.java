@@ -3,7 +3,7 @@ package departments;
 import java.util.ArrayList;
 
 import company.Company;
-
+import config.Config;
 import campaigns.Campaign;
 import campaigns.ExplicitCampaign;
 
@@ -73,12 +73,22 @@ public abstract class CampaignDepartment extends Department {
 					campaign.updateProbability(1);
 				}
 				this.level += 1;
+				updateFixcost();
 				return true;
 			} else {
 				return false;
 			}
 		}
 	}
+	
+	public void downgrade(){
+		if (level >1){
+			level--;
+			updateFixcost();
+		}
+	}
+	
+	protected abstract void updateFixcost();
 
 	protected abstract boolean isMaxLevel();
 

@@ -10,7 +10,7 @@ public class Marketing extends CampaignDepartment {
 
 	public Marketing(Company company) {
 		super(company);
-		fixcost = Config.getMarketingFixcost();
+		updateFixcost();
 		loadCampaigns();
 	}
 
@@ -27,7 +27,7 @@ public class Marketing extends CampaignDepartment {
 			addCampaign(m);
 		}
 	}
-
+	
 	@Override
 	public int getCostForNextLevel() {
 		int cost = level * level * Config.getCostsUpgradeMarketing();
@@ -47,6 +47,12 @@ public class Marketing extends CampaignDepartment {
 
 		}
 		return false;
+	}
+
+	@Override
+	protected void updateFixcost() {
+		fixcost = Config.getMarketingFixcost() * level;
+		
 	}
 
 }
