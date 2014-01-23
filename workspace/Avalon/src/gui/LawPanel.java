@@ -117,7 +117,7 @@ public class LawPanel extends AvalonPanel {
 			String infoString = "Choose action.";
 
 			boolean sueable = !enemyData.get(index).get("amount")
-					.equalsIgnoreCase("0");
+					.equalsIgnoreCase("0.0");
 
 			final JButton sue = new JButton("Sue Enemy for "
 					+ enemyData.get(index).get("amount"));

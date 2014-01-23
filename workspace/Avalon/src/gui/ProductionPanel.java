@@ -77,7 +77,7 @@ public class ProductionPanel extends AvalonPanel {
 	@Override
 	protected void send() {
 		String value = amountTF.getText();
-		if (!value.equalsIgnoreCase("") || Integer.parseInt(value) > 0) {
+		if (!value.equalsIgnoreCase("") && Integer.parseInt(value) > 0) {
 			GuiManager.sharedInstance().getApi()
 					.produce(Integer.valueOf(value));
 		}
