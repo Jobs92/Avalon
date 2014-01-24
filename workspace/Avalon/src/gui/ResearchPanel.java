@@ -139,8 +139,7 @@ public class ResearchPanel extends AvalonPanel {
 						"Do you want to patent for "
 								+ GuiManager.sharedInstance().getDs()
 										.getPatentCost()
-								* GuiManager.sharedInstance().getDs()
-										.getRound() + "?", "Patent",
+								, "Patent",
 						JOptionPane.YES_NO_OPTION);
 				if (accepted == 0) {
 					// accepted
