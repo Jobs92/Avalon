@@ -100,7 +100,7 @@ public class Research extends CampaignDepartment {
 	 * this level due to lost lawsuits.
 	 */
 	public void patentResearchLevel() {
-		company.changeMoney(Config.getCostsPatent() * researchLevel);
+		company.changeMoney(Config.getCostsPatent() * ( researchLevel + 1));
 		patentLevel = researchLevel;
 	}
 
