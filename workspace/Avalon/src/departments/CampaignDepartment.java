@@ -3,7 +3,6 @@ package departments;
 import java.util.ArrayList;
 
 import company.Company;
-import config.Config;
 import campaigns.Campaign;
 import campaigns.ExplicitCampaign;
 
