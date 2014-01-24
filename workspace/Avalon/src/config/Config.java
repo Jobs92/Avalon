@@ -170,6 +170,7 @@ public class Config {
 
 				durationResearch[i] = Integer.parseInt(tmpDuration[i]);
 			}
+			costsPatent = Double.parseDouble(prop.getProperty("patentCoast"));
 			String[] tmpLevel = prop.getProperty("levelResearch").split(";");
 			levelResearch = new int[tmpLevel.length];
 			for (int i = 0; i < tmpCost.length; i++) {
