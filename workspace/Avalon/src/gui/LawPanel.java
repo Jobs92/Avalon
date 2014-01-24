@@ -24,6 +24,8 @@ public class LawPanel extends AvalonPanel {
 	private JPanel enemyPanel = new JPanel();
 	private JPanel suesPanel = new JPanel();
 	private JButton upgradeButton = new JButton("Upgrade");
+	private JButton downgradeButton = new JButton("Downgrade");
+	private JPanel southPanel = new JPanel();
 
 	private JList<String> enemies = new JList<String>();
 	private JList<String> sues = new JList<String>();
@@ -44,19 +46,38 @@ public class LawPanel extends AvalonPanel {
 		enemyPanel.setBorder(new TitledBorder("Opponents"));
 		add(suesPanel, BorderLayout.NORTH);
 		add(enemyPanel, BorderLayout.CENTER);
+
+		downgradeButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int accepted = JOptionPane.showConfirmDialog(null,
+						"Do you want to downgrade the Legal department?",
+						"Downgrade", JOptionPane.YES_NO_OPTION);
+				if (accepted == 0) {
+					upgradeButton.setEnabled(false);
+					// accepted
+					GuiManager.sharedInstance().getApi()
+							.downgradeLegalDepartment();
+				}
+			}
+		});
+
 		upgradeButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				makeUpgradePopup();
 			}
 		});
-		add(upgradeButton, BorderLayout.SOUTH);
+		southPanel.add(upgradeButton);
+		southPanel.add(downgradeButton);
+		southPanel.setBackground(getBackground());
+		add(southPanel, BorderLayout.SOUTH);
 	}
 
 	protected void makeUpgradePopup() {
 		int accepted = JOptionPane.showConfirmDialog(
 				null,
-				"Do you want to upgrade the Law department for "
+				"Do you want to upgrade the Legal department for "
 						+ GuiManager.sharedInstance().getDs()
 								.getUpgradeCosts("legalDepartment") + "?",
 				"Upgrade", JOptionPane.YES_NO_OPTION);

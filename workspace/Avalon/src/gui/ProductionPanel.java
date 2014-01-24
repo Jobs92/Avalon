@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
@@ -18,9 +19,8 @@ public class ProductionPanel extends AvalonPanel {
 	private JLabel resourceLabel = new JLabel("Available Resources: 0");
 	private JTextField amountTF = new JTextField("0");
 	private JButton upgradeButton = new JButton("Upgrade");
-
-	// private JList<String> products;// = new JList<String>();
-	// private Vector<String> data = new Vector<String>();
+	private JButton downgradeButton = new JButton("Downgrade");
+	private JPanel southPanel = new JPanel();
 
 	public ProductionPanel() {
 		TitledBorder tb = new TitledBorder("Production");
@@ -40,7 +40,24 @@ public class ProductionPanel extends AvalonPanel {
 				makeUpgradePopup();
 			}
 		});
-		add(upgradeButton);
+
+		downgradeButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int accepted = JOptionPane.showConfirmDialog(null,
+						"Do you want to downgrade the Production department?",
+						"Downgrade", JOptionPane.YES_NO_OPTION);
+				if (accepted == 0) {
+					upgradeButton.setEnabled(false);
+					// accepted
+					GuiManager.sharedInstance().getApi().downgradeProduction();
+				}
+			}
+		});
+		southPanel.add(upgradeButton);
+		southPanel.add(downgradeButton);
+		southPanel.setBackground(getBackground());
+		add(southPanel);
 	}
 
 	protected void makeUpgradePopup() {

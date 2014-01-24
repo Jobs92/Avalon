@@ -31,6 +31,7 @@ public class ResearchPanel extends AvalonPanel {
 	private ArrayList<JCheckBox> campaignsCB = new ArrayList<JCheckBox>();
 	private ArrayList<JButton> info = new ArrayList<JButton>();
 	private JButton upgradeButton = new JButton("Upgrade");
+	private JButton downgradeButton = new JButton("Downgrade");
 	private ArrayList<Dictionary<String, String>> campaigns = new ArrayList<Dictionary<String, String>>();
 	private JLabel labelPatentLevelNumber;
 	private JButton releaseButton = new JButton("Release new Product");
@@ -60,6 +61,20 @@ public class ResearchPanel extends AvalonPanel {
 			}
 		});
 
+		downgradeButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int accepted = JOptionPane.showConfirmDialog(null,
+						"Do you want to downgrade the Research department?",
+						"Downgrade", JOptionPane.YES_NO_OPTION);
+				if (accepted == 0) {
+					upgradeButton.setEnabled(false);
+					// accepted
+					GuiManager.sharedInstance().getApi().downgradeResearch();
+				}
+			}
+		});
+
 		releaseButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -71,6 +86,7 @@ public class ResearchPanel extends AvalonPanel {
 		JPanel p = new JPanel();
 		p.setBackground(getBackground());
 		p.add(upgradeButton);
+		p.add(downgradeButton);
 		p.add(releaseButton);
 		add(p, BorderLayout.SOUTH);
 
@@ -122,7 +138,9 @@ public class ResearchPanel extends AvalonPanel {
 				int accepted = JOptionPane.showConfirmDialog(null,
 						"Do you want to patent for "
 								+ GuiManager.sharedInstance().getDs()
-										.getPatentCost() * GuiManager.sharedInstance().getDs().getRound() + "?", "Patent",
+										.getPatentCost()
+								* GuiManager.sharedInstance().getDs()
+										.getRound() + "?", "Patent",
 						JOptionPane.YES_NO_OPTION);
 				if (accepted == 0) {
 					// accepted

@@ -18,8 +18,10 @@ import javax.swing.border.TitledBorder;
 public class MarketingPanel extends AvalonPanel {
 	private ArrayList<JCheckBox> campaignsCB = new ArrayList<JCheckBox>();
 	private ArrayList<JButton> info = new ArrayList<JButton>();
+
 	private JButton upgradeButton = new JButton("Upgrade");
-	// private JButton startButton = new JButton("Start Campaigns");
+	private JButton downgradeButton = new JButton("Downgrade");
+	private JPanel southPanel = new JPanel();
 	private ArrayList<Dictionary<String, String>> campaigns = new ArrayList<Dictionary<String, String>>();
 
 	public MarketingPanel() {
@@ -57,6 +59,20 @@ public class MarketingPanel extends AvalonPanel {
 			campaignPanel.add(info.get(i));
 		}
 
+		downgradeButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int accepted = JOptionPane.showConfirmDialog(null,
+						"Do you want to downgrade the Marketing department?",
+						"Downgrade", JOptionPane.YES_NO_OPTION);
+				if (accepted == 0) {
+					upgradeButton.setEnabled(false);
+					// accepted
+					GuiManager.sharedInstance().getApi().downMarketing();
+				}
+			}
+		});
+
 		upgradeButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -64,8 +80,22 @@ public class MarketingPanel extends AvalonPanel {
 				makeUpgradePopup();
 			}
 		});
-		add(upgradeButton, BorderLayout.SOUTH);
+		southPanel.add(upgradeButton);
+		southPanel.add(downgradeButton);
+		southPanel.setBackground(getBackground());
+		add(southPanel, BorderLayout.SOUTH);
 		add(campaignPanel, BorderLayout.NORTH);
+	}
+
+	protected void makeDowngradePopup() {
+		int accepted = JOptionPane.showConfirmDialog(null,
+				"Do you want to downgrade the Marketing department?",
+				"Upgrade", JOptionPane.YES_NO_OPTION);
+		if (accepted == 0) {
+			upgradeButton.setEnabled(false);
+			// accepted
+			GuiManager.sharedInstance().getApi().downMarketing();
+		}
 	}
 
 	protected void makeUpgradePopup() {
