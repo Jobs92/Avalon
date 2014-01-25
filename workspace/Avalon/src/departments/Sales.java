@@ -9,6 +9,7 @@ import otherclasses.SalesHistory;
 import product.Product;
 import utils.Message;
 import company.Company;
+import config.Config;
 
 
 
@@ -18,6 +19,7 @@ public class Sales  extends Department{
 	private ArrayList<otherclasses.SalesHistory> salesHistory;
 	public Sales(Company company) {
 		super(company);
+		updateFixcost();
 	}
 	
 	private int revenue;
@@ -89,6 +91,9 @@ public class Sales  extends Department{
 		
 	}
 	
+	protected void updateFixcost() {
+		fixcost = Config.getSalesFixcost();	
+	}
 	
 	@Override
 	public void simulate() {
