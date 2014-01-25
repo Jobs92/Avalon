@@ -47,6 +47,7 @@ public class Config {
 
 	// Marketing
 	private static int costsUpgradeMarketing;
+	
 
 	// Marketing Campaigns
 	private static String[] titleMarketing;
@@ -55,6 +56,7 @@ public class Config {
 	private static int[] levelMarketing;
 	private static int[] successprobabilityMarketing;
 	private static int[] durationMarketing;
+	private static double marketingFixcost;
 
 	// Market
 	private static int demand;
@@ -75,10 +77,11 @@ public class Config {
 	private static double upgradeProduction;
 	private static double productionVariableCosts;
 	private static int maxLevelMarketing;
-	private static double marketingFixcost;
+	
 
 	// Warehouse
 	private static String startProductName;
+	private static double salesFixcost;
 	
 	// Events
 	private static String[] eventText;
@@ -153,6 +156,7 @@ public class Config {
 
 			// Warehouse
 			startProductName = prop.getProperty("startProductName");
+			salesFixcost = Double.parseDouble(prop.getProperty("salesFixcost"));
 
 			// Research
 			titleResearch = prop.getProperty("titleResearch").split(";");
@@ -182,6 +186,8 @@ public class Config {
 			for (int i = 0; i < tmpCost.length; i++) {
 				successprobabilityResearch[i] = Integer.parseInt(probLevel[i]);
 			}
+			researchFixcost = Integer.parseInt(prop.getProperty("researchFixcost"));
+			
 			//Spying campaign
 			titleSpying = prop.getProperty("titleSpying");
 			descriptionSpying = prop.getProperty("descriptionSpying");
@@ -220,6 +226,7 @@ public class Config {
 				successprobabilityMarketing[i] = Integer
 						.parseInt(probMarketingLevel[i]);
 			}
+			marketingFixcost = Double.parseDouble(prop.getProperty("marketingFixcost"));
 			
 			// Events
 			eventText = prop.getProperty("eventText").split(";");
@@ -272,6 +279,11 @@ public class Config {
 	public static int[] getLevelMarketing() {
 		return levelMarketing;
 	}
+	
+	public static double getSalesFixcost() {
+		return salesFixcost;
+	}
+
 
 	public static int[] getSuccessprobabilityMarketing() {
 		return successprobabilityMarketing;
