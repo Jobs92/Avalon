@@ -209,7 +209,7 @@ public class Company {
 		snapshot.setProductsOnStock(getWarehouse().getTotalAmountProducts());
 		snapshot.setRound(GameManager.sharedInstance().getRound());
 		snapshot.setPatentLevel(this.getResearch().getPatentLevel());
-		snapshot.setPatentCost(Config.getCostsPatent() * GameManager.sharedInstance().getRound());
+		snapshot.setPatentCost(Config.getCostsPatent() * (GameManager.sharedInstance().getRound() + 1 ));
 		snapshot.setSpyCost(Config.getCostSpy());
 		snapshot.setNotAppliedLevels(this.getResearch().getNotAppliedLevels());
 		snapshot.setResearchLevel(getResearch().getResearchLevel());

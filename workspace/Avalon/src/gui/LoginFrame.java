@@ -80,7 +80,7 @@ public class LoginFrame extends JFrame {
 			}
 		});
 		textField_1.setBounds(103, 79, 112, 20);
-		textField_1.setText("134.3.122.131");
+		textField_1.setText("localhost");
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
 
