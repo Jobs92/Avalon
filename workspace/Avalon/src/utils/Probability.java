@@ -3,6 +3,7 @@ package utils;
 public class Probability {
 
 	/**
+	 * @author Frederik, Martin
 	 * Check if unsure event happened with the given probability.
 	 * 
 	 * @param probability

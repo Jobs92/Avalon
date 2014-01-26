@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
+/**
+ * @author Frederik
+ * Manages all Data sent from the server to a single client. 
+ */
 public class DataSnapshot implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

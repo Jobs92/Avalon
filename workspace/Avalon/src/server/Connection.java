@@ -8,6 +8,11 @@ import java.io.*;
 import utils.DataSnapshot;
 import company.Company;
 
+/**
+ * @author Frederik
+ * Manages the connection to a single client. As thread, this object is waiting for incoming Strings. For this a BufferedReader is used.
+ * To inform the client, a ObjectOutputStream is used.
+ */
 public class Connection extends Thread {
 
 	private boolean active;
@@ -22,6 +27,10 @@ public class Connection extends Thread {
 		initialize();
 	}
 
+	/**
+	 * Creates a PrintWriter to send Strings, an ObjectOutputStream to send DataSnapshot objects
+	 * and a BufferedReader to receive Strings.
+	 */
 	private void initialize() {
 		try {
 			out = new PrintWriter(socket.getOutputStream(), true);
@@ -38,6 +47,9 @@ public class Connection extends Thread {
 		start();
 	}
 
+	/**
+	 * Creates a company object for this connection with the ID assigned from the GameManager.
+	 */
 	private void createCompany() {
 		company = new Company(this);
 		int id = GameManager.sharedInstance().addPlayer(company);
@@ -48,9 +60,10 @@ public class Connection extends Thread {
 		return company;
 	}
 
+	/** 
+	 * Waits for incoming Strings from the Client.
+	 */
 	public void run() {
-		// send("CONNECTED ");
-		// System.out.print("Run gestartet...Server");
 		String txt;
 		while (active) {
 			try {
@@ -62,8 +75,6 @@ public class Connection extends Thread {
 
 			} catch (IOException e) {
 				close();
-				// handler.removePlayer(this);
-				// handler.spreadPlayer();
 			}
 		}
 	}
@@ -82,13 +93,26 @@ public class Connection extends Thread {
 		}
 	}
 
+	/**
+	 * Closes Streams and Socket. Informs the Company, that the Connection is closed.
+	 */
 	public void close() {
 		active = false;
 		System.out.println(company.getName() + " hat das Spiel verlassen.");
 		company.setActive(false);
-		// close Socket
 		try {
-			socket.close();
+			if (in != null){
+				in.close();
+			}
+			if (out != null){
+				out.close();
+			}
+			if (out_object != null){
+				out_object.close();
+			}
+			if (socket != null){
+				socket.close();
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

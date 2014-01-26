@@ -12,6 +12,10 @@ import campaigns.ResearchCampaign;
 import campaigns.SpyingCampaign;
 import market.Market;
 
+/**
+ * @author Frederik
+ * Interprets and handles the incoming strings.
+ */
 public class ServerMessageHandler {
 
 	private ArrayList<Connection> players = new ArrayList<Connection>();
@@ -27,6 +31,12 @@ public class ServerMessageHandler {
 	private ServerMessageHandler() {
 	}
 
+	
+	/**
+	 * Interprets an given String and executes the wanted action.
+	 * @param txt
+	 * @param sender
+	 */
 	public void handleMessage(String txt, Connection sender) {
 		System.out.println("ServerHandler handlet: " + txt);
 		if (txt.startsWith("NAME")){
@@ -112,6 +122,9 @@ public class ServerMessageHandler {
 		}
 		if (txt.startsWith("DOWNGRADELEGALDEPARTMENT")){
 			downgradeLegalDepartment(sender);
+		}
+		if (txt.startsWith("UPGRADELEGALDEPARTMENT")){
+			upgradeLegalDepartment(sender);
 		}
 	}
 	

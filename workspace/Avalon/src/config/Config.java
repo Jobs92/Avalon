@@ -4,6 +4,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+/**
+ * @author Frederik
+ * Manages all configurable Data. At the begin, the data is loaded from a properties-file. The objects can access the values with static methods.
+ */
 public class Config {
 
 	// general
@@ -90,13 +94,12 @@ public class Config {
 	private static boolean[] eventAllPlayers;
 	private static int eventAmount;
 
-	private Properties prop;
+	private static Properties prop;
 
-	public Config() {
-		loadConfig();
-	}
-
-	private void loadConfig() {
+	/**
+	 * Loads the data from a properties-file.
+	 */
+	public static void loadConfig() {
 		prop = new Properties();
 		try {
 			// load a properties file

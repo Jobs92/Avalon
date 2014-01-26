@@ -7,6 +7,11 @@ import config.Config;
 import campaigns.ExplicitSpyingCampaign;
 import departments.LegalDepartment;
 
+
+/**
+ * @author Frederik 
+ * Simulates a lawsuit between two Legal Departments.
+ */
 public class Lawsuit {
 	private LegalDepartment claimant;
 	private LegalDepartment defendant;
@@ -17,6 +22,13 @@ public class Lawsuit {
 	private boolean active;
 	private boolean started;
 	
+	
+	/** 
+	 * @param LegalDepartment c
+	 * @param Legal Department d
+	 * @param ArrayList<ExplicitSpyingCampaign> spyings
+	 * @param double amount
+	 */
 	public Lawsuit(LegalDepartment c, LegalDepartment d, ArrayList<ExplicitSpyingCampaign> spyings, double amount){
 		claimant = c;
 		defendant = d;
@@ -29,6 +41,9 @@ public class Lawsuit {
 		return costs;
 	}
 	
+	/**
+	 * Starts simulating the lawsuit
+	 */
 	public void startLawsuit(){
 		defendant.beSued(this);
 		active = true;
@@ -39,6 +54,9 @@ public class Lawsuit {
 		return amount;
 	}
 	
+	/**
+	 * Ends the lawsuit and informs the players.
+	 */
 	public void endLawsuit(){
 		Message m = new Message();
 		m.setTitle("Gerichtsverfahren beendet");
@@ -76,6 +94,13 @@ public class Lawsuit {
 		return defendant;
 	}
 
+	/**
+	 * Simulates the lawsuit. The process costs are subtracted from the companies money. Then the winner is detected. The Probability to win is 
+	 * better, when the the level of the Legal Department is higher and when the duration of the lawsuit is higher. 
+	 * If the claimant wins, the defendant has to pay the claimed amount and furthermore he has to refund the process costs of the claimant.
+	 * If the defendant wins, he has to refund the process costs of the claimant.
+	 * If the lawsuits ends, both companies are informed.
+	 */
 	public void simulate(){
 		duration++;
 		
@@ -140,6 +165,12 @@ public class Lawsuit {
 		
 	}
 
+	/**
+	 * 
+	 * Informs winner and loser about the outcome  of the lawsuit.
+	 * @param winner
+	 * @param loser
+	 */
 	private void informPlayer(LegalDepartment winner, LegalDepartment loser) {
 		//Inform Winner
 		Message m = new Message();

@@ -5,7 +5,7 @@ import java.net.*;
 
 /**
  * @author Frederik
- *
+ * Starts the server on port 56557 and waits for clients. For each client  a Connection object is created, which runs in an new Thread.
  */
 public class Server {
 	private static ServerSocket server;
