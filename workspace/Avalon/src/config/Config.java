@@ -5,8 +5,9 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- * @author Frederik
- * Manages all configurable Data. At the begin, the data is loaded from a properties-file. The objects can access the values with static methods.
+ * @author Frederik Manages all configurable Data. At the begin, the data is
+ *         loaded from a properties-file. The objects can access the values with
+ *         static methods.
  */
 public class Config {
 
@@ -40,8 +41,8 @@ public class Config {
 	private static int[] levelResearch;
 	private static int[] successprobabilityResearch;
 	private static int[] durationResearch;
-	
-	//Spying Campaign
+
+	// Spying Campaign
 	private static String titleSpying;
 	private static String descriptionSpying;
 	private static double costSpying;
@@ -51,7 +52,6 @@ public class Config {
 
 	// Marketing
 	private static int costsUpgradeMarketing;
-	
 
 	// Marketing Campaigns
 	private static String[] titleMarketing;
@@ -81,12 +81,11 @@ public class Config {
 	private static double upgradeProduction;
 	private static double productionVariableCosts;
 	private static int maxLevelMarketing;
-	
 
 	// Warehouse
 	private static String startProductName;
 	private static double salesFixcost;
-	
+
 	// Events
 	private static String[] eventText;
 	private static String[] eventType;
@@ -162,6 +161,8 @@ public class Config {
 			salesFixcost = Double.parseDouble(prop.getProperty("salesFixcost"));
 
 			// Research
+			costsUpgradeResearch = Integer.parseInt(prop
+					.getProperty("costsUpgradeResearch"));
 			titleResearch = prop.getProperty("titleResearch").split(";");
 			descriptionResearch = prop.getProperty("descriptionResearch")
 					.split(";");
@@ -189,17 +190,22 @@ public class Config {
 			for (int i = 0; i < tmpCost.length; i++) {
 				successprobabilityResearch[i] = Integer.parseInt(probLevel[i]);
 			}
-			researchFixcost = Integer.parseInt(prop.getProperty("researchFixcost"));
-			
-			//Spying campaign
+			researchFixcost = Integer.parseInt(prop
+					.getProperty("researchFixcost"));
+
+			// Spying campaign
 			titleSpying = prop.getProperty("titleSpying");
 			descriptionSpying = prop.getProperty("descriptionSpying");
-			durationSpying = Integer.parseInt(prop.getProperty("durationSpying"));
+			durationSpying = Integer.parseInt(prop
+					.getProperty("durationSpying"));
 			costSpying = Double.parseDouble(prop.getProperty("costSpying"));
-			successprobabilitySpying = Integer.parseInt(prop.getProperty("successprobabilitySpying"));
+			successprobabilitySpying = Integer.parseInt(prop
+					.getProperty("successprobabilitySpying"));
 			levelSpying = Integer.parseInt(prop.getProperty("levelSpying"));
 
 			// Marketing
+			costsUpgradeMarketing = Integer.parseInt(prop
+					.getProperty("costsUpgradeMarketing"));
 			titleMarketing = prop.getProperty("titleMarketing").split(";");
 			descriptionMarketing = prop.getProperty("descriptionMarketing")
 					.split(";");
@@ -214,7 +220,8 @@ public class Config {
 			durationMarketing = new int[tmpMarketingDuration.length];
 			for (int i = 0; i < tmpMarketingCost.length; i++) {
 
-				durationMarketing[i] = Integer.parseInt(tmpMarketingDuration[i]);
+				durationMarketing[i] = Integer
+						.parseInt(tmpMarketingDuration[i]);
 			}
 			String[] tmpMarketingLevel = prop.getProperty("levelMarketing")
 					.split(";");
@@ -229,39 +236,36 @@ public class Config {
 				successprobabilityMarketing[i] = Integer
 						.parseInt(probMarketingLevel[i]);
 			}
-			marketingFixcost = Double.parseDouble(prop.getProperty("marketingFixcost"));
-			
+			marketingFixcost = Double.parseDouble(prop
+					.getProperty("marketingFixcost"));
+
 			// Events
 			eventText = prop.getProperty("eventText").split(";");
 			eventType = prop.getProperty("eventType").split(";");
 			eventAmount = Integer.parseInt(prop.getProperty("eventAmount"));
 			String[] tmpEventValue = prop.getProperty("eventValue").split(";");
-			eventValue = new int[tmpEventValue.length];			
+			eventValue = new int[tmpEventValue.length];
 			for (int i = 0; i < tmpEventValue.length; i++) {
 				eventValue[i] = Integer.parseInt(tmpEventValue[i]);
 			}
-			
-			String[] tmpEventAllPlayers = prop.getProperty("eventAllPlayers").split(";");
-			eventAllPlayers = new boolean[tmpEventValue.length];			
+
+			String[] tmpEventAllPlayers = prop.getProperty("eventAllPlayers")
+					.split(";");
+			eventAllPlayers = new boolean[tmpEventValue.length];
 			for (int i = 0; i < tmpEventAllPlayers.length; i++) {
 				if (tmpEventAllPlayers[i].equals("true")) {
-					eventAllPlayers[i]=true;
-				}
-				else if (tmpEventAllPlayers[i].equals("false")){
-					eventAllPlayers[i]=false;
-				}
-				else{
+					eventAllPlayers[i] = true;
+				} else if (tmpEventAllPlayers[i].equals("false")) {
+					eventAllPlayers[i] = false;
+				} else {
 					// Error Handling??
 				}
 			}
-		
 
 		} catch (IOException ex) {
 			System.err.println(ex);
 		}
 	}
-	
-	
 
 	public static int getMaxLevelLegalDepartment() {
 		return maxLevelLegalDepartment;
@@ -282,11 +286,10 @@ public class Config {
 	public static int[] getLevelMarketing() {
 		return levelMarketing;
 	}
-	
+
 	public static double getSalesFixcost() {
 		return salesFixcost;
 	}
-
 
 	public static int[] getSuccessprobabilityMarketing() {
 		return successprobabilityMarketing;
@@ -487,7 +490,7 @@ public class Config {
 	public static String[] getEventText() {
 		return eventText;
 	}
-	
+
 	public static int getEventTextLength() {
 		return eventText.length;
 	}

@@ -75,12 +75,12 @@ public class Company {
 		departments.add(new Production(this));
 		inbox = new ArrayList<Message>();
 	}
-	
-	public boolean isActive(){
+
+	public boolean isActive() {
 		return active;
 	}
-	
-	public void setActive(boolean b){
+
+	public void setActive(boolean b) {
 		active = b;
 	}
 
@@ -101,11 +101,11 @@ public class Company {
 		departments.add(new Production(this));
 		inbox = new ArrayList<Message>();
 	}
-	
-	public void insolvency(){
+
+	public void insolvency() {
 		active = false;
-		
-		//Inform Playder
+
+		// Inform Playder
 		Message m = new Message();
 		m.setTitle("Insolvenz");
 		m.setType(Message.GAME);
@@ -210,11 +210,13 @@ public class Company {
 		snapshot.setProductsOnStock(getWarehouse().getTotalAmountProducts());
 		snapshot.setRound(GameManager.sharedInstance().getRound());
 		snapshot.setPatentLevel(this.getResearch().getPatentLevel());
-		snapshot.setPatentCost(Config.getCostsPatent() * (GameManager.sharedInstance().getRound() + 1 ));
+		snapshot.setPatentCost(Config.getCostsPatent()
+				* (GameManager.sharedInstance().getRound() + 1));
 		snapshot.setSpyCost(Config.getCostSpy());
 		snapshot.setNotAppliedLevels(this.getResearch().getNotAppliedLevels());
 		snapshot.setResearchLevel(getResearch().getResearchLevel());
-		snapshot.setHighestProductName(getWarehouse().getHighestProduct().getName());
+		snapshot.setHighestProductName(getWarehouse().getHighestProduct()
+				.getName());
 
 		// Department Fixcosts
 		snapshot.addDepartmentFixcost("marketing", this.getMarketing()
@@ -261,12 +263,12 @@ public class Company {
 			if (c != this && c.isActive()) {
 				// Enemy Names
 				snapshot.addEnemyName(c.getName(), c.getId());
-				
-				//Checked Enemies
+
+				// Checked Enemies
 				double amount = this.getLegaldepartment().getAmountForEnemy(c);
 				snapshot.addCheckedEnemy(c.getName(), amount, c.getId());
 			}
-	
+
 		}
 
 		// LegalDepartment
@@ -290,18 +292,20 @@ public class Company {
 					c.getSuccessProbability(), c.getLevel(), c.getTitle(),
 					c.getDescription());
 		}
-		
-		//Products
+
+		// Products
 		for (Product p : this.getWarehouse().getProducts()) {
-			if (p.getAmount() > 0){
-				snapshot.addProduct(p.getName(), p.getLevel(), p.getAmount(), p.getPrice());
+			if (p.getAmount() > 0) {
+				snapshot.addProduct(p.getName(), p.getLevel(), p.getAmount(),
+						p.getPrice());
 			}
 		}
-		
-		//Market Products
+
+		// Market Products
 		for (Product p : Market.sharedInstance().getProducts()) {
-			if (p.getAmount() > 0){
-				snapshot.addMarketProduct(p.getCompany().getName(), p.getName(), p.getLevel(), p.getPrice());
+			if (p.getAmount() > 0) {
+				snapshot.addMarketProduct(p.getCompany().getName(),
+						p.getName(), p.getLevel(), p.getPrice());
 			}
 		}
 
