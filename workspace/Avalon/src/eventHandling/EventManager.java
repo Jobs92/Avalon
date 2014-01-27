@@ -109,6 +109,7 @@ public class EventManager {
 		}
 		
 	triggedGroupEvents=delayedGroupEvents;
+	delayedGroupEvents.clear();
 		
 	}
 	
