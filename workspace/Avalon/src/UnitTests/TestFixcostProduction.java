@@ -33,11 +33,21 @@ public class TestFixcostProduction {
 
 	
 	@Test
-	public void testFixcost() {
+	public void testFixAndVarcosts() {
+		double fixcosts = Config.getProductionFixcost();
+		double varcosts = Config.getProductionVariableCosts();
+		
+		//FixCosts
 		double money = company.getMoney();
-		double costs = Config.getProductionFixcost();
 		company.getProduction().simulate();
-		assertEquals(money-costs, company.getMoney(), 0);
+		assertEquals(money-fixcosts, company.getMoney(), 0);
+		
+		//Var Costs
+		money = company.getMoney();
+		company.getWarehouse().addResources(10, 100);
+		company.getProduction().produce(1, 10);
+		company.getProduction().simulate();
+		assertEquals(money-fixcosts-10*varcosts, company.getMoney(), 0);
 	}
 	
 	@Test
@@ -63,57 +73,47 @@ public class TestFixcostProduction {
 	}
 	
 	@Test
-	public void testCapacity(){
+	public void testAmountResources(){
 		//Grenze: Resources
 		company.changeMoney(9999999);
-		int amount = company.getWarehouse().getTotalAmountProducts();
 		company.getWarehouse().addResources(5, 100);
 		company.getProduction().produce(1, 100);
 		company.simulate();
-		assertEquals(5, company.getWarehouse().getTotalAmountProducts()-amount);
+		assertEquals(5, company.getWarehouse().getTotalAmountProducts());
+	}
 		
+	@Test
+	public void testCapacity(){
 		//Grenze: Kapazität
 		company.changeMoney(9999999);
-		amount = company.getWarehouse().getTotalAmountProducts();
 		company.getWarehouse().addResources(5000000, 100);
 		company.getProduction().produce(1, 5000000);
 		company.simulate();
-		assertEquals(Config.getProductionCapacity(), company.getWarehouse().getTotalAmountProducts()-amount);
+		assertEquals(Config.getProductionCapacity(), company.getWarehouse().getTotalAmountProducts());
 	}
 	
 	@Test
-	public void warehouseCount(){
+	public void warehouseCount100Quality(){
 	company.changeMoney(9999999.0);
 	
 	//Ohne Ausschuss
 	company.getWarehouse().addResources(100, 100);
 	company.getProduction().produce(1, 100);
 	company.getProduction().simulate();
+	
 	assertEquals(100, company.getWarehouse().getTotalAmountProducts());
+	}
+	
+	@Test
+	public void warehouseCount90Quality(){
+	company.changeMoney(9999999.0);
 	
 	//Mit Ausschuss
-	int amount = company.getWarehouse().getTotalAmountProducts();
 	company.getWarehouse().addResources(100000, 90);
 	company.getProduction().produce(1, 100000);
 	company.getProduction().simulate();
-	assertEquals(90000, company.getWarehouse().getTotalAmountProducts()-amount,200.0);
+	assertEquals(90000, company.getWarehouse().getTotalAmountProducts(),300.0);
 	}
-	
-
-	
-		
-//		company1.getProduction().upgrade();
-//		assertEquals(2, company1.getProduction().getLevel());
-//		assertEquals(1, company2.getProduction().getLevel());
-//		assertEquals(Config.getCompanyStartMoney() - Config.getProductionFixcost() - Config.getCostsUpgradeProduction(), company1.getMoney(), 0);
-//		for (int i = 2; i < 20; i++) {
-//			company2.getProduction().upgrade();
-//			if (i<=10){
-//				assertEquals(i, company2.getProduction().getLevel());
-//			}else{
-//				assertEquals(10, company2.getProduction().getLevel());
-//			}
-//		}
 	
 	@After
 	public void removeInstances(){
