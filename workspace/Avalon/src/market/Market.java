@@ -32,6 +32,15 @@ public class Market {
 		products = new ArrayList<Product>();
 		// load ConsumerGroup
 	}
+	
+	public String getNameForId(int id){
+		for (Company c : companies) {
+			if (c.getId() == id){
+				return c.getName();
+			}
+		}
+		return null;
+	}
 
 	public void simulateMarket() {
 
