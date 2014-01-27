@@ -71,14 +71,15 @@ public class EventManager {
 
 	public void simEvents() {
 		
-		double groupChance=0.9;
-		double singleChance=0.4;
+		double groupChance=0.2;
+		double singleChance=0.3;
 		
 		ArrayList<company.Company> players = market.Market.sharedInstance().getCompanies();
 		
 		if (Math.random()<=groupChance) {   // GruppenEvent
-			Event eG = groupEvents.get((int) (1+(groupEvents.size()-1)*Math.random()));
-			EventTrigger GroupEventTrigger = new EventTrigger(eG, 0);
+			int var=(int) (1+(groupEvents.size()-1)*Math.random());
+			Event gEvent = groupEvents.get(var-1);
+			EventTrigger GroupEventTrigger = new EventTrigger(gEvent, 0);
 			triggedGroupEvents.add(GroupEventTrigger);
 			for (EventTrigger evt : triggedGroupEvents) {
 				evt.simulategGroupEvents();
@@ -91,9 +92,9 @@ public class EventManager {
 
 		for (Company company : players) {
 			if (Math.random()<=singleChance) {
-						
-					Event eS = singleEvents.get((int) (1+(singleEvents.size()-1)*Math.random()));
-					EventTrigger SingleEventTrigger = new EventTrigger(eS, 0);
+				int var=(int) (1+(groupEvents.size()-1)*Math.random());
+					Event sEvent = singleEvents.get(var-1);
+					EventTrigger SingleEventTrigger = new EventTrigger(sEvent, 0);
 					triggedSingleEvents.add(SingleEventTrigger);
 					for (EventTrigger evt : triggedSingleEvents) {
 						evt.simulategSingleEvents(company);
