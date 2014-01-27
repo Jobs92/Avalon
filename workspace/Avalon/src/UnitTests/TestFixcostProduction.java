@@ -63,6 +63,23 @@ public class TestFixcostProduction {
 	}
 	
 	@Test
+	public void testCapacity(){
+		//Grenze: Resources
+		int amount = company.getWarehouse().getTotalAmountProducts();
+		company.getWarehouse().addResources(5, 100);
+		company.getProduction().produce(1, 100);
+		company.simulate();
+		assertEquals(5, company.getWarehouse().getTotalAmountProducts()-amount);
+		
+		//Grenze: Kapazität
+		amount = company.getWarehouse().getTotalAmountProducts();
+		company.getWarehouse().addResources(5000000, 100);
+		company.getProduction().produce(1, 5000000);
+		company.simulate();
+		assertEquals(Config.getProductionCapacity(), company.getWarehouse().getTotalAmountProducts()-amount);
+	}
+	
+	@Test
 	public void warehouseCount(){
 	company.changeMoney(9999999.0);
 	
@@ -78,11 +95,9 @@ public class TestFixcostProduction {
 	company.getProduction().produce(1, 100000);
 	company.getProduction().simulate();
 	assertEquals(90000, company.getWarehouse().getTotalAmountProducts()-amount,200.0);
+	}
 	
 
-	
-	
-}
 	
 		
 //		company1.getProduction().upgrade();
