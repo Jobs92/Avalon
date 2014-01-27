@@ -13,6 +13,8 @@ public class EventManager {
 	private ArrayList<Event> singleEvents;
 	private ArrayList<EventTrigger> triggedGroupEvents;
 	private ArrayList<EventTrigger> triggedSingleEvents;
+	private ArrayList<EventTrigger> delayedGroupEvents; 
+	//private ArrayList<EventTrigger> delayedSingleEvents; //NOT USED
 	private static EventManager sharedInstance;
 
 	public static EventManager sharedInstance() {
@@ -30,6 +32,7 @@ public class EventManager {
 		groupEvents=new ArrayList<Event>();
 		singleEvents=new ArrayList<Event>();
 		triggedGroupEvents=new ArrayList<EventTrigger>();
+		delayedGroupEvents=new ArrayList<EventTrigger>();
 		triggedSingleEvents=new ArrayList<EventTrigger>();
 		
 		
@@ -105,13 +108,16 @@ public class EventManager {
 					
 		}
 		
+	triggedGroupEvents=delayedGroupEvents;
+		
 	}
 	
 	public void addEventTrigger(EventTrigger e){
 		triggedGroupEvents.add(e);
 	}
-	public void removeEventTrigger(EventTrigger e){
-		triggedGroupEvents.remove(e);
+	public void addDelayedEvent(EventTrigger e){
+		delayedGroupEvents.add(e);
 	}
+	
 
 }

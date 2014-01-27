@@ -31,7 +31,7 @@ public class EventTrigger {
 				oldBuyingPower=Market.sharedInstance().getBuyingPower();	
 				Event e=new Event("Kaufkraft ist wieder auf "+oldBuyingPower+" gestiegen", "changeBuyingPower", oldBuyingPower);
 				int rnd=(int) (Math.random() * (4 - 1) + 1);
-				EventManager.sharedInstance().addEventTrigger(new EventTrigger(e, rnd));
+				EventManager.sharedInstance().addDelayedEvent(new EventTrigger(e, rnd));
 				
 				Message m = new Message();
 				m.setTitle(text);
@@ -64,8 +64,6 @@ public class EventTrigger {
 			}
 			
 			
-			
-		EventManager.sharedInstance().removeEventTrigger(this);	
 		}
 		else {
 			counter--;
@@ -100,7 +98,7 @@ public class EventTrigger {
 			else if (type.equals("imageDown")) {
 				company.addPopularity(-1*value);
 			}
-		EventManager.sharedInstance().removeEventTrigger(this);	
+
 		}
 		else {
 			counter--;
