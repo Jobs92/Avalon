@@ -68,8 +68,8 @@ public class EventManager {
 
 	public void simEvents() {
 		
-		double groupChance=0.1;
-		double singleChance=0.3;
+		double groupChance=0.9;
+		double singleChance=0.4;
 		
 		ArrayList<company.Company> players = market.Market.sharedInstance().getCompanies();
 		
