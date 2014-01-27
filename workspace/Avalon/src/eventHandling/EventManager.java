@@ -12,11 +12,13 @@ public class EventManager {
 	
 	private ArrayList<Event> groupEvents;
 	private ArrayList<Event> singleEvents;
+	private ArrayList<EventTrigger> triggedEvents;
 	
 	
 	public void createEvents(){
 		groupEvents=new ArrayList<Event>();
 		singleEvents=new ArrayList<Event>();
+		triggedEvents=new ArrayList<EventTrigger>();
 		
 		
 		
@@ -46,12 +48,16 @@ public class EventManager {
 //	public static void main (String args[]){
 //		EventManager evManager=new EventManager();
 //		new Config();
+	
 //		evManager.createEvents();
 //		System.out.println("bla");
 //		evManager.simEvents();
 //	}
 
 	public void simEvents() {
+		for (EventTrigger et : triggedEvents) {
+			et.simulate();
+		}
 		double groupChance=0.1;
 		double singleChance=0.9;
 		
@@ -77,6 +83,9 @@ public class EventManager {
 				}
 				else if (type.equals("earn")) {
 					company.changeMoney(value);
+				}
+				else if (type.equals("changeBuyingPower")) {
+					
 				}
 				
 				
