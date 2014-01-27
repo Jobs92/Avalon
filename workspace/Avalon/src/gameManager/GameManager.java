@@ -15,12 +15,13 @@ public class GameManager {
 	private Market market = Market.sharedInstance();
 	private EventManager eventManager = new EventManager();
 	private static GameManager sharedInstance;
-	
-	private GameManager(){
+
+	private GameManager() {
+		Config.loadConfig();
 	}
 
 	public static GameManager sharedInstance() {
-		if (GameManager.sharedInstance == null) { 
+		if (GameManager.sharedInstance == null) {
 			GameManager.sharedInstance = new GameManager();
 		}
 		return GameManager.sharedInstance;
@@ -33,16 +34,21 @@ public class GameManager {
 
 	private void initializeGame() {
 		active = true;
-		
-		//Generate Supplier
-		int amountSupplier = Math.min(Config.getSupplierTrust().length, Math.min(Config.getSupplierQuality().length, Config.getSupplierPrice().length));
+
+		// Generate Supplier
+		int amountSupplier = Math.min(
+				Config.getSupplierTrust().length,
+				Math.min(Config.getSupplierQuality().length,
+						Config.getSupplierPrice().length));
 		for (int i = 0; i < amountSupplier; i++) {
-			Supplier s = new Supplier(Config.getSupplierPrice()[i], Config.getSupplierTrust()[i], Config.getSupplierQuality()[i], Config.getSupplierName()[i]);
+			Supplier s = new Supplier(Config.getSupplierPrice()[i],
+					Config.getSupplierTrust()[i],
+					Config.getSupplierQuality()[i], Config.getSupplierName()[i]);
 			market.addSupplier(s);
 		}
 		// Generate Business Events
-		eventManager.createEvents(); 
-		
+		eventManager.createEvents();
+
 	}
 
 	private void nextRound() {
@@ -51,8 +57,8 @@ public class GameManager {
 		// Player decide further actions
 		waitForPlayer();
 	}
-	
-	private void simulate(){
+
+	private void simulate() {
 
 		// Active Actions are simulated
 		market.simulate();
@@ -72,12 +78,12 @@ public class GameManager {
 			endGame();
 		}
 	}
-	
-	public void informReady(){
+
+	public void informReady() {
 		ArrayList<Company> player = market.getCompanies();
 		for (int i = 0; i < player.size(); i++) {
-			if (player.get(i).isActive() && !player.get(i).isReady()){
-				//Not all player ready
+			if (player.get(i).isActive() && !player.get(i).isReady()) {
+				// Not all player ready
 				return;
 			}
 		}
@@ -89,7 +95,7 @@ public class GameManager {
 	}
 
 	private boolean checkWinner() {
-		int neededAmount = Config.getAmountWin(); 
+		int neededAmount = Config.getAmountWin();
 		ArrayList<Company> cs = market.getCompanies();
 		for (Company c : cs) {
 			if (c.getMoney() >= neededAmount) {
@@ -110,24 +116,24 @@ public class GameManager {
 	public int addPlayer(Company c) {
 		return market.addCompany(c);
 	}
-	
-	public boolean getActive(){
+
+	public boolean getActive() {
 		return this.active;
 	}
-	
-	public Company getWinner(){
+
+	public Company getWinner() {
 		return this.winner;
 	}
 
 	public ArrayList<Company> getPlayer() {
 		return market.getCompanies();
 	}
-	
+
 	public int getRound() {
 		return this.round;
 	}
-	
-	public void deleteInstance(){
+
+	public void deleteInstance() {
 		GameManager.sharedInstance = null;
 	}
 }

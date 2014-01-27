@@ -187,7 +187,7 @@ public class ServerMessageHandler {
 	}
 
 	private void spy(Connection sender, int opponent) {
-		SpyingCampaign spyingCampaign = sender.getCompany().getResearch().getSpyingCampaignByID(0);
+		SpyingCampaign spyingCampaign = sender.getCompany().getResearch().getSpyingCampaign();
 		sender.getCompany().getResearch().startCampaign(spyingCampaign, opponent);;
 	}
 

@@ -1,7 +1,5 @@
 package departments;
 
-import java.util.ArrayList;
-
 import market.Market;
 import company.Company;
 import config.Config;
@@ -16,7 +14,7 @@ public class Research extends CampaignDepartment {
 	private int researchLevel;
 	private int spiedLevels;
 
-	private ArrayList<SpyingCampaign> spyingCampains;
+	private SpyingCampaign spyingCampain;
 
 	public Research(Company company) {
 		super(company);
@@ -82,11 +80,10 @@ public class Research extends CampaignDepartment {
 					Config.getDescriptionResearch()[i]);
 			addCampaign(m);
 		}
-		SpyingCampaign s = new SpyingCampaign(this, Config.getTitleSpying(),
+		spyingCampain = new SpyingCampaign(this, Config.getTitleSpying(),
 				Config.getCostSpying(), Config.getDurationSpying(),
 				Config.getSuccessprobabilitySpying(), Config.getLevelSpying(),
 				Config.getDescriptionSpying());
-		addCampaign(s);
 	}
 
 	@Override
@@ -100,10 +97,10 @@ public class Research extends CampaignDepartment {
 	 * this level due to lost lawsuits.
 	 */
 	public void patentResearchLevel() {
-		company.changeMoney(Config.getCostsPatent() * (researchLevel+1));
+		company.changeMoney(Config.getCostsPatent() * (researchLevel + 1));
 		patentLevel = researchLevel;
 	}
-	
+
 	public int getPatentLevel() {
 		return this.patentLevel;
 	}
@@ -127,12 +124,12 @@ public class Research extends CampaignDepartment {
 		return false;
 	}
 
-	public SpyingCampaign getSpyingCampaignByID(int id) {
-		return spyingCampains.get(id);
+	public SpyingCampaign getSpyingCampaign() {
+		return spyingCampain;
 	}
 
 	@Override
 	protected void updateFixcost() {
-		fixcost = Config.getResearchFixcost() * level;	
+		fixcost = Config.getResearchFixcost() * level;
 	}
 }
