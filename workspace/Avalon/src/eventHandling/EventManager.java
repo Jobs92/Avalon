@@ -3,8 +3,7 @@ package eventHandling;
 
 import java.util.ArrayList;
 
-import market.Market;
-import utils.Message;
+
 import company.Company;
 import config.Config;
 
@@ -12,13 +11,26 @@ public class EventManager {
 	
 	private ArrayList<Event> groupEvents;
 	private ArrayList<Event> singleEvents;
-	private ArrayList<EventTrigger> triggedEvents;
+	private ArrayList<EventTrigger> triggedGroupEvents;
+	private ArrayList<EventTrigger> triggedSingleEvents;
+	private static EventManager sharedInstance;
+
+	public static EventManager sharedInstance() {
+		if (EventManager.sharedInstance == null) {
+			EventManager.sharedInstance = new EventManager();
+		}
+		return EventManager.sharedInstance;
+	}
 	
+	private EventManager(){
+		
+	}
 	
 	public void createEvents(){
 		groupEvents=new ArrayList<Event>();
 		singleEvents=new ArrayList<Event>();
-		triggedEvents=new ArrayList<EventTrigger>();
+		triggedGroupEvents=new ArrayList<EventTrigger>();
+		triggedSingleEvents=new ArrayList<EventTrigger>();
 		
 		
 		
@@ -55,75 +67,34 @@ public class EventManager {
 //	}
 
 	public void simEvents() {
-		for (EventTrigger et : triggedEvents) {
-			et.simulate();
-		}
+		
 		double groupChance=0.1;
-		double singleChance=0.9;
+		double singleChance=0.3;
 		
 		ArrayList<company.Company> players = market.Market.sharedInstance().getCompanies();
 		
 		if (Math.random()<=groupChance) {   // GruppenEvent
 			Event e = groupEvents.get((int) (1+(groupEvents.size()-1)*Math.random()));
-//			System.out.println("GroupEvent "+e.getText());
-			String text = e.getText(); 				//extract event data;
-			String type = e.getType();
-						int value = e.getValue();
-			
-			for (Company company : players) {
-				Message m = new Message();
-				m.setTitle(text);
-				m.setType(Message.GAME);
-				m.setTargetPlayer(company.getId());
-				m.setMessage("Das Ereignis "+text+" ist eingetreten!");
-				Market.sharedInstance().sendMessage(m);
-				
-				if (type.equals("cost")) {
-					company.changeMoney(-1*value);
-				}
-				else if (type.equals("earn")) {
-					company.changeMoney(value);
-				}
-				else if (type.equals("changeBuyingPower")) {
-					
-				}
-				
-				
-				
-				
+			EventTrigger GroupEventTrigger = new EventTrigger(e, 0);
+			triggedGroupEvents.add(GroupEventTrigger);
+			for (EventTrigger evt : triggedGroupEvents) {
+				evt.simulategGroupEvents();
 			}
+
 			
 		}
-		else  {   // Singleevent
+		else  {   // SingleEvent
 
 		for (Company company : players) {
 			if (Math.random()<=singleChance) {
 						
 					Event e = singleEvents.get((int) (1+(singleEvents.size()-1)*Math.random()));
-//					System.out.println("SingleEvent "+e.getText());
-					String text = e.getText(); 				//extract event data;
-					String type = e.getType();
-					int value = e.getValue();
-					
-					Message m = new Message();
-					m.setTitle(text);
-					m.setType(Message.GAME);
-					m.setTargetPlayer(company.getId());
-					m.setMessage("Das Ereignis "+text+" ist eingetreten!");
-					Market.sharedInstance().sendMessage(m);
-					
-					if (type.equals("cost")) {
-						company.changeMoney(-1*value);
+					EventTrigger SingleEventTrigger = new EventTrigger(e, 0);
+					triggedGroupEvents.add(SingleEventTrigger);
+					for (EventTrigger evt : triggedSingleEvents) {
+						evt.simulategSingleEvents(company);
 					}
-					else if (type.equals("earn")) {
-						company.changeMoney(value);
-					}
-					else if (type.equals("imageUp")) {
-						company.addPopularity(value);
-					}
-					else if (type.equals("imageDown")) {
-						company.addPopularity(-1*value);
-					}
+				
 					
 					
 			}
@@ -133,6 +104,10 @@ public class EventManager {
 					
 		}
 		
+	}
+	
+	public void addEventTrigger(EventTrigger e){
+		triggedGroupEvents.add(e);
 	}
 
 }

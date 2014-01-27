@@ -13,7 +13,7 @@ public class GameManager {
 	private boolean active;
 	private Company winner;
 	private Market market = Market.sharedInstance();
-	private EventManager eventManager = new EventManager();
+	private EventManager eventManager = EventManager.sharedInstance();
 	private static GameManager sharedInstance;
 
 	private GameManager() {
