@@ -68,7 +68,7 @@ public class ResearchPanel extends AvalonPanel {
 						"Do you want to downgrade the Research department?",
 						"Downgrade", JOptionPane.YES_NO_OPTION);
 				if (accepted == 0) {
-					upgradeButton.setEnabled(false);
+					downgradeButton.setEnabled(false);
 					// accepted
 					GuiManager.sharedInstance().getApi().downgradeResearch();
 				}
@@ -229,6 +229,7 @@ public class ResearchPanel extends AvalonPanel {
 						+ GuiManager.sharedInstance().getDs()
 								.getNotAppliedLevels()));
 		upgradeButton.setEnabled(true);
+		downgradeButton.setEnabled(true);
 		releaseButton.setEnabled(true);
 		setBorder(new TitledBorder("Research(Level: "
 				+ GuiManager.sharedInstance().getDs().getLevel("research")

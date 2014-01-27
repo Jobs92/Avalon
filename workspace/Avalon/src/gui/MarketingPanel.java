@@ -66,7 +66,7 @@ public class MarketingPanel extends AvalonPanel {
 						"Do you want to downgrade the Marketing department?",
 						"Downgrade", JOptionPane.YES_NO_OPTION);
 				if (accepted == 0) {
-					upgradeButton.setEnabled(false);
+					downgradeButton.setEnabled(false);
 					// accepted
 					GuiManager.sharedInstance().getApi().downMarketing();
 				}
@@ -101,7 +101,7 @@ public class MarketingPanel extends AvalonPanel {
 	protected void makeUpgradePopup() {
 		int accepted = JOptionPane.showConfirmDialog(
 				null,
-				"Do you want to upgrade the Research department for "
+				"Do you want to upgrade the Marketing department for "
 						+ GuiManager.sharedInstance().getDs()
 								.getUpgradeCosts("marketing") + "?", "Upgrade",
 				JOptionPane.YES_NO_OPTION);
@@ -129,6 +129,7 @@ public class MarketingPanel extends AvalonPanel {
 	@Override
 	protected void fill() {
 		upgradeButton.setEnabled(true);
+		downgradeButton.setEnabled(true);
 		setBorder(new TitledBorder("Marketing(Level: "
 				+ GuiManager.sharedInstance().getDs().getLevel("marketing")
 				+ ", Fixcosts: "

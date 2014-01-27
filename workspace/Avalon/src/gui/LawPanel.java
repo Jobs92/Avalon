@@ -53,7 +53,7 @@ public class LawPanel extends AvalonPanel {
 						"Do you want to downgrade the Legal department?",
 						"Downgrade", JOptionPane.YES_NO_OPTION);
 				if (accepted == 0) {
-					upgradeButton.setEnabled(false);
+					downgradeButton.setEnabled(false);
 					// accepted
 					GuiManager.sharedInstance().getApi()
 							.downgradeLegalDepartment();
@@ -222,6 +222,7 @@ public class LawPanel extends AvalonPanel {
 	@Override
 	protected void fill() {
 		upgradeButton.setEnabled(true);
+		downgradeButton.setEnabled(true);
 		setBorder(new TitledBorder("Law(Level: "
 				+ GuiManager.sharedInstance().getDs()
 						.getLevel("legalDepartment")

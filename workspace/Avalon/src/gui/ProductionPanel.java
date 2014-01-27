@@ -75,6 +75,8 @@ public class ProductionPanel extends AvalonPanel {
 
 	@Override
 	protected void fill() {
+		upgradeButton.setEnabled(true);
+		downgradeButton.setEnabled(true);
 		setBorder(new TitledBorder("Production (Level: "
 				+ GuiManager.sharedInstance().getDs().getLevel("production")
 				+ ", Fixcosts: "
