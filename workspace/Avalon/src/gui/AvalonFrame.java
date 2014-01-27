@@ -27,12 +27,16 @@ public class AvalonFrame extends JFrame {
 	private MarketingPanel marketingPanel = new MarketingPanel();
 	private ResearchPanel researchPanel = new ResearchPanel();
 	private LawPanel lawPanel = new LawPanel();
+	private MarketPanel marketPanel = new MarketPanel();
 	private ProductionPanel productionPanel = new ProductionPanel();
+
 	private ArrayList<AvalonPanel> panels = new ArrayList<AvalonPanel>();
 	// private JButton nextRoundButton = new JButton("Next Round");
 	private JButton nextRoundButton = new AvalonButton("Next Round");
 	private JLabel roundLabel = new JLabel("Round");
 	private JButton refreshButton = new AvalonButton("Refresh");
+	JPanel headerPanel = new JPanel();
+	JPanel eastPanel = new JPanel();
 
 	public AvalonFrame() {
 		setVisible(true);
@@ -44,7 +48,9 @@ public class AvalonFrame extends JFrame {
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		getContentPane().setBackground(Color.white);
-		setTitle("Avalon - Wirtschaftssimulation - "+GuiManager.sharedInstance().getDs().getCompanyName());
+		setBackground(new Color(52, 152, 219));
+		// setTitle("Avalon - Wirtschaftssimulation - "
+		// + GuiManager.sharedInstance().getDs().getCompanyName());
 
 		gamePanel.setLayout(new GridLayout(2, 4));
 		initGamePanel();
@@ -52,7 +58,6 @@ public class AvalonFrame extends JFrame {
 
 		add(nextRoundButton, BorderLayout.SOUTH);
 
-		JPanel headerPanel = new JPanel();
 		headerPanel.setLayout(new BorderLayout());
 		JLabel headerLabel = new JLabel("AVALON");
 		headerLabel.setFont(new Font(null, Font.PLAIN, 20));
@@ -68,6 +73,8 @@ public class AvalonFrame extends JFrame {
 		});
 		headerPanel.add(refreshButton, BorderLayout.EAST);
 		add(headerPanel, BorderLayout.NORTH);
+		eastPanel.add(messagePanel);
+		add(eastPanel, BorderLayout.EAST);
 	}
 
 	private void initGamePanel() {
@@ -79,15 +86,21 @@ public class AvalonFrame extends JFrame {
 		panels.add(researchPanel);
 		panels.add(marketingPanel);
 		panels.add(lawPanel);
+		panels.add(marketPanel);
 		panels.add(messagePanel);
-		int i = 0;
-		for (JPanel panel : panels) {
-			i++;
+		headerPanel.setBackground(new Color(52, 152, 219));
+		int j = 0;
+		for (int i = 0; i < panels.size() - 1; i++) {
+			AvalonPanel panel = panels.get(i);
+			j++;
+			if (j == 4) {
+				j++;
+			}
 			Color c;
-			if (i % 2 == 0) {
-				c = new Color(26, 188, 156);
+			if (j % 2 == 0) {
+				c = new Color(92, 192, 255);
 			} else {
-				c = new Color(22, 160, 133);
+				c = new Color(81, 168, 225);
 			}
 			panel.setBackground(c);
 			gamePanel.add(panel);
