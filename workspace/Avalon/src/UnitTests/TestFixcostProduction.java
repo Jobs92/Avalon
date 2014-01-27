@@ -65,6 +65,7 @@ public class TestFixcostProduction {
 	@Test
 	public void testCapacity(){
 		//Grenze: Resources
+		company.changeMoney(9999999);
 		int amount = company.getWarehouse().getTotalAmountProducts();
 		company.getWarehouse().addResources(5, 100);
 		company.getProduction().produce(1, 100);
@@ -72,6 +73,7 @@ public class TestFixcostProduction {
 		assertEquals(5, company.getWarehouse().getTotalAmountProducts()-amount);
 		
 		//Grenze: Kapazität
+		company.changeMoney(9999999);
 		amount = company.getWarehouse().getTotalAmountProducts();
 		company.getWarehouse().addResources(5000000, 100);
 		company.getProduction().produce(1, 5000000);

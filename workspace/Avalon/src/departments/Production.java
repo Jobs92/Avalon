@@ -76,24 +76,11 @@ public class Production extends Department {
 	}
 	public void produce (int level, int amount){ 
 		if (amount >0){
-			if (capacity>=amount + countAlreadyNeededRessources()) {
-				if (countAlreadyNeededRessources()+amount <= company.getWarehouse().getAmountResources()){
-	//				if (company.getWarehouse().getSingleProduct(level)==null) {
-	//					company.getWarehouse().addProduct(new Product(level, company));
-	//				}
-					ProductionJobs job = new ProductionJobs(level, amount);
-					allProductionJobs.add(job);
-				}else{
-					//Fehlermeldung: keine ressourcen
-					Message m = new Message();
-					m.setTitle("Nicht genügend Ressourcen");
-					m.setType(Message.GAME);
-					m.setTargetPlayer(company.getId());
-					m.setMessage("Sie haben nicht genügend Ressourcen um " + amount + " weitere Smartphones zu produzieren!");
-					Market.sharedInstance().sendMessage(m);
-				}
-			}
-			else {
+			
+			//Test Capacity
+			if (capacity<amount + countAlreadyNeededRessources()) {
+				amount = capacity;
+		
 				 //Fehlermeldung: keine kapazitaet
 				Message m = new Message();
 				m.setTitle("Kapazität reicht nicht aus");
@@ -101,8 +88,23 @@ public class Production extends Department {
 				m.setTargetPlayer(company.getId());
 				m.setMessage("Ihre Kapazitäten reichen nicht aus um " + amount + " weitere Smartphones zu produzieren!");
 				Market.sharedInstance().sendMessage(m);
-				
 			}
+			
+			//Test Ressources
+			if (countAlreadyNeededRessources()+amount > company.getWarehouse().getAmountResources()){
+				amount = company.getWarehouse().getAmountResources() - countAlreadyNeededRessources();
+				
+				//Fehlermeldung: keine ressourcen
+				Message m = new Message();
+				m.setTitle("Nicht genügend Ressourcen");
+				m.setType(Message.GAME);
+				m.setTargetPlayer(company.getId());
+				m.setMessage("Sie haben nicht genügend Ressourcen um " + amount + " weitere Smartphones zu produzieren!");
+				Market.sharedInstance().sendMessage(m);
+			}
+					
+			ProductionJobs job = new ProductionJobs(level, amount);
+			allProductionJobs.add(job);
 		}
 	}
 
