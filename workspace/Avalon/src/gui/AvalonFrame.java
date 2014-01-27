@@ -73,6 +73,7 @@ public class AvalonFrame extends JFrame {
 		});
 		headerPanel.add(refreshButton, BorderLayout.EAST);
 		add(headerPanel, BorderLayout.NORTH);
+		eastPanel.setLayout(new GridLayout(1, 1));
 		eastPanel.add(messagePanel);
 		add(eastPanel, BorderLayout.EAST);
 	}
@@ -90,6 +91,8 @@ public class AvalonFrame extends JFrame {
 		panels.add(messagePanel);
 		headerPanel.setBackground(new Color(52, 152, 219));
 		int j = 0;
+		messagePanel.setBackground(new Color(92, 192, 255));
+		eastPanel.setBackground(new Color(92, 192, 255));
 		for (int i = 0; i < panels.size() - 1; i++) {
 			AvalonPanel panel = panels.get(i);
 			j++;
