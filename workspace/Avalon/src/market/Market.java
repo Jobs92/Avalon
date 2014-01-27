@@ -193,4 +193,12 @@ public class Market {
 		}
 	}
 
+	public int getBuyingPower() {
+		return buyingPower;
+	}
+
+	public void changeBuyingPower(int buyingPower) {
+		this.buyingPower += buyingPower;
+	}
+
 }
