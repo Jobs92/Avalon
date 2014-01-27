@@ -20,8 +20,11 @@ public class MarketPanel extends AvalonPanel {
 	@Override
 	protected void fill() {
 		products = GuiManager.sharedInstance().getDs().getMarketProducts();
-
-		String text = "<html><ul>";
+		String text;
+		if (products.size() == 0) {
+			text = "No products on Market.";
+		}
+		text = "<html><ul>";
 		for (Dictionary<String, String> p : products) {
 			text += "<li>Product: " + p.get("name") + "<ul><li>Company: "
 					+ p.get("company") + "</li><li>Level: " + p.get("level")
