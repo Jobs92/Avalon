@@ -36,7 +36,7 @@ public class EventTrigger {
 				Message m = new Message();
 				m.setTitle(text);
 				m.setType(Message.BROADCAST);
-				m.setMessage(text+" "+value);
+				m.setMessage(text);
 				Market.sharedInstance().sendMessage(m);
 				
 				Market.sharedInstance().changeBuyingPower(value);
@@ -83,7 +83,7 @@ public class EventTrigger {
 			m.setTitle(text);
 			m.setType(Message.GAME);
 			m.setTargetPlayer(company.getId());
-			m.setMessage(text+" "+value);
+			m.setMessage(text);
 			Market.sharedInstance().sendMessage(m);
 			
 			if (type.equals("cost")) {
