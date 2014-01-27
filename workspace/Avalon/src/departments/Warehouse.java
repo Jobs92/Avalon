@@ -26,19 +26,24 @@ public class Warehouse extends Department {
 	}
 
 	public int getAmountResources() {
-		return resources.size();
+		int amount = 0;
+		for (Resources r : resources) {
+			amount += r.getAmount();
+		}
+		return amount;
 	}
 
 	public Resources getResource() {
 		Resources r = resources.get(resources.size() - 1);
-		resources.remove(r);
+		r.useResource();
+		if (r.getAmount()== 0){
+			resources.remove(r);
+		}
 		return r;
 	}
 
 	public void addResources(int amount, int quality) {
-		for (int i = 0; i < amount; i++) {
-			resources.add(new Resources(quality));
-		}
+		resources.add(new Resources(quality, amount));
 	}
 
 	public ArrayList<product.Product> getProducts() {

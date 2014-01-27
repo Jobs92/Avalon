@@ -16,55 +16,102 @@ import company.Company;
 import config.Config;
 
 public class TestFixcostProduction {
-	private Company company1;
-	private Company company2;
-	private Company company3;
+	private Company company;
 	private GameManager gameManager;
 
 	@Before
-	public void createGameManager() {
+	public void prepareTest() {
 		gameManager = GameManager.sharedInstance();
+		company = new Company();
 	}
 
-	@Before
-	public void createCompanies() {
-		company1 = new Company();
-		company2 = new Company();
-		company3 = new Company();
-	}
 	
 	@Before
 	public void startGame(){
-		gameManager.addPlayer(company1);
-		gameManager.addPlayer(company2);
-		gameManager.startGame();
+		gameManager.addPlayer(company);
 	}
 
-//	@Test
-//	public void testAddCompany() {
-//		gameManager.addPlayer(company3);
-//		assertEquals(gameManager.getPlayer().size(), 1);
-//	}
 	
 	@Test
-	public void testNextRound() {
-		company1.setReady(true);
-		company2.setReady(true);
-		assertEquals(Config.getCompanyStartMoney() - Config.getProductionFixcost(), company1.getMoney(), 0);
-		assertEquals(Config.getCompanyStartMoney() - Config.getProductionFixcost(), company2.getMoney(), 0);
-		company1.getProduction().upgrade();
-		assertEquals(2, company1.getProduction().getLevel());
-		assertEquals(1, company2.getProduction().getLevel());
-		assertEquals(Config.getCompanyStartMoney() - Config.getProductionFixcost() - Config.getCostsUpgradeProduction(), company1.getMoney(), 0);
-		for (int i = 2; i < 20; i++) {
-			company2.getProduction().upgrade();
-			if (i<=10){
-				assertEquals(i, company2.getProduction().getLevel());
-			}else{
-				assertEquals(10, company2.getProduction().getLevel());
-			}
-		}
+	public void testFixcost() {
+		double money = company.getMoney();
+		double costs = Config.getProductionFixcost();
+		company.getProduction().simulate();
+		assertEquals(money-costs, company.getMoney(), 0);
 	}
+	
+	@Test
+	public void testUpgradeAndDowngrade(){
+		//Einfach Upgrade
+		company.getProduction().upgrade();
+		assertEquals(2, company.getProduction().getLevel());
+		
+		//Einfaches Downgrade
+		company.getProduction().downgrade();
+		assertEquals(1, company.getProduction().getLevel());
+		
+		//Downgrade auf 0
+		company.getProduction().downgrade();
+		assertEquals(1, company.getProduction().getLevel());
+		
+		//Testen max. Level
+		for (int i = 0; i < 40; i++) {
+			company.getProduction().upgrade();
+		}
+		assertEquals(Config.getMaxLevelProduction(), company.getProduction().getLevel());
+		
+	}
+	
+	@Test
+	public void testCapacity(){
+		//Grenze: Resources
+		int amount = company.getWarehouse().getTotalAmountProducts();
+		company.getWarehouse().addResources(5, 100);
+		company.getProduction().produce(1, 100);
+		company.simulate();
+		assertEquals(5, company.getWarehouse().getTotalAmountProducts()-amount);
+		
+		//Grenze: Kapazität
+		amount = company.getWarehouse().getTotalAmountProducts();
+		company.getWarehouse().addResources(5000000, 100);
+		company.getProduction().produce(1, 5000000);
+		company.simulate();
+		assertEquals(Config.getProductionCapacity(), company.getWarehouse().getTotalAmountProducts()-amount);
+	}
+	
+	@Test
+	public void warehouseCount(){
+	company.changeMoney(9999999.0);
+	
+	//Ohne Ausschuss
+	company.getWarehouse().addResources(100, 100);
+	company.getProduction().produce(1, 100);
+	company.getProduction().simulate();
+	assertEquals(100, company.getWarehouse().getTotalAmountProducts());
+	
+	//Mit Ausschuss
+	int amount = company.getWarehouse().getTotalAmountProducts();
+	company.getWarehouse().addResources(100000, 90);
+	company.getProduction().produce(1, 100000);
+	company.getProduction().simulate();
+	assertEquals(90000, company.getWarehouse().getTotalAmountProducts()-amount,200.0);
+	}
+	
+
+	
+		
+//		company1.getProduction().upgrade();
+//		assertEquals(2, company1.getProduction().getLevel());
+//		assertEquals(1, company2.getProduction().getLevel());
+//		assertEquals(Config.getCompanyStartMoney() - Config.getProductionFixcost() - Config.getCostsUpgradeProduction(), company1.getMoney(), 0);
+//		for (int i = 2; i < 20; i++) {
+//			company2.getProduction().upgrade();
+//			if (i<=10){
+//				assertEquals(i, company2.getProduction().getLevel());
+//			}else{
+//				assertEquals(10, company2.getProduction().getLevel());
+//			}
+//		}
 	
 	@After
 	public void removeInstances(){

@@ -152,8 +152,7 @@ public class Company {
 	}
 
 	public boolean changeMoney(double value) {
-		System.out.println("bezahlt wird: " + money);
-		if (value > this.money) {
+		if (value < 0 && value*(-1) > this.money) {
 			return false;
 		} else {
 			this.money = this.money + value;
