@@ -1,5 +1,7 @@
 package gui;
 
+import java.awt.Color;
+
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
@@ -18,11 +20,13 @@ public abstract class AvalonPanel extends JPanel {
 	 */
 	protected abstract void send();
 
+	protected abstract void refreshBackground(Color bg);
+
 	/**
 	 * Refreshes the GUI to avoid bugs.
 	 */
 	protected void refresh() {
-//		revalidate();
+		// revalidate();
 		repaint();
 	}
 }

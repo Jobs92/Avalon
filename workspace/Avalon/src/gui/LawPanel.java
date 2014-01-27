@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Vector;
 
-import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -23,8 +22,8 @@ import javax.swing.event.ListSelectionListener;
 public class LawPanel extends AvalonPanel {
 	private JPanel enemyPanel = new JPanel();
 	private JPanel suesPanel = new JPanel();
-	private JButton upgradeButton = new JButton("Upgrade");
-	private JButton downgradeButton = new JButton("Downgrade");
+	private AvalonButton upgradeButton = new AvalonButton("Upgrade");
+	private AvalonButton downgradeButton = new AvalonButton("Downgrade");
 	private JPanel southPanel = new JPanel();
 
 	private JList<String> enemies = new JList<String>();
@@ -36,7 +35,7 @@ public class LawPanel extends AvalonPanel {
 		TitledBorder tb = new TitledBorder("Law");
 		setBorder(tb);
 		setLayout(new BorderLayout());
-		setBackground(new Color(0, 179, 0));
+		// setBackground(new Color(0, 179, 0));
 
 		initEnemyPanel();
 		initSuesPanel();
@@ -140,7 +139,7 @@ public class LawPanel extends AvalonPanel {
 			boolean sueable = !enemyData.get(index).get("amount")
 					.equalsIgnoreCase("0.0");
 
-			final JButton sue = new JButton("Sue Enemy for "
+			final AvalonButton sue = new AvalonButton("Sue Enemy for "
 					+ enemyData.get(index).get("amount"));
 			sue.setEnabled(sueable);
 			sue.addActionListener(new ActionListener() {
@@ -160,7 +159,7 @@ public class LawPanel extends AvalonPanel {
 				}
 			});
 
-			final JButton check = new JButton("Check Enemy");
+			final AvalonButton check = new AvalonButton("Check Enemy");
 			check.setEnabled(!sueable);
 			check.addActionListener(new ActionListener() {
 
@@ -188,7 +187,7 @@ public class LawPanel extends AvalonPanel {
 					+ ", price: " + suesData.get("cost") + ", amount: "
 					+ suesData.get("amount");
 
-			final JButton abort = new JButton("Abort Sue");
+			final AvalonButton abort = new AvalonButton("Abort Sue");
 			abort.addActionListener(new ActionListener() {
 
 				@Override
@@ -201,7 +200,7 @@ public class LawPanel extends AvalonPanel {
 				}
 			});
 
-			final JButton pay = new JButton("Pay");
+			final AvalonButton pay = new AvalonButton("Pay");
 			pay.addActionListener(new ActionListener() {
 
 				@Override
@@ -255,10 +254,20 @@ public class LawPanel extends AvalonPanel {
 		enemies.setListData(enemyListData);
 
 		refresh();
+		refreshBackground(getBackground());
 	}
 
 	@Override
 	protected void send() {
+	}
+
+	@Override
+	protected void refreshBackground(Color bg) {
+		enemies.setBackground(bg);
+		enemyPanel.setBackground(bg);
+		suesPanel.setBackground(bg);
+		sues.setBackground(bg);
+		southPanel.setBackground(bg);
 	}
 
 }

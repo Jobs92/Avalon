@@ -6,7 +6,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.JButton;
 
 import client.Connection;
 
@@ -88,7 +87,7 @@ public class LoginFrame extends JFrame {
 		lblNickname.setBounds(10, 45, 99, 14);
 		contentPane.add(lblNickname);
 
-		JButton btnConnect = new JButton("Connect");
+		AvalonButton btnConnect = new AvalonButton("Connect");
 		btnConnect.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				connect();

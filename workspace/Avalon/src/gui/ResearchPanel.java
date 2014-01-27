@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Dictionary;
 
-import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -29,17 +28,18 @@ public class ResearchPanel extends AvalonPanel {
 	private JList<String> enemies;
 	private ArrayList<Dictionary<String, String>> enemyData = new ArrayList<Dictionary<String, String>>();
 	private ArrayList<JCheckBox> campaignsCB = new ArrayList<JCheckBox>();
-	private ArrayList<JButton> info = new ArrayList<JButton>();
-	private JButton upgradeButton = new JButton("Upgrade");
-	private JButton downgradeButton = new JButton("Downgrade");
+	private ArrayList<AvalonButton> info = new ArrayList<AvalonButton>();
+	private AvalonButton upgradeButton = new AvalonButton("Upgrade");
+	private AvalonButton downgradeButton = new AvalonButton("Downgrade");
 	private ArrayList<Dictionary<String, String>> campaigns = new ArrayList<Dictionary<String, String>>();
 	private JLabel labelPatentLevelNumber;
-	private JButton releaseButton = new JButton("Release new Product");
+	private AvalonButton releaseButton = new AvalonButton("Release new Product");
+	private JPanel southPanel;
 
 	public ResearchPanel() {
 		TitledBorder tb = new TitledBorder("Research");
 		setBorder(tb);
-		setBackground(new Color(122, 189, 255));
+//		setBackground(new Color(122, 189, 255));
 
 		enemyPanel.setBackground(getBackground());
 		patentPanel.setBackground(getBackground());
@@ -83,12 +83,12 @@ public class ResearchPanel extends AvalonPanel {
 			}
 		});
 
-		JPanel p = new JPanel();
-		p.setBackground(getBackground());
-		p.add(upgradeButton);
-		p.add(downgradeButton);
-		p.add(releaseButton);
-		add(p, BorderLayout.SOUTH);
+		southPanel = new JPanel();
+		southPanel.setBackground(getBackground());
+		southPanel.add(upgradeButton);
+		southPanel.add(downgradeButton);
+		southPanel.add(releaseButton);
+		add(southPanel, BorderLayout.SOUTH);
 
 	}
 
@@ -106,13 +106,13 @@ public class ResearchPanel extends AvalonPanel {
 			rbutton.setBackground(getBackground());
 			campaignsCB.add(rbutton);
 
-			JButton b = new JButton("Info");
+			AvalonButton b = new AvalonButton("Info");
 			b.setName(String.valueOf(i - 1));
 			b.addActionListener(new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					JButton b = (JButton) e.getSource();
+					AvalonButton b = (AvalonButton) e.getSource();
 					makeInfoPopup(Integer.valueOf(b.getName()));
 				}
 			});
@@ -129,7 +129,7 @@ public class ResearchPanel extends AvalonPanel {
 
 		JLabel labelPatentLevel = new JLabel("Patentlevel : ");
 		labelPatentLevelNumber = new JLabel("0");
-		JButton orderPatent = new JButton("Patent");
+		AvalonButton orderPatent = new AvalonButton("Patent");
 
 		orderPatent.addActionListener(new ActionListener() {
 
@@ -138,8 +138,7 @@ public class ResearchPanel extends AvalonPanel {
 				int accepted = JOptionPane.showConfirmDialog(null,
 						"Do you want to patent for "
 								+ GuiManager.sharedInstance().getDs()
-										.getPatentCost()
-								, "Patent",
+										.getPatentCost(), "Patent",
 						JOptionPane.YES_NO_OPTION);
 				if (accepted == 0) {
 					// accepted
@@ -241,13 +240,15 @@ public class ResearchPanel extends AvalonPanel {
 			campaignsCB.get(i).setText(campaigns.get(i).get("title"));
 			campaignsCB.get(i).setSelected(false);
 		}
-		refresh();
 		enemyData = GuiManager.sharedInstance().getDs().getEnemies();
 		String[] enemyListData = new String[enemyData.size()];
 		for (int i = 0; i < enemyData.size(); i++) {
 			enemyListData[i] = enemyData.get(i).get("name");
 		}
 		enemies.setListData(enemyListData);
+
+		refresh();
+		refreshBackground(getBackground());
 	}
 
 	@Override
@@ -257,5 +258,17 @@ public class ResearchPanel extends AvalonPanel {
 				GuiManager.sharedInstance().getApi().startResearchCampaign(i);
 			}
 		}
+	}
+
+	@Override
+	protected void refreshBackground(Color bg) {
+		enemies.setBackground(bg);
+		for (JCheckBox cb : campaignsCB) {
+			cb.setBackground(bg);
+		}
+		enemyPanel.setBackground(bg);
+		patentPanel.setBackground(bg);
+		researchCampainPanel.setBackground(bg);
+		southPanel.setBackground(bg);
 	}
 }

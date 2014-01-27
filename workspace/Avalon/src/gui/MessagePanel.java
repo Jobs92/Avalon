@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Dictionary;
 
@@ -67,9 +68,16 @@ public class MessagePanel extends AvalonPanel {
 		}
 		inbox.setListData(titles);
 		refresh();
+		refreshBackground(getBackground());
 	}
 
 	@Override
 	protected void send() {
+	}
+
+	@Override
+	protected void refreshBackground(Color bg) {
+		// TODO Auto-generated method stub
+		
 	}
 }

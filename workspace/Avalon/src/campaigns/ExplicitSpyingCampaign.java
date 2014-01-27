@@ -52,17 +52,17 @@ public class ExplicitSpyingCampaign extends ExplicitResearchCampaign {
 		// send message
 		Message message = new Message();
 		message.setTitle("Spionagekampagne nicht erfolgreich durchgeführt.");
-		message.setMessage("Spionagekampagne \"" + campaign.getTitle()
-				+ "\" ist aufgeflogen. Sie könnten verklagt werden");
+		message.setMessage("Spionagekampagne ist aufgeflogen. Sie könnten von"
+				+ Market.sharedInstance().getNameForId(getSpiedPlayer())
+				+ " verklagt werden");
 		message.setType(Message.GAME);
-		message.setSourcePlayer(c.getId());
-		message.setSourcePlayer(c.getId());
+		message.setTargetPlayer(c.getId());
 		c.addMessageToInbox(message);
 
 		// send message to spied player
 		message.setTitle("Sie wurden ausspioniert!");
 		message.setMessage("Sie wurden ausspioniert! Sie sollten "
-				+ c.getPlayername() + " verklagen!");
+				+ c.getName() + " verklagen!");
 		Market.sharedInstance().sendMessage(message);
 	}
 

@@ -25,7 +25,7 @@ public class LobbyFrame extends JFrame {
 	private JLabel lblIcon;
 	private JLabel[] playerLabels = new JLabel[12];
 
-	// private JButton btnSpielStarten;
+	// private AvalonButton btnSpielStarten;
 
 	/**
 	 * Create the frame.
@@ -40,7 +40,7 @@ public class LobbyFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JButton btnSenden = new JButton("Senden");
+		AvalonButton btnSenden = new AvalonButton("Senden");
 		btnSenden.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -50,7 +50,7 @@ public class LobbyFrame extends JFrame {
 
 		btnSenden.setBounds(474, 438, 185, 30);
 		contentPane.add(btnSenden);
-		JButton btnSpielStarten = new JButton("Spiel starten");
+		AvalonButton btnSpielStarten = new AvalonButton("Spiel starten");
 		btnSpielStarten.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				sendStartGame();

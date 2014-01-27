@@ -6,7 +6,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -18,15 +17,15 @@ public class ProductionPanel extends AvalonPanel {
 	private JLabel productLabel = new JLabel("Product (Level 1)");
 	private JLabel resourceLabel = new JLabel("Available Resources: 0");
 	private JTextField amountTF = new JTextField("0");
-	private JButton upgradeButton = new JButton("Upgrade");
-	private JButton downgradeButton = new JButton("Downgrade");
+	private AvalonButton upgradeButton = new AvalonButton("Upgrade");
+	private AvalonButton downgradeButton = new AvalonButton("Downgrade");
 	private JPanel southPanel = new JPanel();
 
 	public ProductionPanel() {
 		TitledBorder tb = new TitledBorder("Production");
 		setBorder(tb);
 		setLayout(new GridLayout(2, 2));
-		setBackground(Color.ORANGE);
+//		setBackground(Color.ORANGE);
 
 		add(productLabel);
 		amountTF.setPreferredSize(new Dimension(100, 30));
@@ -89,6 +88,7 @@ public class ProductionPanel extends AvalonPanel {
 		resourceLabel.setText("Available Resources: "
 				+ GuiManager.sharedInstance().getDs().getResources());
 		refresh();
+		refreshBackground(getBackground());
 	}
 
 	@Override
@@ -98,6 +98,11 @@ public class ProductionPanel extends AvalonPanel {
 			GuiManager.sharedInstance().getApi()
 					.produce(Integer.valueOf(value));
 		}
+	}
+
+	@Override
+	protected void refreshBackground(Color bg) {
+		southPanel.setBackground(bg);
 	}
 
 }

@@ -29,9 +29,10 @@ public class AvalonFrame extends JFrame {
 	private LawPanel lawPanel = new LawPanel();
 	private ProductionPanel productionPanel = new ProductionPanel();
 	private ArrayList<AvalonPanel> panels = new ArrayList<AvalonPanel>();
-	private JButton nextRoundButton = new JButton("Next Round");
+	// private JButton nextRoundButton = new JButton("Next Round");
+	private JButton nextRoundButton = new AvalonButton("Next Round");
 	private JLabel roundLabel = new JLabel("Round");
-	private JButton refreshButton = new JButton("Refresh");
+	private JButton refreshButton = new AvalonButton("Refresh");
 
 	public AvalonFrame() {
 		setVisible(true);
@@ -43,7 +44,7 @@ public class AvalonFrame extends JFrame {
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		getContentPane().setBackground(Color.white);
-		setTitle("Avalon - Wirtschaftssimulation");
+		setTitle("Avalon - Wirtschaftssimulation - "+GuiManager.sharedInstance().getDs().getCompanyName());
 
 		gamePanel.setLayout(new GridLayout(2, 4));
 		initGamePanel();
@@ -79,7 +80,16 @@ public class AvalonFrame extends JFrame {
 		panels.add(marketingPanel);
 		panels.add(lawPanel);
 		panels.add(messagePanel);
+		int i = 0;
 		for (JPanel panel : panels) {
+			i++;
+			Color c;
+			if (i % 2 == 0) {
+				c = new Color(26, 188, 156);
+			} else {
+				c = new Color(22, 160, 133);
+			}
+			panel.setBackground(c);
 			gamePanel.add(panel);
 		}
 

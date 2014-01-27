@@ -29,7 +29,7 @@ public class CompanyPanel extends AvalonPanel {
 		TitledBorder tb = new TitledBorder("Company");
 		setBorder(tb);
 		setLayout(new GridLayout(5, 2));
-		setBackground(new Color(255, 0, 0, 95));
+//		setBackground(new Color(255, 0, 0, 95));
 
 		addLabels();
 	}
@@ -68,5 +68,9 @@ public class CompanyPanel extends AvalonPanel {
 
 	@Override
 	protected void send() {
+	}
+
+	@Override
+	protected void refreshBackground(Color bg) {
 	}
 }

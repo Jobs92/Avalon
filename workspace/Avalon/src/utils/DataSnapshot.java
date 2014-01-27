@@ -6,30 +6,30 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 
 /**
- * @author Frederik
- * Manages all Data sent from the server to a single client. 
+ * @author Frederik Manages all Data sent from the server to a single client.
  */
 public class DataSnapshot implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	//Generell
+
+	// Generell
 	private int round;
 	private Dictionary<String, Double> upgradeCosts = new Hashtable<String, Double>();
 	private ArrayList<Dictionary<String, String>> messages = new ArrayList<Dictionary<String, String>>();
 	private ArrayList<Dictionary<String, String>> supplier = new ArrayList<Dictionary<String, String>>();
-	
+
 	// Market
 	private ArrayList<Dictionary<String, String>> enemyNames = new ArrayList<Dictionary<String, String>>();
 	private ArrayList<Dictionary<String, String>> marketProducts = new ArrayList<Dictionary<String, String>>();
-	
-	//Company
+
+	// Company
+	private String companyName;
 	private double money;
 	private double image;
 	private double fixCosts;
 	private int productsOnStock;
 	private double varCosts; // <-- ???
-	private Dictionary<String, String> departmentFixcosts 	= new Hashtable<String, String>();
-	private Dictionary<String, Integer> levels 				= new Hashtable<String, Integer>(); // Research#LegalDepartment#Marketing#spying#patent
+	private Dictionary<String, String> departmentFixcosts = new Hashtable<String, String>();
+	private Dictionary<String, Integer> levels = new Hashtable<String, Integer>(); // Research#LegalDepartment#Marketing#spying#patent
 
 	// Research
 	private ArrayList<Dictionary<String, String>> researchCampaigns = new ArrayList<Dictionary<String, String>>();
@@ -41,25 +41,21 @@ public class DataSnapshot implements Serializable {
 	private ArrayList<Dictionary<String, String>> products = new ArrayList<Dictionary<String, String>>();
 
 	// LegalDepartment
-	private Dictionary<String, String> lawsuit					 = new Hashtable<String, String>();
+	private Dictionary<String, String> lawsuit = new Hashtable<String, String>();
 	private ArrayList<Dictionary<String, String>> checkedEnemies = new ArrayList<Dictionary<String, String>>();
 
 	// Marketing
 	private int patentLevel;
 	private double patentCost;
-	
-	
 
 	private ArrayList<Dictionary<String, String>> marketingCampaigns = new ArrayList<Dictionary<String, String>>();
-	
 
 	// Production
 	private String resources;
 	private int highestProductLevel;
 	private String highestProductName;
-	
-	
-	//Setter and Getter
+
+	// Setter and Getter
 	public void setLawsuit(String claimant, String defendant, int duration,
 			double amount, double costs) {
 		lawsuit.put("claimant", claimant);
@@ -76,12 +72,12 @@ public class DataSnapshot implements Serializable {
 	public String getDepartmentFixcosts(String key) {
 		return departmentFixcosts.get(key);
 	}
-	
-	public String getHighestProductName(){
+
+	public String getHighestProductName() {
 		return highestProductName;
 	}
-	
-	public void setHighestProductName(String s){
+
+	public void setHighestProductName(String s) {
 		highestProductName = s;
 	}
 
@@ -93,7 +89,7 @@ public class DataSnapshot implements Serializable {
 		Dictionary<String, String> d = new Hashtable<String, String>();
 		d.put("name", name);
 		d.put("amount", amount + "");
-		d.put("id", id+"");
+		d.put("id", id + "");
 		checkedEnemies.add(d);
 	}
 
@@ -128,7 +124,7 @@ public class DataSnapshot implements Serializable {
 	public void addEnemyName(String enemyName, int id) {
 		Dictionary<String, String> d = new Hashtable<String, String>();
 		d.put("name", enemyName);
-		d.put("id", id+"");
+		d.put("id", id + "");
 		this.enemyNames.add(d);
 	}
 
@@ -199,22 +195,23 @@ public class DataSnapshot implements Serializable {
 	public void addProduct(String name, int level, int amount, double price) {
 		Dictionary<String, String> d = new Hashtable<String, String>();
 		d.put("name", name);
-		d.put("level", level+"");
-		d.put("amount", amount+"");
-		d.put("price", price+"");
+		d.put("level", level + "");
+		d.put("amount", amount + "");
+		d.put("price", price + "");
 		products.add(d);
 	}
-	
+
 	public ArrayList<Dictionary<String, String>> getMarketProducts() {
 		return marketProducts;
 	}
-	
-	public void addMarketProduct(String company, String name, int level, double price) {
+
+	public void addMarketProduct(String company, String name, int level,
+			double price) {
 		Dictionary<String, String> d = new Hashtable<String, String>();
 		d.put("company", company);
 		d.put("name", name);
-		d.put("level", level+"");
-		d.put("price", price+"");
+		d.put("level", level + "");
+		d.put("price", price + "");
 		marketProducts.add(d);
 	}
 
@@ -342,6 +339,14 @@ public class DataSnapshot implements Serializable {
 
 	public String getResources() {
 		return resources;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String name) {
+		this.companyName = name;
 	}
 
 }

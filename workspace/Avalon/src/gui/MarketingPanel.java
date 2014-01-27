@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Dictionary;
 
-import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -17,20 +16,21 @@ import javax.swing.border.TitledBorder;
 @SuppressWarnings("serial")
 public class MarketingPanel extends AvalonPanel {
 	private ArrayList<JCheckBox> campaignsCB = new ArrayList<JCheckBox>();
-	private ArrayList<JButton> info = new ArrayList<JButton>();
+	private ArrayList<AvalonButton> info = new ArrayList<AvalonButton>();
 
-	private JButton upgradeButton = new JButton("Upgrade");
-	private JButton downgradeButton = new JButton("Downgrade");
+	private AvalonButton upgradeButton = new AvalonButton("Upgrade");
+	private AvalonButton downgradeButton = new AvalonButton("Downgrade");
 	private JPanel southPanel = new JPanel();
 	private ArrayList<Dictionary<String, String>> campaigns = new ArrayList<Dictionary<String, String>>();
+	JPanel campaignPanel;
 
 	public MarketingPanel() {
 		TitledBorder tb = new TitledBorder("Marketing");
 		setBorder(tb);
 		setLayout(new BorderLayout());
-		setBackground(new Color(201, 148, 255));
+		// setBackground(new Color(201, 148, 255));
 
-		JPanel campaignPanel = new JPanel();
+		campaignPanel = new JPanel();
 		campaignPanel.setBackground(getBackground());
 		campaignPanel.setLayout(new GridLayout(3, 3));
 
@@ -40,13 +40,13 @@ public class MarketingPanel extends AvalonPanel {
 			cb.setBackground(getBackground());
 			campaignsCB.add(cb);
 
-			JButton b = new JButton("Info");
+			AvalonButton b = new AvalonButton("Info");
 			b.setName(String.valueOf(i - 1));
 			b.addActionListener(new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					JButton b = (JButton) e.getSource();
+					AvalonButton b = (AvalonButton) e.getSource();
 					makeInfoPopup(Integer.valueOf(b.getName()));
 				}
 			});
@@ -141,6 +141,7 @@ public class MarketingPanel extends AvalonPanel {
 		}
 
 		refresh();
+		refreshBackground(getBackground());
 	}
 
 	@Override
@@ -149,6 +150,15 @@ public class MarketingPanel extends AvalonPanel {
 			if (campaignsCB.get(i).isSelected()) {
 				GuiManager.sharedInstance().getApi().startMarketingCampaign(i);
 			}
+		}
+	}
+
+	@Override
+	protected void refreshBackground(Color bg) {
+		southPanel.setBackground(bg);
+		campaignPanel.setBackground(bg);
+		for (JCheckBox cb : campaignsCB) {
+			cb.setBackground(bg);
 		}
 	}
 

@@ -24,7 +24,7 @@ public class SalesPanel extends AvalonPanel {
 		TitledBorder tb = new TitledBorder("Sales");
 		setBorder(tb);
 		setLayout(new BorderLayout());
-		setBackground(new Color(255, 189, 122));
+//		setBackground(new Color(255, 189, 122));
 
 		for (int i = 0; i < 5; i++) {
 			data.add("Product #" + (i + 1));
@@ -71,9 +71,15 @@ public class SalesPanel extends AvalonPanel {
 		}
 		products.setListData(names);
 		refresh();
+		refreshBackground(getBackground());
 	}
 
 	@Override
 	protected void send() {
+	}
+
+	@Override
+	protected void refreshBackground(Color bg) {
+		products.setBackground(bg);
 	}
 }

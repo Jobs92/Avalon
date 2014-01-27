@@ -10,7 +10,6 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Dictionary;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -20,19 +19,20 @@ import javax.swing.border.TitledBorder;
 @SuppressWarnings("serial")
 public class PurchasePanel extends AvalonPanel {
 	private ArrayList<JLabel> supplierLabels = new ArrayList<JLabel>();
-	private ArrayList<JButton> info = new ArrayList<JButton>();
+	private ArrayList<AvalonButton> info = new ArrayList<AvalonButton>();
 	private ArrayList<JTextField> amount = new ArrayList<JTextField>();
 	private JLabel sumLabel = new JLabel("Sum: ");
-	// private JButton buyButton = new JButton("Confirm");
+	JPanel supplierPanel;
+	// private AvalonButton buyButton = new AvalonButton("Confirm");
 	private ArrayList<Dictionary<String, String>> supplier;
 
 	public PurchasePanel() {
 		TitledBorder tb = new TitledBorder("Purchase");
 		setBorder(tb);
 		setLayout(new BorderLayout());
-		setBackground(new Color(189, 255, 122));
+//		setBackground(new Color(189, 255, 122));
 
-		JPanel supplierPanel = new JPanel();
+		supplierPanel = new JPanel();
 		supplierPanel.setBackground(getBackground());
 		supplierPanel.setLayout(new GridLayout(3, 3));
 
@@ -40,13 +40,13 @@ public class PurchasePanel extends AvalonPanel {
 		for (int i = 1; i <= 3; i++) {
 			supplierLabels.add(new JLabel("Supplier #" + i));
 
-			JButton b = new JButton("Info");
+			AvalonButton b = new AvalonButton("Info");
 			b.setName(String.valueOf(i - 1));
 			b.addActionListener(new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					JButton b = (JButton) e.getSource();
+					AvalonButton b = (AvalonButton) e.getSource();
 					makeInfoPopup(Integer.valueOf(b.getName()));
 				}
 			});
@@ -112,6 +112,7 @@ public class PurchasePanel extends AvalonPanel {
 			supplierLabels.get(i).setText(supplier.get(i).get("name"));
 		}
 		refresh();
+		refreshBackground(getBackground());
 	}
 
 	@Override
@@ -123,6 +124,14 @@ public class PurchasePanel extends AvalonPanel {
 						.buy(i, Integer.valueOf(value));
 			}
 		}
+	}
+
+	@Override
+	protected void refreshBackground(Color bg) {
+		for (JLabel l : supplierLabels) {
+			l.setBackground(bg);
+		}
+		supplierPanel.setBackground(bg);
 	}
 
 }

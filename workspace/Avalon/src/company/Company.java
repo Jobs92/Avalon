@@ -201,6 +201,7 @@ public class Company {
 		DataSnapshot snapshot = new DataSnapshot();
 
 		// Fill DataSnapshot object with data
+		snapshot.setCompanyName(this.name);
 		snapshot.setMoney(this.money);
 		snapshot.setImage(this.popularity);
 		snapshot.setFixCosts(calcFixcosts());
