@@ -80,6 +80,7 @@ public class EventManager {
 			for (EventTrigger evt : triggedGroupEvents) {
 				evt.simulategGroupEvents();
 			}
+			
 
 			
 		}
@@ -108,6 +109,9 @@ public class EventManager {
 	
 	public void addEventTrigger(EventTrigger e){
 		triggedGroupEvents.add(e);
+	}
+	public void removeEventTrigger(EventTrigger e){
+		triggedGroupEvents.remove(e);
 	}
 
 }
