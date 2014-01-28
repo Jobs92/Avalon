@@ -237,6 +237,7 @@ public class Config {
 			}
 			marketingFixcost = Double.parseDouble(prop
 					.getProperty("marketingFixcost"));
+			maxLevelMarketing = Integer.parseInt(prop.getProperty("maxLevelMarketing"));
 
 			// Events
 			eventText = prop.getProperty("eventText").split(";");
