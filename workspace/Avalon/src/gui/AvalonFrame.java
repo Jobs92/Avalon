@@ -146,10 +146,8 @@ public class AvalonFrame extends JFrame {
 			p.fill();
 		}
 		if (round > 1) {
-			JOptionPane.showConfirmDialog(this, "You are entering round #"
-					+ (GuiManager.sharedInstance().getDs().getRound() + 1),
-					"Next Round", JOptionPane.INFORMATION_MESSAGE,
-					JOptionPane.OK_OPTION);
+			JOptionPane.showMessageDialog(this, "You are entering round #"
+					+ (GuiManager.sharedInstance().getDs().getRound() + 1));
 		}
 	}
 
