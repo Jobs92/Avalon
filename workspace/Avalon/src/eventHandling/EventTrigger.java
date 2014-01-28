@@ -28,18 +28,18 @@ public class EventTrigger {
 		if (counter==0) {
 			//MarketEvent
 			if (type.equals("changeBuyingPower")) {
-			oldBuyingPower=Market.sharedInstance().getBuyingPower();	
-			Event e=new Event("Kaufkraft ist wieder auf "+oldBuyingPower+" gestiegen", "changeBuyingPower", oldBuyingPower);
-			int rnd=(int) (Math.random() * (4 - 1) + 1);
-			EventManager.sharedInstance().addEventTrigger(new EventTrigger(e, rnd));
-			
-			Message m = new Message();
-			m.setTitle(text);
-			m.setType(Message.BROADCAST);
-			m.setMessage(text);
-			Market.sharedInstance().sendMessage(m);
-			
-			Market.sharedInstance().changeBuyingPower(value);
+				oldBuyingPower=Market.sharedInstance().getBuyingPower();	
+				Event e=new Event("Kaufkraft ist wieder auf "+oldBuyingPower+" gestiegen", "changeBuyingPower", oldBuyingPower);
+				int rnd=(int) (Math.random() * (4 - 1) + 1);
+				EventManager.sharedInstance().addDelayedEvent(new EventTrigger(e, rnd));
+				
+				Message m = new Message();
+				m.setTitle(text);
+				m.setType(Message.BROADCAST);
+				m.setMessage(text);
+				Market.sharedInstance().sendMessage(m);
+				
+				Market.sharedInstance().changeBuyingPower(value);
 				
 			}
 			//Event that effects every Player
@@ -64,8 +64,6 @@ public class EventTrigger {
 			}
 			
 			
-			
-			
 		}
 		else {
 			counter--;
@@ -85,7 +83,7 @@ public class EventTrigger {
 			m.setTitle(text);
 			m.setType(Message.GAME);
 			m.setTargetPlayer(company.getId());
-			m.setMessage("Das Ereignis "+text+" ist eingetreten!");
+			m.setMessage(text);
 			Market.sharedInstance().sendMessage(m);
 			
 			if (type.equals("cost")) {
@@ -100,6 +98,7 @@ public class EventTrigger {
 			else if (type.equals("imageDown")) {
 				company.addPopularity(-1*value);
 			}
+
 		}
 		else {
 			counter--;
