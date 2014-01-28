@@ -21,9 +21,6 @@ public class LobbyFrame extends JFrame {
 	private javax.swing.text.Style style;
 	private StyledDocument doc;
 	private JScrollPane scrollPane;
-	private JLabel lblPlayer;
-	private JLabel lblIcon;
-	private JLabel[] playerLabels = new JLabel[12];
 
 	// private AvalonButton btnSpielStarten;
 
@@ -34,40 +31,23 @@ public class LobbyFrame extends JFrame {
 		setTitle("Avalon - Unternehmenssimulation - Lobby");
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 685, 518);
+		setBounds(100, 100, 400, 430);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		AvalonButton btnSenden = new AvalonButton("Senden");
-		btnSenden.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-
-				send();
-			}
-		});
-
-		btnSenden.setBounds(474, 438, 185, 30);
-		contentPane.add(btnSenden);
 		AvalonButton btnSpielStarten = new AvalonButton("Spiel starten");
 		btnSpielStarten.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				sendStartGame();
 			}
 		});
-		btnSpielStarten.setBounds(474, 392, 185, 30);
+		btnSpielStarten.setBounds(10, 360, 360, 30);
 		contentPane.add(btnSpielStarten);
-
-		btnSpielStarten.setBounds(474, 392, 185, 30);
-		contentPane.add(btnSpielStarten);
-
-		JLabel lblSpieler = new JLabel("Unternehmen");
-		lblSpieler.setBounds(485, 10, 110, 14);
-		contentPane.add(lblSpieler);
 
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(10, 426, 454, 42);
+		scrollPane_1.setBounds(10, 305, 360, 50);
 		contentPane.add(scrollPane_1);
 
 		chatInput = new JTextPane();
@@ -88,7 +68,7 @@ public class LobbyFrame extends JFrame {
 		scrollPane_1.setViewportView(chatInput);
 
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 35, 454, 380);
+		scrollPane.setBounds(10, 10, 360, 290);
 		contentPane.add(scrollPane);
 
 		textPane = new JTextPane();
@@ -119,32 +99,6 @@ public class LobbyFrame extends JFrame {
 			textPane.select(doc.getLength(), doc.getLength());
 		} catch (BadLocationException e) {
 			e.printStackTrace();
-		}
-	}
-
-	public void setPlayers(String[] s) {
-		for (int i = 0; i < playerLabels.length; i++) {
-			if (playerLabels[i] != null) {
-				System.out.println("Wird auf false gesetzt ");
-				playerLabels[i].setVisible(false);
-				playerLabels[i].removeAll();
-				playerLabels[i] = null;
-			}
-		}
-		for (int i = 0; i < s.length; i++) {
-			String player = s[i];
-			String nick = player.substring(2);
-			// int id = Integer.parseInt(player.substring(0,1));
-			lblPlayer = new JLabel(nick);
-			// lblPlayer.setForeground(handler.getColor(id));
-			lblPlayer.setBounds(485, 35 + (i * 40), 100, 14);
-			contentPane.add(lblPlayer);
-			playerLabels[2 * i] = lblPlayer;
-
-			playerLabels[2 * i + 1] = lblIcon;
-			lblIcon.setBounds(600, 35 + (i * 40), 30, 30);
-			contentPane.add(lblIcon);
-			contentPane.repaint();
 		}
 	}
 
