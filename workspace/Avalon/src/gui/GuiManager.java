@@ -52,7 +52,7 @@ public class GuiManager {
 
 	public void successfullLogin() {
 		loginFrame.setVisible(false);
-		lobbyFrame = new LobbyFrame();
+		lobbyFrame =new LobbyFrame();
 //		mainFrame = new AvalonFrame();
 		
 		//for testing

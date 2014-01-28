@@ -1,8 +1,5 @@
 package campaigns;
 
-import java.util.ArrayList;
-
-import departments.Research;
 import utils.Probability;
 import gameManager.GameManager;
 
@@ -13,7 +10,7 @@ public abstract class ExplicitCampaign {
 
 	private int endRound;
 	protected Campaign campaign;
-	protected boolean active;
+	protected boolean active = true;
 
 	public ExplicitCampaign(Campaign campaign) {
 		this.campaign = campaign;
@@ -27,23 +24,13 @@ public abstract class ExplicitCampaign {
 	 */
 	public void simulate() {
 		if (GameManager.sharedInstance().getRound() == endRound) {
+			active = false;
 			if (Probability.propability(campaign.getSuccessProbability())) {
 				campaignFinishedSuccessfully();
 			} else {
 				campaignFailed();
-				stop();
 			}
 		}
-	}
-
-	/**
-	 * Stops this explicit Campaign and removes it from the ArrayList in the
-	 * Department.
-	 */
-	protected void stop() {
-		Research r = (Research) campaign.getDepartment();
-		ArrayList<ExplicitCampaign> campaigns = r.getExplicitCampaigns();
-		campaigns.remove(this);
 	}
 
 	/**
@@ -55,5 +42,9 @@ public abstract class ExplicitCampaign {
 	 * Failure-handler.
 	 */
 	protected abstract void campaignFailed();
+
+	public boolean isActive() {
+		return active;
+	}
 
 }

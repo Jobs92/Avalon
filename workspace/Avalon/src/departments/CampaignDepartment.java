@@ -39,7 +39,9 @@ public abstract class CampaignDepartment extends Department {
 
 	public void simulate() {
 		for (ExplicitCampaign campaign : explicitCampaigns) {
-			campaign.simulate();
+			if (campaign.isActive()) {
+				campaign.simulate();	
+			}
 		}
 	}
 

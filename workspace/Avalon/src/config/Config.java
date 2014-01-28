@@ -32,7 +32,6 @@ public class Config {
 	private static int researchFixcost;
 	private static int costsUpgradeResearch;
 	private static double costsPatent;
-	private static double costSpy;
 
 	// Research Campaigns
 	private static String[] titleResearch;
@@ -321,10 +320,6 @@ public class Config {
 
 	public static int[] getDurationMarketing() {
 		return durationMarketing;
-	}
-
-	public static double getCostSpy() {
-		return costSpy;
 	}
 
 	public static String[] getTitleResearch() {

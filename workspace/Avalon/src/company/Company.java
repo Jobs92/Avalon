@@ -23,7 +23,6 @@ import departments.Sales;
 import departments.Warehouse;
 
 public class Company {
-	private String playername;
 	private int popularity;
 	private double money;
 	private ArrayList<Message> inbox;
@@ -114,10 +113,6 @@ public class Company {
 		Market.sharedInstance().sendMessage(m);
 	}
 
-	public String getPlayername() {
-		return playername;
-	}
-
 	public Sales getSales() {
 		return (Sales) departments.get(0);
 	}
@@ -152,7 +147,7 @@ public class Company {
 	}
 
 	public boolean changeMoney(double value) {
-		if (value < 0 && value*(-1) > this.money) {
+		if (value < 0 && value * (-1) > this.money) {
 			return false;
 		} else {
 			this.money = this.money + value;
@@ -211,7 +206,7 @@ public class Company {
 		snapshot.setPatentLevel(this.getResearch().getPatentLevel());
 		snapshot.setPatentCost(Config.getCostsPatent()
 				* (GameManager.sharedInstance().getRound() + 1));
-		snapshot.setSpyCost(Config.getCostSpy());
+		snapshot.setSpyCost(Config.getCostSpying());
 		snapshot.setNotAppliedLevels(this.getResearch().getNotAppliedLevels());
 		snapshot.setResearchLevel(getResearch().getResearchLevel());
 		snapshot.setHighestProductName(getWarehouse().getHighestProduct()
