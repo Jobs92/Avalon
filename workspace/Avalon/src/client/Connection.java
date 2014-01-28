@@ -12,6 +12,10 @@ import java.net.UnknownHostException;
 
 import utils.DataSnapshot;
 
+/**
+ * @author Frederik
+ * Thread, that manages the connection to the server for a client.
+ */
 public class Connection extends Thread {
 	private Socket socket;
 	private PrintWriter out = null;
@@ -23,6 +27,11 @@ public class Connection extends Thread {
 		this.socket = socket;
 	}
 
+	/**
+	 * @return
+	 * Tries to initiate a PrintWriter, to send Strings, a BufferedReader, to receive Strings (chat) and 
+	 * an ObjectInputStream, to receive the DataSnapshot Objects. The api for the client is created.
+	 */
 	public boolean connect() {
 		try {
 			out = new PrintWriter(socket.getOutputStream());
@@ -44,7 +53,11 @@ public class Connection extends Thread {
 		return true;
 	}
 
-	// Receive Messages from the server
+	/** (non-Javadoc)
+	 * @see java.lang.Thread#run()
+	 * Before the game is started, this method waits for incoming Strings. After the game has started, the
+	 * method waits for DataSnapshot objects and informs the GuiManager.
+	 */
 	public void run() {
 		DataSnapshot ds;
 		while (active) {
@@ -56,7 +69,6 @@ public class Connection extends Thread {
 				}else{
 					String s;
 					if ((s = inTxt.readLine()) != null) {
-						System.out.println("hat String " + s);
 						ClientMessageHandler.handleMessage(s);
 					}
 
@@ -68,43 +80,33 @@ public class Connection extends Thread {
 		}
 	}
 
+	/**
+	 * @param txt
+	 * The given text is buffered in the PrintWriter.
+	 */
 	public void send(String txt) {
 		System.out.println("Client sendet: " + txt);
 		out.println(txt);
 	}
 	
+	/**
+	 * All buffered Strings are send to the server.
+	 */
 	public void flush(){
 		out.flush();
 	}
 
+	/**
+	 * Closes the In- and Output Streams when the connection is closed.
+	 */
 	public void close() {
 		active = false;
-		// more todo?
 		try {
-			out.close();
-			inTxt.close();
-			socket.close();
+			if (out != null) out.close();
+			if (inTxt != null) inTxt.close();
+			if (in_object != null) in_object.close();
+			if (socket != null) socket.close();
 			System.out.println("Schlieﬂt Verbindung...");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	public static void main(String[] args) {
-		try {
-			Socket socket = new Socket("localhost", 56557);
-			Connection conn = new Connection(socket);
-			BufferedReader userIn = new BufferedReader(new InputStreamReader(
-					System.in));
-			while (true) {
-				System.out.println("wartet auf String");
-				String s = userIn.readLine();
-				conn.send(s);
-			}
-
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

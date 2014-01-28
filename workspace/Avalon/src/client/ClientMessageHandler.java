@@ -1,12 +1,12 @@
 package client;
 
 import gui.GuiManager;
-
-import java.util.ArrayList;
-
+/**
+ * @author Frederik
+ * Handles incoming Strings for the client.
+ */
 public class ClientMessageHandler {
 
-	private ArrayList<Connection> players = new ArrayList<Connection>();
 	private static ClientMessageHandler sharedInstance;
 
 	public static ClientMessageHandler sharedInstance(){
@@ -16,6 +16,10 @@ public class ClientMessageHandler {
 		return ClientMessageHandler.sharedInstance;
 	}
 
+	/**
+	 * @param txt
+	 * Handles a given text.
+	 */
 	public static void handleMessage(String txt) {
 		if (txt.startsWith("CHAT")){
 			int id = Integer.parseInt(txt.substring(5,6));
@@ -26,10 +30,6 @@ public class ClientMessageHandler {
 			GuiManager.sharedInstance().startGame();
 		}
 		
-	}
-	
-	public void addPlayer(Connection p){
-		players.add(p);
 	}
 
 }
