@@ -17,7 +17,7 @@ public class Market {
 	private static Market sharedInstance;
 	private ArrayList<Supplier> supplier = new ArrayList<Supplier>();
 	private int demand;
-	private ArrayList<ConsumerGroup> consumerGroups;
+	private ArrayList<ConsumerGroup> consumerGroups = new ArrayList<ConsumerGroup>();
 
 	public static Market sharedInstance() {
 		if (Market.sharedInstance == null) {
@@ -30,7 +30,10 @@ public class Market {
 		demand = Config.getDemand();
 		buyingPower = Config.getBuyingPower();
 		products = new ArrayList<Product>();
-		// load ConsumerGroup
+	}
+	
+	public void addConsumerGroup(ConsumerGroup cg){
+		consumerGroups.add(cg);
 	}
 	
 	public String getNameForId(int id){
@@ -45,9 +48,9 @@ public class Market {
 	public void simulateMarket() {
 
 		// For Testing
-		if (true) {
-			return;
-		}
+//		if (true) {
+//			return;
+//		}
 
 		int demand = saisonalOscillate(calculateDemand());
 		demand = (int) (Config.getDemand() * buyingPower / 100.0);

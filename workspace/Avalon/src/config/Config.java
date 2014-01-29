@@ -5,9 +5,10 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- * @author Frederik Manages all configurable Data. At the begin, the data is
- *         loaded from a properties-file. The objects can access the values with
- *         static methods.
+ * @author Frederik 
+ * Manages all configurable Data. At the begin, the data is
+ * loaded from a properties-file. The objects can access the values with
+ * static methods.
  */
 public class Config {
 
@@ -65,6 +66,10 @@ public class Config {
 	private static int demand;
 	private static int buyingPower;
 	private static int consumerGroupOscillation;
+	private static int[] consumerGroupPrice = new int[3];
+	private static int[] consumerGroupQuality = new int[3];
+	private static int[] consumerGroupImage = new int[3];
+	private static int[] consumerGroupSize = new int[3];
 
 	// Supplier
 	private static int[] supplierTrust = new int[3];
@@ -120,27 +125,48 @@ public class Config {
 			costsUpgradeLegalDeparment = Integer.parseInt(prop
 					.getProperty("costsUpgradeLegalDepartment"));
 
-			// Supplier
+			// Market - Supplier
 			String[] trust = prop.getProperty("supplierTrust").split(";");
 			for (int i = 0; i < trust.length; i++) {
 				supplierTrust[i] = Integer.parseInt(trust[i]);
 			}
 
 			String[] quality = prop.getProperty("supplierQuality").split(";");
-			for (int i = 0; i < trust.length; i++) {
+			for (int i = 0; i < quality.length; i++) {
 				supplierQuality[i] = Integer.parseInt(quality[i]);
 			}
 
 			String[] price = prop.getProperty("supplierPrice").split(";");
-			for (int i = 0; i < trust.length; i++) {
+			for (int i = 0; i < price.length; i++) {
 				supplierPrice[i] = Double.parseDouble(price[i]);
 			}
 
 			String[] name = prop.getProperty("supplierName").split(";");
-			for (int i = 0; i < trust.length; i++) {
+			for (int i = 0; i < name.length; i++) {
 				supplierName[i] = name[i];
 			}
+			
+			//Market - Consumer Groups
+			String[] cgPrice = prop.getProperty("consumerGroupPrice").split(";");
+			for (int i = 0; i < cgPrice.length; i++) {
+				consumerGroupPrice[i] = Integer.parseInt(cgPrice[i]);
+			}
 
+			String[] cgQuality = prop.getProperty("consumerGroupQuality").split(";");
+			for (int i = 0; i < cgQuality.length; i++) {
+				consumerGroupQuality[i] = Integer.parseInt(cgQuality[i]);
+			}
+
+			String[] cgImage = prop.getProperty("consumerGroupImage").split(";");
+			for (int i = 0; i < cgImage.length; i++) {
+				consumerGroupImage[i] = Integer.parseInt(cgImage[i]);
+			}
+			
+			String[] cgSize = prop.getProperty("consumerGroupSize").split(";");
+			for (int i = 0; i < cgSize.length; i++) {
+				consumerGroupSize[i] = Integer.parseInt(cgSize[i]);
+			}
+			
 			// Production
 			productionCapacity = Integer.parseInt(prop
 					.getProperty("productionCapacity"));
@@ -265,6 +291,22 @@ public class Config {
 		} catch (IOException ex) {
 			System.err.println(ex);
 		}
+	}
+	
+	public static int[] getConsumerGroupSize() {
+		return consumerGroupSize;
+	}
+	
+	public static int[] getConsumerGroupPrice() {
+		return consumerGroupPrice;
+	}
+
+	public static int[] getConsumerGroupQuality() {
+		return consumerGroupQuality;
+	}
+
+	public static int[] getConsumerGroupImage() {
+		return consumerGroupImage;
 	}
 
 	public static int getMaxLevelLegalDepartment() {

@@ -6,6 +6,7 @@ import otherclasses.Supplier;
 import company.Company;
 import config.Config;
 import eventHandling.EventManager;
+import market.ConsumerGroup;
 import market.Market;
 
 /**
@@ -44,7 +45,7 @@ public class GameManager {
 	}
 
 	/**
-	 * Create supplier objects and events.
+	 * Create supplier objects, consumer groups and events.
 	 */
 	private void initializeGame() {
 		active = true;
@@ -60,6 +61,20 @@ public class GameManager {
 					Config.getSupplierQuality()[i], Config.getSupplierName()[i]);
 			market.addSupplier(s);
 		}
+		
+		// Generate ConsumerGroups
+				int amountConsumerGroups = Math.min(
+						Config.getConsumerGroupImage().length,
+						Math.min(Config.getConsumerGroupPrice().length,Math.min(Config.getConsumerGroupSize().length,
+								Config.getConsumerGroupQuality().length)));
+				for (int i = 0; i < amountConsumerGroups; i++) {
+					ConsumerGroup cg = new ConsumerGroup(Config.getConsumerGroupImage()[i],
+														Config.getConsumerGroupPrice()[i], 
+														Config.getConsumerGroupQuality()[i],  
+														Config.getConsumerGroupSize()[i]);
+					market.addConsumerGroup(cg);
+				}
+				
 		// Generate Business Events
 		eventManager.createEvents();
 

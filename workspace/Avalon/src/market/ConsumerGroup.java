@@ -20,37 +20,39 @@ public class ConsumerGroup {
 
 	public void simulate() {
 		products = Market.sharedInstance().getProducts();
-		double averagePopularity = calculateAveragePopularity();
-		double averageLevel = calculateAverageLevel();
-		double averagePrice = calculateAveragePrice();
-		double sum = 0.0;
-		// calculate attractivity for each product for this consumer group
-		for (Product product : products) {
-			double i = product.getCompany().getPopularity() / averagePopularity;
-			double l = product.getLevel() / averageLevel;
-			double p = product.getPrice() / averagePrice;
-
-			double attractivity = (i * popularity + l * level + p * price) / 100;
-			attractivity *= attractivity;
-			sum += attractivity;
-			product.setAttractivity(attractivity);
-		}
-		// calculate demand for this consumer group
-		int demand = Market.sharedInstance().getDemand();
-		demand = (int) (demand * percentage / 100.0);
-
-		// sort products by attractivity
-		sort(products);
-
-		// calculate relative attractivity for each product
-		int rest = 0;
-		for (Product product : products) {
-			double relativeAttractivity = product.getAttractivity() / sum;
-			product.setAttractivity(relativeAttractivity);
-			int amount = (int) (relativeAttractivity * demand + rest);
-			rest = product.sell(amount);
-			if (rest < 0) {
-				rest = 0;
+		if (products.size() != 0){
+			double averagePopularity = calculateAveragePopularity();
+			double averageLevel = calculateAverageLevel();
+			double averagePrice = calculateAveragePrice();
+			double sum = 0.0;
+			// calculate attractivity for each product for this consumer group
+			for (Product product : products) {
+				double i = product.getCompany().getPopularity() / averagePopularity;
+				double l = product.getLevel() / averageLevel;
+				double p = product.getPrice() / averagePrice;
+	
+				double attractivity = (i * popularity + l * level + p * price) / 100;
+				attractivity *= attractivity;
+				sum += attractivity;
+				product.setAttractivity(attractivity);
+			}
+			// calculate demand for this consumer group
+			int demand = Market.sharedInstance().getDemand();
+			demand = (int) (demand * percentage / 100.0);
+	
+			// sort products by attractivity
+			sort(products);
+	
+			// calculate relative attractivity for each product
+			int rest = 0;
+			for (Product product : products) {
+				double relativeAttractivity = product.getAttractivity() / sum;
+				product.setAttractivity(relativeAttractivity);
+				int amount = (int) (relativeAttractivity * demand + rest);
+				rest = product.sell(amount);
+				if (rest < 0) {
+					rest = 0;
+				}
 			}
 		}
 	}
