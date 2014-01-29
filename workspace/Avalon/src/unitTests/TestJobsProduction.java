@@ -28,9 +28,9 @@ public class TestJobsProduction {
 
 	@Before
 	public void createCompanies() {
-		company1 = new Company();
-		company2 = new Company();
-		company3 = new Company();
+		company1 = new Company("1");
+		company2 = new Company("2");
+		company3 = new Company("3");
 	}
 	
 	@Before
@@ -48,15 +48,15 @@ public class TestJobsProduction {
 	
 	@Test
 	public void testNextRound() {
-		company1.getWarehouse().addResources(10, 1);
+		company1.getWarehouse().addResources(100,100);
 		company1.getProduction().produce(1, 5);
 		company2.getProduction().produce(1, 5);
-		company2.getWarehouse().addResources(110, 1);
+		company2.getWarehouse().addResources(110, 100);
 		company2.getProduction().produce(1, 110);
-		company1.setReady(true);
-		company2.setReady(true);
+		company1.getProduction().simulate();
+		company2.getProduction().simulate();
 		assertEquals(5, company1.getWarehouse().getSingleProduct(1).getAmount());
-		assertEquals(0, company2.getWarehouse().getProducts().size());
+		assertEquals(1, company2.getWarehouse().getProducts().size());
 		assertEquals(Config.getCompanyStartMoney() - Config.getProductionFixcost() - Config.getProductionVariableCosts()*5, company1.getMoney(), 0);
 	}
 	

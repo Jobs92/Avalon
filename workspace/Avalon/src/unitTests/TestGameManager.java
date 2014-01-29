@@ -18,7 +18,6 @@ import config.Config;
 public class TestGameManager {
 	private Company company1;
 	private Company company2;
-	private Company company3;
 	private GameManager gameManager;
 
 	@Before
@@ -28,26 +27,22 @@ public class TestGameManager {
 
 	@Before
 	public void createCompanies() {
-		company1 = new Company();
-		company2 = new Company();
-		company3 = new Company();
-	}
-	
-	@Before
-	public void startGame(){
+		company1 = new Company("1");
+		company2 = new Company("2");
 		gameManager.addPlayer(company1);
 		gameManager.addPlayer(company2);
-		gameManager.startGame();
 	}
-
-//	@Test
-//	public void testAddCompany() {
-//		gameManager.addPlayer(company3);
-//		assertEquals(gameManager.getPlayer().size(), 1);
-//	}
+	
+	@Test
+	public void testStartGame(){
+		assertEquals(false, GameManager.sharedInstance().getActive());
+		gameManager.startGame();
+		assertEquals(true, GameManager.sharedInstance().getActive());
+	}
 	
 	@Test
 	public void testNextRound() {
+		gameManager.startGame();
 		assertEquals(2, GameManager.sharedInstance().getPlayer().size());
 		company1.setReady(true);
 		company2.setReady(true);
@@ -56,7 +51,12 @@ public class TestGameManager {
 		assertEquals(2, gameManager.getRound());
 		company2.setReady(true);
 		assertEquals(3, gameManager.getRound());
-		company1.changeMoney(1000000);
+	} 
+	
+	@Test
+	public void testCheckWinner() {
+		gameManager.startGame();
+		company1.changeMoney(999999999);
 		company1.setReady(true);
 		company2.setReady(true);
 		assertEquals(false, GameManager.sharedInstance().getActive());

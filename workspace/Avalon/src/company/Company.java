@@ -60,19 +60,7 @@ public class Company {
 
 	public Company() {
 		// For Unit tests withot Client/Server Architecture
-		GameManager.sharedInstance();
-		active = true;
-		money = Config.getCompanyStartMoney();
-		popularity = Config.getCompanyStartPopularity();
-		departments = new ArrayList<Department>();
-		departments.add(new Sales(this));
-		departments.add(new Marketing(this));
-		departments.add(new Research(this));
-		departments.add(new Warehouse(this));
-		departments.add(new LegalDepartment(this));
-		departments.add(new Purchase(this));
-		departments.add(new Production(this));
-		inbox = new ArrayList<Message>();
+		initialize();
 	}
 
 	public boolean isActive() {
@@ -82,12 +70,15 @@ public class Company {
 	public void setActive(boolean b) {
 		active = b;
 	}
-
-	public Company(Connection connection) {
-		super();
-		active = true;
+	
+	public Company(String name){
+		this.name = name;
+		initialize();
+	}
+	
+	private void initialize(){
 		GameManager.sharedInstance();
-		this.connection = connection;
+		active = true;
 		money = Config.getCompanyStartMoney();
 		popularity = Config.getCompanyStartPopularity();
 		departments = new ArrayList<Department>();
@@ -99,6 +90,11 @@ public class Company {
 		departments.add(new Purchase(this));
 		departments.add(new Production(this));
 		inbox = new ArrayList<Message>();
+	}
+
+	public Company(Connection connection) {
+		this.connection = connection;
+		initialize();
 	}
 
 	public void insolvency() {
@@ -305,8 +301,8 @@ public class Company {
 
 		// Production
 		snapshot.setResources(getWarehouse().getAmountResources());
-
-		connection.sendSnapshot(snapshot);
+		
+		if (connection != null) connection.sendSnapshot(snapshot);
 	}
 
 	private void clearInbox() {
