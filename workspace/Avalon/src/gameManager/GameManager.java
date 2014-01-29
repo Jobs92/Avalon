@@ -8,6 +8,10 @@ import config.Config;
 import eventHandling.EventManager;
 import market.Market;
 
+/**
+ * @author Frederik
+ * Ensures the turn-based process of the game. Starts and ends the game.
+ */
 public class GameManager {
 	private int round = 0;
 	private boolean active;
@@ -20,6 +24,10 @@ public class GameManager {
 		Config.loadConfig();
 	}
 
+	/**
+	 * @return
+	 * returns the single GameManager object (Singleton)
+	 */
 	public static GameManager sharedInstance() {
 		if (GameManager.sharedInstance == null) {
 			GameManager.sharedInstance = new GameManager();
@@ -27,11 +35,17 @@ public class GameManager {
 		return GameManager.sharedInstance;
 	}
 
+	/**
+	 * Starts the game and the first round.
+	 */
 	public void startGame() {
 		initializeGame();
 		nextRound();
 	}
 
+	/**
+	 * Create supplier objects and events.
+	 */
 	private void initializeGame() {
 		active = true;
 
@@ -51,6 +65,9 @@ public class GameManager {
 
 	}
 
+	/**
+	 * Starts the next round and informs the payers. Waits until all players are ready.
+	 */
 	private void nextRound() {
 		market.informPlayers();
 		round++;
@@ -58,6 +75,10 @@ public class GameManager {
 		waitForPlayer();
 	}
 
+	/**
+	 * Simulates a round by simulating the market, all company activities and the random events.
+	 * Checks if there is a winner.
+	 */
 	private void simulate() {
 
 		// Active Actions are simulated
@@ -79,6 +100,10 @@ public class GameManager {
 		}
 	}
 
+	/**
+	 * When a player is ready, it is checked whether all players are ready. If they are, the next round
+	 * is started. If not, the game is still waiting.
+	 */
 	public void informReady() {
 		ArrayList<Company> player = market.getCompanies();
 		for (int i = 0; i < player.size(); i++) {
@@ -94,6 +119,10 @@ public class GameManager {
 		active = false;
 	}
 
+	/**
+	 * @return
+	 * If there is a winner, it it returned true, else false.
+	 */
 	private boolean checkWinner() {
 		int neededAmount = Config.getAmountWin();
 		ArrayList<Company> cs = market.getCompanies();
@@ -106,6 +135,9 @@ public class GameManager {
 		return false;
 	}
 
+	/**
+	 * Sets the boolean "ready" for all players to false.
+	 */
 	private void waitForPlayer() {
 		ArrayList<Company> player = market.getCompanies();
 		for (int i = 0; i < player.size(); i++) {

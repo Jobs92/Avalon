@@ -47,7 +47,6 @@ public class DataSnapshot implements Serializable {
 	// Marketing
 	private int patentLevel;
 	private double patentCost;
-
 	private ArrayList<Dictionary<String, String>> marketingCampaigns = new ArrayList<Dictionary<String, String>>();
 
 	// Production
@@ -293,12 +292,6 @@ public class DataSnapshot implements Serializable {
 
 	public ArrayList<Dictionary<String, String>> getMessages() {
 		return messages;
-		/**
-		 * Für Martin: Ich geb dir die Messages in einer Array List mit
-		 * Dictionaries. du kannst dann so drauf zugreifen: for
-		 * (Dictionary<String, String> m : ds.getMessages()) { String titel =
-		 * m.get("title"); String message = m.get("message"); }
-		 */
 	}
 
 	public void addMessage(String title, String message) {

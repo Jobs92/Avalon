@@ -1,5 +1,9 @@
 package otherclasses;
 
+/**
+ * @author Frederik
+ * Manages the Resources of a single order.
+ */
 public class Resources {
 
 	private int quality;

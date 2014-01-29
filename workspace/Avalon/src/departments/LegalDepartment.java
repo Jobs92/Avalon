@@ -10,6 +10,10 @@ import config.Config;
 import lawsuits.Lawsuit;
 import market.Market;
 
+/**
+ * @author Frederik
+ * Manages the Legal Department of the company.
+ */
 public class LegalDepartment extends Department {
 	private int level = 1;
 	private ArrayList<Lawsuit> lawsuitsAsClaimant = new ArrayList<Lawsuit>();
@@ -21,6 +25,11 @@ public class LegalDepartment extends Department {
 		updateFixcost();
 	}
 
+	/**
+	 * @param c
+	 * Checks, whether the the given opponent has spied your company. If he has spied, a lawsuit object
+	 * is created, which can be started now.
+	 */
 	public void checkOpponent(Company c) {
 		
 		//Player has do sue opponent, before he checks him again
@@ -90,6 +99,11 @@ public class LegalDepartment extends Department {
 		return false;
 	}
 	
+	/**
+	 * @param c
+	 * @return sum
+	 * If the company can start a lawsuit against the given opponent, the amount of this lawsuit is returned.
+	 */
 	public double getAmountForEnemy(Company c){
 		for (Lawsuit l : lawsuitsAsClaimant) {
 			if (!l.isActive() && !l.isStarted()){
@@ -99,6 +113,10 @@ public class LegalDepartment extends Department {
 		return 0;
 	}
 	
+	/**
+	 * @return
+	 * Returns the lawsuit, the company is currently involved.
+	 */
 	public Lawsuit getCurrentLawsuit(){
 		
 		// Check lawsuits as Claimant
@@ -121,6 +139,9 @@ public class LegalDepartment extends Department {
 		return level;
 	}
 
+	/**
+	 * Upgrades the legal department if it is possible.
+	 */
 	public void upgrade() {
 		if (level < Config.getMaxLevelLegalDepartment()){
 			int amount = Config.getCostsUpgradeLegalDeparment();
@@ -138,6 +159,9 @@ public class LegalDepartment extends Department {
 		}
 	}
 	
+	/**
+	 * Downgrades the legal department.
+	 */
 	public void downgrade(){
 		if (level >1){
 			level--;
@@ -149,6 +173,10 @@ public class LegalDepartment extends Department {
 		fixcost = Config.getLegalDepartmentFixcost() * level;
 	}
 
+	/**
+	 * @param l
+	 * Informs the company, that it is sued by an opponent.
+	 */
 	public void beSued(Lawsuit l) {
 		lawsuitsAsDefendant.add(l);
 		
@@ -160,6 +188,10 @@ public class LegalDepartment extends Department {
 		Market.sharedInstance().sendMessage(m);
 	}
 
+	/**
+	 * @param c
+	 * The given opponent is suid if possible.
+	 */
 	public void sueOpponent(Company c) {
 		LegalDepartment opponent = c.getLegaldepartment();
 		if (this.isAvailable()) {
@@ -188,6 +220,10 @@ public class LegalDepartment extends Department {
 		}
 	}
 
+	/**
+	 * @return
+	 * Checks, whether the legal department is available for a lawsuit.
+	 */
 	private boolean isAvailable() {
 		// A legal Departmant has the capacity for only one lawsuit at the same
 		// time
@@ -198,6 +234,9 @@ public class LegalDepartment extends Department {
 		return false;
 	}
 
+	/**
+	 * As defendant, the claimed amount is paid.
+	 */
 	public void payAmount() {
 		Lawsuit l = lawsuitsAsDefendant.get(lawsuitsAsDefendant.size() - 1);
 		if (l.isActive()) {
@@ -217,6 +256,9 @@ public class LegalDepartment extends Department {
 		}
 	}
 
+	/**
+	 * As Claimant, the lawsuit is stopped.
+	 */
 	public void abandonLawsuit() {
 		Lawsuit l = lawsuitsAsClaimant.get(lawsuitsAsClaimant.size() - 1);
 		if (l.isActive()) {
@@ -230,7 +272,7 @@ public class LegalDepartment extends Department {
 		Lawsuit l;
 		for (int i = 0; i < lawsuitsAsClaimant.size(); i++) {
 			l = lawsuitsAsClaimant.get(i);
-			if (l.isActive()) {
+			if (l.isActive()&&l.isStarted()) {
 				l.simulate();
 			}
 		}
