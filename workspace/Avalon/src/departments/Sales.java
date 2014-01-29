@@ -1,5 +1,6 @@
 package departments;
 
+import eventHandling.EventTrigger;
 import gameManager.GameManager;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class Sales  extends Department{
 	public Sales(Company company) {
 		super(company);
 		updateFixcost();
+		salesHistory=new ArrayList<otherclasses.SalesHistory>();
 	}
 	
 	private int revenue;
@@ -58,21 +60,24 @@ public class Sales  extends Department{
 				m.setMessage("Sie haben nicht genügend Produkte im Lager!");
 				Market.sharedInstance().sendMessage(m);
 		}
-		else { }
+		else { 
 			
 		
 			company.getWarehouse().getSingleProduct(level).changeAmount(0-amount);
 			company.changeMoney(amount*currentPrice);
 			this.revenue+=amount*currentPrice;
 			
-			if (salesHistory.get(salesHistory.size()).getRound() == GameManager.sharedInstance().getRound() && level==salesHistory.get(salesHistory.size()).getLevel()){
-				salesHistory.get(salesHistory.size()).updateAmount(availableAmount);
+			if (salesHistory.isEmpty()==false ){
+				if ((salesHistory.get(salesHistory.size()-1).getRound() == GameManager.sharedInstance().getRound()) && (level==salesHistory.get(salesHistory.size()-1).getLevel())) {
+					salesHistory.get(salesHistory.size()-1).updateAmount(availableAmount);	
+				}
+				
 			}
 			else {
 					salesHistory.add(new SalesHistory(level, amount, GameManager.sharedInstance().getRound()));
 			}
 		
-		
+		}
 		
 		
        return div;

@@ -71,8 +71,8 @@ public class EventManager {
 
 	public void simEvents() {
 		
-		double groupChance=0.2;
-		double singleChance=0.3;
+		double groupChance=0.2; //0.2
+		double singleChance=0.3;//0.3
 		
 		ArrayList<company.Company> players = market.Market.sharedInstance().getCompanies();
 		
@@ -84,6 +84,9 @@ public class EventManager {
 			for (EventTrigger evt : triggedGroupEvents) {
 				evt.simulategGroupEvents();
 			}
+			triggedGroupEvents.clear();
+			triggedGroupEvents=delayedGroupEvents;
+			delayedGroupEvents.clear();
 			
 
 			
@@ -99,7 +102,7 @@ public class EventManager {
 					for (EventTrigger evt : triggedSingleEvents) {
 						evt.simulategSingleEvents(company);
 					}
-				
+					triggedSingleEvents.clear();
 					
 					
 			}
@@ -108,9 +111,9 @@ public class EventManager {
 			
 					
 		}
-		
-	triggedGroupEvents=delayedGroupEvents;
-	delayedGroupEvents.clear();
+	
+	
+
 		
 	}
 	
