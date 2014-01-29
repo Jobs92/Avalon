@@ -125,6 +125,10 @@ public class Config {
 			costsUpgradeLegalDeparment = Integer.parseInt(prop
 					.getProperty("costsUpgradeLegalDepartment"));
 
+			//Market
+			buyingPower= Integer.parseInt(prop.getProperty("buyingPower"));
+			
+			
 			// Market - Supplier
 			String[] trust = prop.getProperty("supplierTrust").split(";");
 			for (int i = 0; i < trust.length; i++) {

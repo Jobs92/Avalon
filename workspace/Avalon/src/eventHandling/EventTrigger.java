@@ -17,21 +17,22 @@ public class EventTrigger {
 
 	}
 
-	public void simulategGroupEvents() {
+	public EventTrigger simulategGroupEvents() {
 		String text = event.getText(); 				//extract event data;
 		String type = event.getType();
 		int value = event.getValue();
 		int oldBuyingPower;
-		
+		EventTrigger evt = null;
 
-		
+		System.out.println(event.getText());
 		if (counter==0) {
+			
 			//MarketEvent
 			if (type.equals("changeBuyingPower")) {
 				oldBuyingPower=Market.sharedInstance().getBuyingPower();	
-				Event e=new Event("Kaufkraft ist wieder auf "+oldBuyingPower+" gestiegen", "changeBuyingPower", oldBuyingPower);
+				Event e=new Event("Kaufkraft ist wieder auf "+oldBuyingPower+" gestiegen", "ReChangeBuyingPower", value);
 				int rnd=(int) (Math.random() * (4 - 1) + 1);
-				EventManager.sharedInstance().addDelayedEvent(new EventTrigger(e, rnd));
+				evt = new EventTrigger(e, rnd);
 				
 				Message m = new Message();
 				m.setTitle(text);
@@ -41,7 +42,19 @@ public class EventTrigger {
 				
 				Market.sharedInstance().changeBuyingPower(value);
 				
+			}//Event to Reset BuyingPower
+			else if (type.equals("ReChangeBuyingPower")) {	
+				Message m = new Message();
+				m.setTitle(text);
+				m.setType(Message.BROADCAST);
+				m.setMessage(text);
+				Market.sharedInstance().sendMessage(m);
+				
+				Market.sharedInstance().changeBuyingPower(-1*value);
+				
 			}
+			
+			
 			//Event that effects every Player
 			else {
 				ArrayList<company.Company> players = market.Market.sharedInstance().getCompanies();
@@ -68,6 +81,7 @@ public class EventTrigger {
 		else {
 			counter--;
 		}
+		return evt;
 		
 	}
 	public void simulategSingleEvents(Company company) {

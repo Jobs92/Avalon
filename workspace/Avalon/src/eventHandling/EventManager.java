@@ -4,6 +4,7 @@ package eventHandling;
 import java.util.ArrayList;
 
 
+
 import company.Company;
 import config.Config;
 
@@ -69,10 +70,11 @@ public class EventManager {
 //		evManager.simEvents();
 //	}
 
+	@SuppressWarnings("unchecked")
 	public void simEvents() {
 		
-		double groupChance=0.2; //0.2
-		double singleChance=0.3;//0.3
+		double groupChance=1; //0.2
+		double singleChance=0.0;//0.3
 		
 		ArrayList<company.Company> players = market.Market.sharedInstance().getCompanies();
 		
@@ -82,10 +84,11 @@ public class EventManager {
 			EventTrigger GroupEventTrigger = new EventTrigger(gEvent, 0);
 			triggedGroupEvents.add(GroupEventTrigger);
 			for (EventTrigger evt : triggedGroupEvents) {
-				evt.simulategGroupEvents();
+				EventTrigger delayedEvt = evt.simulategGroupEvents();
+				if (delayedEvt != null) delayedGroupEvents.add(delayedEvt);
 			}
 			triggedGroupEvents.clear();
-			triggedGroupEvents=delayedGroupEvents;
+			triggedGroupEvents= (ArrayList<EventTrigger>) delayedGroupEvents.clone();
 			delayedGroupEvents.clear();
 			
 
