@@ -1,4 +1,4 @@
-package UnitTests;
+package unitTests;
 
 import static org.junit.Assert.*;
 import gameManager.GameManager;
