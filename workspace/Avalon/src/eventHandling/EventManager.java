@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 
 
+
 import company.Company;
 import config.Config;
 
@@ -98,8 +99,8 @@ public class EventManager {
 
 		for (Company company : players) {
 			if (Math.random()<=singleChance) {
-				int var=(int) (1+(groupEvents.size()-1)*Math.random());
-					Event sEvent = singleEvents.get(var-1);
+				int var=(int) ((int) (Math.random()*singleEvents.size()));
+					Event sEvent = singleEvents.get(var);
 					EventTrigger SingleEventTrigger = new EventTrigger(sEvent, 0);
 					triggedSingleEvents.add(SingleEventTrigger);
 					for (EventTrigger evt : triggedSingleEvents) {

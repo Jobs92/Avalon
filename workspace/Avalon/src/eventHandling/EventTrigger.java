@@ -1,8 +1,6 @@
 package eventHandling;
 
 import java.util.ArrayList;
-import java.util.Random;
-
 import market.Market;
 import utils.Message;
 import company.Company;
@@ -69,16 +67,7 @@ public class EventTrigger {
 					else if (type.equals("earn")) {
 						company.changeMoney(value);
 					}		
-					else if (type.equals("spy")) {
-						int rndId;
-						do {
-							rndId = new Random().nextInt(market.Market.sharedInstance().getCompanies().size());
-						} while (rndId == company.getId());
-					
-						String tgtName=market.Market.sharedInstance().getCompanyById(rndId).getName();	 
-						
-						text=tgtName+" "+text;						
-					}
+				
 					
 					Message m = new Message();
 					m.setTitle(text);
@@ -104,16 +93,7 @@ public class EventTrigger {
 		int value = event.getValue();
 		
 		
-		if (counter==0) {
-			
-			
-			Message m = new Message();
-			m.setTitle(text);
-			m.setType(Message.GAME);
-			m.setTargetPlayer(company.getId());
-			m.setMessage(text);
-			Market.sharedInstance().sendMessage(m);
-			
+		if (counter==0) {		
 			if (type.equals("cost")) {
 				company.changeMoney(-1*value);
 			}
@@ -126,6 +106,29 @@ public class EventTrigger {
 			else if (type.equals("imageDown")) {
 				company.addPopularity(-1*value);
 			}
+			else if (type.equals("fakeSpy")) {
+				int rndId;
+				if (market.Market.sharedInstance().getCompanies().size()<2) {
+					text="";
+				} else {
+				 do {
+					rndId = (int) (Math.random()*market.Market.sharedInstance().getCompanies().size());
+					System.out.println("in loop");
+				} while (rndId != company.getId());
+				System.out.println("out of loop");
+				String tgtName=market.Market.sharedInstance().getCompanyById(rndId).getName();	 
+				
+				text=tgtName+" "+text;	
+				}
+									
+			}
+			
+			Message m = new Message();
+			m.setTitle(text);
+			m.setType(Message.GAME);
+			m.setTargetPlayer(company.getId());
+			m.setMessage(text);
+			Market.sharedInstance().sendMessage(m);
 
 		}
 		else {
