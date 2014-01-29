@@ -91,6 +91,10 @@ public class Config {
 	private static double salesFixcost;
 
 	// Events
+	
+	private static double eventGroupChance;
+	private static double eventSingleChance;
+	
 	private static String[] eventText;
 	private static String[] eventType;
 	private static int[] eventValue;
@@ -270,6 +274,8 @@ public class Config {
 			maxLevelMarketing = Integer.parseInt(prop.getProperty("maxLevelMarketing"));
 
 			// Events
+			eventGroupChance=Double.parseDouble(prop.getProperty("groupChance"));
+			eventSingleChance=Double.parseDouble(prop.getProperty("singleChance"));
 			eventText = prop.getProperty("eventText").split(";");
 			eventType = prop.getProperty("eventType").split(";");
 			eventAmount = Integer.parseInt(prop.getProperty("eventAmount"));
@@ -551,6 +557,14 @@ public class Config {
 
 	public static int getEventAmount() {
 		return eventAmount;
+	}
+
+	public static double getEventGroupChance() {
+		return eventGroupChance;
+	}
+
+	public static double getEventSingleChance() {
+		return eventSingleChance;
 	}
 
 }

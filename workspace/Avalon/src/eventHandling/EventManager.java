@@ -73,8 +73,8 @@ public class EventManager {
 	@SuppressWarnings("unchecked")
 	public void simEvents() {
 		
-		double groupChance=1; //0.2
-		double singleChance=0.0;//0.3
+		double groupChance=Config.getEventGroupChance(); //0.2
+		double singleChance=Config.getEventGroupChance();//0.3
 		
 		ArrayList<company.Company> players = market.Market.sharedInstance().getCompanies();
 		

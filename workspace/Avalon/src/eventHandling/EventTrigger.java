@@ -1,6 +1,7 @@
 package eventHandling;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import market.Market;
 import utils.Message;
@@ -21,7 +22,7 @@ public class EventTrigger {
 		String text = event.getText(); 				//extract event data;
 		String type = event.getType();
 		int value = event.getValue();
-		int oldBuyingPower;
+//		int oldBuyingPower;
 		EventTrigger evt = null;
 
 		System.out.println(event.getText());
@@ -29,8 +30,9 @@ public class EventTrigger {
 			
 			//MarketEvent
 			if (type.equals("changeBuyingPower")) {
-				oldBuyingPower=Market.sharedInstance().getBuyingPower();	
-				Event e=new Event("Kaufkraft ist wieder auf "+oldBuyingPower+" gestiegen", "ReChangeBuyingPower", value);
+				Market.sharedInstance().changeBuyingPower(value);
+	
+				Event e=new Event("Die Kaufkraft ist wieder gestigen auf: ", "ReChangeBuyingPower", value);
 				int rnd=(int) (Math.random() * (4 - 1) + 1);
 				evt = new EventTrigger(e, rnd);
 				
@@ -40,14 +42,14 @@ public class EventTrigger {
 				m.setMessage(text);
 				Market.sharedInstance().sendMessage(m);
 				
-				Market.sharedInstance().changeBuyingPower(value);
+				
 				
 			}//Event to Reset BuyingPower
 			else if (type.equals("ReChangeBuyingPower")) {	
 				Message m = new Message();
 				m.setTitle(text);
 				m.setType(Message.BROADCAST);
-				m.setMessage(text);
+				m.setMessage(text+Market.sharedInstance().getBuyingPower());
 				Market.sharedInstance().sendMessage(m);
 				
 				Market.sharedInstance().changeBuyingPower(-1*value);
@@ -59,19 +61,31 @@ public class EventTrigger {
 			else {
 				ArrayList<company.Company> players = market.Market.sharedInstance().getCompanies();
 				for (Company company : players) {
-					Message m = new Message();
-					m.setTitle(text);
-					m.setType(Message.GAME);
-					m.setTargetPlayer(company.getId());
-					m.setMessage(text);
-					Market.sharedInstance().sendMessage(m);
+					
 					
 					if (type.equals("cost")) {
 						company.changeMoney(-1*value);
 					}
 					else if (type.equals("earn")) {
 						company.changeMoney(value);
-					}				
+					}		
+					else if (type.equals("spy")) {
+						int rndId;
+						do {
+							rndId = new Random().nextInt(market.Market.sharedInstance().getCompanies().size());
+						} while (rndId == company.getId());
+					
+						String tgtName=market.Market.sharedInstance().getCompanyById(rndId).getName();	 
+						
+						text=tgtName+" "+text;						
+					}
+					
+					Message m = new Message();
+					m.setTitle(text);
+					m.setType(Message.GAME);
+					m.setTargetPlayer(company.getId());
+					m.setMessage(text);
+					Market.sharedInstance().sendMessage(m);
 					
 				}
 			}
