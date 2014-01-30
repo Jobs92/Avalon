@@ -9,13 +9,18 @@ import java.util.ArrayList;
 import company.Company;
 import config.Config;
 
+/**
+ * @author Johannes
+ * This class manages the events
+ *
+ */
 public class EventManager {
 	
 	private ArrayList<Event> groupEvents;
 	private ArrayList<Event> singleEvents;
 	private ArrayList<EventTrigger> triggedGroupEvents;
 	private ArrayList<EventTrigger> triggedSingleEvents;
-	private ArrayList<EventTrigger> delayedGroupEvents; 
+	private ArrayList<EventTrigger> delayedGroupEvents;
 	//private ArrayList<EventTrigger> delayedSingleEvents; //NOT USED
 	private static EventManager sharedInstance;
 
@@ -30,13 +35,15 @@ public class EventManager {
 		
 	}
 	
+	/**
+	 * This method extract the event data from config file and creates the events.
+	 */
 	public void createEvents(){
 		groupEvents=new ArrayList<Event>();
 		singleEvents=new ArrayList<Event>();
 		triggedGroupEvents=new ArrayList<EventTrigger>();
 		delayedGroupEvents=new ArrayList<EventTrigger>();
-		triggedSingleEvents=new ArrayList<EventTrigger>();
-		
+		triggedSingleEvents=new ArrayList<EventTrigger>();	
 		
 		
 		for (int i = 0; i < Config.getEventAmount(); i++) {
@@ -71,6 +78,9 @@ public class EventManager {
 //		evManager.simEvents();
 //	}
 
+	/**
+	 * This method pick a random event.
+	 */
 	@SuppressWarnings("unchecked")
 	public void simEvents() {
 		
@@ -79,22 +89,14 @@ public class EventManager {
 		
 		ArrayList<company.Company> players = market.Market.sharedInstance().getCompanies();
 		
-		if (Math.random()<=groupChance) {   // GruppenEvent
+		
+		if (Math.random()<=groupChance) {   // pick random groupEvent
 			int var=(int) (1+(groupEvents.size()-1)*Math.random());
 			Event gEvent = groupEvents.get(var-1);
 			EventTrigger GroupEventTrigger = new EventTrigger(gEvent, 0);
-			triggedGroupEvents.add(GroupEventTrigger);
-			for (EventTrigger evt : triggedGroupEvents) {
-				EventTrigger delayedEvt = evt.simulategGroupEvents();
-				if (delayedEvt != null) delayedGroupEvents.add(delayedEvt);
-			}
-			triggedGroupEvents.clear();
-			triggedGroupEvents= (ArrayList<EventTrigger>) delayedGroupEvents.clone();
-			delayedGroupEvents.clear();
-			
-
-			
+			triggedGroupEvents.add(GroupEventTrigger);			
 		}
+		
 		else  {   // SingleEvent
 
 		for (Company company : players) {
@@ -115,6 +117,15 @@ public class EventManager {
 			
 					
 		}
+		
+		// Simulate GroupEvents
+		for (EventTrigger evt : triggedGroupEvents) {
+			EventTrigger delayedEvt = evt.simulategGroupEvents();
+			if (delayedEvt != null) delayedGroupEvents.add(delayedEvt);
+		}
+		triggedGroupEvents.clear();
+		triggedGroupEvents= (ArrayList<EventTrigger>) delayedGroupEvents.clone();
+		delayedGroupEvents.clear();
 	
 	
 

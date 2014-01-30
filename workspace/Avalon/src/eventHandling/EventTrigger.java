@@ -5,17 +5,33 @@ import market.Market;
 import utils.Message;
 import company.Company;
 
+/**
+ * @author Johannes
+ * This class combines Events with a counter variable and simulates the events.
+ *
+ */
 public class EventTrigger {
 	private Event event;
 	private int counter;
 
 	
+	/**
+	 * @param e Event
+	 * @param c counter variable
+	 */
 	public EventTrigger(Event e, int c){
 		this.event = e;
 		this.counter = c;
 
 	}
+	
+		
+	
 
+	/**
+	 * @return 
+	 * This method performs group and market events (include reset events).
+	 */
 	public EventTrigger simulategGroupEvents() {
 		String text = event.getText(); 				//extract event data;
 		String type = event.getType();
@@ -40,9 +56,9 @@ public class EventTrigger {
 				m.setMessage(text);
 				Market.sharedInstance().sendMessage(m);
 				
-				
-				
-			}//Event to Reset BuyingPower
+			}	
+			
+			//Event to Reset BuyingPower
 			else if (type.equals("ReChangeBuyingPower")) {	
 				Message m = new Message();
 				m.setTitle(text);
@@ -51,8 +67,8 @@ public class EventTrigger {
 				Market.sharedInstance().sendMessage(m);
 				
 				Market.sharedInstance().changeBuyingPower(-1*value);
-				
 			}
+			
 			
 			
 			//Event that effects every Player
@@ -87,6 +103,10 @@ public class EventTrigger {
 		return evt;
 		
 	}
+	/**
+	 * @param company
+	 * This method perform events for single user.
+	 */
 	public void simulategSingleEvents(Company company) {
 		String text = event.getText(); 				//extract event data;
 		String type = event.getType();
