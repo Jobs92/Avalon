@@ -30,7 +30,7 @@ public class PurchasePanel extends AvalonPanel {
 		TitledBorder tb = new TitledBorder("Purchase");
 		setBorder(tb);
 		setLayout(new BorderLayout());
-//		setBackground(new Color(189, 255, 122));
+		// setBackground(new Color(189, 255, 122));
 
 		supplierPanel = new JPanel();
 		supplierPanel.setBackground(getBackground());
@@ -83,11 +83,11 @@ public class PurchasePanel extends AvalonPanel {
 
 	protected void makeInfoPopup(int index) {
 		if (index > -1) {
-		String infoString = "Trust: " + supplier.get(index).get("trust")
-				+ ", quality: " + supplier.get(index).get("quality")
-				+ ", price: " + supplier.get(index).get("price");
-		JOptionPane.showMessageDialog(null, infoString, "Supplier #" + index,
-				JOptionPane.INFORMATION_MESSAGE);
+			String infoString = "Trust: " + supplier.get(index).get("trust")
+					+ ", quality: " + supplier.get(index).get("quality")
+					+ ", price: " + supplier.get(index).get("price");
+			JOptionPane.showMessageDialog(null, infoString, "Supplier #"
+					+ index, JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 
@@ -120,7 +120,7 @@ public class PurchasePanel extends AvalonPanel {
 	protected void send() {
 		for (int i = 0; i < amount.size(); i++) {
 			String value = amount.get(i).getText();
-			if (!value.equalsIgnoreCase("")) {
+			if (!value.equalsIgnoreCase("") || Integer.parseInt(value) > 0) {
 				GuiManager.sharedInstance().getApi()
 						.buy(i, Integer.valueOf(value));
 			}
