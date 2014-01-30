@@ -129,13 +129,12 @@ public class EventTrigger {
 			else if (type.equals("fakeSpy")) {
 				int rndId;
 				if (market.Market.sharedInstance().getCompanies().size()<2) {
-					text="";
-				} else {
+					text=" ";
+				}
+				else {
 				 do {
 					rndId = (int) (Math.random()*market.Market.sharedInstance().getCompanies().size());
-					System.out.println("in loop");
-				} while (rndId != company.getId());
-				System.out.println("out of loop");
+				} while (rndId == company.getId());
 				String tgtName=market.Market.sharedInstance().getCompanyById(rndId).getName();	 
 				
 				text=tgtName+" "+text;	
