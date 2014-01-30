@@ -35,7 +35,7 @@ public class Marketing extends CampaignDepartment {
 		return cost;
 	}
 
-	@Override // Was soll diese Funktion wenn wir garnicht das Level erhöhen?????
+	@Override 
 	protected boolean isMaxLevel() {
 		int maxLevel = Config.getMaxLevelMarketing();
 		if (level == maxLevel) {
