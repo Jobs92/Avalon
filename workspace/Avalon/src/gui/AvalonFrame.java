@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -92,6 +93,7 @@ public class AvalonFrame extends JFrame {
 		headerPanel.setBackground(new Color(52, 152, 219));
 		int j = 0;
 		messagePanel.setBackground(new Color(92, 192, 255));
+		messagePanel.setPreferredSize(new Dimension(200, 0));
 		eastPanel.setBackground(new Color(92, 192, 255));
 		for (int i = 0; i < panels.size() - 1; i++) {
 			AvalonPanel panel = panels.get(i);

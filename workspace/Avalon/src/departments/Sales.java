@@ -1,6 +1,5 @@
 package departments;
 
-import eventHandling.EventTrigger;
 import gameManager.GameManager;
 
 import java.util.ArrayList;

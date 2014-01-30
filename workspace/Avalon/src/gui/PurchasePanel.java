@@ -110,6 +110,7 @@ public class PurchasePanel extends AvalonPanel {
 		supplier = GuiManager.sharedInstance().getDs().getSupplier();
 		for (int i = 0; i < supplierLabels.size(); i++) {
 			supplierLabels.get(i).setText(supplier.get(i).get("name"));
+			amount.get(i).setText("0");
 		}
 		refresh();
 		refreshBackground(getBackground());

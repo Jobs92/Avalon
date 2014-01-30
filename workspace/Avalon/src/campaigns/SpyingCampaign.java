@@ -18,6 +18,7 @@ public class SpyingCampaign extends ResearchCampaign {
 	 * @return explicit spying campaign
 	 */
 	public ExplicitSpyingCampaign startSpyingCampaign(int target) {
+		System.out.println("Class: " +this.getClass() + ". SpyingCampaign started. Target: "+ target);
 		return new ExplicitSpyingCampaign(target, this);
 	}
 

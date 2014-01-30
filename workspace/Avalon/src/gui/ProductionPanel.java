@@ -89,6 +89,7 @@ public class ProductionPanel extends AvalonPanel {
 				+ ")");
 		resourceLabel.setText("Available Resources: "
 				+ GuiManager.sharedInstance().getDs().getResources());
+		amountTF.setText("0");
 		refresh();
 		refreshBackground(getBackground());
 	}

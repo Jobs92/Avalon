@@ -29,11 +29,15 @@ public class ExplicitSpyingCampaign extends ExplicitResearchCampaign {
 
 	@Override
 	protected void campaignFinishedSuccessfully() {
+		System.out.println("Class: " + this.getClass()
+				+ ". SpyingCampaign finished successfully.");
 		Company c = campaign.getDepartment().getCompany();
 		Research r = (Research) campaign.getDepartment();
 		r.addSpiedLevels(campaign.getLevel());
 
 		// send message
+		System.out.println("Class: " + this.getClass()
+				+ ". Send success message to spying Player.");
 		Message message = new Message();
 		message.setTitle("Spionagekampagne erfolgreich durchgeführt.");
 		message.setMessage("Spionagekampagne \""
@@ -47,12 +51,16 @@ public class ExplicitSpyingCampaign extends ExplicitResearchCampaign {
 
 	@Override
 	protected void campaignFailed() {
+		System.out.println("Class: " + this.getClass()
+				+ ". SpyingCampaign failed.");
 		Company c = campaign.getDepartment().getCompany();
 
 		// send message
+		System.out.println("Class: " + this.getClass()
+				+ ". Send failed message to spying Player.");
 		Message message = new Message();
 		message.setTitle("Spionagekampagne nicht erfolgreich durchgeführt.");
-		message.setMessage("Spionagekampagne ist aufgeflogen. Sie könnten von"
+		message.setMessage("Spionagekampagne ist aufgeflogen. Sie könnten von "
 				+ Market.sharedInstance().getNameForId(getSpiedPlayer())
 				+ " verklagt werden");
 		message.setType(Message.GAME);
@@ -60,9 +68,13 @@ public class ExplicitSpyingCampaign extends ExplicitResearchCampaign {
 		c.addMessageToInbox(message);
 
 		// send message to spied player
+		System.out.println("Class: " + this.getClass()
+				+ ". Send message to spied Player.");
+		message = new Message();
 		message.setTitle("Sie wurden ausspioniert!");
 		message.setMessage("Sie wurden ausspioniert! Sie sollten "
 				+ c.getName() + " verklagen!");
+		message.setTargetPlayer(getSpiedPlayer());
 		Market.sharedInstance().sendMessage(message);
 	}
 

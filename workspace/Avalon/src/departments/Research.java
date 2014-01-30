@@ -34,6 +34,7 @@ public class Research extends CampaignDepartment {
 	 *            id
 	 */
 	public void startCampaign(SpyingCampaign spyingCampaign, int target) {
+		System.out.println("Class: " +this.getClass()+". Spying Campaign gestartet. Target: "+ target);
 		explicitCampaigns.add(spyingCampaign.startSpyingCampaign(target));
 	}
 

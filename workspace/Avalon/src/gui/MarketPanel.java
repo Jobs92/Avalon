@@ -28,7 +28,7 @@ public class MarketPanel extends AvalonPanel {
 		for (Dictionary<String, String> p : products) {
 			text += "<li>Product: " + p.get("name") + "<ul><li>Company: "
 					+ p.get("company") + "</li><li>Level: " + p.get("level")
-					+ "</li> <li>Price: " + p.get("price") + ")</ul></li>";
+					+ "</li> <li>Price: " + p.get("price") + "</ul></li>";
 		}
 		text += "</ul></html>";
 		label.setText(text);
