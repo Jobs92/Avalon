@@ -32,7 +32,7 @@ public class TestSales {
 
 	@Test
 	public void test() {
-		//Pay fixcosts		
+		//Pay fixcosts
 		company.getSales().payFixcosts();
 		company.getSales().simulate();
 		assertEquals(company.getMoney(), Config.getCompanyStartMoney() - Config.getSalesFixcost(), 0);
