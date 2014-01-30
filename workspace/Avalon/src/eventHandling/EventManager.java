@@ -143,12 +143,19 @@ public class EventManager {
 		delayedGroupEvents.add(e);
 	}
 
-	private void setGroupChance(double groupChance) {
+	public void setGroupChance(double groupChance) {
 		this.groupChance = groupChance;
 	}
 
-	private void setSingleChance(double singleChance) {
+	public void setSingleChance(double singleChance) {
 		this.singleChance = singleChance;
+	}
+
+	public Event getGroupEvents(int i) {
+		return groupEvents.get(i);
+	}
+	public Event getSingleEvents(int i) {
+		return singleEvents.get(i);
 	}
 	
 
