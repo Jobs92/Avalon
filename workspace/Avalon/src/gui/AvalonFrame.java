@@ -36,8 +36,9 @@ public class AvalonFrame extends JFrame {
 	private JButton nextRoundButton = new AvalonButton("Next Round");
 	private JLabel roundLabel = new JLabel("Round");
 	private JButton refreshButton = new AvalonButton("Refresh");
-	JPanel headerPanel = new JPanel();
-	JPanel eastPanel = new JPanel();
+	private JPanel headerPanel = new JPanel();
+	private JPanel eastPanel = new JPanel();
+	private JLabel headerLabel = new JLabel();
 
 	public AvalonFrame() {
 		setVisible(true);
@@ -50,8 +51,7 @@ public class AvalonFrame extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		getContentPane().setBackground(Color.white);
 		setBackground(new Color(52, 152, 219));
-		// setTitle("Avalon - Wirtschaftssimulation - "
-		// + GuiManager.sharedInstance().getDs().getCompanyName());
+		setTitle("Avalon - Wirtschaftssimulation");
 
 		gamePanel.setLayout(new GridLayout(2, 4));
 		initGamePanel();
@@ -60,7 +60,7 @@ public class AvalonFrame extends JFrame {
 		add(nextRoundButton, BorderLayout.SOUTH);
 
 		headerPanel.setLayout(new BorderLayout());
-		JLabel headerLabel = new JLabel("AVALON");
+		headerLabel = new JLabel("AVALON");
 		headerLabel.setFont(new Font(null, Font.PLAIN, 20));
 		headerPanel.add(headerLabel, BorderLayout.WEST);
 		headerPanel.add(roundLabel, BorderLayout.CENTER);
@@ -140,6 +140,9 @@ public class AvalonFrame extends JFrame {
 	}
 
 	public void fill() {
+		headerLabel.setText(GuiManager.sharedInstance().getDs()
+				.getCompanyName()
+				+ "s AVALON");
 		// update round
 		int round = GuiManager.sharedInstance().getDs().getRound() + 1;
 		nextRoundButton.setEnabled(true);

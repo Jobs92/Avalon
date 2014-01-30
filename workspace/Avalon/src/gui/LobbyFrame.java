@@ -31,7 +31,7 @@ public class LobbyFrame extends JFrame {
 		setTitle("Avalon - Unternehmenssimulation - Lobby");
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 400, 430);
+		setBounds(100, 100, 400, 450);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
