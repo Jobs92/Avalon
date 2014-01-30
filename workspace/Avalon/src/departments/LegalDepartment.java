@@ -18,7 +18,7 @@ public class LegalDepartment extends Department {
 	private int level = 1;
 	private ArrayList<Lawsuit> lawsuitsAsClaimant = new ArrayList<Lawsuit>();
 	private ArrayList<Lawsuit> lawsuitsAsDefendant = new ArrayList<Lawsuit>();
-	private ArrayList<ExplicitSpyingCampaign> checkedCampaigns = new ArrayList<ExplicitSpyingCampaign>(); //Remember already checked Campaigns
+	private ArrayList<ExplicitResearchCampaign> checkedCampaigns = new ArrayList<ExplicitResearchCampaign>(); //Remember already checked Campaigns
 
 	public LegalDepartment(Company company) {
 		super(company);
@@ -48,6 +48,7 @@ public class LegalDepartment extends Department {
 						if (campaign.getClass() == ExplicitSpyingCampaign.class && ((ExplicitSpyingCampaign) campaign).getSpiedPlayer() == company.getId()) {
 							foundSpyingCampaigns.add((ExplicitSpyingCampaign) campaign);
 						}
+						checkedCampaigns.add(campaign);
 					}else{
 						//Not enough money
 						Message m = new Message();
@@ -64,14 +65,14 @@ public class LegalDepartment extends Department {
 			//Create Lawsuit, if amount spying campaigns > 0
 			if (foundSpyingCampaigns.size() != 0){
 				double sum = Config.getCostsFoundSpyingCampaign() * foundSpyingCampaigns.size();
-				Lawsuit l = new Lawsuit(this, company.getLegaldepartment(), foundSpyingCampaigns, sum);
+				Lawsuit l = new Lawsuit(this, c.getLegaldepartment(), sum);
 				lawsuitsAsClaimant.add(l);
 				
 				Message m = new Message();
 				m.setTitle("Spionagekampagnen gefunden!");
 				m.setType(Message.GAME);
 				m.setTargetPlayer(company.getId());
-				m.setMessage(c.getName() + " hat Sie ausspioniert!");
+				m.setMessage(c.getName() + " hat Sie ausspioniert! Sie können " + c.getName() + " auf " + l.getAmount() + "$ verklagen!");
 				Market.sharedInstance().sendMessage(m);
 			}else{
 				Message m = new Message();
@@ -94,7 +95,7 @@ public class LegalDepartment extends Department {
 	
 	private boolean alreadyChecked(Company c){
 		for (Lawsuit l : lawsuitsAsClaimant) {
-			if (c.getLegaldepartment() == l.getDefendant() && !l.isActive() && !l.isStarted()) return true;
+			if (c.getLegaldepartment() == l.getDefendant() && l.getState() == Lawsuit.WAITING) return true;
 		}
 		return false;
 	}
@@ -106,7 +107,7 @@ public class LegalDepartment extends Department {
 	 */
 	public double getAmountForEnemy(Company c){
 		for (Lawsuit l : lawsuitsAsClaimant) {
-			if (!l.isActive() && !l.isStarted()){
+			if (l.getState() != Lawsuit.FINISHED){
 				return l.getAmount();
 			}
 		}
@@ -121,14 +122,14 @@ public class LegalDepartment extends Department {
 		
 		// Check lawsuits as Claimant
 		for (int i = 0; i < lawsuitsAsClaimant.size(); i++) {
-			if (lawsuitsAsClaimant.get(i).isActive() && lawsuitsAsClaimant.get(i).isStarted()) {
+			if (lawsuitsAsClaimant.get(i).getState() == Lawsuit.ACTIVE) {
 				return lawsuitsAsClaimant.get(i);
 			}
 		}
 
 		// Check lawsuits as Defendant
 		for (int i = 0; i < lawsuitsAsDefendant.size(); i++) {
-			if (lawsuitsAsDefendant.get(i).isActive()&& lawsuitsAsDefendant.get(i).isStarted()) {
+			if (lawsuitsAsDefendant.get(i).getState() == Lawsuit.ACTIVE) {
 				return lawsuitsAsDefendant.get(i);
 			}
 		}
@@ -184,7 +185,7 @@ public class LegalDepartment extends Department {
 		m.setTitle("Sie wurden verklagt!");
 		m.setType(Message.GAME);
 		m.setTargetPlayer(company.getId());
-		m.setMessage(l.getClaimant().getCompany().getName() + " hat Sie verklagt!");
+		m.setMessage(l.getClaimant().getCompany().getName() + " hat Sie auf " + l.getAmount() + "$ verklagt!");
 		Market.sharedInstance().sendMessage(m);
 	}
 
@@ -197,7 +198,7 @@ public class LegalDepartment extends Department {
 		if (this.isAvailable()) {
 			if (opponent.isAvailable()){
 				for (Lawsuit l : lawsuitsAsClaimant) {
-					if (!l.isActive() && !l.isStarted()){
+					if (l.getState() == Lawsuit.WAITING){
 						l.startLawsuit();
 						break;
 					}
@@ -239,10 +240,20 @@ public class LegalDepartment extends Department {
 	 */
 	public void payAmount() {
 		Lawsuit l = lawsuitsAsDefendant.get(lawsuitsAsDefendant.size() - 1);
-		if (l.isActive()) {
+		if (l.getState() == Lawsuit.ACTIVE) {
 			double amount = l.getAmount();
 			if (company.changeMoney((-1)*amount)){
 				l.getClaimant().getCompany().changeMoney(amount);
+				
+				l.endLawsuit();
+				
+				Message m = new Message();
+				m.setTitle("Gerichtsverfahren beendet!");
+				m.setType(Message.GAME);
+				m.setTargetPlayer(l.getClaimant().getCompany().getId());
+				m.setMessage(company.getName() + " zahlt Ihnen die geforderte Summe von " + l.getAmount() + "$.");
+				Market.sharedInstance().sendMessage(m);
+				
 			}else{
 				
 				Message m = new Message();
@@ -252,7 +263,7 @@ public class LegalDepartment extends Department {
 				m.setMessage("Sie haben nicht genügend Geld um die aktuelle Klage zu bezahlen!");
 				Market.sharedInstance().sendMessage(m);
 			}
-			l.endLawsuit();
+			
 		}
 	}
 
@@ -261,8 +272,15 @@ public class LegalDepartment extends Department {
 	 */
 	public void abandonLawsuit() {
 		Lawsuit l = lawsuitsAsClaimant.get(lawsuitsAsClaimant.size() - 1);
-		if (l.isActive()) {
+		if (l.getState() == Lawsuit.ACTIVE) {
 			l.endLawsuit();
+			
+			Message m = new Message();
+			m.setTitle("Klage zurückgezogen!");
+			m.setType(Message.GAME);
+			m.setTargetPlayer(l.getDefendant().getCompany().getId());
+			m.setMessage(company.getName() + " zieht die Klage gegen Sie zurück.");
+			Market.sharedInstance().sendMessage(m);
 		}
 	}
 
@@ -272,7 +290,7 @@ public class LegalDepartment extends Department {
 		Lawsuit l;
 		for (int i = 0; i < lawsuitsAsClaimant.size(); i++) {
 			l = lawsuitsAsClaimant.get(i);
-			if (l.isActive()&&l.isStarted()) {
+			if (l.getState() == Lawsuit.ACTIVE) {
 				l.simulate();
 			}
 		}

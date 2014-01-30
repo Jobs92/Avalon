@@ -53,7 +53,7 @@ public class Market {
 //		}
 
 		int demand = saisonalOscillate(calculateDemand());
-		demand = (int) (Config.getDemand() * buyingPower / 100.0);
+		demand = (int) (demand * buyingPower / 100.0);
 		oscillateConsumerGroup();
 		for (ConsumerGroup cg : consumerGroups) {
 			cg.simulate();
@@ -101,7 +101,7 @@ public class Market {
 	}
 
 	private int calculateDemand() {
-		demand = (int) (demand * (1 + Math.log((double) (GameManager
+		demand = (int) (Config.getDemand() * (1 + Math.log((double) (GameManager
 				.sharedInstance().getRound()) / Math.log(30.0))));
 		return demand;
 	}
@@ -157,6 +157,28 @@ public class Market {
 	public ArrayList<Supplier> getSupplier() {
 		return supplier;
 	}
+	
+	public void handleInsolvency(Company c){
+		
+		//Remove Products
+		ArrayList<Product> productsToRemove = new ArrayList<Product>();
+		for (Product p : products) {
+			if (p.getCompany() == c){
+				productsToRemove.add(p);
+			}
+		}
+		
+		for (Product product : productsToRemove) {
+			products.remove(product);
+		}
+		
+		//Inform all Player
+		Message m = new Message();
+		m.setTitle(c.getName() + " ist insolvent!");
+		m.setType(Message.BROADCAST);
+		m.setMessage("Der Spiegel berichtet: " + c.getName() + " musste Insolvenz anmelden.");
+		Market.sharedInstance().sendMessage(m);
+	}
 
 	public void sendMessage(String title, String message, int target,
 			int source, int type) {
@@ -190,9 +212,7 @@ public class Market {
 
 	public void informPlayers() {
 		for (Company c : companies) {
-			if (c.isActive()){
-				c.informPlayer();
-			}
+			c.informPlayer();
 		}
 	}
 

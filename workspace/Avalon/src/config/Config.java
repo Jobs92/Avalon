@@ -25,7 +25,7 @@ public class Config {
 	private static int legalDepartmentFixcost;
 	private static double costsCheckCampaign;
 	private static double costsFoundSpyingCampaign;
-	private static int relativeAmountCostsLawsuit;
+	private static double relativeAmountCostsLawsuit;
 	private static int maxLevelLegalDepartment;
 
 	// Research
@@ -128,6 +128,8 @@ public class Config {
 					.getProperty("legalDepartmentFixcost"));
 			costsUpgradeLegalDeparment = Integer.parseInt(prop
 					.getProperty("costsUpgradeLegalDepartment"));
+			costsFoundSpyingCampaign = Double.parseDouble(prop.getProperty("costsFoundSpyingCampaign"));
+			relativeAmountCostsLawsuit = Double.parseDouble(prop.getProperty("relativeAmountCostsLawsuit"));
 
 			//Market
 			buyingPower= Integer.parseInt(prop.getProperty("buyingPower"));
@@ -455,7 +457,7 @@ public class Config {
 		return costsFoundSpyingCampaign;
 	}
 
-	public static int getRelativeAmountCostsLawsuit() {
+	public static double getRelativeAmountCostsLawsuit() {
 		return relativeAmountCostsLawsuit;
 	}
 

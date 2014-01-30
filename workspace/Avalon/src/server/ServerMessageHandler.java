@@ -217,8 +217,10 @@ public class ServerMessageHandler {
 	}
 
 	private void buyRessources(Connection sender, int supplierId, int amount) {
-		Order order = new Order(Market.sharedInstance().getSupplierById(supplierId), amount);
-		sender.getCompany().getPurchase().addOrder(order);
+		if (amount >0){
+			Order order = new Order(Market.sharedInstance().getSupplierById(supplierId), amount);
+			sender.getCompany().getPurchase().addOrder(order);
+		}
 	}
 
 	private void startMarketingCampaign(Connection sender, int id) {

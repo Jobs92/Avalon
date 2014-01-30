@@ -99,6 +99,9 @@ public class Company {
 
 	public void insolvency() {
 		active = false;
+		money = 0;
+		
+		Market.sharedInstance().handleInsolvency(this);
 
 		// Inform Playder
 		Message m = new Message();

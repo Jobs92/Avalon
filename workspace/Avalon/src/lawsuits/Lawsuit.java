@@ -1,10 +1,8 @@
 package lawsuits;
-import java.util.ArrayList;
 
 import market.Market;
 import utils.Message;
 import config.Config;
-import campaigns.ExplicitSpyingCampaign;
 import departments.LegalDepartment;
 
 
@@ -15,12 +13,16 @@ import departments.LegalDepartment;
 public class Lawsuit {
 	private LegalDepartment claimant;
 	private LegalDepartment defendant;
-	private ArrayList<ExplicitSpyingCampaign> spyings;
 	private double amount = 0;
 	private double costs = 0;
 	private int duration = 0;
-	private boolean active;
-	private boolean started;
+	
+	public final static int WAITING = 0;
+	public final static int ACTIVE = 1;
+	public final static int FINISHED = 2;
+	
+	
+	private int state;
 	
 	
 	/** 
@@ -29,12 +31,12 @@ public class Lawsuit {
 	 * @param ArrayList<ExplicitSpyingCampaign> spyings
 	 * @param double amount
 	 */
-	public Lawsuit(LegalDepartment c, LegalDepartment d, ArrayList<ExplicitSpyingCampaign> spyings, double amount){
+	public Lawsuit(LegalDepartment c, LegalDepartment d, double amount){
 		claimant = c;
 		defendant = d;
 		this.amount = amount;
-		this.spyings = spyings;
 		costs = amount*Config.getRelativeAmountCostsLawsuit();
+		state = Lawsuit.WAITING;
 	}
 	
 	public double getCosts(){
@@ -46,8 +48,7 @@ public class Lawsuit {
 	 */
 	public void startLawsuit(){
 		defendant.beSued(this);
-		active = true;
-		started = true;
+		state = Lawsuit.ACTIVE;
 	}
 	
 	public double getAmount() {
@@ -58,28 +59,11 @@ public class Lawsuit {
 	 * Ends the lawsuit and informs the players.
 	 */
 	public void endLawsuit(){
-		Message m = new Message();
-		m.setTitle("Gerichtsverfahren beendet");
-		m.setType(Message.GAME);
-		
-		
-		m.setTargetPlayer(claimant.getCompany().getId());
-		m.setMessage("Das Gerichtsverfahren gegen " + defendant.getCompany().getName() + " ist nun beendet!");
-		Market.sharedInstance().sendMessage(m);
-		
-		m.setTargetPlayer(defendant.getCompany().getId());
-		m.setMessage("Das Gerichtsverfahren gegen " + claimant.getCompany().getName() + " ist nun beendet!");
-		Market.sharedInstance().sendMessage(m);
-		
-		active = false;
+		state = Lawsuit.FINISHED;
 	}
 
-	public boolean isActive() {
-		return active;
-	}
-
-	public boolean isStarted() {
-		return started;
+	public int getState(){
+		return state;
 	}
 	
 	public int getDuration(){
@@ -126,7 +110,7 @@ public class Lawsuit {
 		
 		if (utils.Probability.propability((int) (Config.getProbWinLawsuit() * paramWin))){
 			//Claimant wins lawsuit
-			
+			endLawsuit();
 			informPlayer(claimant, defendant);
 			
 			//Refund Process Costs
@@ -147,7 +131,7 @@ public class Lawsuit {
 			
 		}else if (utils.Probability.propability((int) (Config.getProbWinLawsuit() * paramLose))){
 			//Defendant wins lawsuit
-
+			endLawsuit();
 			informPlayer(defendant, claimant);
 			
 			//Refund Process Costs
@@ -161,6 +145,18 @@ public class Lawsuit {
 				defendant.getCompany().changeMoney(claimant.getCompany().getMoney());
 				claimant.getCompany().insolvency();
 			}
+		}else{
+			//No Winner this round
+			Message m = new Message();
+			m.setTitle("Gerichtsentscheidung vertagt.");
+			m.setType(Message.GAME);
+			m.setTargetPlayer(defendant.getCompany().getId());
+			m.setMessage("Die Entscheidung des Gerichts im Verfahren gegen " + claimant.getCompany().getName() + "wurde vertagt.");
+			Market.sharedInstance().sendMessage(m);
+			
+			m.setTargetPlayer(claimant.getCompany().getId());
+			m.setMessage("Die Entscheidung des Gerichts im Verfahren gegen " + defendant.getCompany().getName() + "wurde vertagt.");
+			Market.sharedInstance().sendMessage(m);
 		}
 		
 	}
