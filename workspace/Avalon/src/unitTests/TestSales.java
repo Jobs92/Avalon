@@ -38,12 +38,18 @@ public class TestSales {
 		assertEquals(company.getMoney(), Config.getCompanyStartMoney() - Config.getSalesFixcost(), 0);
 		
 		//Create products and get amount 
-		Product product = new Product(10, "test", company);
-		Product product2 = new Product(10, "test", company);
+		
+		company.getWarehouse().addResources(100,100);
+		Product product = new Product(1, "test", company);
 		company.getWarehouse().addProduct(product);
-		company.getWarehouse().addProduct(product2);
-		company.getSales().setPrice(10, 1000);
-		company.getSales().sell(10, 2); // Problem with history
+		company.getProduction().produce(1, 5);
+
+		company.getProduction().simulate();
+		
+	
+
+		company.getSales().setPrice(1, 1000);
+		company.getSales().sell(1, 2); // Problem with history
 		company.getSales().simulate();
 		assertEquals(2000, company.getSales().getRevenue());
 		
