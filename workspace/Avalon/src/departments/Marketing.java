@@ -28,6 +28,7 @@ public class Marketing extends CampaignDepartment {
 		}
 	}
 	
+	
 	@Override
 	public int getCostForNextLevel() {
 		int cost = level * level * Config.getCostsUpgradeMarketing();
