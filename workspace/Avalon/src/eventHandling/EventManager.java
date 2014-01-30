@@ -23,6 +23,9 @@ public class EventManager {
 	private ArrayList<EventTrigger> delayedGroupEvents;
 	//private ArrayList<EventTrigger> delayedSingleEvents; //NOT USED
 	private static EventManager sharedInstance;
+	
+	double groupChance; //0.2
+	double singleChance;//0.3
 
 	public static EventManager sharedInstance() {
 		if (EventManager.sharedInstance == null) {
@@ -39,6 +42,9 @@ public class EventManager {
 	 * This method extract the event data from config file and creates the events.
 	 */
 	public void createEvents(){
+		groupChance=Config.getEventGroupChance(); //0.2
+		singleChance=Config.getEventGroupChance();//0.3
+		
 		groupEvents=new ArrayList<Event>();
 		singleEvents=new ArrayList<Event>();
 		triggedGroupEvents=new ArrayList<EventTrigger>();
@@ -83,9 +89,7 @@ public class EventManager {
 	 */
 	@SuppressWarnings("unchecked")
 	public void simEvents() {
-		
-		double groupChance=Config.getEventGroupChance(); //0.2
-		double singleChance=Config.getEventGroupChance();//0.3
+	
 		
 		ArrayList<company.Company> players = market.Market.sharedInstance().getCompanies();
 		
@@ -137,6 +141,14 @@ public class EventManager {
 	}
 	public void addDelayedEvent(EventTrigger e){
 		delayedGroupEvents.add(e);
+	}
+
+	private void setGroupChance(double groupChance) {
+		this.groupChance = groupChance;
+	}
+
+	private void setSingleChance(double singleChance) {
+		this.singleChance = singleChance;
 	}
 	
 

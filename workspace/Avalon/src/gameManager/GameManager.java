@@ -103,8 +103,10 @@ public class GameManager {
 		market.simulateMarket();
 
 		// Events are simulated
-		eventManager.simEvents();
-
+		if (round > 2){
+			eventManager.simEvents();
+		}
+		
 		// Check for winner
 		if (!checkWinner()) {
 			// no winner --> next round is started

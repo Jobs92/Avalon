@@ -14,7 +14,7 @@ public class TestEvents {
 
 	@Before
 	public void createEventManager() {
-		evManager=new EventManager();
+		evManager=EventManager.sharedInstance();
 	}
 	
 	@Before
@@ -25,7 +25,8 @@ public class TestEvents {
 
 	@Test
 	public void testEvent() {
-		evManager.simEvents();
+		
+		
 //		assertEquals(5, company1.getWarehouse().getSingleProduct(1).getAmount());
 //		assertEquals(0, company2.getWarehouse().getProducts().size());
 //		assertEquals(Config.getCompanyStartMoney() - Config.getProductionFixcost() - Config.getProductionVariableCosts()*5, company1.getMoney(), 0);
