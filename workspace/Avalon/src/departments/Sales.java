@@ -96,12 +96,22 @@ public class Sales  extends Department{
 		
 	}
 	
+	public int getAmountSoldProductsCurrentRound(){
+		if (salesHistory.isEmpty()==false ){
+			if (salesHistory.get(salesHistory.size()-1).getRound() == GameManager.sharedInstance().getRound()){
+				return salesHistory.get(salesHistory.size()-1).getAmount();
+			}
+		}
+		return 0;
+	}
+	
 	protected void updateFixcost() {
 		fixcost = Config.getSalesFixcost();	
 	}
 	
 	@Override
 	public void simulate() {
+		payFixcosts();
 	}
 
 }

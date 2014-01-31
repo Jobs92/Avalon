@@ -206,17 +206,27 @@ public class Company {
 		return this.id;
 	}
 
-	public void informPlayer() {
+	public void handleNextRound() {
 		DataSnapshot snapshot = new DataSnapshot();
 
 		// Fill DataSnapshot object with data
+		
+		//Company Data
 		snapshot.setCompanyName(this.name);
 		snapshot.setMoney(this.money);
+		snapshot.setRevenue(revenues);
+		snapshot.setTotalCosts(costsThisRound);
+		snapshot.setProfit(revenues-costsThisRound);
+		snapshot.setSoldSmartphones(this.getSales().getAmountSoldProductsCurrentRound());
 		snapshot.setImage(this.popularity);
 		snapshot.setFixCosts(calcFixcosts());
 		snapshot.setHighestProductLevel(getWarehouse().getHighestProduct()
 				.getLevel());
 		snapshot.setProductsOnStock(getWarehouse().getTotalAmountProducts());
+		snapshot.setHighestProductName(getWarehouse().getHighestProduct()
+				.getName());
+		
+		//Generell
 		snapshot.setRound(GameManager.sharedInstance().getRound());
 		snapshot.setPatentLevel(this.getResearch().getPatentLevel());
 		snapshot.setPatentCost(Config.getCostsPatent()
@@ -224,8 +234,7 @@ public class Company {
 		snapshot.setSpyCost(Config.getCostSpying());
 		snapshot.setNotAppliedLevels(this.getResearch().getNotAppliedLevels());
 		snapshot.setResearchLevel(getResearch().getResearchLevel());
-		snapshot.setHighestProductName(getWarehouse().getHighestProduct()
-				.getName());
+		
 
 		// Department Fixcosts
 		snapshot.addDepartmentFixcost("marketing", this.getMarketing()
@@ -322,6 +331,9 @@ public class Company {
 		snapshot.setResources(getWarehouse().getAmountResources());
 		
 		if (connection != null) connection.sendSnapshot(snapshot);
+		
+		revenues = 0;
+		costsThisRound = 0;
 	}
 
 	private void clearInbox() {

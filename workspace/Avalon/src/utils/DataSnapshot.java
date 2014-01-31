@@ -24,6 +24,10 @@ public class DataSnapshot implements Serializable {
 	// Company
 	private String companyName;
 	private double money;
+	private double profit;
+	private double revenue;
+	private double totalCosts;
+	private int soldSmartphones;
 	private double image;
 	private double fixCosts;
 	private int productsOnStock;
@@ -53,14 +57,6 @@ public class DataSnapshot implements Serializable {
 	private String resources;
 	private int highestProductLevel;
 	private String highestProductName;
-
-	private int profit;
-
-	private int revenue;
-
-	private int totalCosts;
-
-	private int soldSmartphones;
 
 	// Setter and Getter
 	public void setLawsuit(String claimant, String defendant, int duration,
@@ -350,15 +346,15 @@ public class DataSnapshot implements Serializable {
 		this.companyName = name;
 	}
 
-	public int getProfit() {
+	public double getProfit() {
 		return profit;
 	}
 
-	public int getRevenue() {
+	public double getRevenue() {
 		return revenue;
 	}
 
-	public int getTotalCosts() {
+	public double getTotalCosts() {
 		return totalCosts;
 	}
 
@@ -366,15 +362,15 @@ public class DataSnapshot implements Serializable {
 		return soldSmartphones;
 	}
 
-	public void setProfit(int x) {
+	public void setProfit(double x) {
 		profit = x;
 	}
 
-	public void setRevenue(int x) {
+	public void setRevenue(double x) {
 		revenue = x;
 	}
 
-	public void setTotalCosts(int x) {
+	public void setTotalCosts(double x) {
 		totalCosts = x;
 	}
 

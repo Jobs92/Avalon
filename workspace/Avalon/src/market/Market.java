@@ -211,7 +211,7 @@ public class Market {
 
 	public void informPlayers() {
 		for (Company c : companies) {
-			c.informPlayer();
+			c.handleNextRound();
 		}
 	}
 

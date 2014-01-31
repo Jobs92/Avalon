@@ -38,6 +38,7 @@ public abstract class CampaignDepartment extends Department {
 	protected abstract void loadCampaigns();
 
 	public void simulate() {
+		payFixcosts();
 		for (ExplicitCampaign campaign : explicitCampaigns) {
 			if (campaign.isActive()) {
 				campaign.simulate();	
