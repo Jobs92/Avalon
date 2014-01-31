@@ -21,6 +21,7 @@ public class Sales  extends Department{
 		super(company);
 		updateFixcost();
 		salesHistory=new ArrayList<otherclasses.SalesHistory>();
+		this.revenue=0;
 	}
 	
 	private int revenue;
