@@ -157,6 +157,38 @@ public class EventManager {
 	public Event getSingleEvents(int i) {
 		return singleEvents.get(i);
 	}
+
+	public ArrayList<Event> getGroupEvents() {
+		return groupEvents;
+	}
+
+	public ArrayList<Event> getSingleEvents() {
+		return singleEvents;
+	}
+
+	public ArrayList<EventTrigger> getTriggedGroupEvents() {
+		return triggedGroupEvents;
+	}
+
+	public ArrayList<EventTrigger> getTriggedSingleEvents() {
+		return triggedSingleEvents;
+	}
+
+	public ArrayList<EventTrigger> getDelayedGroupEvents() {
+		return delayedGroupEvents;
+	}
+
+	public static EventManager getSharedInstance() {
+		return sharedInstance;
+	}
+
+	public double getGroupChance() {
+		return groupChance;
+	}
+
+	public double getSingleChance() {
+		return singleChance;
+	}
 	
 
 }

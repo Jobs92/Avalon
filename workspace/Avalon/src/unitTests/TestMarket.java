@@ -68,6 +68,8 @@ public class TestMarket {
 			Market.sharedInstance().addConsumerGroup(cg);
 		}
 		
+		
+		
 	}
 	
 
