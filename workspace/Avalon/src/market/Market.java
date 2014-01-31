@@ -78,7 +78,7 @@ public class Market {
 		return (int) ((((Math.random() - 0.5) * range * 2) + 100) / 100 * i);
 	}
 
-	private int saisonalOscillate(int i) {
+	public int saisonalOscillate(int i) {
 		int round = GameManager.sharedInstance().getRound();
 		switch (round % 4) {
 		case 0:
@@ -101,7 +101,7 @@ public class Market {
 	}
 
 	public int calculateDemand() {
-		demand = (int) (Config.getDemand() * (1 + Math.exp(-0.4 * (GameManager.sharedInstance().getRound() - 10))));
+		demand = (int) (Config.getDemand() * (1+7/(1 + Math.exp(-0.4 * (GameManager.sharedInstance().getRound() - 10)))));
 		return demand;
 	}
 
