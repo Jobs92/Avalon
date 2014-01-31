@@ -26,7 +26,7 @@ public class Market {
 		return Market.sharedInstance;
 	}
 
-	public Market() {
+	private Market() {
 		demand = Config.getDemand();
 		buyingPower = Config.getBuyingPower();
 		products = new ArrayList<Product>();
@@ -100,7 +100,7 @@ public class Market {
 		return i;
 	}
 
-	private int calculateDemand() {
+	public int calculateDemand() {
 		demand = (int) (Config.getDemand() * (1 + Math.exp(-0.4 * (GameManager.sharedInstance().getRound() - 10))));
 		return demand;
 	}
@@ -221,6 +221,14 @@ public class Market {
 
 	public void changeBuyingPower(int buyingPower) {
 		this.buyingPower += buyingPower;
+	}
+
+	public void setBuyingPower(int buyingPower) {
+		this.buyingPower = buyingPower;
+	}
+
+	public void setDemand(int demand) {
+		this.demand = demand;
 	}
 
 }

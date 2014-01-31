@@ -83,7 +83,7 @@ public class GameManager {
 	/**
 	 * Starts the next round and informs the payers. Waits until all players are ready.
 	 */
-	private void nextRound() {
+	public void nextRound() {
 		market.informPlayers();
 		round++;
 		// Player decide further actions

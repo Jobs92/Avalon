@@ -133,6 +133,7 @@ public class Config {
 
 			//Market
 			buyingPower= Integer.parseInt(prop.getProperty("buyingPower"));
+			demand = Integer.parseInt(prop.getProperty("demand"));
 			
 			
 			// Market - Supplier
