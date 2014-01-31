@@ -166,7 +166,7 @@ public class LawPanel extends AvalonPanel {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					int i = enemies.getSelectedIndex();
-					GuiManager.sharedInstance().getApi().checkOpponent(i);
+					GuiManager.sharedInstance().getApi().checkOpponent(Integer.parseInt(enemyData.get(index).get("id")));
 					System.out.println("enemy checked");
 					// close popup
 					Window win = SwingUtilities.getWindowAncestor(check);

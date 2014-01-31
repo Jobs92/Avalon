@@ -126,8 +126,7 @@ public class Lawsuit {
 				
 				claimant.getCompany().changeMoney(defendant.getCompany().getMoney());
 				defendant.getCompany().insolvency();
-			}
-			
+			}			
 			
 		}else if (utils.Probability.propability((int) (Config.getProbWinLawsuit() * paramLose))){
 			//Defendant wins lawsuit
