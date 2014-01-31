@@ -13,7 +13,7 @@ import org.junit.Test;
 
 
 
-public class TestMarket {
+public class TestConsumerGroup {
 	private GameManager gameManager;
 	private int demand;
 	private int oscillate;
@@ -42,17 +42,6 @@ public class TestMarket {
 	
 	@Test
 	public void testMarketDemandOscillate() {
-		for (int i = 0; i < 4; i++) {
-			demand=1000;
-			demand=Market.sharedInstance().calculateDemand();
-			oscillate=Market.sharedInstance().saisonalOscillate(demand);
-			assertEquals(oscillate, demandOscillateExcel[i]);
-			gameManager.nextRound();
-		}
-		
-		
-	}
-	public void testConsumerGroups() {
 		for (int i = 0; i < 4; i++) {
 			demand=1000;
 			demand=Market.sharedInstance().calculateDemand();
