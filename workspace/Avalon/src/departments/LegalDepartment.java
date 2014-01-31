@@ -93,7 +93,7 @@ public class LegalDepartment extends Department {
 		}
 	}
 	
-	private boolean alreadyChecked(Company c){
+	public boolean alreadyChecked(Company c){
 		for (Lawsuit l : lawsuitsAsClaimant) {
 			if (c.getLegaldepartment() == l.getDefendant() && l.getState() == Lawsuit.WAITING) return true;
 		}
@@ -271,16 +271,18 @@ public class LegalDepartment extends Department {
 	 * As Claimant, the lawsuit is stopped.
 	 */
 	public void abandonLawsuit() {
-		Lawsuit l = lawsuitsAsClaimant.get(lawsuitsAsClaimant.size() - 1);
-		if (l.getState() == Lawsuit.ACTIVE) {
-			l.endLawsuit();
-			
-			Message m = new Message();
-			m.setTitle("Klage zurückgezogen!");
-			m.setType(Message.GAME);
-			m.setTargetPlayer(l.getDefendant().getCompany().getId());
-			m.setMessage(company.getName() + " zieht die Klage gegen Sie zurück.");
-			Market.sharedInstance().sendMessage(m);
+		if (lawsuitsAsClaimant.size() >0){
+			Lawsuit l = lawsuitsAsClaimant.get(lawsuitsAsClaimant.size() - 1);
+			if (l.getState() == Lawsuit.ACTIVE) {
+				l.endLawsuit();
+				
+				Message m = new Message();
+				m.setTitle("Klage zurückgezogen!");
+				m.setType(Message.GAME);
+				m.setTargetPlayer(l.getDefendant().getCompany().getId());
+				m.setMessage(company.getName() + " zieht die Klage gegen Sie zurück.");
+				Market.sharedInstance().sendMessage(m);
+			}
 		}
 	}
 
