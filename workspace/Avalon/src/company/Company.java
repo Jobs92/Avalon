@@ -33,8 +33,19 @@ public class Company {
 
 	private ArrayList<Department> departments;
 	private int id;
+	
+	private double costsThisRound;
+	private double revenues;
 
 	// private ArrayList<product.Product> products;
+
+	public double getCostsThisRound() {
+		return costsThisRound;
+	}
+
+	public double getRevenues() {
+		return revenues;
+	}
 
 	public boolean isReady() {
 		return ready;
@@ -146,12 +157,17 @@ public class Company {
 	}
 
 	public boolean changeMoney(double value) {
-		if (value < 0 && value * (-1) > this.money) {
-			return false;
-		} else {
-			this.money = this.money + value;
-			return true;
+		if (value <0){
+			if (value * (-1) > this.money){
+				return false;
+			}
+			costsThisRound += (-1)*value;
+		}else{
+			revenues += revenues;
 		}
+
+		this.money = this.money + value;
+		return true;
 	}
 
 	// popularity functions

@@ -31,9 +31,9 @@ public class TestQuality {
 	@Before
 	public void createCompanies() {
 		System.out.println(2);
-		company1 = new Company();
-		company2 = new Company();
-		company3 = new Company();
+		company1 = new Company("1");
+		company2 = new Company("2");
+		company3 = new Company("3");
 	}
 	
 	@Before
