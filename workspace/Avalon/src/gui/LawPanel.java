@@ -192,7 +192,7 @@ public class LawPanel extends AvalonPanel {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					// TODO Abort sue
+					GuiManager.sharedInstance().getApi().abandonLawsuit();
 					System.out.println("sue aborted");
 					// close popup
 					Window win = SwingUtilities.getWindowAncestor(abort);
@@ -205,7 +205,7 @@ public class LawPanel extends AvalonPanel {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					// TODO pay sue
+					GuiManager.sharedInstance().getApi().payAmount();
 					System.out.println("sue payed");
 					// close popup
 					Window win = SwingUtilities.getWindowAncestor(pay);

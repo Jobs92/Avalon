@@ -101,8 +101,7 @@ public class Market {
 	}
 
 	private int calculateDemand() {
-		demand = (int) (Config.getDemand() * (1 + Math.log((double) (GameManager
-				.sharedInstance().getRound()) / Math.log(30.0))));
+		demand = (int) (Config.getDemand() * (1 + Math.exp(-0.4 * (GameManager.sharedInstance().getRound() - 10))));
 		return demand;
 	}
 
