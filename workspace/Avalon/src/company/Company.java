@@ -163,6 +163,7 @@ public class Company {
 			}
 			costsThisRound += (-1)*value;
 		}else{
+			System.out.println("Einnahmen: " + value);
 			revenues += revenues;
 		}
 

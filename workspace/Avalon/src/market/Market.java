@@ -54,6 +54,7 @@ public class Market {
 
 		int demand = saisonalOscillate(calculateDemand());
 		demand = (int) (demand * buyingPower / 100.0);
+		System.out.println("Die Nachfrage liegt diese Runde bei " + demand);
 		oscillateConsumerGroup();
 		for (ConsumerGroup cg : consumerGroups) {
 			cg.simulate();
@@ -221,10 +222,6 @@ public class Market {
 
 	public void changeBuyingPower(int buyingPower) {
 		this.buyingPower += buyingPower;
-	}
-
-	public void setBuyingPower(int buyingPower) {
-		this.buyingPower = buyingPower;
 	}
 
 	public void setDemand(int demand) {

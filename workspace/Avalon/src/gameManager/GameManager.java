@@ -17,12 +17,14 @@ public class GameManager {
 	private int round = 0;
 	private boolean active;
 	private Company winner;
-	private Market market = Market.sharedInstance();
-	private EventManager eventManager = EventManager.sharedInstance();
+	private Market market;
+	private EventManager eventManager;
 	private static GameManager sharedInstance;
 
 	private GameManager() {
 		Config.loadConfig();
+		 market = Market.sharedInstance();
+		 eventManager = EventManager.sharedInstance();
 	}
 
 	/**

@@ -50,6 +50,7 @@ public class ConsumerGroup {
 				product.setAttractivity(relativeAttractivity);
 				int amount = (int) (relativeAttractivity * demand + rest);
 				rest = product.sell(amount);
+				System.out.println("Produkt " + product.getName() +" wird " + amount + " mal gekauft.");
 				if (rest < 0) {
 					rest = 0;
 				}
