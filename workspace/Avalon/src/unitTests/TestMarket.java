@@ -16,20 +16,42 @@ import org.junit.Test;
 public class TestMarket {
 	private GameManager gameManager;
 	private int demand;
+	private int oscillate;
+	private int[] demandExcel={1186,1274,1401,1582};
+	private int[] demandOscillateExcel={1008,1210,1401,1898};
 
 	@Before
 	public void prepareTest() {
 		demand = 1;
 		gameManager=GameManager.sharedInstance();
 		gameManager.startGame();
+		System.out.println("Start: "+gameManager.getRound());
 	}
 
 
 	
 	@Test
-	public void testMarket() {
-		demand=Market.sharedInstance().calculateDemand();
-		assertEquals(demand, 1000);
+	public void testMarketDemand() {
+		for (int i = 0; i < 4; i++) {
+			System.out.println(gameManager.getRound());
+			demand=Market.sharedInstance().calculateDemand();
+			assertEquals(demand, demandExcel[i]);
+			gameManager.nextRound();
+		}
+		
+		
+	}
+	
+	@Test
+	public void testMarketDemandOscillate() {
+		for (int i = 0; i < 4; i++) {
+			demand=1000;
+			demand=Market.sharedInstance().calculateDemand();
+			oscillate=Market.sharedInstance().saisonalOscillate(demand);
+			assertEquals(oscillate, demandOscillateExcel[i]);
+			gameManager.nextRound();
+		}
+		
 		
 	}
 	
