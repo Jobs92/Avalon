@@ -5,11 +5,14 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 
 import gameManager.GameManager;
+import market.ConsumerGroup;
 import market.Market;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import config.Config;
 
 
 
@@ -53,14 +56,17 @@ public class TestMarket {
 		
 	}
 	public void testConsumerGroups() {
-		for (int i = 0; i < 4; i++) {
-			demand=1000;
-			demand=Market.sharedInstance().calculateDemand();
-			oscillate=Market.sharedInstance().saisonalOscillate(demand);
-			assertEquals(oscillate, demandOscillateExcel[i]);
-			gameManager.nextRound();
+		int amountConsumerGroups = Math.min(
+				Config.getConsumerGroupImage().length,
+				Math.min(Config.getConsumerGroupPrice().length,Math.min(Config.getConsumerGroupSize().length,
+						Config.getConsumerGroupQuality().length)));
+		for (int i = 0; i < amountConsumerGroups; i++) {
+			ConsumerGroup cg = new ConsumerGroup(Config.getConsumerGroupImage()[i],
+												Config.getConsumerGroupPrice()[i], 
+												Config.getConsumerGroupQuality()[i],  
+												Config.getConsumerGroupSize()[i]);
+			Market.sharedInstance().addConsumerGroup(cg);
 		}
-		
 		
 	}
 	
