@@ -199,7 +199,7 @@ public class Config {
 			salesFixcost = Double.parseDouble(prop.getProperty("salesFixcost"));
 
 			// Research
-			maxLevelResearch = Integer.parseInt("maxLevelResearch");
+			maxLevelResearch = Integer.parseInt(prop.getProperty("maxLevelResearch"));
 			costsUpgradeResearch = Integer.parseInt(prop
 					.getProperty("costsUpgradeResearch"));
 			titleResearch = prop.getProperty("titleResearch").split(";");
