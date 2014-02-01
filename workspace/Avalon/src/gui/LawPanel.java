@@ -161,11 +161,11 @@ public class LawPanel extends AvalonPanel {
 
 			final AvalonButton check = new AvalonButton("Check Enemy");
 			check.setEnabled(!sueable);
+			
 			check.addActionListener(new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					int i = enemies.getSelectedIndex();
 					GuiManager.sharedInstance().getApi().checkOpponent(Integer.parseInt(enemyData.get(index).get("id")));
 					System.out.println("enemy checked");
 					// close popup

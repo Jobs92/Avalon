@@ -27,6 +27,6 @@ public abstract class AvalonPanel extends JPanel {
 	 */
 	protected void refresh() {
 		// revalidate();
-		repaint();
+		// repaint();
 	}
 }

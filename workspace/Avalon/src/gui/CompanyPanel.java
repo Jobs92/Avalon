@@ -1,10 +1,8 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.GridLayout;
 
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
 import utils.DataSnapshot;
