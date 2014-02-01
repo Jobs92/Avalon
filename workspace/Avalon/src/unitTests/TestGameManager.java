@@ -2,18 +2,13 @@ package unitTests;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-
 import gameManager.GameManager;
 import market.Market;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import otherclasses.Supplier;
 import company.Company;
-import config.Config;
 
 public class TestGameManager {
 	private Company company1;
@@ -32,14 +27,14 @@ public class TestGameManager {
 		gameManager.addPlayer(company1);
 		gameManager.addPlayer(company2);
 	}
-	
+
 	@Test
-	public void testStartGame(){
+	public void testStartGame() {
 		assertEquals(false, GameManager.sharedInstance().getActive());
 		gameManager.startGame();
 		assertEquals(true, GameManager.sharedInstance().getActive());
 	}
-	
+
 	@Test
 	public void testNextRound() {
 		gameManager.startGame();
@@ -51,8 +46,8 @@ public class TestGameManager {
 		assertEquals(2, gameManager.getRound());
 		company2.setReady(true);
 		assertEquals(3, gameManager.getRound());
-	} 
-	
+	}
+
 	@Test
 	public void testCheckWinner() {
 		gameManager.startGame();
@@ -61,13 +56,12 @@ public class TestGameManager {
 		company2.setReady(true);
 		assertEquals(false, GameManager.sharedInstance().getActive());
 		assertEquals(company1, GameManager.sharedInstance().getWinner());
-	} 
-	
+	}
+
 	@After
-	public void removeInstances(){
+	public void removeInstances() {
 		GameManager.sharedInstance().deleteInstance();
 		Market.sharedInstance().deleteInstance();
 	}
-	
 
 }

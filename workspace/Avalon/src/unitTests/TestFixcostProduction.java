@@ -2,8 +2,6 @@ package unitTests;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-
 import gameManager.GameManager;
 import market.Market;
 
@@ -11,7 +9,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import otherclasses.Supplier;
 import company.Company;
 import config.Config;
 

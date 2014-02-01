@@ -1,9 +1,6 @@
 package unitTests;
 
 import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-
 import gameManager.GameManager;
 import market.Market;
 
@@ -14,7 +11,6 @@ import org.junit.Test;
 import otherclasses.Order;
 import otherclasses.Supplier;
 import company.Company;
-import config.Config;
 
 public class TestTrust {
 	private Company company1;
@@ -33,14 +29,13 @@ public class TestTrust {
 		company2 = new Company("2");
 		company3 = new Company("3");
 	}
-	
+
 	@Before
-	public void startGame(){
+	public void startGame() {
 		gameManager.addPlayer(company1);
 		gameManager.addPlayer(company2);
 		gameManager.startGame();
 	}
-
 
 	@Test
 	public void testNextRound() {
@@ -53,11 +48,12 @@ public class TestTrust {
 		company1.setReady(true);
 		company2.setReady(true);
 		System.out.println(company1.getWarehouse().getAmountResources());
-		assertEquals(90, company1.getWarehouse().getAmountResources()/(amount*1.0), 90);
+		assertEquals(90, company1.getWarehouse().getAmountResources()
+				/ (amount * 1.0), 90);
 	}
-	
+
 	@After
-	public void removeInstances(){
+	public void removeInstances() {
 		GameManager.sharedInstance().deleteInstance();
 		Market.sharedInstance().deleteInstance();
 	}
