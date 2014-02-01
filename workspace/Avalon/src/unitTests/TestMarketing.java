@@ -1,6 +1,7 @@
 package unitTests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import gameManager.GameManager;
 import market.Market;
 
@@ -8,66 +9,48 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-
-
-
-
-
-
-
-import campaigns.Campaign;
-import campaigns.ExplicitCampaign;
 import campaigns.ExplicitMarketingCampaign;
 import campaigns.MarketingCampaign;
+
 import company.Company;
+
 import config.Config;
 import departments.Marketing;
 
 public class TestMarketing {
 
-	
-	private Company company;
-	private GameManager gameManager;
+	private Company c;
+	Marketing m;
+	MarketingCampaign mc;
 
 	@Before
 	public void prepareTest() {
-		gameManager = GameManager.sharedInstance();
-		company = new Company();
-	}
-
-	
-	@Before
-	public void startGame(){
-		gameManager.addPlayer(company);
+		c = new Company();
+		m = c.getMarketing();
+		mc = new MarketingCampaign(m, "test", 100, 1, 100, 2,
+				"test description");
 	}
 
 	@Test
-	public void test() {
-		// Check + update fixcosts
-		assertEquals(Config.getMarketingFixcost(), company.getMarketing().getFixcost(), 0);
-	
-	
-		//Create new campain, check if campain is successfull
-		company.getMarketing().addCampaign(new MarketingCampaign(company.getMarketing(), "TestTitle", 10000, 1, 95,
-						3, "Description"));
-
-		 company.getMarketing().startCampaign(new MarketingCampaign(company.getMarketing(), "TestTitle",
-		10000, 1, 100, 3, "Description"));
-		 company.getMarketing().simulate();
-		 assertEquals(Config.getCompanyStartPopularity() + 3, company.getPopularity());
-
-
-		company.getMarketing().simulate();
-		assertEquals(Config.getMarketingFixcost() * company.getMarketing().getLevel(), company.getMarketing().getFixcost(), 0);
-		
-		//Check costs for next level
-		assertEquals(Config.getCostsUpgradeMarketing(), company.getMarketing().getCostForNextLevel() );
-		
-		
+	public void testStartCampaignFinishedSuccessfully() {
+		m.startCampaign(mc);
+		ExplicitMarketingCampaign emc = (ExplicitMarketingCampaign) m
+				.getExplicitCampaigns().get(0);
+		emc.campaignFinishedSuccessfully();
+		assertEquals(Config.getCompanyStartPopularity() + 2, c.getPopularity());
 	}
-	
+
+	@Test
+	public void testStartCampaignFailed() {
+		m.startCampaign(mc);
+		ExplicitMarketingCampaign emc = (ExplicitMarketingCampaign) m
+				.getExplicitCampaigns().get(0);
+		emc.campaignFailed();
+		assertNotNull(c.getMessagesFromInbox());
+	}
+
 	@After
-	public void removeInstances(){
+	public void removeInstances() {
 		GameManager.sharedInstance().deleteInstance();
 		Market.sharedInstance().deleteInstance();
 	}

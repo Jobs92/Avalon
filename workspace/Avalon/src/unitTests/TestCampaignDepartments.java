@@ -1,42 +1,42 @@
 package unitTests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import gameManager.GameManager;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import campaigns.ResearchCampaign;
-import campaigns.SpyingCampaign;
 import company.Company;
+
 import config.Config;
+import departments.Marketing;
 import departments.Research;
 
 public class TestCampaignDepartments {
 	Company c;
 	Company c2;
 	Research r;
-	ResearchCampaign rc;
-	SpyingCampaign sc;
+	Marketing m;
 	GameManager gm = GameManager.sharedInstance();
 
 	@Before
 	public void startGame() {
 		c = new Company("Testcompany");
 		c2 = new Company("Testcompany2");
+		r = c.getResearch();
+		m = c.getMarketing();
 		gm.addPlayer(c);
 		gm.addPlayer(c2);
-
-		r = c.getResearch();
-		rc = new ResearchCampaign(r, "test", 100, 1, 100, 2, "test description");
-		sc = new SpyingCampaign(r, "testspy", 100, 1, 100, 3, "testdescription");
 	}
 
 	@Test
 	public void testUpgrade() {
 		r.upgradeDepartment();
 		assertEquals(2, r.getLevel());
+
+		m.upgradeDepartment();
+		assertEquals(2, m.getLevel());
 	}
 
 	@Test
@@ -44,6 +44,10 @@ public class TestCampaignDepartments {
 		r.upgradeDepartment();
 		r.downgrade();
 		assertEquals(1, r.getLevel());
+
+		m.upgradeDepartment();
+		m.downgrade();
+		assertEquals(1, m.getLevel());
 	}
 
 	@Test
@@ -54,10 +58,13 @@ public class TestCampaignDepartments {
 
 	@Test
 	public void testUpgradeWhenLevelIsMax() {
-		for (int i = 0; i < 12; i++) {
+		c.changeMoney(1000000000);
+		for (int i = 0; i < 11; i++) {
+			m.upgradeDepartment();
 			r.upgradeDepartment();
 		}
 		assertEquals(Config.getMaxLevelResearch(), r.getLevel());
+		assertEquals(Config.getMaxLevelMarketing(), m.getLevel());
 	}
 
 	@After

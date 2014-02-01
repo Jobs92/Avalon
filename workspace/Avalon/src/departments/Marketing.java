@@ -27,15 +27,14 @@ public class Marketing extends CampaignDepartment {
 			addCampaign(m);
 		}
 	}
-	
-	
+
 	@Override
 	public int getCostForNextLevel() {
 		int cost = level * level * Config.getCostsUpgradeMarketing();
 		return cost;
 	}
 
-	@Override 
+	@Override
 	protected boolean isMaxLevel() {
 		int maxLevel = Config.getMaxLevelMarketing();
 		if (level == maxLevel) {
@@ -45,7 +44,7 @@ public class Marketing extends CampaignDepartment {
 			m.setTargetPlayer(company.getId());
 			m.setMessage("Sie haben das maximale Level dieses Bereichs erreicht!");
 			Market.sharedInstance().sendMessage(m);
-
+			return true;
 		}
 		return false;
 	}
@@ -53,7 +52,7 @@ public class Marketing extends CampaignDepartment {
 	@Override
 	protected void updateFixcost() {
 		fixcost = Config.getMarketingFixcost() * level;
-		
+
 	}
 
 }

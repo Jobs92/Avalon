@@ -161,12 +161,17 @@ public class LawPanel extends AvalonPanel {
 
 			final AvalonButton check = new AvalonButton("Check Enemy");
 			check.setEnabled(!sueable);
-			
+
 			check.addActionListener(new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					GuiManager.sharedInstance().getApi().checkOpponent(Integer.parseInt(enemyData.get(index).get("id")));
+					GuiManager
+							.sharedInstance()
+							.getApi()
+							.checkOpponent(
+									Integer.parseInt(enemyData.get(index).get(
+											"id")));
 					System.out.println("enemy checked");
 					// close popup
 					Window win = SwingUtilities.getWindowAncestor(check);
@@ -186,8 +191,11 @@ public class LawPanel extends AvalonPanel {
 			String infoString = " Duration: " + suesData.get("duration")
 					+ ", price: " + suesData.get("cost") + ", amount: "
 					+ suesData.get("amount");
+			boolean isClaimant = Boolean.parseBoolean(suesData
+					.get("isClaimant"));
 
 			final AvalonButton abort = new AvalonButton("Abort Sue");
+			abort.setEnabled(isClaimant);
 			abort.addActionListener(new ActionListener() {
 
 				@Override
@@ -201,6 +209,7 @@ public class LawPanel extends AvalonPanel {
 			});
 
 			final AvalonButton pay = new AvalonButton("Pay");
+			pay.setEnabled(!isClaimant);
 			pay.addActionListener(new ActionListener() {
 
 				@Override
