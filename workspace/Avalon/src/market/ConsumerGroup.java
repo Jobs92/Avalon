@@ -29,7 +29,7 @@ public class ConsumerGroup {
 			for (Product product : products) {
 				double i = product.getCompany().getPopularity() / averagePopularity;
 				double l = product.getLevel() / averageLevel;
-				double p = product.getPrice() / averagePrice;
+				double p = averagePrice / product.getPrice(); //Prices are attractive if they are lower --> inverse fraction
 	
 				double attractivity = (i * popularity + l * level + p * price) / 100;
 				attractivity *= attractivity;
@@ -61,7 +61,7 @@ public class ConsumerGroup {
 		Product temp = null;
 		for (int i = 1; i < input.size(); i++) {
 			for (int j = 0; j < input.size() - i; j++) {
-				if (input.get(j).getAttractivity() > input.get(i)
+				if (input.get(j).getAttractivity() < input.get(j+1)
 						.getAttractivity()) {
 					temp = input.get(j);
 					input.set(j, input.get(j + 1));
@@ -73,7 +73,7 @@ public class ConsumerGroup {
 	}
 
 	public double calculateAveragePopularity() {
-		int sum = 0;
+		double sum = 0;
 		for (Product product : products) {
 			sum += product.getCompany().getPopularity();
 		}
@@ -81,7 +81,7 @@ public class ConsumerGroup {
 	}
 
 	public double calculateAverageLevel() {
-		int sum = 0;
+		double sum = 0;
 		for (Product product : products) {
 			sum += product.getLevel();
 		}
@@ -89,15 +89,11 @@ public class ConsumerGroup {
 	}
 
 	public double calculateAveragePrice() {
-		int sum = 0;
+		double sum = 0;
 		for (Product product : products) {
 			sum += product.getPrice();
 		}
 		return sum / products.size();
-	}
-
-	public double calculateAttractivity() {
-		return 0;
 	}
 
 	public int getPopularity() {

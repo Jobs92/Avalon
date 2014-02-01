@@ -107,7 +107,7 @@ public class LegalDepartment extends Department {
 	 */
 	public double getAmountForEnemy(Company c){
 		for (Lawsuit l : lawsuitsAsClaimant) {
-			if (l.getState() != Lawsuit.FINISHED){
+			if (l.getState() == Lawsuit.WAITING){
 				return l.getAmount();
 			}
 		}

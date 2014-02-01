@@ -1,9 +1,13 @@
 package utils;
 
+import gameManager.GameManager;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
+
+import config.Config;
 
 /**
  * @author Frederik Manages all Data sent from the server to a single client.
@@ -55,8 +59,17 @@ public class DataSnapshot implements Serializable {
 
 	// Production
 	private String resources;
+	private double variableCostsProduction;
 	private int highestProductLevel;
 	private String highestProductName;
+	
+	public DataSnapshot(){
+		//Get Config Data
+		variableCostsProduction = Config.getProductionVariableCosts();
+		patentCost = Config.getCostsPatent()* (GameManager.sharedInstance().getRound() + 1);
+		spyCost = Config.getCostSpying();
+		
+	}
 
 	// Setter and Getter
 	public void setLawsuit(String claimant, String defendant, int duration,
@@ -65,7 +78,7 @@ public class DataSnapshot implements Serializable {
 		lawsuit.put("defendant", defendant);
 		lawsuit.put("duration", duration + "");
 		lawsuit.put("amount", amount + "");
-		lawsuit.put("costs", costs + "");
+		lawsuit.put("cost", costs + "");
 		lawsuit.put("isClaimant", isClaimant + "");
 	}
 
@@ -379,4 +392,9 @@ public class DataSnapshot implements Serializable {
 	public void setSoldSmartphones(int x) {
 		soldSmartphones = x;
 	}
+
+	public double getVariableCostsProduction() {
+		return variableCostsProduction;
+	}
+
 }
