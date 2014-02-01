@@ -285,6 +285,13 @@ public class LegalDepartment extends Department {
 			}
 		}
 	}
+	
+	public boolean isClaimant(){
+		if (getCurrentLawsuit() != null && getCurrentLawsuit().getClaimant() == this){
+			return true;
+		}
+		return false;
+	}
 
 	@Override
 	public void simulate() {

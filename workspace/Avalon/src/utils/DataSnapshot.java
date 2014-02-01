@@ -60,12 +60,13 @@ public class DataSnapshot implements Serializable {
 
 	// Setter and Getter
 	public void setLawsuit(String claimant, String defendant, int duration,
-			double amount, double costs) {
+			double amount, double costs, boolean isClaimant) {
 		lawsuit.put("claimant", claimant);
 		lawsuit.put("defendant", defendant);
 		lawsuit.put("duration", duration + "");
 		lawsuit.put("amount", amount + "");
 		lawsuit.put("costs", costs + "");
+		lawsuit.put("isClaimant", isClaimant + "");
 	}
 
 	public Dictionary<String, String> getLawsuit() {

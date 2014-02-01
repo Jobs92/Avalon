@@ -109,18 +109,20 @@ public class Company {
 	}
 
 	public void insolvency() {
-		active = false;
-		money = 0;
-		
-		Market.sharedInstance().handleInsolvency(this);
-
-		// Inform Playder
-		Message m = new Message();
-		m.setTitle("Insolvenz");
-		m.setType(Message.GAME);
-		m.setTargetPlayer(id);
-		m.setMessage("Sie haben nicht genügend liquide Mittel um ihre Verbindlichkeiten zu begleichen. Sie sind insolvent.");
-		Market.sharedInstance().sendMessage(m);
+		if (active){
+			active = false;
+			money = 0;
+			
+			Market.sharedInstance().handleInsolvency(this);
+	
+			// Inform Playder
+			Message m = new Message();
+			m.setTitle("Insolvenz");
+			m.setType(Message.GAME);
+			m.setTargetPlayer(id);
+			m.setMessage("Sie haben nicht genügend liquide Mittel um ihre Verbindlichkeiten zu begleichen. Sie sind insolvent.");
+			Market.sharedInstance().sendMessage(m);
+		}
 	}
 
 	public Sales getSales() {
@@ -164,10 +166,10 @@ public class Company {
 			costsThisRound += (-1)*value;
 		}else{
 			System.out.println("Einnahmen: " + value);
-			revenues += revenues;
+			revenues += value;
 		}
 
-		this.money = this.money + value;
+		this.money += value;
 		return true;
 	}
 
@@ -295,7 +297,7 @@ public class Company {
 		if ((l = this.getLegaldepartment().getCurrentLawsuit()) != null) {
 			snapshot.setLawsuit(l.getClaimant().getCompany().getName(), l
 					.getDefendant().getCompany().getName(), l.getDuration(),
-					l.getAmount(), l.getCosts());
+					l.getAmount(), l.getCosts(), this.getLegaldepartment().isClaimant());
 		}
 
 		// MarketingCampaigns

@@ -23,8 +23,10 @@ public class Product {
 	public int sell(int amount) { 
 		int dif = this.amount - amount;
 		if (this.amount >= amount) {
+			System.out.println("Produkt " + name +" wird " + amount + " mal gekauft.");
 			company.getSales().sell(level, amount);
 		} else {
+			System.out.println("Produkt " + name +" wird " + this.amount + " mal gekauft.");
 			company.getSales().sell(level, this.amount);
 		}
 		return ((-1)*dif);
