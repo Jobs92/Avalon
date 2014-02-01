@@ -10,7 +10,7 @@ public class ExplicitMarketingCampaign extends ExplicitCampaign {
 	}
 
 	@Override
-	protected void campaignFinishedSuccessfully() {
+	public void campaignFinishedSuccessfully() {
 		Company c = campaign.getDepartment().getCompany();
 		c.addPopularity(campaign.getLevel());
 
@@ -27,7 +27,7 @@ public class ExplicitMarketingCampaign extends ExplicitCampaign {
 	}
 
 	@Override
-	protected void campaignFailed() {
+	public void campaignFailed() {
 		Company c = campaign.getDepartment().getCompany();
 
 		// send message

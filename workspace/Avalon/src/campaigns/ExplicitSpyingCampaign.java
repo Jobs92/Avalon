@@ -28,7 +28,7 @@ public class ExplicitSpyingCampaign extends ExplicitResearchCampaign {
 	}
 
 	@Override
-	protected void campaignFinishedSuccessfully() {
+	public void campaignFinishedSuccessfully() {
 		System.out.println("Class: " + this.getClass()
 				+ ". SpyingCampaign finished successfully.");
 		Company c = campaign.getDepartment().getCompany();
@@ -50,7 +50,7 @@ public class ExplicitSpyingCampaign extends ExplicitResearchCampaign {
 	}
 
 	@Override
-	protected void campaignFailed() {
+	public void campaignFailed() {
 		System.out.println("Class: " + this.getClass()
 				+ ". SpyingCampaign failed.");
 		Company c = campaign.getDepartment().getCompany();

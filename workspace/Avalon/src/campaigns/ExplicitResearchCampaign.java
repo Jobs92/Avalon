@@ -13,7 +13,7 @@ public class ExplicitResearchCampaign extends ExplicitCampaign {
 	}
 	
 	@Override
-	protected void campaignFinishedSuccessfully() {
+	public void campaignFinishedSuccessfully() {
 		Company c = campaign.getDepartment().getCompany();
 		Research r = (Research) campaign.getDepartment();
 		r.addResearchedLevels(campaign.getLevel());
@@ -31,7 +31,7 @@ public class ExplicitResearchCampaign extends ExplicitCampaign {
 	}
 
 	@Override
-	protected void campaignFailed() {
+	public void campaignFailed() {
 		Company c = campaign.getDepartment().getCompany();
 
 		// send message

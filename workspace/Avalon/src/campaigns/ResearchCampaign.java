@@ -3,9 +3,9 @@ package campaigns;
 import departments.Department;
 
 public class ResearchCampaign extends Campaign {
-	public ResearchCampaign(Department department, String title, double d,
+	public ResearchCampaign(Department department, String title, double cost,
 			int duration, int successProbability, int level, String description) {
-		super(department, title, d, duration, successProbability, level, description);
+		super(department, title, cost, duration, successProbability, level, description);
 	}
 
 	@Override

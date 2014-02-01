@@ -99,7 +99,7 @@ public class Research extends CampaignDepartment {
 	 */
 	public void patentResearchLevel() {
 		company.changeMoney(Config.getCostsPatent() * (researchLevel + 1));
-		patentLevel = researchLevel;
+		patentLevel = researchLevel + notAppliedLevels;
 	}
 
 	public int getPatentLevel() {

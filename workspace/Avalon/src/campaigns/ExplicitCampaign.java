@@ -36,12 +36,12 @@ public abstract class ExplicitCampaign {
 	/**
 	 * Success-handler.
 	 */
-	protected abstract void campaignFinishedSuccessfully();
+	public abstract void campaignFinishedSuccessfully();
 
 	/**
 	 * Failure-handler.
 	 */
-	protected abstract void campaignFailed();
+	public abstract void campaignFailed();
 
 	public boolean isActive() {
 		return active;
