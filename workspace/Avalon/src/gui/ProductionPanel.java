@@ -25,7 +25,6 @@ public class ProductionPanel extends AvalonPanel {
 		TitledBorder tb = new TitledBorder("Production");
 		setBorder(tb);
 		setLayout(new GridLayout(2, 2));
-//		setBackground(Color.ORANGE);
 
 		add(productLabel);
 		amountTF.setPreferredSize(new Dimension(100, 30));
@@ -88,7 +87,10 @@ public class ProductionPanel extends AvalonPanel {
 				+ GuiManager.sharedInstance().getDs().getHighestProductLevel()
 				+ ")");
 		resourceLabel.setText("Available Resources: "
-				+ GuiManager.sharedInstance().getDs().getResources());
+				+ GuiManager.sharedInstance().getDs().getResources()
+				+ "\nVariable Costs: "
+				+ GuiManager.sharedInstance().getDs()
+						.getVariableCostsProduction());
 		amountTF.setText("0");
 		refresh();
 		refreshBackground(getBackground());
