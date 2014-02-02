@@ -46,7 +46,7 @@ public class ProductionPanel extends AvalonPanel {
 						"Do you want to downgrade the Production department?",
 						"Downgrade", JOptionPane.YES_NO_OPTION);
 				if (accepted == 0) {
-					upgradeButton.setEnabled(false);
+					downgradeButton.setEnabled(false);
 					// accepted
 					GuiManager.sharedInstance().getApi().downgradeProduction();
 				}
@@ -61,7 +61,7 @@ public class ProductionPanel extends AvalonPanel {
 	protected void makeUpgradePopup() {
 		int accepted = JOptionPane.showConfirmDialog(
 				null,
-				"Do you want to spy to upgrade the Production department for "
+				"Do you want to upgrade the Production department for "
 						+ GuiManager.sharedInstance().getDs()
 								.getUpgradeCosts("production") + "?",
 				"Upgrade", JOptionPane.YES_NO_OPTION);

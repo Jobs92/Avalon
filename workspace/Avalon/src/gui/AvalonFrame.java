@@ -140,13 +140,32 @@ public class AvalonFrame extends JFrame {
 	}
 
 	public void fill() {
-		headerLabel.setText(GuiManager.sharedInstance().getDs()
-				.getCompanyName()
-				+ "s AVALON");
+		String header = GuiManager.sharedInstance().getDs().getCompanyName()
+				+ "s AVALON";
+		headerLabel.setText(header);
 		// update round
 		int round = GuiManager.sharedInstance().getDs().getRound() + 1;
+		int a = round % 4;
+		String s = "Round #" + round + ", Season: ";
+		switch (a) {
+		case 0:
+			s += "Spring";
+			break;
+		case 1:
+			s += "Summer";
+			break;
+		case 2:
+			s += "Autumn";
+			break;
+		case 3:
+			s += "Winter";
+			break;
+
+		default:
+			break;
+		}
 		nextRoundButton.setEnabled(true);
-		roundLabel.setText("Round #" + round);
+		roundLabel.setText(s);
 		for (AvalonPanel p : panels) {
 			p.fill();
 		}

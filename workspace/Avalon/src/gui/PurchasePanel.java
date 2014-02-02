@@ -7,8 +7,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Dictionary;
+import java.util.Locale;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -90,6 +93,8 @@ public class PurchasePanel extends AvalonPanel {
 	}
 
 	private void updateSum() {
+		DecimalFormat df = (DecimalFormat) NumberFormat
+				.getInstance(Locale.GERMANY);
 		int sum = 0;
 		int cost = 0;
 		int i = 0;
@@ -102,13 +107,12 @@ public class PurchasePanel extends AvalonPanel {
 			}
 			i++;
 		}
-		sumLabel.setText("<html><p>Sum Resources: " + sum + "<br> Total Cost: "
-				+ cost + "</p></html>");
+		sumLabel.setText("<html><p>Sum Resources: " + df.format(sum)
+				+ "<br> Total Cost: " + df.format(cost) + "</p></html>");
 	}
 
 	@Override
 	protected void fill() {
-		updateSum();
 		setBorder(new TitledBorder("Purchase (Fixcosts: "
 				+ GuiManager.sharedInstance().getDs()
 						.getDepartmentFixcosts("purchase") + ")"));
@@ -117,6 +121,7 @@ public class PurchasePanel extends AvalonPanel {
 			supplierLabels.get(i).setText(supplier.get(i).get("name"));
 			amount.get(i).setText("0");
 		}
+		updateSum();
 		refresh();
 		refreshBackground(getBackground());
 	}
@@ -131,19 +136,15 @@ public class PurchasePanel extends AvalonPanel {
 			}
 		}
 	}
-	
-	private static boolean isNumeric(String str)  
-	{  
-	  try  
-	  {  
-	    @SuppressWarnings("unused")
-		double d = Double.parseDouble(str);  
-	  }  
-	  catch(NumberFormatException nfe)  
-	  {  
-	    return false;  
-	  }  
-	  return true;  
+
+	private static boolean isNumeric(String str) {
+		try {
+			@SuppressWarnings("unused")
+			double d = Double.parseDouble(str);
+		} catch (NumberFormatException nfe) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override

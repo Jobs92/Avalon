@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Dictionary;
 
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 
 @SuppressWarnings("serial")
@@ -14,7 +15,9 @@ public class MarketPanel extends AvalonPanel {
 
 	public MarketPanel() {
 		setBorder(new TitledBorder("Market"));
-		add(label);
+		JScrollPane s = new JScrollPane();
+		s.add(label);
+		add(s);
 	}
 
 	@Override
