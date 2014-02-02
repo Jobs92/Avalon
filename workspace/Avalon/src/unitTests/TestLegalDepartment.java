@@ -71,9 +71,14 @@ public class TestLegalDepartment {
 		assertTrue(company2.getLegaldepartment().alreadyChecked(company1));
 		
 		company2.getLegaldepartment().sueOpponent(company1);
-		
+		double money1 = company1.getMoney();
+		double money2 = company2.getMoney();
 		company1.getLegaldepartment().payAmount();
-		assertTrue(company1.getMoney() == company2.getMoney() - 2*Config.getCostsFoundSpyingCampaign());
+		
+		
+		assertTrue(money1-Config.getCostsFoundSpyingCampaign() == company1.getMoney());
+		assertTrue(money2+Config.getCostsFoundSpyingCampaign() == company2.getMoney());
+		
 		assertTrue(company1.getLegaldepartment().getCurrentLawsuit() == null);
 		assertTrue(company2.getLegaldepartment().getCurrentLawsuit() == null);
 	}
@@ -96,8 +101,11 @@ public class TestLegalDepartment {
 		assertTrue(company2.getLegaldepartment().getCurrentLawsuit() != null);
 		
 		//Claimant aborts lawsuit
+		double money1 = company1.getMoney();
+		double money2 = company2.getMoney();
+		
 		company2.getLegaldepartment().abandonLawsuit();
-		assertTrue(company1.getMoney() == company2.getMoney());
+		assertTrue((money1 == company1.getMoney() && money2 == company2.getMoney()));
 		assertTrue(company1.getLegaldepartment().getCurrentLawsuit() == null);
 		assertTrue(company2.getLegaldepartment().getCurrentLawsuit() == null);
 	}

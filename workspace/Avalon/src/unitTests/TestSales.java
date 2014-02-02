@@ -34,7 +34,6 @@ public class TestSales {
 	public void test() {
 		//Pay fixcosts
 		company.getSales().payFixcosts();
-		company.getSales().simulate();
 		assertEquals(company.getMoney(), Config.getCompanyStartMoney() - Config.getSalesFixcost(), 0);
 		
 		//Create products and get amount 
