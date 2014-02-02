@@ -94,12 +94,12 @@ public class Company {
 		popularity = Config.getCompanyStartPopularity();
 		departments = new ArrayList<Department>();
 		departments.add(new Sales(this));
+		departments.add(new Production(this));
 		departments.add(new Marketing(this));
 		departments.add(new Research(this));
 		departments.add(new Warehouse(this));
 		departments.add(new LegalDepartment(this));
 		departments.add(new Purchase(this));
-		departments.add(new Production(this));
 		inbox = new ArrayList<Message>();
 	}
 
