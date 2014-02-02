@@ -240,6 +240,7 @@ public class Company {
 		snapshot.setNotAppliedLevels(this.getResearch().getNotAppliedLevels());
 		snapshot.setResearchLevel(getResearch().getResearchLevel());
 		
+		snapshot.setCapacity(this.getProduction().getCapacity());
 
 		// Department Fixcosts
 		snapshot.addDepartmentFixcost("marketing", this.getMarketing()

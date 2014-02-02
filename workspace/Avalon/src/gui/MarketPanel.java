@@ -16,8 +16,8 @@ public class MarketPanel extends AvalonPanel {
 	public MarketPanel() {
 		setBorder(new TitledBorder("Market"));
 		JScrollPane s = new JScrollPane();
-		s.add(label);
-		add(s);
+		label.add(s);
+		add(label);
 	}
 
 	@Override

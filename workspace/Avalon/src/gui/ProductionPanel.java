@@ -90,7 +90,10 @@ public class ProductionPanel extends AvalonPanel {
 				+ GuiManager.sharedInstance().getDs().getResources()
 				+ "<br> Variable Costs: "
 				+ GuiManager.sharedInstance().getDs()
-						.getVariableCostsProduction() + "</p></html>");
+						.getVariableCostsProduction()
+				+ "<br> Capacity: "
+				+ GuiManager.sharedInstance().getDs()
+						.getCapacity() + "</p></html>");
 		amountTF.setText("0");
 		refresh();
 		refreshBackground(getBackground());

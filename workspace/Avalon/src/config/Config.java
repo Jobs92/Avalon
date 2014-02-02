@@ -130,6 +130,7 @@ public class Config {
 					.getProperty("costsUpgradeLegalDepartment"));
 			costsFoundSpyingCampaign = Double.parseDouble(prop.getProperty("costsFoundSpyingCampaign"));
 			relativeAmountCostsLawsuit = Double.parseDouble(prop.getProperty("relativeAmountCostsLawsuit"));
+			maxLevelLegalDepartment = Integer.parseInt(prop.getProperty("maxLevelLegalDepartment"));
 
 			//Market
 			buyingPower= Integer.parseInt(prop.getProperty("buyingPower"));

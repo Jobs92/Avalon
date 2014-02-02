@@ -61,6 +61,7 @@ public class DataSnapshot implements Serializable {
 	private String resources;
 	private double variableCostsProduction;
 	private int highestProductLevel;
+	private int capacity;
 	private String highestProductName;
 	
 	public DataSnapshot(){
@@ -394,6 +395,14 @@ public class DataSnapshot implements Serializable {
 
 	public double getVariableCostsProduction() {
 		return variableCostsProduction;
+	}
+
+	public int getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
 	}
 
 }
