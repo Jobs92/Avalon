@@ -9,6 +9,7 @@ import eventHandling.Event;
 import eventHandling.EventManager;
 import eventHandling.EventTrigger;
 import gameManager.GameManager;
+import market.Market;
 
 import org.junit.After;
 import org.junit.Before;
@@ -73,7 +74,8 @@ public class TestEvents {
 	
 	@After
 	public void removeInstances(){
-
+		GameManager.sharedInstance().deleteInstance();
+		Market.sharedInstance().deleteInstance();
 	
 	}
 	

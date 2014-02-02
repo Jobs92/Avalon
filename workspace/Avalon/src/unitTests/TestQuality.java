@@ -26,8 +26,8 @@ public class TestQuality {
 
 	@Before
 	public void createCompanies() {
-		company1 = new Company("1");
-		company2 = new Company("2");
+		company1 = new Company("Player1");
+		company2 = new Company("Player2");
 	}
 	
 	@Before
