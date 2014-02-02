@@ -3,6 +3,7 @@ package gameManager;
 import java.util.ArrayList;
 
 import otherclasses.Supplier;
+import utils.Message;
 import company.Company;
 import config.Config;
 import eventHandling.EventManager;
@@ -136,6 +137,15 @@ public class GameManager {
 
 	private void endGame() {
 		active = false;
+		
+		//Inform Player
+		Message m = new Message();
+		m.setTitle("Spiel beendet");
+		m.setType(Message.BROADCAST);
+		m.setMessage(winner.getName() + " hat mindestens " + Config.getAmountWin() + "$ und damit das Spiel gewonnen.");
+		Market.sharedInstance().sendMessage(m);
+		
+		Market.sharedInstance().informPlayers();
 	}
 
 	/**
