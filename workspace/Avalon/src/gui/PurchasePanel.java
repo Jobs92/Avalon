@@ -21,7 +21,7 @@ public class PurchasePanel extends AvalonPanel {
 	private ArrayList<JLabel> supplierLabels = new ArrayList<JLabel>();
 	private ArrayList<AvalonButton> info = new ArrayList<AvalonButton>();
 	private ArrayList<JTextField> amount = new ArrayList<JTextField>();
-	private JLabel sumLabel = new JLabel("Sum: ");
+	private JLabel sumLabel = new JLabel();
 	JPanel supplierPanel;
 	private ArrayList<Dictionary<String, String>> supplier;
 
@@ -108,6 +108,7 @@ public class PurchasePanel extends AvalonPanel {
 
 	@Override
 	protected void fill() {
+		updateSum();
 		setBorder(new TitledBorder("Purchase (Fixcosts: "
 				+ GuiManager.sharedInstance().getDs()
 						.getDepartmentFixcosts("purchase") + ")"));
@@ -124,11 +125,25 @@ public class PurchasePanel extends AvalonPanel {
 	protected void send() {
 		for (int i = 0; i < amount.size(); i++) {
 			String value = amount.get(i).getText();
-			if (!value.equalsIgnoreCase("") || Integer.parseInt(value) > 0) {
+			if (!isNumeric(value) || Integer.parseInt(value) > 0) {
 				GuiManager.sharedInstance().getApi()
 						.buy(i, Integer.parseInt(value));
 			}
 		}
+	}
+	
+	private static boolean isNumeric(String str)  
+	{  
+	  try  
+	  {  
+	    @SuppressWarnings("unused")
+		double d = Double.parseDouble(str);  
+	  }  
+	  catch(NumberFormatException nfe)  
+	  {  
+	    return false;  
+	  }  
+	  return true;  
 	}
 
 	@Override
