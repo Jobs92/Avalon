@@ -74,17 +74,6 @@ public class Sales  extends Department{
 				}
 			}
 			salesHistory.add(new SalesHistory(level, amount, GameManager.sharedInstance().getRound()));	
-				
-				
-				
-//				if ((salesHistory.get(salesHistory.size()-1).getRound() == GameManager.sharedInstance().getRound()) && (level==salesHistory.get(salesHistory.size()-1).getLevel())) {
-//					salesHistory.get(salesHistory.size()-1).updateAmount(availableAmount);	
-//				}
-//				
-//			}
-//			else {
-//					salesHistory.add(new SalesHistory(level, amount, GameManager.sharedInstance().getRound()));
-//			}
 		
 		}
 		
