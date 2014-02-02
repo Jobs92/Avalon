@@ -150,11 +150,11 @@ public class Lawsuit {
 			m.setTitle("Gerichtsentscheidung vertagt.");
 			m.setType(Message.GAME);
 			m.setTargetPlayer(defendant.getCompany().getId());
-			m.setMessage("Die Entscheidung des Gerichts im Verfahren gegen " + claimant.getCompany().getName() + "wurde vertagt.");
+			m.setMessage("Die Entscheidung des Gerichts im Verfahren gegen " + claimant.getCompany().getName() + " wurde vertagt.");
 			Market.sharedInstance().sendMessage(m);
 			
 			m.setTargetPlayer(claimant.getCompany().getId());
-			m.setMessage("Die Entscheidung des Gerichts im Verfahren gegen " + defendant.getCompany().getName() + "wurde vertagt.");
+			m.setMessage("Die Entscheidung des Gerichts im Verfahren gegen " + defendant.getCompany().getName() + " wurde vertagt.");
 			Market.sharedInstance().sendMessage(m);
 		}
 		

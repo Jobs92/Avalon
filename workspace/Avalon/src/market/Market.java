@@ -52,7 +52,7 @@ public class Market {
 //			return;
 //		}
 
-		int demand = saisonalOscillate(calculateDemand());
+		demand = saisonalOscillate(calculateDemand());
 		demand = (int) (demand * buyingPower / 100.0);
 		System.out.println("Die Nachfrage liegt diese Runde bei " + demand);
 		oscillateConsumerGroup();

@@ -156,6 +156,14 @@ public class ServerMessageHandler {
 
 	private void setName(Connection sender, String name) {
 		sender.getCompany().setName(name);
+		informAboutNewPlayer(sender);
+	}
+	
+	private void informAboutNewPlayer(Connection sender){
+		String m = "CHAT " + sender.getCompany().getId() + sender.getCompany().getName() + " ist dem Spiel beigetreten";
+		for (Company c : Market.sharedInstance().getCompanies()) {
+			if (c != sender.getCompany()) c.getConnection().send(m);
+		}
 	}
 	
 	private void startGame(){

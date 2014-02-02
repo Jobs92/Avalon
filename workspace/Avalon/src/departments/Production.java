@@ -92,7 +92,6 @@ public class Production extends Department {
 			
 			//Test Ressources
 			if (countAlreadyNeededRessources()+amount > company.getWarehouse().getAmountResources()){
-				amount = company.getWarehouse().getAmountResources() - countAlreadyNeededRessources();
 				
 				//Fehlermeldung: keine ressourcen
 				Message m = new Message();
@@ -101,6 +100,8 @@ public class Production extends Department {
 				m.setTargetPlayer(company.getId());
 				m.setMessage("Sie haben nicht genügend Ressourcen um " + amount + " weitere Smartphones zu produzieren!");
 				Market.sharedInstance().sendMessage(m);
+				
+				amount = company.getWarehouse().getAmountResources() - countAlreadyNeededRessources();
 			}
 					
 			ProductionJobs job = new ProductionJobs(level, amount);
