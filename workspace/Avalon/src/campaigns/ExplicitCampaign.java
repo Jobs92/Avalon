@@ -16,6 +16,8 @@ public abstract class ExplicitCampaign {
 		this.campaign = campaign;
 		this.endRound = GameManager.sharedInstance().getRound()
 				+ campaign.getDuration() - 1;
+		campaign.getDepartment().getCompany()
+				.changeMoney(-1 * campaign.getCost());
 	}
 
 	/**
