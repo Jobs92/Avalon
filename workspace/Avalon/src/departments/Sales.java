@@ -67,15 +67,24 @@ public class Sales  extends Department{
 			company.changeMoney(amount*currentPrice);
 			this.revenue+=amount*currentPrice;
 			
-			if (salesHistory.isEmpty()==false ){
-				if ((salesHistory.get(salesHistory.size()-1).getRound() == GameManager.sharedInstance().getRound()) && (level==salesHistory.get(salesHistory.size()-1).getLevel())) {
-					salesHistory.get(salesHistory.size()-1).updateAmount(availableAmount);	
+			for (SalesHistory sH : salesHistory) {
+				if (sH.getRound() == GameManager.sharedInstance().getRound() && level==sH.getLevel()){
+					sH.updateAmount(availableAmount);
+					return div;
 				}
+			}
+			salesHistory.add(new SalesHistory(level, amount, GameManager.sharedInstance().getRound()));	
 				
-			}
-			else {
-					salesHistory.add(new SalesHistory(level, amount, GameManager.sharedInstance().getRound()));
-			}
+				
+				
+//				if ((salesHistory.get(salesHistory.size()-1).getRound() == GameManager.sharedInstance().getRound()) && (level==salesHistory.get(salesHistory.size()-1).getLevel())) {
+//					salesHistory.get(salesHistory.size()-1).updateAmount(availableAmount);	
+//				}
+//				
+//			}
+//			else {
+//					salesHistory.add(new SalesHistory(level, amount, GameManager.sharedInstance().getRound()));
+//			}
 		
 		}
 		
@@ -94,6 +103,22 @@ public class Sales  extends Department{
 		
 		return totalAmount;
 		
+	}
+	
+	public void sendQuarterlyReport(){
+		if (getAmountSoldProductsCurrentRound() != 0){
+			String message = "Verkaufte Smartphones in diesem Quartal: \n";
+			for (SalesHistory sH : salesHistory) {
+				message += sH.getAmount() + "x " + company.getWarehouse().getSingleProduct(sH.getLevel()).getName() + "\n";
+			}
+			
+			Message m = new Message();
+			m.setTitle("Sales Quartalsbericht");
+			m.setType(Message.GAME);
+			m.setTargetPlayer(company.getId());
+			m.setMessage(message);
+			Market.sharedInstance().sendMessage(m);
+		}
 	}
 	
 	public int getAmountSoldProductsCurrentRound(){

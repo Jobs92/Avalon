@@ -210,6 +210,10 @@ public class Company {
 	}
 
 	public void handleNextRound() {
+		
+		//Sales Quarterly Report
+		getSales().sendQuarterlyReport();
+		
 		DataSnapshot snapshot = new DataSnapshot();
 
 		// Fill DataSnapshot object with data
