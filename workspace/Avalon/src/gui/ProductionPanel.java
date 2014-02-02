@@ -86,11 +86,11 @@ public class ProductionPanel extends AvalonPanel {
 				+ " (Level "
 				+ GuiManager.sharedInstance().getDs().getHighestProductLevel()
 				+ ")");
-		resourceLabel.setText("Available Resources: "
+		resourceLabel.setText("<html><p>Available Resources: "
 				+ GuiManager.sharedInstance().getDs().getResources()
-				+ "\n Variable Costs: "
+				+ "<br> Variable Costs: "
 				+ GuiManager.sharedInstance().getDs()
-						.getVariableCostsProduction());
+						.getVariableCostsProduction() + "</p></html>");
 		amountTF.setText("0");
 		refresh();
 		refreshBackground(getBackground());

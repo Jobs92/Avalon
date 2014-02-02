@@ -23,14 +23,12 @@ public class PurchasePanel extends AvalonPanel {
 	private ArrayList<JTextField> amount = new ArrayList<JTextField>();
 	private JLabel sumLabel = new JLabel("Sum: ");
 	JPanel supplierPanel;
-	// private AvalonButton buyButton = new AvalonButton("Confirm");
 	private ArrayList<Dictionary<String, String>> supplier;
 
 	public PurchasePanel() {
 		TitledBorder tb = new TitledBorder("Purchase");
 		setBorder(tb);
 		setLayout(new BorderLayout());
-		// setBackground(new Color(189, 255, 122));
 
 		supplierPanel = new JPanel();
 		supplierPanel.setBackground(getBackground());
@@ -47,7 +45,7 @@ public class PurchasePanel extends AvalonPanel {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					AvalonButton b = (AvalonButton) e.getSource();
-					makeInfoPopup(Integer.valueOf(b.getName()));
+					makeInfoPopup(Integer.parseInt(b.getName()));
 				}
 			});
 			info.add(b);
@@ -93,13 +91,19 @@ public class PurchasePanel extends AvalonPanel {
 
 	private void updateSum() {
 		int sum = 0;
+		int cost = 0;
+		int i = 0;
 		for (JTextField t : amount) {
 			String s = t.getText();
 			if (!s.equalsIgnoreCase("")) {
-				sum += Integer.valueOf(t.getText());
+				int price = new Double(supplier.get(i).get("price")).intValue();
+				sum += Integer.parseInt(t.getText());
+				cost += Integer.parseInt(t.getText()) * price;
 			}
+			i++;
 		}
-		sumLabel.setText("Sum: " + sum);
+		sumLabel.setText("<html><p>Sum Resources: " + sum + "<br> Total Cost: "
+				+ cost + "</p></html>");
 	}
 
 	@Override
@@ -122,7 +126,7 @@ public class PurchasePanel extends AvalonPanel {
 			String value = amount.get(i).getText();
 			if (!value.equalsIgnoreCase("") || Integer.parseInt(value) > 0) {
 				GuiManager.sharedInstance().getApi()
-						.buy(i, Integer.valueOf(value));
+						.buy(i, Integer.parseInt(value));
 			}
 		}
 	}
