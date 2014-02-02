@@ -130,27 +130,27 @@ public class Company {
 	}
 
 	public Marketing getMarketing() {
-		return (Marketing) departments.get(1);
+		return (Marketing) departments.get(2);
 	}
 
 	public Research getResearch() {
-		return (Research) departments.get(2);
+		return (Research) departments.get(3);
 	}
 
 	public Warehouse getWarehouse() {
-		return (Warehouse) departments.get(3);
+		return (Warehouse) departments.get(4);
 	}
 
 	public LegalDepartment getLegaldepartment() {
-		return (LegalDepartment) departments.get(4);
+		return (LegalDepartment) departments.get(5);
 	}
 
 	public Purchase getPurchase() {
-		return (Purchase) departments.get(5);
+		return (Purchase) departments.get(6);
 	}
 
 	public Production getProduction() {
-		return (Production) departments.get(6);
+		return (Production) departments.get(1);
 	}
 
 	// money functions
