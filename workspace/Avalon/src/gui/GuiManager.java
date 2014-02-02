@@ -66,7 +66,6 @@ public class GuiManager {
 	}
 	
 	public void handleChat(String txt, int id){
-		System.out.println(txt + "  " + id);
 		if(lobbyFrame != null){
 			lobbyFrame.handleChat(txt, id);
 		}

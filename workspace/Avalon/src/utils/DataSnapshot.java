@@ -381,7 +381,6 @@ public class DataSnapshot implements Serializable {
 	}
 
 	public void setRevenue(double x) {
-		System.out.println("Revenue: " +x);
 		revenue = x;
 	}
 

@@ -75,7 +75,6 @@ public class Sales  extends Department{
 					return div;
 				}
 			}
-			System.out.println("add new SalesHistory for level " + level + " and round " + GameManager.sharedInstance().getRound());
 			salesHistory.add(new SalesHistory(level, amount, GameManager.sharedInstance().getRound()));	
 		
 		}
