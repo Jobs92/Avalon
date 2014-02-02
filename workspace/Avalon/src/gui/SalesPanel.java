@@ -15,7 +15,7 @@ import javax.swing.event.ListSelectionListener;
 
 @SuppressWarnings("serial")
 public class SalesPanel extends AvalonPanel {
-	private JList<String> products;// = new JList<String>();
+	private JList<String> products;
 	private ArrayList<Dictionary<String, String>> productData;
 	private Vector<String> data = new Vector<String>();
 	private String[] names;
@@ -24,7 +24,6 @@ public class SalesPanel extends AvalonPanel {
 		TitledBorder tb = new TitledBorder("Sales");
 		setBorder(tb);
 		setLayout(new BorderLayout());
-		// setBackground(new Color(255, 189, 122));
 
 		for (int i = 0; i < 5; i++) {
 			data.add("Product #" + (i + 1));
@@ -67,7 +66,8 @@ public class SalesPanel extends AvalonPanel {
 		for (int i = 0; i < names.length; i++) {
 			names[i] = productData.get(i).get("name") + " (Level "
 					+ productData.get(i).get("level") + ", Price: "
-					+ productData.get(i).get("price") + " )";
+					+ productData.get(i).get("price") + ", Amount on Stock: "
+					+ productData.get(i).get("amount") + ")";
 		}
 		products.setListData(names);
 		refresh();
