@@ -70,6 +70,7 @@ public class Config {
 	private static int[] consumerGroupQuality = new int[3];
 	private static int[] consumerGroupImage = new int[3];
 	private static int[] consumerGroupSize = new int[3];
+	private static double maxPrice;
 
 	// Supplier
 	private static int[] supplierTrust = new int[3];
@@ -242,6 +243,8 @@ public class Config {
 			successprobabilitySpying = Integer.parseInt(prop
 					.getProperty("successprobabilitySpying"));
 			levelSpying = Integer.parseInt(prop.getProperty("levelSpying"));
+			
+			maxPrice = Double.parseDouble(prop.getProperty("maxLevel"));
 
 			// Marketing
 			costsUpgradeMarketing = Integer.parseInt(prop
@@ -572,6 +575,10 @@ public class Config {
 
 	public static double getEventSingleChance() {
 		return eventSingleChance;
+	}
+
+	public static double getMaxPrice() {
+		return maxPrice;
 	}
 
 }

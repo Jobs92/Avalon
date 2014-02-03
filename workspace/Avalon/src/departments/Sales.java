@@ -33,11 +33,21 @@ public class Sales  extends Department{
 
 	public void setPrice(int level, int price){
 		if (price>0){
-			Product p = company.getWarehouse().getSingleProduct(level);
-			p.setPrice(price);
-			if (!Market.sharedInstance().productAlreadyOnMarket(p)){
-				Market.sharedInstance().addProduct(p);
+			if (price <= Config.getMaxPrice()){
+				Product p = company.getWarehouse().getSingleProduct(level);
+				p.setPrice(price);
+				if (!Market.sharedInstance().productAlreadyOnMarket(p)){
+					Market.sharedInstance().addProduct(p);
+				}
+			}else{
+				Message m = new Message();
+				m.setTitle("Preis zu hoch!");
+				m.setType(Message.GAME);
+				m.setTargetPlayer(company.getId());
+				m.setMessage("Sales-Experten raten von einem Preis über " + Config.getMaxPrice() +  "ab!");
+				Market.sharedInstance().sendMessage(m);
 			}
+			
 		}
 	}
 	
