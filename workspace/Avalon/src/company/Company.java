@@ -110,10 +110,6 @@ public class Company {
 
 	public void insolvency() {
 		if (active){
-			active = false;
-			money = 0;
-			
-			Market.sharedInstance().handleInsolvency(this);
 	
 			// Inform Playder
 			Message m = new Message();
@@ -122,6 +118,11 @@ public class Company {
 			m.setTargetPlayer(id);
 			m.setMessage("Sie haben nicht genügend liquide Mittel um ihre Verbindlichkeiten zu begleichen. Sie sind insolvent.");
 			Market.sharedInstance().sendMessage(m);
+			
+			active = false;
+			money = 0;
+			
+			Market.sharedInstance().handleInsolvency(this);
 		}
 	}
 
