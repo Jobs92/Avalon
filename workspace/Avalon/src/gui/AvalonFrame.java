@@ -43,10 +43,10 @@ public class AvalonFrame extends JFrame {
 	public AvalonFrame() {
 		setVisible(true);
 		setBounds(
-				0,
-				0,
-				java.awt.Toolkit.getDefaultToolkit().getScreenSize().width,
-				java.awt.Toolkit.getDefaultToolkit().getScreenSize().height - 50);
+				20,
+				20,
+				java.awt.Toolkit.getDefaultToolkit().getScreenSize().width - 30,
+				java.awt.Toolkit.getDefaultToolkit().getScreenSize().height - 80);
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		getContentPane().setBackground(Color.white);
@@ -118,11 +118,9 @@ public class AvalonFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// send confirm
-				int accepted = JOptionPane
-						.showConfirmDialog(
-								null,
-								"Willst du wirklich die Runde beenden?",
-								"Nächste Runde", JOptionPane.YES_NO_OPTION);
+				int accepted = JOptionPane.showConfirmDialog(null,
+						"Willst du wirklich die Runde beenden?",
+						"Nächste Runde", JOptionPane.YES_NO_OPTION);
 				if (accepted == 0) {
 					nextRoundButton.setEnabled(false);
 					send();

@@ -232,7 +232,7 @@ public class LawPanel extends AvalonPanel {
 	protected void fill() {
 		upgradeButton.setEnabled(true);
 		downgradeButton.setEnabled(true);
-		setBorder(new TitledBorder("Law(Level: "
+		setBorder(new TitledBorder("Rechtsabteilung(Level: "
 				+ GuiManager.sharedInstance().getDs()
 						.getLevel("legalDepartment")
 				+ ", Fixkosten: "
