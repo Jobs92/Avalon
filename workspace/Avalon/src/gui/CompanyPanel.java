@@ -16,7 +16,7 @@ public class CompanyPanel extends AvalonPanel {
 	private JLabel infoLabel = new JLabel();
 
 	public CompanyPanel() {
-		TitledBorder tb = new TitledBorder("Company");
+		TitledBorder tb = new TitledBorder("Unternehmen");
 		setBorder(tb);
 		add(infoLabel);
 	}
@@ -28,16 +28,16 @@ public class CompanyPanel extends AvalonPanel {
 		DataSnapshot ds = GuiManager.sharedInstance().getDs();
 		String infoString = "<html><ul><li>Money: " + df.format(ds.getMoney())
 				+ "</li>";
-		infoString += "<li>Profit: " + df.format(ds.getProfit()) + "</li>";
-		infoString += "<li>Revenue: " + df.format(ds.getRevenue()) + "</li>";
-		infoString += "<li>Total Costs: " + df.format(ds.getTotalCosts())
+		infoString += "<li>Gewinn: " + df.format(ds.getProfit()) + "</li>";
+		infoString += "<li>Umsatz: " + df.format(ds.getRevenue()) + "</li>";
+		infoString += "<li>Gesamtkosten: " + df.format(ds.getTotalCosts())
 				+ "</li>";
-		infoString += "<li>Sold Smartphones: "
+		infoString += "<li>Verkaufte Smartphones: "
 				+ df.format(ds.getSoldSmartphones()) + "</li>";
-		infoString += "<li>Fixcosts: " + df.format(ds.getFixCosts()) + "</li>";
-		infoString += "<li>Highest Product Level: "
+		infoString += "<li>Fixkosten: " + df.format(ds.getFixCosts()) + "</li>";
+		infoString += "<li>Höchstes Produktlevel: "
 				+ ds.getHighestProductLevel() + "</li>";
-		infoString += "<li>Products on Stock: " + ds.getProductsOnStock()
+		infoString += "<li>Produkte im Lager: " + ds.getProductsOnStock()
 				+ "</li>";
 		infoString += "</ul></html>";
 		infoLabel.setText(infoString);

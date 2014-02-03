@@ -2,6 +2,7 @@ package departments;
 
 import java.util.ArrayList;
 
+import utils.Message;
 import company.Company;
 import campaigns.Campaign;
 import campaigns.ExplicitCampaign;
@@ -12,7 +13,7 @@ import campaigns.ExplicitCampaign;
  */
 /**
  * @author Martin
- *
+ * 
  */
 public abstract class CampaignDepartment extends Department {
 
@@ -41,13 +42,14 @@ public abstract class CampaignDepartment extends Department {
 		payFixcosts();
 		for (ExplicitCampaign campaign : explicitCampaigns) {
 			if (campaign.isActive()) {
-				campaign.simulate();	
+				campaign.simulate();
 			}
 		}
 	}
 
 	/**
 	 * Add campaign templates.
+	 * 
 	 * @param abstract campaign
 	 */
 	public void addCampaign(Campaign campaign) {
@@ -56,10 +58,20 @@ public abstract class CampaignDepartment extends Department {
 
 	/**
 	 * Starts the given campaign. Adds explicit campaign to the department.
+	 * 
 	 * @param campaign
 	 */
 	public void startCampaign(Campaign campaign) {
-		explicitCampaigns.add((ExplicitCampaign) campaign.startCampaign());
+		if (!company.changeMoney(-1 * campaign.getCost())) {
+			Message message = new Message();
+			message.setTitle("Nicht genügend Geld.");
+			message.setMessage("Kampagne \""
+					+ campaign.getTitle()
+					+ "\" konnte nicht gestartet werden, da zu wenig Geld vorhanden ist.");
+			campaign.getDepartment().getCompany().addMessageToInbox(message);
+		} else {
+			explicitCampaigns.add((ExplicitCampaign) campaign.startCampaign());
+		}
 	}
 
 	public int getCountOfCurrentlyRunningCampaigns() {
@@ -82,14 +94,14 @@ public abstract class CampaignDepartment extends Department {
 			}
 		}
 	}
-	
-	public void downgrade(){
-		if (level >1){
+
+	public void downgrade() {
+		if (level > 1) {
 			level--;
 			updateFixcost();
 		}
 	}
-	
+
 	protected abstract void updateFixcost();
 
 	protected abstract boolean isMaxLevel();
@@ -106,7 +118,7 @@ public abstract class CampaignDepartment extends Department {
 	public ArrayList<ExplicitCampaign> getExplicitCampaigns() {
 		return explicitCampaigns;
 	}
-	
+
 	/**
 	 * @return All abstract campaigns.
 	 */
@@ -115,10 +127,11 @@ public abstract class CampaignDepartment extends Department {
 	}
 
 	/**
-	 * @param campaign id
+	 * @param campaign
+	 *            id
 	 * @return campaign with given id
 	 */
-	public Campaign getCampaignByID(int id){
+	public Campaign getCampaignByID(int id) {
 		return campaigns.get(id);
 	}
 

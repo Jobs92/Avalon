@@ -32,7 +32,7 @@ public class LawPanel extends AvalonPanel {
 	private Dictionary<String, String> suesData;
 
 	public LawPanel() {
-		TitledBorder tb = new TitledBorder("Law");
+		TitledBorder tb = new TitledBorder("Rechtsabteilung");
 		setBorder(tb);
 		setLayout(new BorderLayout());
 		// setBackground(new Color(0, 179, 0));
@@ -40,9 +40,9 @@ public class LawPanel extends AvalonPanel {
 		initEnemyPanel();
 		initSuesPanel();
 		suesPanel.setBackground(getBackground());
-		suesPanel.setBorder(new TitledBorder("Current Lawsuits"));
+		suesPanel.setBorder(new TitledBorder("Laufende Verfahren"));
 		enemyPanel.setBackground(getBackground());
-		enemyPanel.setBorder(new TitledBorder("Opponents"));
+		enemyPanel.setBorder(new TitledBorder("Konkurrenten"));
 		add(suesPanel, BorderLayout.NORTH);
 		add(enemyPanel, BorderLayout.CENTER);
 
@@ -50,7 +50,7 @@ public class LawPanel extends AvalonPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int accepted = JOptionPane.showConfirmDialog(null,
-						"Do you want to downgrade the Legal department?",
+						"Willst du wirklich die Rechtsabteilung downgraden?",
 						"Downgrade", JOptionPane.YES_NO_OPTION);
 				if (accepted == 0) {
 					downgradeButton.setEnabled(false);
@@ -76,9 +76,9 @@ public class LawPanel extends AvalonPanel {
 	protected void makeUpgradePopup() {
 		int accepted = JOptionPane.showConfirmDialog(
 				null,
-				"Do you want to upgrade the Legal department for "
+				"Willst du wirklich die Rechtsabteilung für "
 						+ GuiManager.sharedInstance().getDs()
-								.getUpgradeCosts("legalDepartment") + "?",
+								.getUpgradeCosts("legalDepartment") + " upgraden?",
 				"Upgrade", JOptionPane.YES_NO_OPTION);
 		if (accepted == 0) {
 			upgradeButton.setEnabled(false);
@@ -113,7 +113,7 @@ public class LawPanel extends AvalonPanel {
 
 		String[] listData = new String[3];
 		for (int i = 0; i < listData.length; i++) {
-			listData[i] = "Enemy #" + (i + 1);
+			listData[i] = "Konkurrent #" + (i + 1);
 		}
 		enemies = new JList<String>(listData);
 		enemies.addListSelectionListener(new ListSelectionListener() {
@@ -134,13 +134,13 @@ public class LawPanel extends AvalonPanel {
 
 	private void makeEnemyPopup(final int index) {
 		if (index > -1) {
-			String infoString = "Choose action.";
+			String infoString = "Aktion auswählen.";
 
 			boolean sueable = !enemyData.get(index).get("amount")
 					.equalsIgnoreCase("0.0");
 
-			final AvalonButton sue = new AvalonButton("Sue Enemy for "
-					+ enemyData.get(index).get("amount"));
+			final AvalonButton sue = new AvalonButton("Konkurrent auf "
+					+ enemyData.get(index).get("amount")+"verklagen");
 			sue.setEnabled(sueable);
 			sue.addActionListener(new ActionListener() {
 
@@ -159,7 +159,7 @@ public class LawPanel extends AvalonPanel {
 				}
 			});
 
-			final AvalonButton check = new AvalonButton("Check Enemy");
+			final AvalonButton check = new AvalonButton("Konkurrent überprüfen");
 			check.setEnabled(!sueable);
 
 			check.addActionListener(new ActionListener() {
@@ -194,7 +194,7 @@ public class LawPanel extends AvalonPanel {
 			boolean isClaimant = Boolean.parseBoolean(suesData
 					.get("isClaimant"));
 
-			final AvalonButton abort = new AvalonButton("Abort Sue");
+			final AvalonButton abort = new AvalonButton("Klage abbrechen");
 			abort.setEnabled(isClaimant);
 			abort.addActionListener(new ActionListener() {
 
@@ -208,7 +208,7 @@ public class LawPanel extends AvalonPanel {
 				}
 			});
 
-			final AvalonButton pay = new AvalonButton("Pay");
+			final AvalonButton pay = new AvalonButton("Bezahlen");
 			pay.setEnabled(!isClaimant);
 			pay.addActionListener(new ActionListener() {
 
@@ -235,7 +235,7 @@ public class LawPanel extends AvalonPanel {
 		setBorder(new TitledBorder("Law(Level: "
 				+ GuiManager.sharedInstance().getDs()
 						.getLevel("legalDepartment")
-				+ ", Fixcosts: "
+				+ ", Fixkosten: "
 				+ GuiManager.sharedInstance().getDs()
 						.getDepartmentFixcosts("legalDepartment") + ")"));
 		enemyData = GuiManager.sharedInstance().getDs().getCheckedEnemies();
@@ -247,7 +247,7 @@ public class LawPanel extends AvalonPanel {
 					+ suesData.get("defendant");
 		} else {
 			suesListData = new String[1];
-			suesListData[0] = "No current lawsuits";
+			suesListData[0] = "Keine laufenden Verfahren";
 		}
 		sues.setListData(suesListData);
 

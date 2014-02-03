@@ -33,18 +33,18 @@ public class ResearchPanel extends AvalonPanel {
 	private AvalonButton downgradeButton = new AvalonButton("Downgrade");
 	private ArrayList<Dictionary<String, String>> campaigns = new ArrayList<Dictionary<String, String>>();
 	private JLabel labelPatentLevelNumber;
-	private AvalonButton releaseButton = new AvalonButton("Release new Product");
+	private AvalonButton releaseButton = new AvalonButton("Neues Produkt veröffentlichen");
 	private JPanel southPanel;
 
 	public ResearchPanel() {
-		TitledBorder tb = new TitledBorder("Research");
+		TitledBorder tb = new TitledBorder("Forschungsabteilung");
 		setBorder(tb);
-//		setBackground(new Color(122, 189, 255));
+		// setBackground(new Color(122, 189, 255));
 
 		enemyPanel.setBackground(getBackground());
 		patentPanel.setBackground(getBackground());
 		researchCampainPanel.setBackground(getBackground());
-		researchCampainPanel.setBorder(new TitledBorder("Campaigns"));
+		researchCampainPanel.setBorder(new TitledBorder("Kampagnen"));
 
 		initEnemyPanel();
 		initPatentLevelPanel();
@@ -64,9 +64,11 @@ public class ResearchPanel extends AvalonPanel {
 		downgradeButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int accepted = JOptionPane.showConfirmDialog(null,
-						"Do you want to downgrade the Research department?",
-						"Downgrade", JOptionPane.YES_NO_OPTION);
+				int accepted = JOptionPane
+						.showConfirmDialog(
+								null,
+								"Willst du wirklich die Forschungsabteilung downgraden?",
+								"Downgrade", JOptionPane.YES_NO_OPTION);
 				if (accepted == 0) {
 					downgradeButton.setEnabled(false);
 					// accepted
@@ -94,7 +96,7 @@ public class ResearchPanel extends AvalonPanel {
 
 	protected void makeReleasePopup() {
 		String name = JOptionPane.showInputDialog(this,
-				"Release a new Product. Choose name.");
+				"Neues Produkt veröffentlichen. Bitte Namen wählen.");
 		GuiManager.sharedInstance().getApi().release(name);
 	}
 
@@ -102,7 +104,7 @@ public class ResearchPanel extends AvalonPanel {
 		researchCampainPanel.setLayout(new GridLayout(3, 2));
 
 		for (int i = 1; i <= 3; i++) {
-			JCheckBox rbutton = new JCheckBox("Campaign " + i, false);
+			JCheckBox rbutton = new JCheckBox("Kampagne " + i, false);
 			rbutton.setBackground(getBackground());
 			campaignsCB.add(rbutton);
 
@@ -129,17 +131,17 @@ public class ResearchPanel extends AvalonPanel {
 
 		JLabel labelPatentLevel = new JLabel("Patentlevel : ");
 		labelPatentLevelNumber = new JLabel("0");
-		AvalonButton orderPatent = new AvalonButton("Patent");
+		AvalonButton orderPatent = new AvalonButton("Patentieren");
 
 		orderPatent.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				int accepted = JOptionPane.showConfirmDialog(null,
-						"Do you want to patent for "
+						"Willst du den Forschungsstand für "
 								+ GuiManager.sharedInstance().getDs()
-										.getPatentCost(), "Patent",
-						JOptionPane.YES_NO_OPTION);
+										.getPatentCost() + " patentieren?",
+						"Patentieren", JOptionPane.YES_NO_OPTION);
 				if (accepted == 0) {
 					// accepted
 					GuiManager.sharedInstance().getApi().patent();
@@ -174,11 +176,12 @@ public class ResearchPanel extends AvalonPanel {
 
 	protected void makeEnemyPopup(int i) {
 		if (i > -1) {
-			int accepted = JOptionPane.showConfirmDialog(null,
-					"Do you want to spy " + enemyData.get(i).get("name")
-							+ " for "
+			int accepted = JOptionPane
+					.showConfirmDialog(null, "Willst du "
+							+ enemyData.get(i).get("name") + " für "
 							+ GuiManager.sharedInstance().getDs().getSpyCost()
-							+ "?", "Spy", JOptionPane.YES_NO_OPTION);
+							+ " auspionieren?", "Spionieren",
+							JOptionPane.YES_NO_OPTION);
 			if (accepted == 0) {
 				// accepted
 				GuiManager.sharedInstance().getApi()
@@ -189,12 +192,11 @@ public class ResearchPanel extends AvalonPanel {
 
 	protected void makeInfoPopup(int index) {
 		if (index > -1) {
-			String infoString = "Description: "
-					+ campaigns.get(index).get("description") + "\nDuration: "
-					+ campaigns.get(index).get("duration") + "\nPrice: "
-					+ campaigns.get(index).get("cost") + "\nLevelupgrade: "
-					+ campaigns.get(index).get("level")
-					+ "\nSuccessprobability: "
+			String infoString = campaigns.get(index).get("description")
+					+ "\nLaufzeit: " + campaigns.get(index).get("duration")
+					+ "\nPreis: " + campaigns.get(index).get("cost")
+					+ "\nLevelupgrade: " + campaigns.get(index).get("level")
+					+ "\nErfolgswahrscheinlichkeit: "
 					+ campaigns.get(index).get("successprobability") + "%";
 			JOptionPane.showMessageDialog(null, infoString, campaigns
 					.get(index).get("title") + index,
@@ -205,9 +207,9 @@ public class ResearchPanel extends AvalonPanel {
 	protected void makeUpgradePopup() {
 		int accepted = JOptionPane.showConfirmDialog(
 				null,
-				"Do you want to upgrade the Research department for "
+				"Willst du wirklich die Forschungsabteilung für "
 						+ GuiManager.sharedInstance().getDs()
-								.getUpgradeCosts("research") + "?", "Upgrade",
+								.getUpgradeCosts("research") + " upgraden?", "Upgrade",
 				JOptionPane.YES_NO_OPTION);
 		if (accepted == 0) {
 			upgradeButton.setEnabled(false);
@@ -223,7 +225,7 @@ public class ResearchPanel extends AvalonPanel {
 				+ ", Productlevel: "
 				+ String.valueOf(GuiManager.sharedInstance().getDs()
 						.getResearchLevel())
-				+ ", Researchlevel: "
+				+ ", Forschungslevel: "
 				+ String.valueOf(GuiManager.sharedInstance().getDs()
 						.getResearchLevel()
 						+ GuiManager.sharedInstance().getDs()
@@ -231,9 +233,9 @@ public class ResearchPanel extends AvalonPanel {
 		upgradeButton.setEnabled(true);
 		downgradeButton.setEnabled(true);
 		releaseButton.setEnabled(true);
-		setBorder(new TitledBorder("Research(Level: "
+		setBorder(new TitledBorder("Forschungsabteilung(Level: "
 				+ GuiManager.sharedInstance().getDs().getLevel("research")
-				+ ", Fixcosts: "
+				+ ", Fixkosten: "
 				+ GuiManager.sharedInstance().getDs()
 						.getDepartmentFixcosts("research") + ")"));
 		campaigns = GuiManager.sharedInstance().getDs().getResearchCampaigns();

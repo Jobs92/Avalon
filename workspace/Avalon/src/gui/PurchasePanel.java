@@ -29,7 +29,7 @@ public class PurchasePanel extends AvalonPanel {
 	private ArrayList<Dictionary<String, String>> supplier;
 
 	public PurchasePanel() {
-		TitledBorder tb = new TitledBorder("Purchase");
+		TitledBorder tb = new TitledBorder("Einkauf");
 		setBorder(tb);
 		setLayout(new BorderLayout());
 
@@ -84,11 +84,12 @@ public class PurchasePanel extends AvalonPanel {
 
 	protected void makeInfoPopup(int index) {
 		if (index > -1) {
-			String infoString = "Trust: " + supplier.get(index).get("trust")
-					+ ", quality: " + supplier.get(index).get("quality")
-					+ ", price: " + supplier.get(index).get("price");
-			JOptionPane.showMessageDialog(null, infoString, "Supplier #"
-					+ index, JOptionPane.INFORMATION_MESSAGE);
+			String infoString = "<html><p>Zuverlässigkeit: "
+					+ supplier.get(index).get("trust") + "<br>Qualität: "
+					+ supplier.get(index).get("quality") + "<br>Preis: "
+					+ supplier.get(index).get("price") + "</p></html>";
+			JOptionPane.showMessageDialog(null, infoString, supplier.get(index)
+					.get("name"), JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 
@@ -107,13 +108,13 @@ public class PurchasePanel extends AvalonPanel {
 			}
 			i++;
 		}
-		sumLabel.setText("<html><p>Sum Resources: " + df.format(sum)
-				+ "<br> Total Cost: " + df.format(cost) + "</p></html>");
+		sumLabel.setText("<html><p>Anzahl Ressourcen: " + df.format(sum)
+				+ "<br>Gesamtkosten: " + df.format(cost) + "</p></html>");
 	}
 
 	@Override
 	protected void fill() {
-		setBorder(new TitledBorder("Purchase (Fixcosts: "
+		setBorder(new TitledBorder("Einkauf (Fixkosten: "
 				+ GuiManager.sharedInstance().getDs()
 						.getDepartmentFixcosts("purchase") + ")"));
 		supplier = GuiManager.sharedInstance().getDs().getSupplier();

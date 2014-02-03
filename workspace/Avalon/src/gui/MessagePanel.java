@@ -22,7 +22,7 @@ public class MessagePanel extends AvalonPanel {
 	// private Vector<Message> messages = new Vector<Message>();
 
 	public MessagePanel() {
-		TitledBorder tb = new TitledBorder("Message Inbox");
+		TitledBorder tb = new TitledBorder("Nachrichteneingang");
 		setBorder(tb);
 		setLayout(new BorderLayout());
 
@@ -77,7 +77,5 @@ public class MessagePanel extends AvalonPanel {
 
 	@Override
 	protected void refreshBackground(Color bg) {
-		// TODO Auto-generated method stub
-		
 	}
 }

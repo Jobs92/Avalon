@@ -14,15 +14,15 @@ import javax.swing.border.TitledBorder;
 
 @SuppressWarnings("serial")
 public class ProductionPanel extends AvalonPanel {
-	private JLabel productLabel = new JLabel("Product (Level 1)");
-	private JLabel resourceLabel = new JLabel("Available Resources: 0");
+	private JLabel productLabel = new JLabel("Produkt (Level 1)");
+	private JLabel resourceLabel = new JLabel("Verfügbare Ressourcen: 0");
 	private JTextField amountTF = new JTextField("0");
 	private AvalonButton upgradeButton = new AvalonButton("Upgrade");
 	private AvalonButton downgradeButton = new AvalonButton("Downgrade");
 	private JPanel southPanel = new JPanel();
 
 	public ProductionPanel() {
-		TitledBorder tb = new TitledBorder("Production");
+		TitledBorder tb = new TitledBorder("Produktion");
 		setBorder(tb);
 		setLayout(new GridLayout(2, 2));
 
@@ -43,7 +43,7 @@ public class ProductionPanel extends AvalonPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int accepted = JOptionPane.showConfirmDialog(null,
-						"Do you want to downgrade the Production department?",
+						"Willst du wirklich die Produktion downgraden?",
 						"Downgrade", JOptionPane.YES_NO_OPTION);
 				if (accepted == 0) {
 					downgradeButton.setEnabled(false);
@@ -61,9 +61,9 @@ public class ProductionPanel extends AvalonPanel {
 	protected void makeUpgradePopup() {
 		int accepted = JOptionPane.showConfirmDialog(
 				null,
-				"Do you want to upgrade the Production department for "
+				"Willst du wirklich die Produktion für "
 						+ GuiManager.sharedInstance().getDs()
-								.getUpgradeCosts("production") + "?",
+								.getUpgradeCosts("production") + " upgraden?",
 				"Upgrade", JOptionPane.YES_NO_OPTION);
 		if (accepted == 0) {
 			upgradeButton.setEnabled(false);
@@ -76,9 +76,9 @@ public class ProductionPanel extends AvalonPanel {
 	protected void fill() {
 		upgradeButton.setEnabled(true);
 		downgradeButton.setEnabled(true);
-		setBorder(new TitledBorder("Production (Level: "
+		setBorder(new TitledBorder("Produktion (Level: "
 				+ GuiManager.sharedInstance().getDs().getLevel("production")
-				+ ", Fixcosts: "
+				+ ", Fixkosten: "
 				+ GuiManager.sharedInstance().getDs()
 						.getDepartmentFixcosts("production") + ")"));
 		productLabel.setText(GuiManager.sharedInstance().getDs()
@@ -86,12 +86,12 @@ public class ProductionPanel extends AvalonPanel {
 				+ " (Level "
 				+ GuiManager.sharedInstance().getDs().getHighestProductLevel()
 				+ ")");
-		resourceLabel.setText("<html><p>Available Resources: "
+		resourceLabel.setText("<html><p>Verfügbare Ressourcen: "
 				+ GuiManager.sharedInstance().getDs().getResources()
-				+ "<br> Variable Costs: "
+				+ "<br> Variable Kosten: "
 				+ GuiManager.sharedInstance().getDs()
 						.getVariableCostsProduction()
-				+ "<br> Capacity: "
+				+ "<br> Kapazität: "
 				+ GuiManager.sharedInstance().getDs()
 						.getCapacity() + "</p></html>");
 		amountTF.setText("0");

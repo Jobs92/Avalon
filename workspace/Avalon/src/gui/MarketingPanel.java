@@ -36,7 +36,7 @@ public class MarketingPanel extends AvalonPanel {
 
 		// init arraylists
 		for (int i = 1; i <= 3; i++) {
-			JCheckBox cb = new JCheckBox("Campaign #" + i);
+			JCheckBox cb = new JCheckBox("Kampagne #" + i);
 			cb.setBackground(getBackground());
 			campaignsCB.add(cb);
 
@@ -63,7 +63,7 @@ public class MarketingPanel extends AvalonPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int accepted = JOptionPane.showConfirmDialog(null,
-						"Do you want to downgrade the Marketing department?",
+						"Willst du wirklich die Marketingabteilung downgraden?",
 						"Downgrade", JOptionPane.YES_NO_OPTION);
 				if (accepted == 0) {
 					downgradeButton.setEnabled(false);
@@ -87,23 +87,23 @@ public class MarketingPanel extends AvalonPanel {
 		add(campaignPanel, BorderLayout.NORTH);
 	}
 
-	protected void makeDowngradePopup() {
-		int accepted = JOptionPane.showConfirmDialog(null,
-				"Do you want to downgrade the Marketing department?",
-				"Upgrade", JOptionPane.YES_NO_OPTION);
-		if (accepted == 0) {
-			upgradeButton.setEnabled(false);
-			// accepted
-			GuiManager.sharedInstance().getApi().downMarketing();
-		}
-	}
+//	protected void makeDowngradePopup() {
+//		int accepted = JOptionPane.showConfirmDialog(null,
+//				"Do you want to downgrade the Marketing department?",
+//				"Upgrade", JOptionPane.YES_NO_OPTION);
+//		if (accepted == 0) {
+//			upgradeButton.setEnabled(false);
+//			// accepted
+//			GuiManager.sharedInstance().getApi().downMarketing();
+//		}
+//	}
 
 	protected void makeUpgradePopup() {
 		int accepted = JOptionPane.showConfirmDialog(
 				null,
-				"Do you want to upgrade the Marketing department for "
+				"Willst du wirklich die Marketingabteilung für "
 						+ GuiManager.sharedInstance().getDs()
-								.getUpgradeCosts("marketing") + "?", "Upgrade",
+								.getUpgradeCosts("marketing") + " upgraden?", "Upgrade",
 				JOptionPane.YES_NO_OPTION);
 		if (accepted == 0) {
 			upgradeButton.setEnabled(false);
@@ -115,10 +115,10 @@ public class MarketingPanel extends AvalonPanel {
 	private void makeInfoPopup(int index) {
 		if (index > -1) {
 			String infoString = campaigns.get(index).get("description")
-					+ "\nDuration: " + campaigns.get(index).get("duration")
-					+ "\nPrice: " + campaigns.get(index).get("cost")
+					+ "\nLaufzeit: " + campaigns.get(index).get("duration")
+					+ "\nPreis: " + campaigns.get(index).get("cost")
 					+ "\nImageupgrade: " + campaigns.get(index).get("level")
-					+ "\nSuccessprobability: "
+					+ "\nErfolgswahrscheinlichkeit: "
 					+ campaigns.get(index).get("successProbability");
 			JOptionPane.showMessageDialog(null, infoString, campaigns
 					.get(index).get("title") + index,
@@ -132,7 +132,7 @@ public class MarketingPanel extends AvalonPanel {
 		downgradeButton.setEnabled(true);
 		setBorder(new TitledBorder("Marketing(Level: "
 				+ GuiManager.sharedInstance().getDs().getLevel("marketing")
-				+ ", Fixcosts: "
+				+ ", Fixkosten: "
 				+ GuiManager.sharedInstance().getDs()
 						.getDepartmentFixcosts("marketing") + ")"));
 		campaigns = GuiManager.sharedInstance().getDs().getMarketingCampaigns();

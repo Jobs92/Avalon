@@ -121,8 +121,8 @@ public class AvalonFrame extends JFrame {
 				int accepted = JOptionPane
 						.showConfirmDialog(
 								null,
-								"Do you really want to finish this round and go on with the next round?",
-								"Next Round", JOptionPane.YES_NO_OPTION);
+								"Willst du wirklich die Runde beenden?",
+								"Nächste Runde", JOptionPane.YES_NO_OPTION);
 				if (accepted == 0) {
 					nextRoundButton.setEnabled(false);
 					send();
@@ -141,39 +141,42 @@ public class AvalonFrame extends JFrame {
 	}
 
 	public void fill() {
-		String header = GuiManager.sharedInstance().getDs().getCompanyName()
-				+ "s AVALON";
+		String header = GuiManager.sharedInstance().getDs().getCompanyName();
+		if (header.endsWith("x") || header.endsWith("s")) {
+			header += "'";
+		}
+		header += " AVALON";
 		headerLabel.setText(header);
 		// update round
 		int round = GuiManager.sharedInstance().getDs().getRound() + 1;
 		int a = round % 4;
-		String s = "Round #" + round + ", Season: ";
+		String s = "Runde #" + round + ", Saison: ";
 		switch (a) {
-		case 0:
-			s += "Spring";
-			break;
 		case 1:
-			s += "Summer";
+			s += "Frühling";
 			break;
 		case 2:
-			s += "Autumn";
+			s += "Sommer";
 			break;
 		case 3:
+			s += "Herbst";
+			break;
+		case 0:
 			s += "Winter";
 			break;
 
 		default:
 			break;
 		}
-		int year = 2007 + round/4;
-		s+=" "+year;
+		int year = 2007 + round / 4;
+		s += " " + year;
 		nextRoundButton.setEnabled(true);
 		roundLabel.setText(s);
 		for (AvalonPanel p : panels) {
 			p.fill();
 		}
 		if (round > 1) {
-			JOptionPane.showMessageDialog(this, "You are entering round #"
+			JOptionPane.showMessageDialog(this, "Du betrittst Runde #"
 					+ (GuiManager.sharedInstance().getDs().getRound() + 1));
 		}
 	}

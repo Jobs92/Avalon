@@ -39,13 +39,13 @@ public class LoginFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblIpAdresse = new JLabel("IP-Address:");
+		JLabel lblIpAdresse = new JLabel("IP-Adresse:");
 		lblIpAdresse.setBounds(10, 82, 99, 14);
 		contentPane.add(lblIpAdresse);
 
 		textField = new JTextField();
 		textField.setBounds(103, 42, 112, 20);
-		textField.setText("Enter name...");
+		textField.setText("Name eingeben...");
 		textField.addKeyListener(new KeyListener() {
 
 			@Override
@@ -98,7 +98,7 @@ public class LoginFrame extends JFrame {
 		btnConnect.setBounds(10, 120, 205, 23);
 		contentPane.add(btnConnect);
 
-		JLabel lblWillkommen = new JLabel("Welcome to Avalon!");
+		JLabel lblWillkommen = new JLabel("Herzlich Willkomenn zu Avalon!");
 		lblWillkommen.setBounds(10, 11, 500, 14);
 		contentPane.add(lblWillkommen);
 	}

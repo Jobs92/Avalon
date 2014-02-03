@@ -21,12 +21,12 @@ public class SalesPanel extends AvalonPanel {
 	private String[] names;
 
 	public SalesPanel() {
-		TitledBorder tb = new TitledBorder("Sales");
+		TitledBorder tb = new TitledBorder("Vertrieb");
 		setBorder(tb);
 		setLayout(new BorderLayout());
 
 		for (int i = 0; i < 5; i++) {
-			data.add("Product #" + (i + 1));
+			data.add("Produkt #" + (i + 1));
 		}
 
 		products = new JList<String>(data);
@@ -45,8 +45,8 @@ public class SalesPanel extends AvalonPanel {
 
 	protected void makePopup(int i) {
 		if (i > -1) {
-			String value = JOptionPane.showInputDialog(null, "Set Price for "
-					+ names[i], productData.get(i).get("price"));
+			String value = JOptionPane.showInputDialog(null, "Preis für "
+					+ names[i] + " setzen", productData.get(i).get("price"));
 			int price = new Double(value).intValue();
 			GuiManager
 					.sharedInstance()
@@ -59,15 +59,15 @@ public class SalesPanel extends AvalonPanel {
 	@Override
 	protected void fill() {
 		productData = GuiManager.sharedInstance().getDs().getProducts();
-		setBorder(new TitledBorder("Sales(Fixcosts: "
+		setBorder(new TitledBorder("Vertrieb(Fixkosten: "
 				+ GuiManager.sharedInstance().getDs()
 						.getDepartmentFixcosts("sales") + ")"));
 
 		names = new String[productData.size()];
 		for (int i = 0; i < names.length; i++) {
 			names[i] = productData.get(i).get("name") + " (Level "
-					+ productData.get(i).get("level") + ", Price: "
-					+ productData.get(i).get("price") + ", Amount on Stock: "
+					+ productData.get(i).get("level") + ", Preis: "
+					+ productData.get(i).get("price") + ", Anzahl auf Lager: "
 					+ productData.get(i).get("amount") + ")";
 		}
 		products.setListData(names);
