@@ -26,8 +26,8 @@ public class CompanyPanel extends AvalonPanel {
 		DecimalFormat df = (DecimalFormat) NumberFormat
 				.getInstance(Locale.GERMANY);
 		DataSnapshot ds = GuiManager.sharedInstance().getDs();
-		String infoString = "<html><ul><li>Money: " + df.format(ds.getMoney())
-				+ "</li>";
+		String infoString = "<html><ul><li>Kontostand: "
+				+ df.format(ds.getMoney()) + "</li>";
 		infoString += "<li>Gewinn: " + df.format(ds.getProfit()) + "</li>";
 		infoString += "<li>Umsatz: " + df.format(ds.getRevenue()) + "</li>";
 		infoString += "<li>Gesamtkosten: " + df.format(ds.getTotalCosts())
