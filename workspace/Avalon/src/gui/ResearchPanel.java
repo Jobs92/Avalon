@@ -33,7 +33,7 @@ public class ResearchPanel extends AvalonPanel {
 	private AvalonButton downgradeButton = new AvalonButton("Downgrade");
 	private ArrayList<Dictionary<String, String>> campaigns = new ArrayList<Dictionary<String, String>>();
 	private JLabel labelPatentLevelNumber;
-	private AvalonButton releaseButton = new AvalonButton("Neues Produkt veröffentlichen");
+	private AvalonButton releaseButton = new AvalonButton("Neues Produkt");
 	private JPanel southPanel;
 
 	public ResearchPanel() {
@@ -220,16 +220,16 @@ public class ResearchPanel extends AvalonPanel {
 
 	@Override
 	protected void fill() {
-		labelPatentLevelNumber.setText(String.valueOf(GuiManager
+		labelPatentLevelNumber.setText("<html><p>"+String.valueOf(GuiManager
 				.sharedInstance().getDs().getPatentLevel())
-				+ ", Productlevel: "
+				+ "<br>Produktlevel: "
 				+ String.valueOf(GuiManager.sharedInstance().getDs()
 						.getResearchLevel())
-				+ ", Forschungslevel: "
+				+ "<br>Forschungslevel: "
 				+ String.valueOf(GuiManager.sharedInstance().getDs()
 						.getResearchLevel()
 						+ GuiManager.sharedInstance().getDs()
-								.getNotAppliedLevels()));
+								.getNotAppliedLevels())+"</p></html>");
 		upgradeButton.setEnabled(true);
 		downgradeButton.setEnabled(true);
 		releaseButton.setEnabled(true);
