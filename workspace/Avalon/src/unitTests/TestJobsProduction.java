@@ -14,7 +14,7 @@ import config.Config;
 public class TestJobsProduction {
 	private Company company1;
 	private Company company2;
-	private Company company3;
+
 	private GameManager gameManager;
 
 	@Before
@@ -26,7 +26,6 @@ public class TestJobsProduction {
 	public void createCompanies() {
 		company1 = new Company("1");
 		company2 = new Company("2");
-		company3 = new Company("3");
 	}
 	
 	@Before

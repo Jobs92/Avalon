@@ -22,7 +22,6 @@ import company.Company;
 public class TestEvents {
 	private EventManager evManager;
 	private ArrayList<EventTrigger> triggedGroupEvents;
-	private ArrayList<EventTrigger> triggedSingleEvents;
 	private ArrayList<EventTrigger> delayedGroupEvents;
 	private Company comp;
 
@@ -37,7 +36,6 @@ public class TestEvents {
 		evManager.createEvents();
 		triggedGroupEvents=new ArrayList<EventTrigger>();
 		delayedGroupEvents=new ArrayList<EventTrigger>();
-		triggedSingleEvents=new ArrayList<EventTrigger>();	
 		comp=new Company();
 		GameManager.sharedInstance().addPlayer(comp);
 	
