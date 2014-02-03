@@ -71,9 +71,8 @@ public class ExplicitSpyingCampaign extends ExplicitResearchCampaign {
 		System.out.println("Class: " + this.getClass()
 				+ ". Send message to spied Player.");
 		message = new Message();
-		message.setTitle("Sie wurden ausspioniert!");
-		message.setMessage("Sie wurden ausspioniert! Sie sollten "
-				+ c.getName() + " verklagen!");
+		message.setTitle(c.getName() + " spioniert Sie nach Medienberichten aus!");
+		message.setMessage(c.getName() + " spioniert Sie nach Medienberichten aus!");
 		message.setTargetPlayer(getSpiedPlayer());
 		Market.sharedInstance().sendMessage(message);
 	}
