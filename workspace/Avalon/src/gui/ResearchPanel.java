@@ -80,7 +80,6 @@ public class ResearchPanel extends AvalonPanel {
 		releaseButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				releaseButton.setEnabled(false);
 				makeReleasePopup();
 			}
 		});
@@ -97,7 +96,10 @@ public class ResearchPanel extends AvalonPanel {
 	protected void makeReleasePopup() {
 		String name = JOptionPane.showInputDialog(this,
 				"Neues Produkt veröffentlichen. Bitte Namen wählen.");
-		GuiManager.sharedInstance().getApi().release(name);
+		if (!name.equalsIgnoreCase("")) {
+			releaseButton.setEnabled(false);
+			GuiManager.sharedInstance().getApi().release(name);
+		}
 	}
 
 	private void initResearchCampainPanel() {
