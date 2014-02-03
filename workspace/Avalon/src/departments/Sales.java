@@ -44,7 +44,7 @@ public class Sales  extends Department{
 				m.setTitle("Preis zu hoch!");
 				m.setType(Message.GAME);
 				m.setTargetPlayer(company.getId());
-				m.setMessage("Sales-Experten raten von einem Preis über " + Config.getMaxPrice() +  "ab!");
+				m.setMessage("Sales-Experten raten von einem Preis über " + Config.getMaxPrice() +  " ab!");
 				Market.sharedInstance().sendMessage(m);
 			}
 			

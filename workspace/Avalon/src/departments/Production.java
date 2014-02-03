@@ -22,6 +22,10 @@ public class Production extends Department {
 		updateFixcost();
 	}
 	
+	public void setCapacity(int x){
+		capacity = x;
+	}
+	
 	public int getLevel() {
 		return level;
 	}

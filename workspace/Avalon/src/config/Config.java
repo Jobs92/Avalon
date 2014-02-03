@@ -244,7 +244,7 @@ public class Config {
 					.getProperty("successprobabilitySpying"));
 			levelSpying = Integer.parseInt(prop.getProperty("levelSpying"));
 			
-			maxPrice = Double.parseDouble(prop.getProperty("maxLevel"));
+			maxPrice = Double.parseDouble(prop.getProperty("maxPrice"));
 
 			// Marketing
 			costsUpgradeMarketing = Integer.parseInt(prop

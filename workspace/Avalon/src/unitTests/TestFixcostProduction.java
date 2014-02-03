@@ -107,6 +107,7 @@ public class TestFixcostProduction {
 	
 	//Mit Ausschuss
 	company.getWarehouse().addResources(100000, 90);
+	company.getProduction().setCapacity(1000000);
 	company.getProduction().produce(1, 100000);
 	company.getProduction().simulate();
 	assertEquals(90000, company.getWarehouse().getTotalAmountProducts(),300.0);
