@@ -85,7 +85,7 @@ public class LoginFrame extends JFrame {
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
 
-		JLabel lblNickname = new JLabel("Companyname:");
+		JLabel lblNickname = new JLabel("Name:");
 		lblNickname.setBounds(10, 45, 99, 14);
 		contentPane.add(lblNickname);
 
