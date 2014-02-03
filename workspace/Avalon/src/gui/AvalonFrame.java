@@ -107,6 +107,7 @@ public class AvalonFrame extends JFrame {
 			} else {
 				c = new Color(81, 168, 225);
 			}
+			c = Color.WHITE;
 			panel.setBackground(c);
 			gamePanel.add(panel);
 		}
@@ -164,6 +165,8 @@ public class AvalonFrame extends JFrame {
 		default:
 			break;
 		}
+		int year = 2007 + round/4;
+		s+=" "+year;
 		nextRoundButton.setEnabled(true);
 		roundLabel.setText(s);
 		for (AvalonPanel p : panels) {

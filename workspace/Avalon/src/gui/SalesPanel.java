@@ -47,11 +47,12 @@ public class SalesPanel extends AvalonPanel {
 		if (i > -1) {
 			String value = JOptionPane.showInputDialog(null, "Set Price for "
 					+ names[i], productData.get(i).get("price"));
+			int price = new Double(value).intValue();
 			GuiManager
 					.sharedInstance()
 					.getApi()
 					.setPrice(Integer.valueOf(productData.get(i).get("level")),
-							Integer.valueOf(value));
+							price);
 		}
 	}
 
