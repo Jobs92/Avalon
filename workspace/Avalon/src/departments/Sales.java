@@ -106,14 +106,17 @@ public class Sales  extends Department{
 	}
 	
 	public void sendQuarterlyReport(){
-		if (getAmountSoldProductsCurrentRound() != 0){
+		if (GameManager.sharedInstance().getRound() > 0){
 			String message = "Verkaufte Smartphones in diesem Quartal: \n";
-			for (SalesHistory sH : salesHistory) {
-				if (sH.getRound() == GameManager.sharedInstance().getRound() && sH.getAmount() != 0){
-					message += sH.getAmount() + "x " + company.getWarehouse().getSingleProduct(sH.getLevel()).getName() + "\n";
+			if (getAmountSoldProductsCurrentRound() != 0){
+				for (SalesHistory sH : salesHistory) {
+					if (sH.getRound() == GameManager.sharedInstance().getRound() && sH.getAmount() != 0){
+						message += sH.getAmount() + "x " + company.getWarehouse().getSingleProduct(sH.getLevel()).getName() + "\n";
+					}
 				}
+			}else{
+				message += "Es wurden keine Produkte verkauft.";
 			}
-			
 			Message m = new Message();
 			m.setTitle("Sales Quartalsbericht");
 			m.setType(Message.GAME);

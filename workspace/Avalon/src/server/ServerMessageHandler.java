@@ -38,93 +38,95 @@ public class ServerMessageHandler {
 	 * @param sender
 	 */
 	public void handleMessage(String txt, Connection sender) {
-		System.out.println("ServerHandler handlet: " + txt);
-		if (txt.startsWith("NAME")){
-			setName(sender, txt.substring("NAME ".length()));
-		}
-		if(txt.startsWith("CHAT")){
-		 String s = "CHAT " + sender.getCompany().getId() + sender.getCompany().getName() + ": " + txt.substring("CHAT ".length());
-		 sendChat(s);
-		}
-		if (txt.startsWith("READY")){
-			isReady(sender);
-		}
-		if (txt.startsWith("STARTGAME")){
-			broadcast("GAMESTARTED");
-			startGame();
-		}
-		if (txt.startsWith("UPGRADEMARKETING")){
-			upgradeMarketing(sender);
-		}
-		if (txt.startsWith("DOWNGRADEMARKETING")){
-			downgradeMarketing(sender);
-		}
-		if (txt.startsWith("STARTMARKETINGCAMPAIGN ")){
-			int campaign = Integer.parseInt(txt.substring("STARTMARKETINGCAMPAIGN ".length()));
-			startMarketingCampaign(sender, campaign);
-		}
-		if (txt.startsWith("BUY ")){
-			String[] split = txt.substring("BUY ".length()).split("#");
-			int supplierId = Integer.parseInt(split[0]);
-			int amount = Integer.parseInt(split[1]);
-			buyRessources(sender, supplierId, amount);
-		}
-		if (txt.startsWith("UPGRADEPRODUCTION")){
-			upgradeProduction(sender);
-		}
-		if (txt.startsWith("DOWNGRADEPRODUCTION")){
-			downgradeProduction(sender);
-		}
-		if (txt.startsWith("PRODUCE ")){
-			int amount = Integer.parseInt(txt.substring("PRODUCE ".length()));
-			produce(sender, amount);
-		}
-		if (txt.startsWith("STARTRESEARCHCAMPAIGN")){
-			int campaign = Integer.parseInt(txt.substring("STARTRESEARCHCAMPAIGN ".length()));
-			startResearchCampaign(sender, campaign);
-		}
-		if (txt.startsWith("UPGRADERESEARCH")){
-			upgradeResearch(sender);
-		}
-		if (txt.startsWith("DOWNGRADERESEARCH")){
-			downgradeResearch(sender);
-		}
-		if (txt.startsWith("PATENT")){
-			patent(sender);
-		}
-		if (txt.startsWith("RELEASE")){
-			String name = txt.substring("RELEASE ".length());
-			release(sender, name);
-		}
-		if (txt.startsWith("SPY ")){
-			int opponent = Integer.parseInt(txt.substring("SPY ".length()));
-			spy(sender, opponent);
-		}
-		if (txt.startsWith("PRICE ")){
-			String[] split = txt.substring("PRICE ".length()).split("#");
-			int level = Integer.parseInt(split[0]);
-			int price = Integer.parseInt(split[1]);
-			setPrice(sender, level, price);
-		}
-		if (txt.startsWith("CHECK ")){
-			int opponent = Integer.parseInt(txt.substring("CHECK ".length()));
-			check(sender, opponent);
-		}
-		if (txt.startsWith("SUE ")){
-			int opponent = Integer.parseInt(txt.substring("SUE ".length()));
-			sue(sender, opponent);
-		}
-		if (txt.startsWith("PAYAMOUNT ")){
-			payAmount(sender);
-		}
-		if (txt.startsWith("ABANDONLAWSUIT")){
-			abandonLawsuit(sender);
-		}
-		if (txt.startsWith("DOWNGRADELEGALDEPARTMENT")){
-			downgradeLegalDepartment(sender);
-		}
-		if (txt.startsWith("UPGRADELEGALDEPARTMENT")){
-			upgradeLegalDepartment(sender);
+		if (!GameManager.sharedInstance().gameFinished()){
+			System.out.println("ServerHandler handlet: " + txt);
+			if (txt.startsWith("NAME")){
+				setName(sender, txt.substring("NAME ".length()));
+			}
+			if(txt.startsWith("CHAT")){
+			 String s = "CHAT " + sender.getCompany().getId() + sender.getCompany().getName() + ": " + txt.substring("CHAT ".length());
+			 sendChat(s);
+			}
+			if (txt.startsWith("READY")){
+				isReady(sender);
+			}
+			if (txt.startsWith("STARTGAME")){
+				broadcast("GAMESTARTED");
+				startGame();
+			}
+			if (txt.startsWith("UPGRADEMARKETING")){
+				upgradeMarketing(sender);
+			}
+			if (txt.startsWith("DOWNGRADEMARKETING")){
+				downgradeMarketing(sender);
+			}
+			if (txt.startsWith("STARTMARKETINGCAMPAIGN ")){
+				int campaign = Integer.parseInt(txt.substring("STARTMARKETINGCAMPAIGN ".length()));
+				startMarketingCampaign(sender, campaign);
+			}
+			if (txt.startsWith("BUY ")){
+				String[] split = txt.substring("BUY ".length()).split("#");
+				int supplierId = Integer.parseInt(split[0]);
+				int amount = Integer.parseInt(split[1]);
+				buyRessources(sender, supplierId, amount);
+			}
+			if (txt.startsWith("UPGRADEPRODUCTION")){
+				upgradeProduction(sender);
+			}
+			if (txt.startsWith("DOWNGRADEPRODUCTION")){
+				downgradeProduction(sender);
+			}
+			if (txt.startsWith("PRODUCE ")){
+				int amount = Integer.parseInt(txt.substring("PRODUCE ".length()));
+				produce(sender, amount);
+			}
+			if (txt.startsWith("STARTRESEARCHCAMPAIGN")){
+				int campaign = Integer.parseInt(txt.substring("STARTRESEARCHCAMPAIGN ".length()));
+				startResearchCampaign(sender, campaign);
+			}
+			if (txt.startsWith("UPGRADERESEARCH")){
+				upgradeResearch(sender);
+			}
+			if (txt.startsWith("DOWNGRADERESEARCH")){
+				downgradeResearch(sender);
+			}
+			if (txt.startsWith("PATENT")){
+				patent(sender);
+			}
+			if (txt.startsWith("RELEASE")){
+				String name = txt.substring("RELEASE ".length());
+				release(sender, name);
+			}
+			if (txt.startsWith("SPY ")){
+				int opponent = Integer.parseInt(txt.substring("SPY ".length()));
+				spy(sender, opponent);
+			}
+			if (txt.startsWith("PRICE ")){
+				String[] split = txt.substring("PRICE ".length()).split("#");
+				int level = Integer.parseInt(split[0]);
+				int price = Integer.parseInt(split[1]);
+				setPrice(sender, level, price);
+			}
+			if (txt.startsWith("CHECK ")){
+				int opponent = Integer.parseInt(txt.substring("CHECK ".length()));
+				check(sender, opponent);
+			}
+			if (txt.startsWith("SUE ")){
+				int opponent = Integer.parseInt(txt.substring("SUE ".length()));
+				sue(sender, opponent);
+			}
+			if (txt.startsWith("PAYAMOUNT ")){
+				payAmount(sender);
+			}
+			if (txt.startsWith("ABANDONLAWSUIT")){
+				abandonLawsuit(sender);
+			}
+			if (txt.startsWith("DOWNGRADELEGALDEPARTMENT")){
+				downgradeLegalDepartment(sender);
+			}
+			if (txt.startsWith("UPGRADELEGALDEPARTMENT")){
+				upgradeLegalDepartment(sender);
+			}
 		}
 	}
 	

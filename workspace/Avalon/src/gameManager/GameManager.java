@@ -147,6 +147,13 @@ public class GameManager {
 		
 		Market.sharedInstance().informPlayers();
 	}
+	
+	public boolean gameFinished(){
+		if (winner != null){
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * @return
