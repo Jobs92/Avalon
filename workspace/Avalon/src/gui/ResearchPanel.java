@@ -128,8 +128,6 @@ public class ResearchPanel extends AvalonPanel {
 	}
 
 	private void initPatentLevelPanel() {
-
-		JLabel labelPatentLevel = new JLabel("Patentlevel : ");
 		labelPatentLevelNumber = new JLabel("0");
 		AvalonButton orderPatent = new AvalonButton("Patentieren");
 
@@ -148,8 +146,6 @@ public class ResearchPanel extends AvalonPanel {
 				}
 			}
 		});
-
-		patentPanel.add(labelPatentLevel);
 		patentPanel.add(labelPatentLevelNumber);
 		patentPanel.add(orderPatent);
 	}
@@ -209,8 +205,8 @@ public class ResearchPanel extends AvalonPanel {
 				null,
 				"Willst du wirklich die Forschungsabteilung für "
 						+ GuiManager.sharedInstance().getDs()
-								.getUpgradeCosts("research") + " upgraden?", "Upgrade",
-				JOptionPane.YES_NO_OPTION);
+								.getUpgradeCosts("research") + " upgraden?",
+				"Upgrade", JOptionPane.YES_NO_OPTION);
 		if (accepted == 0) {
 			upgradeButton.setEnabled(false);
 			// accepted
@@ -220,8 +216,9 @@ public class ResearchPanel extends AvalonPanel {
 
 	@Override
 	protected void fill() {
-		labelPatentLevelNumber.setText("<html><p>"+String.valueOf(GuiManager
-				.sharedInstance().getDs().getPatentLevel())
+		labelPatentLevelNumber.setText("<html><p>Patentlevel: "
+				+ String.valueOf(GuiManager.sharedInstance().getDs()
+						.getPatentLevel())
 				+ "<br>Produktlevel: "
 				+ String.valueOf(GuiManager.sharedInstance().getDs()
 						.getResearchLevel())
@@ -229,7 +226,7 @@ public class ResearchPanel extends AvalonPanel {
 				+ String.valueOf(GuiManager.sharedInstance().getDs()
 						.getResearchLevel()
 						+ GuiManager.sharedInstance().getDs()
-								.getNotAppliedLevels())+"</p></html>");
+								.getNotAppliedLevels()) + "</p></html>");
 		upgradeButton.setEnabled(true);
 		downgradeButton.setEnabled(true);
 		releaseButton.setEnabled(true);
