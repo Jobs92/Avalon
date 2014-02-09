@@ -3,8 +3,8 @@ package departments;
 import java.util.ArrayList;
 
 import market.Market;
-import otherclasses.ProductionJobs;
-import otherclasses.Resources;
+import otherclasses.ProductionJob;
+import otherclasses.Resource;
 import company.Company;
 import config.Config;
 import utils.Message;
@@ -12,11 +12,11 @@ import utils.Message;
 public class Production extends Department {
 	private int level;
 	private int capacity;
-	private ArrayList<otherclasses.ProductionJobs> allProductionJobs;
+	private ArrayList<otherclasses.ProductionJob> allProductionJobs;
 	
 	public Production(Company company){
 		super(company);
-		allProductionJobs = new ArrayList<otherclasses.ProductionJobs>();
+		allProductionJobs = new ArrayList<otherclasses.ProductionJob>();
 		level = 1;
 		capacity=config.Config.getProductionCapacity();
 		updateFixcost();
@@ -37,13 +37,13 @@ public class Production extends Department {
 	@Override
 	public void simulate() {
 		super.payFixcosts();
-		for (ProductionJobs job : allProductionJobs) {
+		for (ProductionJob job : allProductionJobs) {
 			if (!job.isCompleted()){
 				
 				int defectiveGoods = 0;
 				for (int i = 0; i < job.getAmount(); i++) {
 					if (company.changeMoney((-1)*Config.getProductionVariableCosts())){
-						Resources r = company.getWarehouse().getResource();
+						Resource r = company.getWarehouse().getResource();
 						if (utils.Probability.propability(r.getQuality())){
 							company.getWarehouse().getSingleProduct(job.getLevel()).changeAmount(1);
 						} else{
@@ -108,14 +108,14 @@ public class Production extends Department {
 				amount = company.getWarehouse().getAmountResources() - countAlreadyNeededRessources();
 			}
 					
-			ProductionJobs job = new ProductionJobs(level, amount);
+			ProductionJob job = new ProductionJob(level, amount);
 			allProductionJobs.add(job);
 		}
 	}
 
 	private int countAlreadyNeededRessources() {
 		int amount = 0;
-		for (ProductionJobs job : allProductionJobs) {
+		for (ProductionJob job : allProductionJobs) {
 			if (!job.isCompleted()){
 				amount+=job.getAmount();
 			}

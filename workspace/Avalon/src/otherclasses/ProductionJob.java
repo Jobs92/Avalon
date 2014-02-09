@@ -1,12 +1,12 @@
 package otherclasses;
 		
 
-public class ProductionJobs {
+public class ProductionJob {
 	private int level;
 	private int amount;
 	private boolean completed;
 	
-	public ProductionJobs (int level, int amount){
+	public ProductionJob (int level, int amount){
 		this.level = level;
 		this.amount = amount;
 	}

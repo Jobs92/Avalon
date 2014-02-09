@@ -2,7 +2,7 @@ package departments;
 
 import java.util.ArrayList;
 
-import otherclasses.Resources;
+import otherclasses.Resource;
 import product.Product;
 import company.Company;
 import config.Config;
@@ -10,12 +10,12 @@ import config.Config;
 public class Warehouse extends Department {
 
 	private ArrayList<product.Product> products;
-	private ArrayList<otherclasses.Resources> resources;
+	private ArrayList<otherclasses.Resource> resources;
 
 	public Warehouse(Company company) {
 		super(company);
 		products = new ArrayList<product.Product>();
-		resources = new ArrayList<otherclasses.Resources>();
+		resources = new ArrayList<otherclasses.Resource>();
 		initialize();
 	}
 
@@ -27,14 +27,14 @@ public class Warehouse extends Department {
 
 	public int getAmountResources() {
 		int amount = 0;
-		for (Resources r : resources) {
+		for (Resource r : resources) {
 			amount += r.getAmount();
 		}
 		return amount;
 	}
 
-	public Resources getResource() {
-		Resources r = resources.get(resources.size() - 1);
+	public Resource getResource() {
+		Resource r = resources.get(resources.size() - 1);
 		r.useResource();
 		if (r.getAmount()== 0){
 			resources.remove(r);
@@ -43,7 +43,7 @@ public class Warehouse extends Department {
 	}
 
 	public void addResources(int amount, int quality) {
-		resources.add(new Resources(quality, amount));
+		resources.add(new Resource(quality, amount));
 	}
 
 	public ArrayList<product.Product> getProducts() {

@@ -4,12 +4,12 @@ package otherclasses;
  * @author Frederik
  * Manages the Resources of a single order.
  */
-public class Resources {
+public class Resource {
 
 	private int quality;
 	private int amount;
 
-	public Resources(int quality, int amount) {
+	public Resource(int quality, int amount) {
 		this.quality = quality;
 		this.amount = amount;
 	}
