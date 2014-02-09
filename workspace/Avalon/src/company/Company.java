@@ -33,7 +33,7 @@ public class Company {
 
 	private ArrayList<Department> departments;
 	private int id;
-	
+
 	private double costsThisRound;
 	private double revenues;
 
@@ -81,13 +81,13 @@ public class Company {
 	public void setActive(boolean b) {
 		active = b;
 	}
-	
-	public Company(String name){
+
+	public Company(String name) {
 		this.name = name;
 		initialize();
 	}
-	
-	private void initialize(){
+
+	private void initialize() {
 		GameManager.sharedInstance();
 		active = true;
 		money = Config.getCompanyStartMoney();
@@ -109,8 +109,8 @@ public class Company {
 	}
 
 	public void insolvency() {
-		if (active){
-	
+		if (active) {
+
 			// Inform Playder
 			Message m = new Message();
 			m.setTitle("Insolvenz");
@@ -118,10 +118,10 @@ public class Company {
 			m.setTargetPlayer(id);
 			m.setMessage("Sie haben nicht genügend liquide Mittel um ihre Verbindlichkeiten zu begleichen. Sie sind insolvent.");
 			Market.sharedInstance().sendMessage(m);
-			
+
 			active = false;
 			money = 0;
-			
+
 			Market.sharedInstance().handleInsolvency(this);
 		}
 	}
@@ -160,12 +160,12 @@ public class Company {
 	}
 
 	public boolean changeMoney(double value) {
-		if (value <0){
-			if (value * (-1) > this.money){
+		if (value < 0) {
+			if (value * (-1) > this.money) {
 				return false;
 			}
-			costsThisRound += (-1)*value;
-		}else{
+			costsThisRound += (-1) * value;
+		} else {
 			System.out.println(name + "Einnahmen: " + value);
 			revenues += value;
 		}
@@ -211,21 +211,22 @@ public class Company {
 	}
 
 	public void handleNextRound() {
-		
-		//Sales Quarterly Report
+
+		// Sales Quarterly Report
 		getSales().sendQuarterlyReport();
-		
+
 		DataSnapshot snapshot = new DataSnapshot();
 
 		// Fill DataSnapshot object with data
-		
-		//Company Data
+
+		// Company Data
 		snapshot.setCompanyName(this.name);
 		snapshot.setMoney(this.money);
 		snapshot.setRevenue(revenues);
 		snapshot.setTotalCosts(costsThisRound);
-		snapshot.setProfit(revenues-costsThisRound);
-		snapshot.setSoldSmartphones(this.getSales().getAmountSoldProductsCurrentRound());
+		snapshot.setProfit(revenues - costsThisRound);
+		snapshot.setSoldSmartphones(this.getSales()
+				.getAmountSoldProductsCurrentRound());
 		snapshot.setImage(this.popularity);
 		snapshot.setFixCosts(calcFixcosts());
 		snapshot.setHighestProductLevel(getWarehouse().getHighestProduct()
@@ -233,14 +234,14 @@ public class Company {
 		snapshot.setProductsOnStock(getWarehouse().getTotalAmountProducts());
 		snapshot.setHighestProductName(getWarehouse().getHighestProduct()
 				.getName());
-		
-		//Generell
+
+		// Generell
 		snapshot.setRound(GameManager.sharedInstance().getRound());
 		snapshot.setPatentLevel(this.getResearch().getPatentLevel());
-		
+
 		snapshot.setNotAppliedLevels(this.getResearch().getNotAppliedLevels());
 		snapshot.setResearchLevel(getResearch().getResearchLevel());
-		
+
 		snapshot.setCapacity(this.getProduction().getCapacity());
 
 		// Department Fixcosts
@@ -300,8 +301,9 @@ public class Company {
 		Lawsuit l;
 		if ((l = this.getLegaldepartment().getCurrentLawsuit()) != null) {
 			snapshot.setLawsuit(l.getClaimant().getCompany().getName(), l
-					.getDefendant().getCompany().getName(), l.getDuration(),
-					l.getAmount(), l.getCosts(), this.getLegaldepartment().isClaimant());
+					.getDefendant().getCompany().getName(), l.getDuration(), l
+					.getAmount(), l.getCosts(), this.getLegaldepartment()
+					.isClaimant());
 		}
 
 		// MarketingCampaigns
@@ -336,9 +338,10 @@ public class Company {
 
 		// Production
 		snapshot.setResources(getWarehouse().getAmountResources());
-		
-		if (connection != null) connection.sendSnapshot(snapshot);
-		
+
+		if (connection != null)
+			connection.sendSnapshot(snapshot);
+
 		revenues = 0;
 		costsThisRound = 0;
 	}

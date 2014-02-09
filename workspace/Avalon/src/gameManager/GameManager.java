@@ -11,8 +11,8 @@ import market.ConsumerGroup;
 import market.Market;
 
 /**
- * @author Frederik
- * Ensures the turn-based process of the game. Starts and ends the game.
+ * @author Frederik Ensures the turn-based process of the game. Starts and ends
+ *         the game.
  */
 public class GameManager {
 	private int round = 0;
@@ -24,13 +24,12 @@ public class GameManager {
 
 	private GameManager() {
 		Config.loadConfig();
-		 market = Market.sharedInstance();
-		 eventManager = EventManager.sharedInstance();
+		market = Market.sharedInstance();
+		eventManager = EventManager.sharedInstance();
 	}
 
 	/**
-	 * @return
-	 * returns the single GameManager object (Singleton)
+	 * @return returns the single GameManager object (Singleton)
 	 */
 	public static GameManager sharedInstance() {
 		if (GameManager.sharedInstance == null) {
@@ -64,27 +63,30 @@ public class GameManager {
 					Config.getSupplierQuality()[i], Config.getSupplierName()[i]);
 			market.addSupplier(s);
 		}
-		
+
 		// Generate ConsumerGroups
-				int amountConsumerGroups = Math.min(
-						Config.getConsumerGroupImage().length,
-						Math.min(Config.getConsumerGroupPrice().length,Math.min(Config.getConsumerGroupSize().length,
+		int amountConsumerGroups = Math.min(
+				Config.getConsumerGroupImage().length,
+				Math.min(
+						Config.getConsumerGroupPrice().length,
+						Math.min(Config.getConsumerGroupSize().length,
 								Config.getConsumerGroupQuality().length)));
-				for (int i = 0; i < amountConsumerGroups; i++) {
-					ConsumerGroup cg = new ConsumerGroup(Config.getConsumerGroupImage()[i],
-														Config.getConsumerGroupPrice()[i], 
-														Config.getConsumerGroupQuality()[i],  
-														Config.getConsumerGroupSize()[i]);
-					market.addConsumerGroup(cg);
-				}
-				
+		for (int i = 0; i < amountConsumerGroups; i++) {
+			ConsumerGroup cg = new ConsumerGroup(
+					Config.getConsumerGroupImage()[i],
+					Config.getConsumerGroupPrice()[i],
+					Config.getConsumerGroupQuality()[i],
+					Config.getConsumerGroupSize()[i]);
+			market.addConsumerGroup(cg);
+		}
+
 		// Generate Business Events
 		eventManager.createEvents();
-
 	}
 
 	/**
-	 * Starts the next round and informs the payers. Waits until all players are ready.
+	 * Starts the next round and informs the payers. Waits until all players are
+	 * ready.
 	 */
 	public void nextRound() {
 		market.informPlayers();
@@ -94,8 +96,8 @@ public class GameManager {
 	}
 
 	/**
-	 * Simulates a round by simulating the market, all company activities and the random events.
-	 * Checks if there is a winner.
+	 * Simulates a round by simulating the market, all company activities and
+	 * the random events. Checks if there is a winner.
 	 */
 	private void simulate() {
 
@@ -106,10 +108,10 @@ public class GameManager {
 		market.simulateMarket();
 
 		// Events are simulated
-		if (round > 2){
+		if (round > 2) {
 			eventManager.simEvents();
 		}
-		
+
 		// Check for winner
 		if (!checkWinner()) {
 			// no winner --> next round is started
@@ -121,8 +123,8 @@ public class GameManager {
 	}
 
 	/**
-	 * When a player is ready, it is checked whether all players are ready. If they are, the next round
-	 * is started. If not, the game is still waiting.
+	 * When a player is ready, it is checked whether all players are ready. If
+	 * they are, the next round is started. If not, the game is still waiting.
 	 */
 	public void informReady() {
 		ArrayList<Company> player = market.getCompanies();
@@ -137,27 +139,27 @@ public class GameManager {
 
 	private void endGame() {
 		active = false;
-		
-		//Inform Player
+
+		// Inform Player
 		Message m = new Message();
 		m.setTitle("Spiel beendet");
 		m.setType(Message.BROADCAST);
-		m.setMessage(winner.getName() + " hat mindestens " + Config.getAmountWin() + "$ und damit das Spiel gewonnen.");
+		m.setMessage(winner.getName() + " hat mindestens "
+				+ Config.getAmountWin() + "$ und damit das Spiel gewonnen.");
 		Market.sharedInstance().sendMessage(m);
-		
+
 		Market.sharedInstance().informPlayers();
 	}
-	
-	public boolean gameFinished(){
-		if (winner != null){
+
+	public boolean gameFinished() {
+		if (winner != null) {
 			return true;
 		}
 		return false;
 	}
 
 	/**
-	 * @return
-	 * If there is a winner, it it returned true, else false.
+	 * @return If there is a winner, it it returned true, else false.
 	 */
 	private boolean checkWinner() {
 		int neededAmount = Config.getAmountWin();
