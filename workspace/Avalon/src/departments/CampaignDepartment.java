@@ -97,11 +97,14 @@ public abstract class CampaignDepartment extends Department implements
 		}
 	}
 
-	public void downgrade() {
+	@Override
+	public boolean downgrade() {
 		if (level > 1) {
 			level--;
 			updateFixcost();
+			return true;
 		}
+		return false;
 	}
 
 	protected abstract void updateFixcost();

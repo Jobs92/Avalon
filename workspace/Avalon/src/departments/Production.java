@@ -154,11 +154,14 @@ public class Production extends Department implements Upgradable {
 		return false;
 	}
 
-	public void downgrade() {
+	@Override
+	public boolean downgrade() {
 		if (level > 1) {
 			level--;
 			updateFixcost();
+			return true;
 		}
+		return false;
 	}
 
 	public void updateFixcost() {
