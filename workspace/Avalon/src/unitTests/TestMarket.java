@@ -52,23 +52,6 @@ public class TestMarket {
 		
 		
 	}
-	public void testConsumerGroups() {
-		int amountConsumerGroups = Math.min(
-				Config.getConsumerGroupImage().length,
-				Math.min(Config.getConsumerGroupPrice().length,Math.min(Config.getConsumerGroupSize().length,
-						Config.getConsumerGroupQuality().length)));
-		for (int i = 0; i < amountConsumerGroups; i++) {
-			ConsumerGroup cg = new ConsumerGroup(Config.getConsumerGroupImage()[i],
-												Config.getConsumerGroupPrice()[i], 
-												Config.getConsumerGroupQuality()[i],  
-												Config.getConsumerGroupSize()[i]);
-			Market.sharedInstance().addConsumerGroup(cg);
-		}
-		
-		
-		
-	}
-	
 
 	@After
 	public void removeInstances(){
