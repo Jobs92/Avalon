@@ -210,7 +210,7 @@ public class ServerMessageHandler {
 	}
 
 	private void upgradeResearch(Connection sender) {
-		sender.getCompany().getResearch().upgradeDepartment();
+		sender.getCompany().getResearch().upgrade();
 	}
 	
 	private void startResearchCampaign(Connection sender, int id) {
@@ -239,7 +239,7 @@ public class ServerMessageHandler {
 	}
 
 	private void upgradeMarketing(Connection sender) {
-		sender.getCompany().getMarketing().upgradeDepartment();
+		sender.getCompany().getMarketing().upgrade();
 	}
 
 	private void isReady(Connection sender) {

@@ -32,20 +32,20 @@ public class TestCampaignDepartments {
 
 	@Test
 	public void testUpgrade() {
-		r.upgradeDepartment();
+		r.upgrade();
 		assertEquals(2, r.getLevel());
 
-		m.upgradeDepartment();
+		m.upgrade();
 		assertEquals(2, m.getLevel());
 	}
 
 	@Test
 	public void testDowngrade() {
-		r.upgradeDepartment();
+		r.upgrade();
 		r.downgrade();
 		assertEquals(1, r.getLevel());
 
-		m.upgradeDepartment();
+		m.upgrade();
 		m.downgrade();
 		assertEquals(1, m.getLevel());
 	}
@@ -60,8 +60,8 @@ public class TestCampaignDepartments {
 	public void testUpgradeWhenLevelIsMax() {
 		c.changeMoney(1000000000);
 		for (int i = 0; i < 11; i++) {
-			m.upgradeDepartment();
-			r.upgradeDepartment();
+			m.upgrade();
+			r.upgrade();
 		}
 		assertEquals(Config.getMaxLevelResearch(), r.getLevel());
 		assertEquals(Config.getMaxLevelMarketing(), m.getLevel());

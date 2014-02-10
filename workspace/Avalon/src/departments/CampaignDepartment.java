@@ -15,7 +15,8 @@ import campaigns.ExplicitCampaign;
  * @author Martin
  * 
  */
-public abstract class CampaignDepartment extends Department {
+public abstract class CampaignDepartment extends Department implements
+		Upgradable {
 
 	protected int level;
 	protected ArrayList<Campaign> campaigns;
@@ -78,7 +79,8 @@ public abstract class CampaignDepartment extends Department {
 		return explicitCampaigns.size();
 	}
 
-	public boolean upgradeDepartment() {
+	@Override
+	public boolean upgrade() {
 		if (isMaxLevel()) {
 			return false;
 		} else {

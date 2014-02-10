@@ -6,7 +6,7 @@ import utils.Message;
 import company.Company;
 import config.Config;
 
-public class Marketing extends CampaignDepartment {
+public class Marketing extends CampaignDepartment{
 
 	public Marketing(Company company) {
 		super(company);
