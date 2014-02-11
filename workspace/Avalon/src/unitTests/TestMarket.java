@@ -2,16 +2,11 @@ package unitTests;
 
 import static org.junit.Assert.*;
 import gameManager.GameManager;
-import market.ConsumerGroup;
 import market.Market;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import config.Config;
-
-
 
 public class TestMarket {
 	private GameManager gameManager;
