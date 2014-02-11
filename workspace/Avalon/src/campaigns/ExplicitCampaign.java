@@ -14,6 +14,7 @@ public abstract class ExplicitCampaign {
 
 	public ExplicitCampaign(Campaign campaign) {
 		this.campaign = campaign;
+		//calc endRound
 		this.endRound = GameManager.sharedInstance().getRound()
 				+ campaign.getDuration() - 1;
 		campaign.getDepartment().getCompany()
@@ -25,11 +26,15 @@ public abstract class ExplicitCampaign {
 	 * successful or not.
 	 */
 	public void simulate() {
+		//check endround
 		if (GameManager.sharedInstance().getRound() == endRound) {
+			//campaign over, test if successfull
 			active = false;
 			if (Probability.propability(campaign.getSuccessProbability())) {
+				//success
 				campaignFinishedSuccessfully();
 			} else {
+				//failed
 				campaignFailed();
 			}
 		}

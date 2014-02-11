@@ -72,6 +72,7 @@ public class Research extends CampaignDepartment {
 
 	@Override
 	protected void loadCampaigns() {
+		//load research campaigns
 		for (int i = 0; i < 3; i++) {
 			ResearchCampaign m = new ResearchCampaign(this,
 					Config.getTitleResearch()[i], Config.getCostResearch()[i],
@@ -81,6 +82,7 @@ public class Research extends CampaignDepartment {
 					Config.getDescriptionResearch()[i]);
 			addCampaign(m);
 		}
+		//load spying campaigns
 		spyingCampain = new SpyingCampaign(this, Config.getTitleSpying(),
 				Config.getCostSpying(), Config.getDurationSpying(),
 				Config.getSuccessprobabilitySpying(), Config.getLevelSpying(),

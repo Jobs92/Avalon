@@ -29,15 +29,12 @@ public class ExplicitSpyingCampaign extends ExplicitResearchCampaign {
 
 	@Override
 	public void campaignFinishedSuccessfully() {
-		System.out.println("Class: " + this.getClass()
-				+ ". SpyingCampaign finished successfully.");
 		Company c = campaign.getDepartment().getCompany();
 		Research r = (Research) campaign.getDepartment();
+		//save spying results
 		r.addSpiedLevels(campaign.getLevel());
 
 		// send message
-		System.out.println("Class: " + this.getClass()
-				+ ". Send success message to spying Player.");
 		Message message = new Message();
 		message.setTitle("Spionagekampagne erfolgreich durchgeführt.");
 		message.setMessage("Spionagekampagne \""
@@ -51,13 +48,9 @@ public class ExplicitSpyingCampaign extends ExplicitResearchCampaign {
 
 	@Override
 	public void campaignFailed() {
-		System.out.println("Class: " + this.getClass()
-				+ ". SpyingCampaign failed.");
 		Company c = campaign.getDepartment().getCompany();
 
 		// send message
-		System.out.println("Class: " + this.getClass()
-				+ ". Send failed message to spying Player.");
 		Message message = new Message();
 		message.setTitle("Spionagekampagne nicht erfolgreich durchgeführt.");
 		message.setMessage("Spionagekampagne ist aufgeflogen. Sie könnten von "
@@ -68,8 +61,6 @@ public class ExplicitSpyingCampaign extends ExplicitResearchCampaign {
 		c.addMessageToInbox(message);
 
 		// send message to spied player
-		System.out.println("Class: " + this.getClass()
-				+ ". Send message to spied Player.");
 		message = new Message();
 		message.setTitle(c.getName() + " spioniert Sie nach Medienberichten aus!");
 		message.setMessage(c.getName() + " spioniert Sie nach Medienberichten aus!");

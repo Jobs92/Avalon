@@ -12,6 +12,7 @@ public class ExplicitMarketingCampaign extends ExplicitCampaign {
 	@Override
 	public void campaignFinishedSuccessfully() {
 		Company c = campaign.getDepartment().getCompany();
+		//rise popularity of the company
 		c.addPopularity(campaign.getLevel());
 
 		// send message

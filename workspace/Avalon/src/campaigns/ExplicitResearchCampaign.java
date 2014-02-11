@@ -16,6 +16,7 @@ public class ExplicitResearchCampaign extends ExplicitCampaign {
 	public void campaignFinishedSuccessfully() {
 		Company c = campaign.getDepartment().getCompany();
 		Research r = (Research) campaign.getDepartment();
+		//save research results
 		r.addResearchedLevels(campaign.getLevel());
 
 		// send message

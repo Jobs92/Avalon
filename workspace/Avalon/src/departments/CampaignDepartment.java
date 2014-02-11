@@ -41,6 +41,7 @@ public abstract class CampaignDepartment extends Department implements
 
 	public void simulate() {
 		payFixcosts();
+		//simulate campaigns
 		for (ExplicitCampaign campaign : explicitCampaigns) {
 			if (campaign.isActive()) {
 				campaign.simulate();
@@ -63,7 +64,9 @@ public abstract class CampaignDepartment extends Department implements
 	 * @param campaign
 	 */
 	public void startCampaign(Campaign campaign) {
+		//check money
 		if (!company.changeMoney(-1 * campaign.getCost())) {
+			//not enough money
 			Message message = new Message();
 			message.setTitle("Nicht genügend Geld.");
 			message.setMessage("Kampagne \""
@@ -71,6 +74,7 @@ public abstract class CampaignDepartment extends Department implements
 					+ "\" konnte nicht gestartet werden, da zu wenig Geld vorhanden ist.");
 			campaign.getDepartment().getCompany().addMessageToInbox(message);
 		} else {
+			//enough money
 			explicitCampaigns.add((ExplicitCampaign) campaign.startCampaign());
 		}
 	}
@@ -81,10 +85,14 @@ public abstract class CampaignDepartment extends Department implements
 
 	@Override
 	public boolean upgrade() {
+		//check if upgrade is possible
 		if (isMaxLevel()) {
+			//not possible because department is already max level
 			return false;
 		} else {
+			//is possible, check money
 			if (company.changeMoney((-1) * getCostForNextLevel())) {
+				//enough money, rise probabilities of all campaigns
 				for (Campaign campaign : campaigns) {
 					campaign.updateProbability(1);
 				}
@@ -92,6 +100,7 @@ public abstract class CampaignDepartment extends Department implements
 				updateFixcost();
 				return true;
 			} else {
+				//not enough money
 				return false;
 			}
 		}
