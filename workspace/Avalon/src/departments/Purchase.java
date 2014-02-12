@@ -8,6 +8,9 @@ import utils.Message;
 import company.Company;
 import config.Config;
 
+/**
+ * @author Jonas Class of  the purchase department
+ */
 public class Purchase extends Department {
 	int amount;
 	private ArrayList<Order> orders;
@@ -22,6 +25,9 @@ public class Purchase extends Department {
 		orders.add(order);
 	}
 
+	/**
+	 * Simulate all buyings of one company
+	 */
 	@Override
 	public void simulate() {
 		super.payFixcosts();

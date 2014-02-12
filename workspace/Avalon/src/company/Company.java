@@ -21,7 +21,9 @@ import departments.Purchase;
 import departments.Research;
 import departments.Sales;
 import departments.Warehouse;
-
+/**
+ * @author Jonas Company class has the main information about one players company
+ */
 public class Company {
 	private int popularity;
 	private double money;
@@ -37,7 +39,6 @@ public class Company {
 	private double costsThisRound;
 	private double revenues;
 
-	// private ArrayList<product.Product> products;
 
 	public double getCostsThisRound() {
 		return costsThisRound;
@@ -62,13 +63,6 @@ public class Company {
 		}
 	}
 
-	// private Marketing marketing;
-	// private Research research;
-	// private Warehouse warehouse;
-	// private LegalDepartment legaldepartment;
-	// private Purchase purchase;
-	// private Sales sales;
-
 	public Company() {
 		// For Unit tests withot Client/Server Architecture
 		initialize();
@@ -87,6 +81,9 @@ public class Company {
 		initialize();
 	}
 
+	/**
+	 * Creates all departments when the game is starting
+	 */
 	private void initialize() {
 		GameManager.sharedInstance();
 		active = true;
@@ -108,6 +105,9 @@ public class Company {
 		initialize();
 	}
 
+	/**
+	 * Checks if the company is out of money
+	 */
 	public void insolvency() {
 		if (active) {
 
@@ -159,6 +159,9 @@ public class Company {
 		return this.money;
 	}
 
+	/**
+	 * @return Return true if the company has enough money
+	 */
 	public boolean changeMoney(double value) {
 		if (value < 0) {
 			if (value * (-1) > this.money) {
@@ -210,6 +213,9 @@ public class Company {
 		return this.id;
 	}
 
+	/**
+	 * Fill the datashnapshot with the current information of the company
+	 */
 	public void handleNextRound() {
 
 		// Sales Quarterly Report
