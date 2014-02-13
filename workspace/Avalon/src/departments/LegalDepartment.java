@@ -34,7 +34,7 @@ public class LegalDepartment extends Department implements Upgradable {
 	 *            started now.
 	 */
 	public void checkOpponent(Company c) {
-
+		boolean atLeastOneCampaignPatented = false;
 		// Player has do sue opponent, before he checks him again
 		if (!alreadyChecked(c)) {
 			ArrayList<ExplicitCampaign> allCampaigns = c.getResearch()
@@ -56,6 +56,9 @@ public class LegalDepartment extends Department implements Upgradable {
 										.getSpiedPlayer() == company.getId()) {
 							foundSpyingCampaigns
 									.add((ExplicitSpyingCampaign) campaign);
+							if (((ExplicitSpyingCampaign) campaign).isPatented()){
+								atLeastOneCampaignPatented = true;
+							}
 						}
 						checkedCampaigns.add(campaign);
 					} else {
@@ -77,7 +80,7 @@ public class LegalDepartment extends Department implements Upgradable {
 			if (foundSpyingCampaigns.size() != 0) {
 				double sum = Config.getCostsFoundSpyingCampaign()
 						* foundSpyingCampaigns.size();
-				Lawsuit l = new Lawsuit(this, c.getLegaldepartment(), sum);
+				Lawsuit l = new Lawsuit(this, c.getLegaldepartment(), sum, atLeastOneCampaignPatented);
 				lawsuitsAsClaimant.add(l);
 
 				Message m = new Message();

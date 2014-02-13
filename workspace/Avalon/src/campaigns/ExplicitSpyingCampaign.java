@@ -8,11 +8,21 @@ import departments.Research;
 public class ExplicitSpyingCampaign extends ExplicitResearchCampaign {
 	private int spiedPlayer;
 	private boolean isSued;
+	private boolean researchLevelPatented;
 
 	public ExplicitSpyingCampaign(int spiedPlayer, SpyingCampaign campaign) {
 		super(campaign);
 		this.isSued = false;
 		this.spiedPlayer = spiedPlayer;
+		
+		// Checks whether the researched levels are patented
+		if (Market.sharedInstance().getCompanyById(spiedPlayer).getResearch().getPatentLevel() ==Market.sharedInstance().getCompanyById(spiedPlayer).getResearch().getPatentLevel() ){
+			researchLevelPatented = true;
+		}
+	}
+	
+	public boolean isPatented(){
+		return researchLevelPatented;
 	}
 
 	public boolean isSued() {

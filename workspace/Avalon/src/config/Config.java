@@ -21,6 +21,7 @@ public class Config {
 	private static double weightRound;
 	private static double weightLevel;
 	private static int probWinLawsuit;
+	private static int probWinLawsuitPatent;
 	private static int costsUpgradeLegalDeparment;
 	private static int legalDepartmentFixcost;
 	private static double costsCheckCampaign;
@@ -125,6 +126,8 @@ public class Config {
 			weightRound = Double.parseDouble(prop.getProperty("weightRound"));
 			probWinLawsuit = Integer.parseInt(prop
 					.getProperty("probWinLawsuit"));
+			probWinLawsuitPatent = Integer.parseInt(prop
+					.getProperty("probWinLawsuitPatent"));
 			legalDepartmentFixcost = Integer.parseInt(prop
 					.getProperty("legalDepartmentFixcost"));
 			costsUpgradeLegalDeparment = Integer.parseInt(prop
@@ -447,6 +450,10 @@ public class Config {
 
 	public static int getProbWinLawsuit() {
 		return probWinLawsuit;
+	}
+	
+	public static int getProbWinLawsuitPatent() {
+		return probWinLawsuitPatent;
 	}
 
 	public static int getCostsUpgradeLegalDeparment() {

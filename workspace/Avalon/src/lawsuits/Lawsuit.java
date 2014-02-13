@@ -16,6 +16,7 @@ public class Lawsuit {
 	private double amount = 0;
 	private double costs = 0;
 	private int duration = 0;
+	private boolean patented;
 	
 	public final static int WAITING = 0;
 	public final static int ACTIVE = 1;
@@ -31,10 +32,11 @@ public class Lawsuit {
 	 * @param ArrayList<ExplicitSpyingCampaign> spyings
 	 * @param double amount
 	 */
-	public Lawsuit(LegalDepartment c, LegalDepartment d, double amount){
+	public Lawsuit(LegalDepartment c, LegalDepartment d, double amount, boolean patented){
 		claimant = c;
 		defendant = d;
 		this.amount = amount;
+		this.patented = patented;
 		costs = amount*Config.getRelativeAmountCostsLawsuit();
 		state = Lawsuit.WAITING;
 	}
@@ -108,7 +110,14 @@ public class Lawsuit {
 		double paramWin = (weightLevel*quotient + weightRound*duration)/(weightLevel + weightRound);
 		double paramLose = (weightLevel*(1/quotient) + weightRound*duration)/(weightLevel + weightRound);
 		
-		if (utils.Probability.propability((int) (Config.getProbWinLawsuit() * paramWin))){
+		int standardProp;
+		if (patented){
+			standardProp = Config.getProbWinLawsuitPatent();
+		}else{
+			standardProp = Config.getProbWinLawsuit();
+		}
+		
+		if (utils.Probability.propability((int) (standardProp * paramWin))){
 			//Claimant wins lawsuit
 			endLawsuit();
 			informPlayer(claimant, defendant);
@@ -128,7 +137,7 @@ public class Lawsuit {
 				defendant.getCompany().insolvency();
 			}			
 			
-		}else if (utils.Probability.propability((int) (Config.getProbWinLawsuit() * paramLose))){
+		}else if (utils.Probability.propability((int) (Config.getProbWinLawsuit() * paramLose))){ //standard prop is not used, because propability to loose is not higher through patent
 			//Defendant wins lawsuit
 			endLawsuit();
 			informPlayer(defendant, claimant);
